@@ -26,11 +26,9 @@ export function Hero() {
     mass: 1,
   });
 
-  // Section cursor tracking (for glow + badge parallax)
+  // Section cursor tracking (for badge parallax)
   const sectionX = useMotionValue(0);
   const sectionY = useMotionValue(0);
-  const glowX = useSpring(sectionX, { stiffness: 120, damping: 25 });
-  const glowY = useSpring(sectionY, { stiffness: 120, damping: 25 });
 
   function handleSectionMove(e: React.MouseEvent<HTMLElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -142,9 +140,6 @@ export function Hero() {
             "radial-gradient(ellipse 90% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.45) 100%)",
         }}
       />
-
-      {/* Cursor-glow */}
-      <CursorGlow x={glowX} y={glowY} />
 
       <div className="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
         <div className="grid gap-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-10">
@@ -345,21 +340,6 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function CursorGlow({ x, y }: { x: MotionValue<number>; y: MotionValue<number> }) {
-  const bgX = useTransform(x, (v) => `${v}px`);
-  const bgY = useTransform(y, (v) => `${v}px`);
-
-  return (
-    <motion.div
-      aria-hidden="true"
-      style={{ left: bgX, top: bgY }}
-      className="pointer-events-none absolute z-0 -translate-x-1/2 -translate-y-1/2 mix-blend-plus-lighter"
-    >
-      <div className="h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,45,143,0.25)_0%,rgba(255,45,143,0.08)_30%,transparent_70%)]" />
-    </motion.div>
   );
 }
 

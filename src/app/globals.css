@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 html, body {
-  background-color: #f7f4ed;
-  color: #1c1c1c;
+  background-color: #0a0a0a;
+  color: #fafafa;
 }
 
 ::selection {
-  background: rgba(28, 28, 28, 0.9);
-  color: #fcfbf8;
+  background: rgba(255, 45, 143, 0.6);
+  color: #fafafa;
 }
 
 .gradient-wash {
-  background: radial-gradient(60% 50% at 30% 20%, rgba(255, 183, 157, 0.35), transparent 70%),
-              radial-gradient(55% 45% at 75% 25%, rgba(167, 189, 255, 0.3), transparent 70%),
-              radial-gradient(70% 60% at 50% 90%, rgba(255, 210, 190, 0.25), transparent 70%);
+  background: radial-gradient(60% 50% at 30% 20%, rgba(255,45,143,0.15), transparent 70%),
+              radial-gradient(55% 45% at 75% 25%, rgba(139,92,246,0.12), transparent 70%),
+              radial-gradient(70% 60% at 50% 90%, rgba(255,45,143,0.08), transparent 70%);
 }
 
 @keyframes marquee {

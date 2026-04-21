@@ -40,7 +40,7 @@ export function FAQ() {
           <SectionHeading eyebrow="Häufige Fragen" title="Antworten, bevor Sie fragen." />
         </Reveal>
 
-        <div className="mt-12 max-w-3xl divide-y divide-line border-t border-b border-line">
+        <div className="mt-12 max-w-3xl divide-y divide-white/[0.06] border-t border-b border-white/[0.08]">
           {ITEMS.map((item, i) => {
             const isOpen = open === i;
             return (
@@ -48,11 +48,23 @@ export function FAQ() {
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between py-6 text-left"
+                  className="flex w-full items-center justify-between py-6 text-left group"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-lg font-medium tracking-[-0.3px]">{item.q}</span>
-                  <span className="ml-6 text-xl text-muted">{isOpen ? "−" : "+"}</span>
+                  <span
+                    className={`text-lg font-medium tracking-[-0.3px] transition-colors duration-300 ${
+                      isOpen ? "text-[#ff6bb0]" : "text-white"
+                    }`}
+                  >
+                    {item.q}
+                  </span>
+                  <span
+                    className={`ml-6 text-xl transition-colors duration-300 ${
+                      isOpen ? "text-[#ff2d8f]" : "text-white/30 group-hover:text-white/60"
+                    }`}
+                  >
+                    {isOpen ? "−" : "+"}
+                  </span>
                 </button>
                 <AnimatePresence initial={false}>
                   {isOpen ? (
@@ -64,7 +76,7 @@ export function FAQ() {
                       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-muted leading-[1.5] max-w-2xl">{item.a}</p>
+                      <p className="pb-6 text-white/50 leading-[1.5] max-w-2xl">{item.a}</p>
                     </motion.div>
                   ) : null}
                 </AnimatePresence>

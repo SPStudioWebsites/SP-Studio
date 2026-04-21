@@ -15,19 +15,20 @@ interface ButtonProps {
 }
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md font-normal transition-[opacity,box-shadow,transform] duration-300 ease-soft active:opacity-80 focus:outline-none focus:shadow-focus";
+  "inline-flex items-center justify-center gap-2 rounded-xl font-bold transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:opacity-80 focus:outline-none";
 
 const sizes: Record<Size, string> = {
-  md: "text-base px-4 py-2",
-  sm: "text-sm px-3 py-1.5",
+  md: "text-sm px-5 py-3",
+  sm: "text-xs px-3 py-1.5",
 };
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-charcoal text-cream-soft shadow-inset hover:-translate-y-[1px]",
+    "bg-[#ff2d8f] text-white shadow-[0_0_32px_rgba(255,45,143,0.35)] hover:-translate-y-px hover:bg-[#ff4a9f] hover:shadow-[0_0_48px_rgba(255,45,143,0.55)]",
   ghost:
-    "bg-transparent text-charcoal border border-charcoal-40 hover:bg-charcoal-04",
-  cream: "bg-cream text-charcoal hover:bg-charcoal-04",
+    "bg-transparent text-white border border-white/20 hover:border-white/40 hover:bg-white/[0.05]",
+  cream:
+    "bg-white/[0.05] text-white border border-white/[0.08] hover:bg-white/[0.10] hover:border-white/[0.14]",
 };
 
 export function Button({
