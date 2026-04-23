@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -10,6 +12,8 @@ import {
   type MotionValue,
 } from "motion/react";
 import { useIsMobile } from "@/lib/useIsMobile";
+
+const WORDS = ["Handwerker", "Friseure", "Restaurants", "Cafés", "Maler"];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -112,8 +116,8 @@ export function Hero() {
       />
 
       <div className="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
-        <div className="grid gap-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-10">
-          {/* Left: copy */}
+        <div className="flex flex-col gap-8 md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-10">
+          {/* Headline */}
           <div className="relative z-10">
             <motion.span
               initial={{ opacity: 0, y: 12 }}
@@ -136,57 +140,21 @@ export function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease, delay: 0.1 }}
-              className="mt-6 text-5xl font-extrabold leading-[0.98] tracking-[-1.5px] sm:text-6xl md:text-[72px] md:tracking-[-2px] lg:text-[84px] 2xl:text-[96px]"
+              className="mt-6 font-extrabold leading-[0.98] tracking-[-1.5px] md:tracking-[-2px]"
             >
-              Websites, die{" "}
-              <span className="bg-gradient-to-r from-[#ff2d8f] via-[#ff5fa2] to-[#8b5cf6] bg-clip-text text-transparent">
-                wirklich Kunden gewinnen.
+              <span className="block text-5xl sm:text-4xl lg:text-5xl 2xl:text-6xl">
+                Webseiten für
+              </span>
+              <span
+                className="relative block overflow-hidden text-5xl sm:text-6xl lg:text-[80px] 2xl:text-[100px]"
+                style={{ height: "1.05em" }}
+              >
+                <RotatingWord words={WORDS} disableMotion={disableMotion} />
+              </span>
+              <span className="block font-bold text-3xl sm:text-[26px] lg:text-[34px] 2xl:text-[40px]">
+                die täglich neue Kunden bringen
               </span>
             </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease, delay: 0.25 }}
-              className="mt-6 max-w-xl text-lg leading-[1.55] text-white/70"
-            >
-              Wir entwerfen und entwickeln moderne Websites für kleine Unternehmen, lokale
-              Betriebe und Kreative — klar, schnell und auf Anfragen ausgelegt.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease, delay: 0.4 }}
-              className="mt-10 flex flex-wrap items-center gap-3"
-            >
-              <a
-                href="#kontakt"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-[#ff2d8f] px-5 py-3 text-sm font-bold text-white shadow-[0_0_40px_rgba(255,45,143,0.35)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#ff4a9f] hover:shadow-[0_0_60px_rgba(255,45,143,0.55)]"
-              >
-                <span className="relative z-10">Unverbindliches Gespräch buchen</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
-              </a>
-              <a
-                href="#arbeiten"
-                className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-transparent px-5 py-3 text-sm font-bold text-white transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/40 hover:bg-white/5"
-              >
-                Arbeiten ansehen
-              </a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, ease, delay: 0.55 }}
-              className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-white/50"
-            >
-              <span>Vertraut von:</span>
-              <span>Café Norden</span>
-              <span>Atelier Reif</span>
-              <span>Brügger Bau</span>
-              <span>Meridian Yoga</span>
-            </motion.div>
           </div>
 
           {/* Right: iPad mockup */}
@@ -194,7 +162,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 60, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ type: "spring", duration: 1.2, bounce: 0.3, delay: 0.2 }}
-            className="relative mx-auto flex items-center justify-center"
+            className="relative mx-auto flex items-center justify-center md:row-start-1 md:row-span-2 md:self-center"
             style={isMobile ? undefined : { perspective: 1200 }}
             onMouseMove={isMobile ? undefined : handleIPadMove}
             onMouseLeave={isMobile ? undefined : handleIPadLeave}
@@ -273,8 +241,8 @@ export function Hero() {
             <motion.div
               animate={disableMotion ? undefined : { y: [-8, 10, -8] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              style={{ willChange: "transform" }}
-              className="relative mx-auto w-[280px] drop-shadow-[0_40px_60px_rgba(0,0,0,0.55)] sm:w-[320px] md:w-[380px]"
+              style={disableMotion ? undefined : { willChange: "transform" }}
+              className={`relative mx-auto w-[280px] sm:w-[320px] md:w-[380px] ${isMobile ? "" : "drop-shadow-[0_40px_60px_rgba(0,0,0,0.55)]"}`}
             >
               {/* iPad tilt wrapper (inner — rotateX/Y/Z only, disabled on mobile) */}
               <motion.div
@@ -299,11 +267,13 @@ export function Hero() {
                   <div className="absolute bottom-[4.38%] left-[5.81%] right-[6.11%] top-[4.66%] overflow-hidden rounded-[18px] bg-[#fafafa]">
                     <ScrollingWebsite isMobile={isMobile} />
 
-                    {/* Screen glare */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-30 mix-blend-overlay"
-                    />
+                    {/* Screen glare — desktop only (mix-blend-overlay forces compositor layer) */}
+                    {!isMobile && (
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent opacity-30 mix-blend-overlay"
+                      />
+                    )}
                   </div>
 
                   {/* iPad frame PNG on top */}
@@ -319,9 +289,106 @@ export function Hero() {
               </motion.div>
             </motion.div>
           </motion.div>
+
+          {/* Body copy */}
+          <div className="md:col-start-1 md:row-start-2">
+            {/* Mobile: 4-benefit checklist */}
+            <motion.ul
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.25 }}
+              className="space-y-3 md:hidden"
+            >
+              {[
+                "Täglich neue Anfragen",
+                "Verkaufsstarke Webseite",
+                "Mehr Buchungen. Mehr Umsatz.",
+                "0,0 Technik-Stress.",
+              ].map((benefit) => (
+                <li key={benefit} className="flex items-center gap-3 text-base font-medium text-white/80">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff2d8f]/20">
+                    <svg viewBox="0 0 10 10" className="h-3 w-3 text-[#ff2d8f]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2 5.5 L4.2 7.5 L8 3" />
+                    </svg>
+                  </span>
+                  {benefit}
+                </li>
+              ))}
+            </motion.ul>
+
+            {/* Desktop: subline text */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.25 }}
+              className="mt-6 hidden max-w-xl text-lg leading-[1.55] text-white/70 md:block"
+            >
+              Täglich neue Anfragen mit einer verkaufsstarken Webseite. Mehr Buchungen. Mehr Umsatz. Ohne Technik-Stress.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease, delay: 0.35 }}
+              className="mt-3 max-w-xl text-sm leading-[1.6] text-white/40"
+            >
+              Du suchst eine professionelle Webseite für Handwerker, eine Webseite für Friseur oder eine Webseite für dein Restaurant oder Café? Wir erstellen verkaufsstarke Webseiten speziell für lokale Unternehmen.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease, delay: 0.45 }}
+              className="mt-10 flex flex-wrap items-center gap-3"
+            >
+              <a
+                href="#kontakt"
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-[#ff2d8f] px-5 py-3 text-sm font-bold text-white shadow-[0_0_40px_rgba(255,45,143,0.35)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#ff4a9f] hover:shadow-[0_0_60px_rgba(255,45,143,0.55)]"
+              >
+                <span className="relative z-10">Kostenloses Beratungsgespräch sichern</span>
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
+              </a>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function RotatingWord({ words, disableMotion }: { words: string[]; disableMotion: boolean }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (disableMotion) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % words.length), 2800);
+    return () => clearInterval(id);
+  }, [disableMotion, words.length]);
+
+  const gradientClass =
+    "bg-gradient-to-r from-[#ff2d8f] via-[#ff5fa2] to-[#8b5cf6] bg-clip-text text-transparent";
+
+  if (disableMotion) {
+    return (
+      <span className={`absolute left-0 top-0 ${gradientClass}`}>
+        {words[index]}
+      </span>
+    );
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={words[index]}
+        initial={{ y: "100%", opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: "-100%", opacity: 0, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }}
+        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+        className={`absolute left-0 top-0 ${gradientClass}`}
+      >
+        {words[index]}
+      </motion.span>
+    </AnimatePresence>
   );
 }
 
@@ -364,13 +431,13 @@ function FloatingBadge({
       className={`absolute z-20 ${className ?? ""}`}
     >
       <motion.div
-        animate={{ y: [float[0], float[1], float[0]] }}
+        animate={disableParallax ? undefined : { y: [float[0], float[1], float[0]] }}
         transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
-        style={{ willChange: "transform" }}
-        className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-[11px] font-bold shadow-xl backdrop-blur-md ${
+        style={disableParallax ? undefined : { willChange: "transform" }}
+        className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-[11px] font-bold shadow-xl ${disableParallax ? "" : "backdrop-blur-md"} ${
           accent
-            ? "border-pink-400/40 bg-[#1a0a14]/80 text-pink-200 shadow-[0_0_24px_rgba(255,45,143,0.3)]"
-            : "border-white/15 bg-[#141414]/85 text-white"
+            ? `border-pink-400/40 ${disableParallax ? "bg-[#1a0a14]" : "bg-[#1a0a14]/80"} text-pink-200 shadow-[0_0_24px_rgba(255,45,143,0.3)]`
+            : `border-white/15 ${disableParallax ? "bg-[#141414]" : "bg-[#141414]/85"} text-white`
         }`}
       >
         {label}

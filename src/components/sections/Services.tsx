@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -51,6 +52,13 @@ const SERVICES: Service[] = [
 ];
 
 export function Services() {
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  const goTo = (next: number) => {
+    if (next < 0 || next >= SERVICES.length) return;
+    setActiveIndex(next);
+  };
+
   return (
     <section id="leistungen" className="relative py-24 md:py-32">
       <div
@@ -81,7 +89,89 @@ export function Services() {
           </Reveal>
         </div>
 
-        <div className="mt-14 flex w-full flex-col items-center justify-center gap-5 md:flex-row md:items-start">
+        {/* Mobile: peek carousel */}
+        <div className="mt-14 md:hidden">
+          {/* Relative wrapper — arrows position relative to this */}
+          <div className="relative -mx-6">
+            {/* Sliding track — no overflow-hidden so peek cards show at edges */}
+            <div
+              className="flex gap-4 transition-transform duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{
+                transform: `translateX(calc(${-activeIndex} * (80vw + 16px) + 10vw))`,
+              }}
+            >
+              {SERVICES.map((service, i) => (
+                <div
+                  key={service.title}
+                  className={`w-[80vw] shrink-0 transition-opacity duration-350 ${
+                    i === activeIndex ? "opacity-100" : "opacity-40"
+                  }`}
+                >
+                  <ServiceCard service={service} index={i} mobile />
+                </div>
+              ))}
+            </div>
+
+            {/* Left arrow — vertically centered on the track */}
+            <button
+              onClick={() => goTo(activeIndex - 1)}
+              disabled={activeIndex === 0}
+              aria-label="Vorheriges Paket"
+              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/60 text-white/80 backdrop-blur-sm transition-all duration-200 disabled:opacity-0"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            {/* Right arrow */}
+            <button
+              onClick={() => goTo(activeIndex + 1)}
+              disabled={activeIndex === SERVICES.length - 1}
+              aria-label="Nächstes Paket"
+              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/60 text-white/80 backdrop-blur-sm transition-all duration-200 disabled:opacity-0"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Dots */}
+          <div className="mt-4 flex justify-center gap-2">
+            {SERVICES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Paket ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? "h-1.5 w-5 bg-[#ff2d8f]"
+                    : "h-1.5 w-1.5 bg-white/20"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: all three cards side by side — unchanged */}
+        <div className="hidden mt-14 md:flex md:w-full md:items-start md:justify-center md:gap-5">
           {SERVICES.map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
           ))}
@@ -101,17 +191,20 @@ export function Services() {
 interface ServiceCardProps {
   service: Service;
   index: number;
+  mobile?: boolean;
 }
 
-function ServiceCard({ service, index }: ServiceCardProps) {
+function ServiceCard({ service, index, mobile }: ServiceCardProps) {
   const { featured } = service;
 
   return (
     <motion.article
-      initial={{ scale: 0.9, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ type: "spring", duration: 0.5, delay: index * 0.1 }}
+      initial={mobile ? false : { scale: 0.95, opacity: 0 }}
+      whileInView={mobile ? undefined : { scale: 1, opacity: 1 }}
+      viewport={mobile ? undefined : { once: true, margin: "-60px" }}
+      transition={
+        mobile ? undefined : { type: "spring", duration: 0.5, delay: index * 0.1 }
+      }
       className={`relative flex w-full flex-col rounded-2xl border p-8 text-center transition-transform duration-300 hover:scale-[1.03] md:w-80 ${
         featured
           ? "border-[#ff2d8f]/40 bg-gradient-to-br from-[#ff2d8f] to-[#8b5cf6] shadow-[0_0_60px_rgba(255,45,143,0.22)] md:-translate-y-3"
@@ -134,7 +227,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         </span>
       ) : null}
 
-      {/* Price — prominent at top, matching $19/mo placement */}
+      {/* Price */}
       <div
         className={`mb-1 text-4xl font-extrabold tracking-[-1px] ${
           featured ? "text-white" : "text-[#ff2d8f]"
@@ -143,7 +236,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         {service.price}
       </div>
 
-      {/* Title as subtitle beneath price */}
+      {/* Title */}
       <div
         className={`mb-5 text-sm font-medium ${
           featured ? "text-white/70" : "text-white/40"
@@ -161,7 +254,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         {service.description}
       </p>
 
-      {/* Feature list — left-aligned inside centered card */}
+      {/* Feature list */}
       <ul className="mb-8 grow space-y-2.5 text-left text-sm">
         {service.bullets.map((b) => (
           <li key={b} className="flex items-center gap-2.5">
@@ -187,7 +280,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         ))}
       </ul>
 
-      {/* Full-width CTA button */}
+      {/* CTA */}
       <a
         href="#kontakt"
         className={`mt-auto block w-full rounded-xl px-4 py-2.5 text-sm font-bold transition-all duration-300 ${
