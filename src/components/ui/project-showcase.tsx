@@ -73,7 +73,7 @@ export function ProjectShowcase({ projects, className = "" }: ProjectShowcasePro
     >
       {/* Floating preview */}
       <div
-        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-focus hidden md:block"
+        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl hidden md:block"
         style={{
           left: rect?.left ?? 0,
           top: rect?.top ?? 0,
@@ -81,11 +81,12 @@ export function ProjectShowcase({ projects, className = "" }: ProjectShowcasePro
             isVisible ? 1 : 0.85
           })`,
           opacity: isVisible ? 1 : 0,
-          transition:
-            "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s linear",
+          transition: "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s linear",
+          boxShadow:
+            "0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.3)",
         }}
       >
-        <div className="relative w-[320px] h-[220px] bg-charcoal-04 rounded-xl overflow-hidden border border-line">
+        <div className="relative w-[320px] h-[220px] rounded-xl overflow-hidden border border-white/[0.12] backdrop-blur-md bg-white/[0.04]">
           {projects.map((project, index) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -100,7 +101,7 @@ export function ProjectShowcase({ projects, className = "" }: ProjectShowcasePro
               }}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
       </div>
 
@@ -113,61 +114,48 @@ export function ProjectShowcase({ projects, className = "" }: ProjectShowcasePro
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="relative py-6 border-t border-line transition-all duration-300 ease-soft">
-              {/* Background highlight on hover */}
+            <div className="relative py-6 border-t border-white/[0.08] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]">
               <div
-                className={`
-                  absolute inset-0 -mx-4 px-4 bg-charcoal-04 rounded-lg
-                  transition-all duration-300 ease-soft
-                  ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}
-                `}
+                className={`absolute inset-0 -mx-4 rounded-xl bg-white/[0.04] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                }`}
               />
 
               <div className="relative flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="inline-flex items-center gap-2">
-                    <h3 className="text-charcoal font-semibold text-xl md:text-2xl tracking-[-0.4px]">
+                    <h3 className="font-bold text-xl md:text-2xl tracking-[-0.4px] text-white">
                       <span className="relative">
                         {project.title}
                         <span
-                          className={`
-                            absolute left-0 -bottom-0.5 h-px bg-charcoal
-                            transition-all duration-300 ease-soft
-                            ${hoveredIndex === index ? "w-full" : "w-0"}
-                          `}
+                          className={`absolute left-0 -bottom-0.5 h-px bg-[#ff2d8f] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                            hoveredIndex === index ? "w-full" : "w-0"
+                          }`}
                         />
                       </span>
                     </h3>
                     <ArrowUpRight
-                      className={`
-                        w-4 h-4 text-muted
-                        transition-all duration-300 ease-soft
-                        ${
-                          hoveredIndex === index
-                            ? "opacity-100 translate-x-0 translate-y-0"
-                            : "opacity-0 -translate-x-2 translate-y-2"
-                        }
-                      `}
+                      className={`w-4 h-4 text-[#ff2d8f] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        hoveredIndex === index
+                          ? "opacity-100 translate-x-0 translate-y-0"
+                          : "opacity-0 -translate-x-2 translate-y-2"
+                      }`}
                     />
                   </div>
 
                   <p
-                    className={`
-                      text-sm mt-1.5 leading-[1.55]
-                      transition-colors duration-300 ease-soft
-                      ${hoveredIndex === index ? "text-charcoal/80" : "text-muted"}
-                    `}
+                    className={`text-sm mt-1.5 leading-[1.55] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      hoveredIndex === index ? "text-white/70" : "text-white/40"
+                    }`}
                   >
                     {project.description}
                   </p>
                 </div>
 
                 <span
-                  className={`
-                    text-xs font-mono text-muted tabular-nums mt-2
-                    transition-colors duration-300 ease-soft
-                    ${hoveredIndex === index ? "text-charcoal/70" : ""}
-                  `}
+                  className={`text-xs font-mono tabular-nums mt-2 transition-colors duration-300 ${
+                    hoveredIndex === index ? "text-white/60" : "text-white/30"
+                  }`}
                 >
                   {project.year}
                 </span>
@@ -175,7 +163,7 @@ export function ProjectShowcase({ projects, className = "" }: ProjectShowcasePro
             </div>
           </a>
         ))}
-        <div className="border-t border-line" />
+        <div className="border-t border-white/[0.08]" />
       </div>
     </div>
   );

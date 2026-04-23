@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, MotionValue } from "motion/react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -20,8 +20,7 @@ const TOTAL_WEEKS = 6;
 const STEPS: Step[] = [
   {
     title: "Gespräch & Strategie",
-    description:
-      "Wir lernen dein Unternehmen kennen, definieren Ziele und Zielgruppe.",
+    description: "Wir lernen dein Unternehmen kennen, definieren Ziele und Zielgruppe.",
     weekStart: 1,
     weekEnd: 1,
     deliverables: ["Kennenlern-Call", "Zielbild", "Projektplan"],
@@ -29,8 +28,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Design",
-    description:
-      "Erste Entwürfe, klare Iterationen — ruhig, markengerecht und stimmig.",
+    description: "Erste Entwürfe, klare Iterationen — ruhig, markengerecht und stimmig.",
     weekStart: 2,
     weekEnd: 3,
     deliverables: ["Moodboard", "UI-Entwürfe", "Feedback"],
@@ -38,8 +36,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Entwicklung",
-    description:
-      "Saubere Umsetzung — schnell, wartbar, SEO-freundlich und barrierearm.",
+    description: "Saubere Umsetzung — schnell, wartbar, SEO-freundlich und barrierearm.",
     weekStart: 3,
     weekEnd: 5,
     deliverables: ["Next.js-Build", "CMS", "Performance"],
@@ -47,8 +44,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Launch & Betreuung",
-    description:
-      "Go-live gemeinsam — auf Wunsch laufende Pflege, Updates und Analytics.",
+    description: "Go-live gemeinsam — auf Wunsch laufende Pflege, Updates und Analytics.",
     weekStart: 6,
     weekEnd: 6,
     deliverables: ["Go-Live", "Schulung", "Monitoring"],
@@ -109,14 +105,15 @@ export function Process() {
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
 
   return (
-    <section id="prozess" className="relative py-20 md:py-24 bg-charcoal-03 overflow-hidden">
+    <section id="prozess" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Subtle dot grid */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "linear-gradient(#1c1c1c 1px, transparent 1px), linear-gradient(90deg, #1c1c1c 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -130,15 +127,16 @@ export function Process() {
         </Reveal>
 
         <div ref={containerRef} className="relative mt-12 md:mt-14 max-w-4xl mx-auto">
-          {/* Rail */}
+          {/* Rail background */}
           <div
             aria-hidden
-            className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px -translate-x-px bg-line"
+            className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px -translate-x-px bg-white/[0.08]"
           />
+          {/* Active rail — pink gradient */}
           <motion.div
             aria-hidden
             style={{ scaleY: smooth }}
-            className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px -translate-x-px bg-charcoal origin-top"
+            className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px -translate-x-px origin-top bg-gradient-to-b from-[#ff2d8f] to-[#8b5cf6]"
           />
 
           <ol className="relative space-y-6 md:space-y-8">
@@ -169,11 +167,11 @@ function TimelineItem({ step, index, total, scrollYProgress }: TimelineItemProps
   const isRight = index % 2 === 1;
   const threshold = index / total;
 
-  const cardRing = useTransform(scrollYProgress, (v) =>
-    v >= threshold ? "#1c1c1c" : "#eceae4"
+  const dotBg = useTransform(scrollYProgress, (v) =>
+    v >= threshold ? "#ff2d8f" : "rgba(255,255,255,0.12)"
   );
-  const dotFill = useTransform(scrollYProgress, (v) =>
-    v >= threshold ? "#1c1c1c" : "#f7f4ed"
+  const dotShadow = useTransform(scrollYProgress, (v) =>
+    v >= threshold ? "0 0 12px rgba(255,45,143,0.6)" : "none"
   );
 
   return (
@@ -187,14 +185,14 @@ function TimelineItem({ step, index, total, scrollYProgress }: TimelineItemProps
       {/* Dot */}
       <motion.span
         aria-hidden
-        style={{ backgroundColor: dotFill }}
-        className="absolute left-5 md:left-1/2 top-5 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-charcoal shadow-focus"
+        style={{ backgroundColor: dotBg, boxShadow: dotShadow }}
+        className="absolute left-5 md:left-1/2 top-5 z-10 h-4 w-4 -translate-x-1/2 rounded-full border border-white/20"
       />
 
-      {/* Horizontal connector (desktop) */}
+      {/* Horizontal connector */}
       <span
         aria-hidden
-        className={`hidden md:block absolute top-6 h-px w-6 bg-line ${
+        className={`hidden md:block absolute top-6 h-px w-6 bg-white/[0.08] ${
           isRight ? "left-1/2 ml-2" : "right-1/2 mr-2"
         }`}
       />
@@ -209,16 +207,19 @@ function TimelineItem({ step, index, total, scrollYProgress }: TimelineItemProps
           isRight ? "md:col-start-2 md:pl-6" : "md:col-start-1 md:pr-6 md:text-right"
         }`}
       >
-        <motion.div
-          style={{ borderColor: cardRing }}
-          className={`relative overflow-hidden rounded-2xl border-2 bg-cream p-5 md:p-6 transition-shadow duration-500 hover:shadow-focus ${
+        <div
+          className={`relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] p-5 md:p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[0.14] ${
             isRight ? "" : "md:ml-auto"
           }`}
+          style={{
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.25)",
+          }}
         >
           {/* Watermark number */}
           <span
             aria-hidden
-            className={`pointer-events-none absolute text-[80px] font-semibold leading-none tracking-[-4px] text-charcoal/[0.06] ${
+            className={`pointer-events-none absolute text-[80px] font-bold leading-none tracking-[-4px] text-[#ff2d8f]/[0.06] ${
               isRight ? "-left-1 -top-5" : "-right-1 -top-5"
             }`}
           >
@@ -231,19 +232,20 @@ function TimelineItem({ step, index, total, scrollYProgress }: TimelineItemProps
               isRight ? "justify-start" : "md:flex-row-reverse"
             }`}
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-charcoal text-cream-soft shadow-inset">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.06] text-white/80 backdrop-blur-sm">
               <StepIcon name={step.icon} className="h-5 w-5" />
             </span>
             <div className={`min-w-0 ${isRight ? "" : "md:text-right"}`}>
-              <span className="block text-[10px] uppercase tracking-[0.14em] text-muted">
-                Schritt {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+              <span className="block text-[10px] uppercase tracking-[0.14em] text-white/30">
+                Schritt {String(index + 1).padStart(2, "0")} /{" "}
+                {String(total).padStart(2, "0")}
               </span>
-              <h3 className="mt-0.5 text-xl md:text-[22px] font-semibold tracking-[-0.5px] leading-[1.15]">
+              <h3 className="mt-0.5 text-xl md:text-[22px] font-bold tracking-[-0.5px] leading-[1.15] text-white">
                 {step.title}
               </h3>
             </div>
             <span
-              className={`ml-auto rounded-pill border border-line bg-cream px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-muted whitespace-nowrap ${
+              className={`ml-auto rounded-full border border-white/[0.08] bg-white/[0.04] px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-white/40 whitespace-nowrap backdrop-blur-sm ${
                 isRight ? "" : "md:ml-0 md:mr-auto md:order-first"
               }`}
             >
@@ -253,39 +255,36 @@ function TimelineItem({ step, index, total, scrollYProgress }: TimelineItemProps
             </span>
           </div>
 
-          <p className="relative mt-3 text-sm text-muted leading-[1.5]">{step.description}</p>
+          <p className="relative mt-3 text-sm text-white/50 leading-[1.5]">
+            {step.description}
+          </p>
 
-          {/* Week bar + deliverables on one row */}
           <div
             className={`relative mt-4 flex items-center gap-3 ${
               isRight ? "" : "md:flex-row-reverse"
             }`}
           >
-            <div className="relative h-1 w-16 shrink-0 rounded-pill bg-charcoal-04">
+            <div className="relative h-1 w-16 shrink-0 rounded-full bg-white/[0.06]">
               <span
-                className="absolute inset-y-0 rounded-pill bg-charcoal"
+                className="absolute inset-y-0 rounded-full bg-gradient-to-r from-[#ff2d8f] to-[#8b5cf6]"
                 style={{
                   left: `${((step.weekStart - 1) / TOTAL_WEEKS) * 100}%`,
                   width: `${((step.weekEnd - step.weekStart + 1) / TOTAL_WEEKS) * 100}%`,
                 }}
               />
             </div>
-            <ul
-              className={`flex flex-wrap gap-1.5 ${
-                isRight ? "" : "md:justify-end"
-              }`}
-            >
+            <ul className={`flex flex-wrap gap-1.5 ${isRight ? "" : "md:justify-end"}`}>
               {step.deliverables.map((d) => (
                 <li
                   key={d}
-                  className="inline-flex items-center gap-1 rounded-pill border border-line bg-charcoal-03 px-2 py-0.5 text-[11px] text-charcoal/80"
+                  className="inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 text-[11px] text-white/50 backdrop-blur-sm"
                 >
                   {d}
                 </li>
               ))}
             </ul>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </motion.li>
   );

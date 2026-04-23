@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -46,44 +46,49 @@ const SERVICES: Service[] = [
     description:
       "Wir bleiben an deiner Seite: Pflege, Updates und Weiterentwicklung im festen Monatspaket.",
     bullets: ["Monatliche Betreuung", "Inhaltliche Updates", "Analytics & Reports"],
-    price: "ab 190 €/Monat",
+    price: "ab 190 €/Mo.",
   },
 ];
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Services() {
   return (
     <section id="leistungen" className="relative py-24 md:py-32">
-      <Container>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,45,143,0.07) 0%, transparent 60%)",
+        }}
+      />
+      <Container className="relative">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal>
             <SectionHeading
               eyebrow="Leistungen"
               title="Klar kalkuliert. Messbar wirksam."
+              highlight="Messbar wirksam."
               description="Drei Pakete, die zu kleinen Unternehmen passen — transparent, fair und ohne versteckte Kosten."
             />
           </Reveal>
           <Reveal delay={0.1}>
             <a
               href="#kontakt"
-              className="hidden md:inline-flex items-center gap-2 text-sm text-charcoal underline-offset-4 hover:underline"
+              className="hidden md:inline-flex items-center gap-2 text-sm text-white/40 transition-colors duration-300 hover:text-white"
             >
               Individuelles Angebot anfragen →
             </a>
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-14 flex w-full flex-col items-center justify-center gap-5 md:flex-row md:items-start">
           {SERVICES.map((service, i) => (
-            <Reveal key={service.title} delay={i * 0.08} className="h-full">
-              <ServiceCard service={service} />
-            </Reveal>
+            <ServiceCard key={service.title} service={service} index={i} />
           ))}
         </div>
 
         <Reveal delay={0.25}>
-          <p className="mt-10 text-center text-sm text-muted">
+          <p className="mt-10 text-center text-sm text-white/30">
             Jedes Projekt erhält vor Start ein transparentes Festpreisangebot. Keine Abos, keine
             Überraschungen.
           </p>
@@ -95,65 +100,79 @@ export function Services() {
 
 interface ServiceCardProps {
   service: Service;
+  index: number;
 }
 
-function ServiceCard({ service }: ServiceCardProps) {
+function ServiceCard({ service, index }: ServiceCardProps) {
   const { featured } = service;
-  const baseCard =
-    "group relative flex h-full flex-col overflow-hidden rounded-2xl p-8 md:p-10 transition-all duration-500 ease-soft";
-  const featuredCard =
-    "bg-charcoal text-cream-soft shadow-inset border border-charcoal md:-translate-y-2 hover:md:-translate-y-3";
-  const standardCard =
-    "bg-cream text-charcoal border border-line hover:border-charcoal-40 hover:-translate-y-1";
-
-  const numberColor = featured ? "text-cream-soft/40" : "text-charcoal/25";
-  const descColor = featured ? "text-cream-soft/70" : "text-muted";
-  const priceBorder = featured ? "border-cream-soft/20" : "border-line";
-  const priceLabel = featured ? "text-cream-soft/60" : "text-muted";
-  const ctaColor = featured ? "text-cream-soft" : "text-charcoal";
-  const dotColor = featured ? "bg-cream-soft/40" : "bg-charcoal-40";
 
   return (
     <motion.article
-      whileHover={{ transition: { duration: 0.4, ease } }}
-      className={`${baseCard} ${featured ? featuredCard : standardCard}`}
+      initial={{ scale: 0.9, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ type: "spring", duration: 0.5, delay: index * 0.1 }}
+      className={`relative flex w-full flex-col rounded-2xl border p-8 text-center transition-transform duration-300 hover:scale-[1.03] md:w-80 ${
+        featured
+          ? "border-[#ff2d8f]/40 bg-gradient-to-br from-[#ff2d8f] to-[#8b5cf6] shadow-[0_0_60px_rgba(255,45,143,0.22)] md:-translate-y-3"
+          : "border-white/[0.08] bg-white/[0.04] backdrop-blur-sm"
+      }`}
+      style={
+        !featured
+          ? {
+              boxShadow:
+                "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.25)",
+            }
+          : undefined
+      }
     >
+      {/* Badge */}
       {featured && service.badge ? (
-        <span className="absolute right-6 top-6 inline-flex items-center gap-1.5 rounded-pill border border-cream-soft/20 bg-cream-soft/10 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-cream-soft">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+        <span className="mb-5 inline-flex items-center justify-center gap-1.5 self-center rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-white backdrop-blur-sm">
+          <span className="h-1.5 w-1.5 rounded-full bg-white" />
           {service.badge}
         </span>
       ) : null}
 
-      {/* background glyph */}
-      <span
-        aria-hidden
-        className={`pointer-events-none absolute -right-6 -top-8 text-[180px] font-semibold leading-none tracking-[-6px] ${numberColor} transition-transform duration-700 ease-soft group-hover:translate-y-1 group-hover:-rotate-2`}
+      {/* Price — prominent at top, matching $19/mo placement */}
+      <div
+        className={`mb-1 text-4xl font-extrabold tracking-[-1px] ${
+          featured ? "text-white" : "text-[#ff2d8f]"
+        }`}
       >
-        {service.number}
-      </span>
-
-      <div className="relative">
-        <span className={`text-xs uppercase tracking-[0.14em] ${descColor}`}>
-          Leistung / {service.number}
-        </span>
-        <h3 className="mt-4 text-3xl md:text-[34px] font-semibold tracking-[-0.9px] leading-[1.05]">
-          {service.title}
-        </h3>
-        <p className={`mt-4 text-base leading-[1.55] ${descColor}`}>{service.description}</p>
+        {service.price}
       </div>
 
-      <ul className="relative mt-8 space-y-3 text-sm">
+      {/* Title as subtitle beneath price */}
+      <div
+        className={`mb-5 text-sm font-medium ${
+          featured ? "text-white/70" : "text-white/40"
+        }`}
+      >
+        {service.title}
+      </div>
+
+      {/* Description */}
+      <p
+        className={`mb-6 text-sm leading-[1.6] ${
+          featured ? "text-white/80" : "text-white/55"
+        }`}
+      >
+        {service.description}
+      </p>
+
+      {/* Feature list — left-aligned inside centered card */}
+      <ul className="mb-8 grow space-y-2.5 text-left text-sm">
         {service.bullets.map((b) => (
-          <li key={b} className="flex items-center gap-3">
+          <li key={b} className="flex items-center gap-2.5">
             <span
-              className={`flex h-4 w-4 items-center justify-center rounded-full ${
-                featured ? "bg-cream-soft/15" : "bg-charcoal-04"
+              className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${
+                featured ? "bg-white/20" : "bg-[#8b5cf6]/20"
               }`}
             >
               <svg
                 viewBox="0 0 10 10"
-                className={`h-2.5 w-2.5 ${featured ? "text-cream-soft" : "text-charcoal"}`}
+                className={`h-2.5 w-2.5 ${featured ? "text-white" : "text-[#8b5cf6]"}`}
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.8"
@@ -163,31 +182,22 @@ function ServiceCard({ service }: ServiceCardProps) {
                 <path d="M2 5.5 L4.2 7.5 L8 3" />
               </svg>
             </span>
-            <span className={featured ? "text-cream-soft/90" : "text-charcoal/85"}>{b}</span>
+            <span className={featured ? "text-white/90" : "text-white/75"}>{b}</span>
           </li>
         ))}
       </ul>
 
-      <div
-        className={`relative mt-10 flex items-end justify-between border-t ${priceBorder} pt-6`}
+      {/* Full-width CTA button */}
+      <a
+        href="#kontakt"
+        className={`mt-auto block w-full rounded-xl px-4 py-2.5 text-sm font-bold transition-all duration-300 ${
+          featured
+            ? "bg-white text-[#ff2d8f] hover:bg-white/90"
+            : "bg-[#ff2d8f] text-white shadow-[0_0_20px_rgba(255,45,143,0.28)] hover:bg-[#ff4a9f] hover:shadow-[0_0_32px_rgba(255,45,143,0.5)]"
+        }`}
       >
-        <div>
-          <span className={`block text-xs uppercase tracking-[0.14em] ${priceLabel}`}>
-            Investition
-          </span>
-          <span className="mt-1 block text-xl font-semibold tracking-[-0.4px]">
-            {service.price}
-          </span>
-        </div>
-        <a
-          href="#kontakt"
-          className={`inline-flex items-center gap-1.5 text-sm ${ctaColor}`}
-          aria-label={`Mehr zu ${service.title}`}
-        >
-          <span className={`h-px w-6 ${dotColor} transition-all duration-500 ease-soft group-hover:w-10`} />
-          Anfragen
-        </a>
-      </div>
+        Anfragen
+      </a>
     </motion.article>
   );
 }

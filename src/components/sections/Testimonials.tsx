@@ -35,20 +35,17 @@ export function Testimonials() {
     <section className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <SectionHeading
-            eyebrow="Stimmen"
-            title="Was Kundinnen und Kunden sagen."
-          />
+          <SectionHeading eyebrow="Stimmen" title="Was Kundinnen und Kunden sagen." />
         </Reveal>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {QUOTES.map((q, i) => (
             <Reveal key={q.author} delay={i * 0.08}>
-              <Card className="h-full">
-                <p className="text-lg leading-[1.5] text-charcoal">“{q.quote}”</p>
-                <div className="mt-8 border-t border-line pt-4">
-                  <p className="text-sm font-medium">{q.author}</p>
-                  <p className="text-sm text-muted">{q.role}</p>
+              <Card className="h-full" as="article">
+                <p className="text-lg leading-[1.5] text-white/80">"{q.quote}"</p>
+                <div className="mt-8 border-t border-white/[0.08] pt-4">
+                  <p className="text-sm font-medium text-white">{q.author}</p>
+                  <p className="text-sm text-white/40">{q.role}</p>
                 </div>
               </Card>
             </Reveal>

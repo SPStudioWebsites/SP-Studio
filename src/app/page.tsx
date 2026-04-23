@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { GlobalBackground } from "@/components/layout/GlobalBackground";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Portfolio } from "@/components/sections/Portfolio";
@@ -11,17 +12,20 @@ import { Contact } from "@/components/sections/Contact";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Portfolio />
-      <Process />
-      <About />
-      <Testimonials />
-      <FAQ />
-      <Contact />
-      <Footer />
+    <main className="relative min-h-screen bg-[#0a0a0a]">
+      <GlobalBackground />
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <Services />
+        <Portfolio />
+        <Process />
+        <About />
+        <Testimonials />
+        <FAQ />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }
