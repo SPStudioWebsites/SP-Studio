@@ -4,15 +4,21 @@ import Image from "next/image";
 import {
   motion,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   useTransform,
   type MotionValue,
 } from "motion/react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
-  // iPad tilt (local to iPad wrapper)
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
+  const disableMotion = isMobile || !!prefersReducedMotion;
+
+  // iPad tilt (local to iPad wrapper) — hooks always declared, used conditionally
   const iPadMouseX = useMotionValue(0);
   const iPadMouseY = useMotionValue(0);
   const rotateY = useSpring(useTransform(iPadMouseX, [-0.5, 0.5], [8, -8]), {
@@ -50,8 +56,8 @@ export function Hero() {
   return (
     <section
       id="top"
-      onMouseMove={handleSectionMove}
-      className="relative overflow-hidden bg-[#0a0a0a] pt-32 pb-24 text-white md:pt-40 md:pb-32"
+      onMouseMove={isMobile ? undefined : handleSectionMove}
+      className="relative pt-28 pb-20 text-white md:pt-32 md:pb-24"
     >
       {/* Base radial gradient wash — adds depth vs flat #0a0a0a */}
       <div
@@ -74,70 +80,34 @@ export function Hero() {
         }}
       />
 
-      {/* Animated ambient blobs — drift adds parallax feel */}
+      {/* Animated ambient blobs — disabled on mobile and reduced-motion */}
       <motion.div
         aria-hidden="true"
-        animate={{ x: [-20, 30, -20], y: [0, -20, 0] }}
+        animate={disableMotion ? undefined : { x: [-20, 30, -20], y: [0, -20, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff2d8f]/[0.14] blur-[140px]"
+        className="pointer-events-none absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff2d8f]/[0.10] blur-[140px]"
       />
       <motion.div
         aria-hidden="true"
-        animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
+        animate={disableMotion ? undefined : { x: [0, -30, 0], y: [0, 20, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute right-[-10%] top-0 h-[500px] w-[500px] rounded-full bg-[#8b5cf6]/[0.13] blur-[140px]"
+        className="pointer-events-none absolute right-[-10%] top-0 h-[500px] w-[500px] rounded-full bg-[#8b5cf6]/[0.09] blur-[140px]"
       />
       <motion.div
         aria-hidden="true"
-        animate={{ x: [0, 40, 0], y: [0, -20, 0] }}
+        animate={disableMotion ? undefined : { x: [0, 40, 0], y: [0, -20, 0] }}
         transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute bottom-0 left-[-10%] h-[400px] w-[400px] rounded-full bg-[#ff2d8f]/[0.08] blur-[120px]"
+        className="pointer-events-none absolute bottom-0 left-[-10%] h-[400px] w-[400px] rounded-full bg-[#ff2d8f]/[0.06] blur-[120px]"
       />
 
-      {/* Dot-grid with radial fade — feels like it recedes into distance */}
+      {/* Diagonal light-leak — softened to blend into global atmosphere */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.09]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-          maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 85%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 85%)",
-        }}
-      />
-
-      {/* Diagonal light-leak — pink streak running top-left to bottom-right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.25]"
+        className="pointer-events-none absolute inset-0 opacity-[0.15]"
         style={{
           background:
             "linear-gradient(115deg, transparent 40%, rgba(255,45,143,0.15) 50%, transparent 60%)",
           filter: "blur(40px)",
-        }}
-      />
-
-      {/* Grain overlay — critical for non-flat feel */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E\")",
-          backgroundSize: "180px 180px",
-        }}
-      />
-
-      {/* Vignette — darkens edges to focus center */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.45) 100%)",
         }}
       />
 
@@ -225,15 +195,19 @@ export function Hero() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ type: "spring", duration: 1.2, bounce: 0.3, delay: 0.2 }}
             className="relative mx-auto flex items-center justify-center"
-            style={{ perspective: 1200 }}
-            onMouseMove={handleIPadMove}
-            onMouseLeave={handleIPadLeave}
+            style={isMobile ? undefined : { perspective: 1200 }}
+            onMouseMove={isMobile ? undefined : handleIPadMove}
+            onMouseLeave={isMobile ? undefined : handleIPadLeave}
           >
             {/* Glow behind iPad */}
             <motion.div
               aria-hidden="true"
-              animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.06, 1] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              animate={
+                disableMotion
+                  ? { opacity: 0.85, scale: 1 }
+                  : { opacity: [0.7, 1, 0.7], scale: [1, 1.06, 1] }
+              }
+              transition={{ duration: 5, repeat: disableMotion ? 0 : Infinity, ease: "easeInOut" }}
               className="absolute inset-0 -z-10 flex items-center justify-center"
             >
               <div className="h-[520px] w-[420px] rounded-full bg-gradient-to-br from-[#ff2d8f]/35 via-[#c06bd8]/25 to-[#8b5cf6]/35 blur-[90px]" />
@@ -247,7 +221,7 @@ export function Hero() {
               <div className="h-full w-full rounded-[100%] bg-gradient-to-r from-[#ff2d8f]/0 via-[#ff2d8f]/40 to-[#8b5cf6]/0 blur-xl" />
             </div>
 
-            {/* Floating badges with inverse parallax */}
+            {/* Floating badges with inverse parallax (parallax disabled on mobile) */}
             <FloatingBadge
               label="Next.js"
               className="top-[6%] left-[-4%] md:left-[-10%]"
@@ -257,6 +231,7 @@ export function Hero() {
               parallaxX={sectionX}
               parallaxY={sectionY}
               parallaxScale={-1}
+              disableParallax={isMobile}
             />
             <FloatingBadge
               label="Motion"
@@ -268,6 +243,7 @@ export function Hero() {
               parallaxX={sectionX}
               parallaxY={sectionY}
               parallaxScale={-0.8}
+              disableParallax={isMobile}
             />
             <FloatingBadge
               label="Figma"
@@ -278,6 +254,7 @@ export function Hero() {
               parallaxX={sectionX}
               parallaxY={sectionY}
               parallaxScale={-0.9}
+              disableParallax={isMobile}
             />
             <FloatingBadge
               label="Performance 98/100"
@@ -289,24 +266,29 @@ export function Hero() {
               parallaxX={sectionX}
               parallaxY={sectionY}
               parallaxScale={-1.1}
+              disableParallax={isMobile}
             />
 
-            {/* iPad float wrapper (outer — y-drift only) */}
+            {/* iPad float wrapper (outer — y-drift only, disabled on mobile) */}
             <motion.div
-              animate={{ y: [-8, 10, -8] }}
+              animate={disableMotion ? undefined : { y: [-8, 10, -8] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               style={{ willChange: "transform" }}
               className="relative mx-auto w-[280px] drop-shadow-[0_40px_60px_rgba(0,0,0,0.55)] sm:w-[320px] md:w-[380px]"
             >
-              {/* iPad tilt wrapper (inner — rotateX/Y/Z only) */}
+              {/* iPad tilt wrapper (inner — rotateX/Y/Z only, disabled on mobile) */}
               <motion.div
-                style={{
-                  rotateX,
-                  rotateY,
-                  rotateZ: -2,
-                  transformStyle: "preserve-3d",
-                  willChange: "transform",
-                }}
+                style={
+                  isMobile
+                    ? { rotateZ: -2 }
+                    : {
+                        rotateX,
+                        rotateY,
+                        rotateZ: -2,
+                        transformStyle: "preserve-3d",
+                        willChange: "transform",
+                      }
+                }
                 className="relative w-full"
               >
                 <div
@@ -315,7 +297,7 @@ export function Hero() {
                 >
                   {/* Screen content — positioned BEHIND the iPad frame PNG */}
                   <div className="absolute bottom-[4.38%] left-[5.81%] right-[6.11%] top-[4.66%] overflow-hidden rounded-[18px] bg-[#fafafa]">
-                    <ScrollingWebsite />
+                    <ScrollingWebsite isMobile={isMobile} />
 
                     {/* Screen glare */}
                     <div
@@ -343,6 +325,19 @@ export function Hero() {
   );
 }
 
+interface FloatingBadgeProps {
+  label: string;
+  className?: string;
+  delay: number;
+  accent?: boolean;
+  float: [number, number];
+  duration: number;
+  parallaxX: MotionValue<number>;
+  parallaxY: MotionValue<number>;
+  parallaxScale: number;
+  disableParallax?: boolean;
+}
+
 function FloatingBadge({
   label,
   className,
@@ -353,17 +348,8 @@ function FloatingBadge({
   parallaxX,
   parallaxY,
   parallaxScale,
-}: {
-  label: string;
-  className?: string;
-  delay: number;
-  accent?: boolean;
-  float: [number, number];
-  duration: number;
-  parallaxX: MotionValue<number>;
-  parallaxY: MotionValue<number>;
-  parallaxScale: number;
-}) {
+  disableParallax,
+}: FloatingBadgeProps) {
   const px = useTransform(parallaxX, (v) => ((v - 600) / 600) * 12 * parallaxScale);
   const py = useTransform(parallaxY, (v) => ((v - 400) / 400) * 8 * parallaxScale);
   const sx = useSpring(px, { stiffness: 40, damping: 30, mass: 1 });
@@ -374,7 +360,7 @@ function FloatingBadge({
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: "spring", duration: 0.8, bounce: 0.35, delay }}
-      style={{ x: sx, y: sy, willChange: "transform" }}
+      style={disableParallax ? undefined : { x: sx, y: sy, willChange: "transform" }}
       className={`absolute z-20 ${className ?? ""}`}
     >
       <motion.div
@@ -393,7 +379,14 @@ function FloatingBadge({
   );
 }
 
-function ScrollingWebsite() {
+function ScrollingWebsite({ isMobile }: { isMobile: boolean }) {
+  if (isMobile) {
+    return (
+      <div className="flex flex-col">
+        <WebsiteImage />
+      </div>
+    );
+  }
   return (
     <motion.div
       animate={{ y: ["0%", "-50%"] }}

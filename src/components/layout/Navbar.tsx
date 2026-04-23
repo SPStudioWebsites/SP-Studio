@@ -9,6 +9,7 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const NAV_LINKS = [
   { href: "#leistungen", label: "Leistungen" },
@@ -21,10 +22,11 @@ const NAV_LINKS = [
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Navbar() {
+  const isMobile = useIsMobile();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Pointer-tracked specular highlight (Liquid Glass refraction feel)
+  // Pointer-tracked specular highlight (Liquid Glass refraction feel) — desktop only
   const pointerX = useMotionValue(50);
   const pointerY = useMotionValue(50);
   const sx = useSpring(pointerX, { stiffness: 120, damping: 25 });
@@ -64,24 +66,33 @@ export function Navbar() {
       className="pointer-events-none fixed inset-x-0 top-3 z-50 flex justify-center px-4 md:top-5"
     >
       <div
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
+        onPointerMove={isMobile ? undefined : handlePointerMove}
+        onPointerLeave={isMobile ? undefined : handlePointerLeave}
         className={`pointer-events-auto relative flex w-full max-w-[1100px] items-center justify-between overflow-hidden rounded-full border transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           scrolled
             ? "border-white/[0.14] bg-white/[0.06] shadow-[0_10px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]"
             : "border-white/[0.10] bg-white/[0.03] shadow-[0_6px_28px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_0_rgba(0,0,0,0.25)]"
         }`}
-        style={{
-          backdropFilter: "blur(24px) saturate(200%) brightness(110%)",
-          WebkitBackdropFilter: "blur(24px) saturate(200%) brightness(110%)",
-        }}
+        style={
+          isMobile
+            ? {
+                backdropFilter: "blur(12px) saturate(140%)",
+                WebkitBackdropFilter: "blur(12px) saturate(140%)",
+              }
+            : {
+                backdropFilter: "blur(24px) saturate(200%) brightness(110%)",
+                WebkitBackdropFilter: "blur(24px) saturate(200%) brightness(110%)",
+              }
+        }
       >
-        {/* Pointer-tracked specular highlight — refraction feel */}
-        <motion.span
-          aria-hidden="true"
-          style={{ background: specular }}
-          className="pointer-events-none absolute inset-0 rounded-full mix-blend-plus-lighter"
-        />
+        {/* Pointer-tracked specular highlight — desktop only */}
+        {!isMobile && (
+          <motion.span
+            aria-hidden="true"
+            style={{ background: specular }}
+            className="pointer-events-none absolute inset-0 rounded-full mix-blend-plus-lighter"
+          />
+        )}
         {/* Inner top chrome edge */}
         <span
           aria-hidden="true"
@@ -184,8 +195,8 @@ export function Navbar() {
             <div
               className="relative overflow-hidden rounded-3xl border border-white/[0.14] bg-white/[0.05] p-4 shadow-[0_20px_56px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]"
               style={{
-                backdropFilter: "blur(28px) saturate(200%) brightness(110%)",
-                WebkitBackdropFilter: "blur(28px) saturate(200%) brightness(110%)",
+                backdropFilter: "blur(12px) saturate(140%)",
+                WebkitBackdropFilter: "blur(12px) saturate(140%)",
               }}
             >
               <span

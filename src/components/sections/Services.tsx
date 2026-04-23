@@ -46,11 +46,9 @@ const SERVICES: Service[] = [
     description:
       "Wir bleiben an deiner Seite: Pflege, Updates und Weiterentwicklung im festen Monatspaket.",
     bullets: ["Monatliche Betreuung", "Inhaltliche Updates", "Analytics & Reports"],
-    price: "ab 190 €/Monat",
+    price: "ab 190 €/Mo.",
   },
 ];
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Services() {
   return (
@@ -69,6 +67,7 @@ export function Services() {
             <SectionHeading
               eyebrow="Leistungen"
               title="Klar kalkuliert. Messbar wirksam."
+              highlight="Messbar wirksam."
               description="Drei Pakete, die zu kleinen Unternehmen passen — transparent, fair und ohne versteckte Kosten."
             />
           </Reveal>
@@ -82,11 +81,9 @@ export function Services() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-14 flex w-full flex-col items-center justify-center gap-5 md:flex-row md:items-start">
           {SERVICES.map((service, i) => (
-            <Reveal key={service.title} delay={i * 0.08} className="h-full">
-              <ServiceCard service={service} />
-            </Reveal>
+            <ServiceCard key={service.title} service={service} index={i} />
           ))}
         </div>
 
@@ -103,18 +100,22 @@ export function Services() {
 
 interface ServiceCardProps {
   service: Service;
+  index: number;
 }
 
-function ServiceCard({ service }: ServiceCardProps) {
+function ServiceCard({ service, index }: ServiceCardProps) {
   const { featured } = service;
 
   return (
     <motion.article
-      whileHover={{ y: -4, transition: { duration: 0.35, ease } }}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl p-8 md:p-10 transition-all duration-500 ${
+      initial={{ scale: 0.9, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ type: "spring", duration: 0.5, delay: index * 0.1 }}
+      className={`relative flex w-full flex-col rounded-2xl border p-8 text-center transition-transform duration-300 hover:scale-[1.03] md:w-80 ${
         featured
-          ? "border border-[#ff2d8f]/40 bg-gradient-to-br from-[#ff2d8f] to-[#8b5cf6] text-white shadow-[0_0_60px_rgba(255,45,143,0.22)] md:-translate-y-2"
-          : "border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm"
+          ? "border-[#ff2d8f]/40 bg-gradient-to-br from-[#ff2d8f] to-[#8b5cf6] shadow-[0_0_60px_rgba(255,45,143,0.22)] md:-translate-y-3"
+          : "border-white/[0.08] bg-white/[0.04] backdrop-blur-sm"
       }`}
       style={
         !featured
@@ -125,37 +126,45 @@ function ServiceCard({ service }: ServiceCardProps) {
           : undefined
       }
     >
+      {/* Badge */}
       {featured && service.badge ? (
-        <span className="absolute right-6 top-6 inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-white backdrop-blur-sm">
+        <span className="mb-5 inline-flex items-center justify-center gap-1.5 self-center rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-white backdrop-blur-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-white" />
           {service.badge}
         </span>
       ) : null}
 
-      <span
-        aria-hidden
-        className={`pointer-events-none absolute -right-4 -top-6 select-none text-[160px] font-bold leading-none tracking-[-6px] transition-transform duration-700 group-hover:-rotate-2 group-hover:translate-y-1 ${
-          featured ? "text-white/[0.12]" : "text-[#ff2d8f]/[0.08]"
+      {/* Price — prominent at top, matching $19/mo placement */}
+      <div
+        className={`mb-1 text-4xl font-extrabold tracking-[-1px] ${
+          featured ? "text-white" : "text-[#ff2d8f]"
         }`}
       >
-        {service.number}
-      </span>
-
-      <div className="relative">
-        <span className={`text-xs uppercase tracking-[0.14em] ${featured ? "text-white/70" : "text-white/40"}`}>
-          Leistung / {service.number}
-        </span>
-        <h3 className="mt-4 text-3xl md:text-[32px] font-bold tracking-[-0.9px] leading-[1.05] text-white">
-          {service.title}
-        </h3>
-        <p className={`mt-4 text-base leading-[1.55] ${featured ? "text-white/80" : "text-white/60"}`}>
-          {service.description}
-        </p>
+        {service.price}
       </div>
 
-      <ul className="relative mt-8 space-y-3 text-sm">
+      {/* Title as subtitle beneath price */}
+      <div
+        className={`mb-5 text-sm font-medium ${
+          featured ? "text-white/70" : "text-white/40"
+        }`}
+      >
+        {service.title}
+      </div>
+
+      {/* Description */}
+      <p
+        className={`mb-6 text-sm leading-[1.6] ${
+          featured ? "text-white/80" : "text-white/55"
+        }`}
+      >
+        {service.description}
+      </p>
+
+      {/* Feature list — left-aligned inside centered card */}
+      <ul className="mb-8 grow space-y-2.5 text-left text-sm">
         {service.bullets.map((b) => (
-          <li key={b} className="flex items-center gap-3">
+          <li key={b} className="flex items-center gap-2.5">
             <span
               className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${
                 featured ? "bg-white/20" : "bg-[#8b5cf6]/20"
@@ -178,29 +187,17 @@ function ServiceCard({ service }: ServiceCardProps) {
         ))}
       </ul>
 
-      <div
-        className={`relative mt-10 flex items-end justify-between border-t pt-6 ${
-          featured ? "border-white/20" : "border-white/[0.08]"
+      {/* Full-width CTA button */}
+      <a
+        href="#kontakt"
+        className={`mt-auto block w-full rounded-xl px-4 py-2.5 text-sm font-bold transition-all duration-300 ${
+          featured
+            ? "bg-white text-[#ff2d8f] hover:bg-white/90"
+            : "bg-[#ff2d8f] text-white shadow-[0_0_20px_rgba(255,45,143,0.28)] hover:bg-[#ff4a9f] hover:shadow-[0_0_32px_rgba(255,45,143,0.5)]"
         }`}
       >
-        <div>
-          <span className={`block text-xs uppercase tracking-[0.14em] ${featured ? "text-white/60" : "text-white/40"}`}>
-            Investition
-          </span>
-          <span className="mt-1 block text-xl font-bold tracking-[-0.4px] text-white">
-            {service.price}
-          </span>
-        </div>
-        <a
-          href="#kontakt"
-          className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 ${
-            featured ? "text-white hover:text-white/80" : "text-[#ff2d8f] hover:text-[#ff6bb0]"
-          }`}
-          aria-label={`Mehr zu ${service.title}`}
-        >
-          Anfragen →
-        </a>
-      </div>
+        Anfragen
+      </a>
     </motion.article>
   );
 }

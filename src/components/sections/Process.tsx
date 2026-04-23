@@ -105,7 +105,7 @@ export function Process() {
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
 
   return (
-    <section id="prozess" className="relative py-20 md:py-24 overflow-hidden">
+    <section id="prozess" className="relative py-24 md:py-32 overflow-hidden">
       {/* Subtle dot grid */}
       <div
         aria-hidden

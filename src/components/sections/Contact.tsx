@@ -28,7 +28,10 @@ export function Contact() {
                 Kontakt
               </span>
               <h2 className="mt-4 text-4xl md:text-section-h font-bold tracking-[-1.2px] text-white">
-                Lass uns über dein Projekt sprechen.
+                Lass uns über dein{" "}
+                <span className="bg-gradient-to-r from-[#ff2d8f] via-[#ff5fa2] to-[#8b5cf6] bg-clip-text text-transparent">
+                  Projekt sprechen.
+                </span>
               </h2>
               <p className="mt-6 text-lg text-white/60 leading-[1.5]">
                 Beschreibe kurz dein Vorhaben. Wir melden uns innerhalb von 24 Stunden mit
