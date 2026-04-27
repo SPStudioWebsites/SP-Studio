@@ -178,7 +178,6 @@ export function HeroSection() {
 
 function LaptopHero() {
   const reduce = useReducedMotion();
-
   return (
     <div className="relative flex h-full items-center justify-center">
       {/* Glow blobs */}
@@ -199,7 +198,7 @@ function LaptopHero() {
         className="relative z-10 w-full"
       >
         <Image
-          src="/laptop-hero.png"
+          src="/laptop-herov2.png"
           alt="Moderne Website auf einem MacBook Pro — Beispiel für ein SP Studio Webdesign-Projekt"
           width={2752}
           height={1536}
@@ -207,6 +206,7 @@ function LaptopHero() {
           priority
         />
       </motion.div>
+
 
       {/* Floating card — conversion metric */}
       <motion.div
