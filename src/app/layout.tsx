@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "./globals.css";
 
 const sans = Inter({
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={sans.variable}>
-      <body className="font-sans antialiased bg-[#0a0a0a] text-white">{children}</body>
+      <body className="font-sans antialiased bg-[#0a0a0a] text-white">
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
