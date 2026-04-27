@@ -1,0 +1,11 @@
+
+> sp-studio-v1@0.1.0 dev
+> next dev --webpack --port 3100
+
+▲ Next.js 16.2.4 (webpack)
+- Local:         http://localhost:3100
+- Network:       http://192.168.50.8:3100
+✓ Ready in 256ms
+
+○ Compiling / ...
+ GET / 200 in 3.8s (next.js: 3.5s, application-code: 264ms)

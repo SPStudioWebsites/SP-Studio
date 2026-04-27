@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --yes)",
+      "Bash(npx create-next-app@latest _tmp_next --typescript --tailwind --eslint --app --src-dir --yes)",
+      "Bash(npx create-next-app@latest tmp-next --typescript --tailwind --eslint --app --src-dir --yes)",
+      "Bash(mv tmp-next/* .)",
+      "Bash(mv tmp-next/.[!.]* .)",
+      "Bash(rm -rf tmp-next)",
+      "Bash(npm install *)",
+      "Bash(node -e \"const m = require\\('motion'\\); console.log\\('Motion OK'\\)\")",
+      "Bash(python *)",
+      "Bash(npx *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('mcpServers',{}\\), indent=2\\)\\)\")",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3002/)",
+      "Bash(curl -s -o /tmp/page.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3002/)",
+      "Bash(curl -s -o /tmp/p.html -w \"HTTP %{http_code} time %{time_total}s size %{size_download}\\\\n\" http://localhost:3002/)",
+      "Bash(taskkill /PID 90204 /F)",
+      "PowerShell(Stop-Process -Id 90204 -Force -ErrorAction SilentlyContinue)",
+      "Bash(curl -s -o /tmp/p.html -w \"HTTP %{http_code} size %{size_download}\\\\n\" http://localhost:3000/)",
+      "Bash(nano-banana \"Photorealistic MacBook Pro laptop mockup, 3/4 angle view from the left side, screen tilted open about 110 degrees. Screen displays a modern dark-themed website with black background, a glowing pink gradient headline text, violet/purple UI card elements, clean minimal navigation bar, and a bright pink CTA button. Laptop body is space gray brushed aluminum with sharp edges. Dramatic rim lighting with pink \\(#ff2d8f\\) glow on the left edge and violet \\(#8b5cf6\\) glow on the right edge. Pure black background. Ultra-sharp 3D render, cinematic studio lighting, photorealistic materials, detailed keyboard, trackpad visible on base. No watermarks, no text overlays.\" --model pro -s 2K -a 16:9 -o laptop-hero -d \"c:/Users/user/meine-website/SP Studio V1/public\" --costs)",
+      "Bash(nano-banana \"Photorealistic MacBook Pro laptop mockup, 3/4 angle view from the left side, screen tilted open about 110 degrees. Screen displays a modern dark-themed website with black background, a glowing pink gradient headline text, violet/purple UI card elements, clean minimal navigation bar, and a bright pink CTA button. Laptop body is space gray brushed aluminum with sharp edges. Dramatic rim lighting with pink \\(#ff2d8f\\) glow on the left edge and violet \\(#8b5cf6\\) glow on the right edge. Isolated on bright solid green screen background. Ultra-sharp 3D render, cinematic studio lighting, photorealistic materials, detailed keyboard, trackpad visible on base. No watermarks, no text overlays.\" --model pro -s 2K -a 16:9 -o laptop-hero-transparent -d \"c:/Users/user/meine-website/SP Studio V1/public\" -t --costs)",
+      "Bash(ffmpeg -i \"c:/Users/user/meine-website/SP Studio V1/public/laptop-hero-transparent.jpeg\" -vf \"colorkey=0x00FD02:0.3:0.1,despill=green\" -y \"c:/Users/user/meine-website/SP Studio V1/public/laptop-hero.png\")",
+      "Bash(ffmpeg -i \"c:/Users/user/meine-website/SP Studio V1/public/laptop-hero-transparent.jpeg\" -vf \"colorkey=0x00FD02:0.3:0.1,despill=green\" -frames:v 1 -update 1 -y \"c:/Users/user/meine-website/SP Studio V1/public/laptop-hero.png\")",
+      "mcp__magic__21st_magic_component_builder",
+      "Bash(node -e \"const fs=require\\('fs'\\); const p='src/components/sections/hero.tsx'; const c=fs.readFileSync\\(p,'utf8'\\); fs.writeFileSync\\(p,c\\);\")",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)"
+    ]
+  }
+}
