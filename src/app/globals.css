@@ -1,6 +1,6 @@
-@import "C:/Users/user/meine-website/SP Studio V1/node_modules/tailwindcss/index.css";
-@import "C:/Users/user/meine-website/SP Studio V1/node_modules/tw-animate-css/dist/tw-animate.css";
-@import "C:/Users/user/meine-website/SP Studio V1/node_modules/shadcn/dist/tailwind.css";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
