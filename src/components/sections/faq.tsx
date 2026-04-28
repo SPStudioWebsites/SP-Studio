@@ -9,7 +9,7 @@ export function FAQSection() {
     <section
       id="faq"
       aria-labelledby="faq-h"
-      className="relative py-16 md:py-24"
+      className="relative overflow-hidden py-16 md:py-24"
     >
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">

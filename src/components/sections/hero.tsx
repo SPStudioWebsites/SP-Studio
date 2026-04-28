@@ -22,12 +22,12 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
   }, []);
 
   return (
-    <h1 className="mt-7 font-display text-[clamp(3.25rem,8.5vw,6.75rem)] font-semibold leading-[0.9] tracking-tight">
+    <h1 className="mt-7 font-display text-[clamp(2.4rem,8.5vw,6.75rem)] font-semibold leading-[0.95] tracking-tight">
       <motion.span
         initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-        className="block whitespace-nowrap text-foreground"
+        className="block text-foreground"
       >
         Schnell sichtbar.
       </motion.span>
@@ -74,7 +74,7 @@ export function HeroSection() {
       <GradientOrbs />
       <div aria-hidden className="absolute inset-0 grid-bg" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-16 px-6 lg:grid-cols-12 lg:gap-4 lg:items-center">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-8 px-6 lg:grid-cols-12 lg:gap-4 lg:items-center">
         <div className="lg:col-span-8 xl:col-span-7 space-y-0">
 
           {/* Eyebrow */}
@@ -178,8 +178,8 @@ export function HeroSection() {
 
         </div>
 
-        {/* Right column — laptop visual */}
-        <div className="relative lg:col-span-4 xl:col-span-5">
+        {/* Right column — laptop visual (desktop only) */}
+        <div className="relative hidden lg:block lg:col-span-4 xl:col-span-5">
           <div className="relative h-[340px] w-full sm:h-[460px] lg:h-[620px]">
             <LaptopHero />
           </div>
