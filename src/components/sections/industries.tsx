@@ -87,7 +87,7 @@ export function IndustriesSection() {
     <section
       id="branchen"
       aria-labelledby="branchen-h"
-      className="relative overflow-hidden py-28 md:py-36"
+      className="relative overflow-hidden py-16 md:py-24"
     >
       {/* Ambient background orbs */}
       <motion.div

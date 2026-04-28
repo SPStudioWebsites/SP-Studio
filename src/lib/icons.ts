@@ -31,4 +31,6 @@ export {
   Zap,
   Loader2,
   AlertCircle,
+  TrendingUp,
+  BadgeEuro,
 } from "lucide-react";

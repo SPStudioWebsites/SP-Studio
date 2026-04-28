@@ -13,56 +13,57 @@ const packages = [
   {
     id: "starter",
     name: "Starter",
-    price: "ab 1.490 €",
+    price: "399 €",
     period: "einmalig",
-    tagline: "Für den professionellen Einstieg",
+    tagline: "Für einen einfachen, sauberen Einstieg",
     features: [
-      "Responsive Website (bis 5 Seiten)",
-      "Mobile-first Design",
-      "Kontaktformular",
-      "SSL & Domain-Setup",
-      "Basis Local SEO",
-      "Einweisung & Übergabe",
+      "Onepager mit klarer Grundstruktur",
+      "Modernes, sauberes Design",
+      "Mobile Optimierung",
+      "Kontaktformular oder Mail-Link",
+      "Basis-Metadaten (Title & Description)",
+      "1 Korrekturrunde",
     ],
     cta: "Starter anfragen",
     popular: false,
     accent: "violet" as const,
   },
   {
-    id: "professional",
-    name: "Professional",
-    price: "ab 2.490 €",
+    id: "wachstum",
+    name: "Wachstum",
+    price: "699 €",
     period: "einmalig",
-    tagline: "Maximale Sichtbarkeit in der Region",
+    tagline: "Für mehr Anfragen und klare Struktur",
     features: [
-      "Alles aus Starter",
-      "Bis zu 10 Seiten",
-      "Local SEO (Keyword-Strategie)",
-      "Google Unternehmensprofil",
-      "Google Maps Integration",
-      "Schema Markup",
-      "Bewertungs-Workflow",
-      "Monatliches Reporting",
+      "Individueller Onepager (kein Template)",
+      "Struktur mit Fokus auf Anfragen & Vertrauen",
+      "Ausformulierte Headlines & Seitenstruktur",
+      "Mobile- & Performance-Optimierung",
+      "Kontaktformular + klare Call-to-Actions",
+      "Lokale Keyword-Einbindung",
+      "Saubere H1–H3 Struktur",
+      "Optimierte Meta-Daten",
+      "2–3 Korrekturrunden",
     ],
-    cta: "Kostenloses Erstgespräch",
+    cta: "Projekt anfragen",
     popular: true,
     accent: "pink" as const,
   },
   {
     id: "premium",
     name: "Premium",
-    price: "ab 149 €",
-    period: "/ Monat",
-    tagline: "Rundum-Betreuung ohne Aufwand",
+    price: "1.199 €",
+    period: "einmalig",
+    tagline: "Maximale Wirkung aus deinem Onepager",
     features: [
-      "Alles aus Professional",
-      "Unbegrenzte Seiten",
-      "Online-Buchungssystem",
-      "Hosting & Backups inklusive",
-      "Laufende Pflege & Updates",
-      "Performance-Monitoring",
-      "Priority Support (Telefon)",
-      "Jährliche SEO-Überprüfung",
+      "Alles aus Wachstum",
+      "Erweiterte Seitenstruktur & stärkere Storyline",
+      "Individuellere visuelle Ausarbeitung",
+      "Vertiefte Conversion-Optimierung",
+      "Erweiterte On-Page-SEO-Struktur",
+      "Vorbereitung für spätere Erweiterungen",
+      "Priorisierte Umsetzung",
+      "4–5 Korrekturrunden",
     ],
     cta: "Premium anfragen",
     popular: false,
@@ -75,7 +76,7 @@ export function ServicesSection() {
     <section
       id="leistungen"
       aria-labelledby="leistungen-h"
-      className="relative overflow-hidden py-28 md:py-36"
+      className="relative overflow-hidden py-16 md:py-24"
     >
       {/* Background glow */}
       <div
@@ -98,8 +99,8 @@ export function ServicesSection() {
               id="leistungen-h"
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
-              Transparent.{" "}
-              <em className="font-serif italic font-normal text-gradient">Fair bepreist.</em>
+              Klare Pakete.{" "}
+              <em className="font-serif italic font-normal text-gradient">Keine Überraschungen.</em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>

@@ -15,18 +15,19 @@ export const brand = {
 };
 
 export const navLinks = [
-  { label: "Leistungen", href: "#leistungen" },
+  { label: "Home", href: "#top" },
   { label: "Branchen", href: "#branchen" },
-  { label: "Beispiele", href: "#beispiele" },
   { label: "Ablauf", href: "#ablauf" },
+  { label: "Über mich", href: "#ueber-uns" },
   { label: "FAQ", href: "#faq" },
+  { label: "Leistungen", href: "#leistungen" },
 ] as const;
 
 export const hero = {
   eyebrow: "Webagentur · Region Haßberge",
   title: ["Schnell sichtbar.", "*Sofort* überzeugend."],
   subtitle:
-    "Wir bauen Webseiten für Frisöre, Restaurants, Handwerker und Studios in Haßfurt, Ebern, Hofheim und Umgebung — schnell, persönlich, ohne Agentur-Bürokratie.",
+    "Wir bauen Webseiten für Frisöre, Restaurants, Handwerker und KMUs in Haßfurt, Ebern, Hofheim und Umgebung — schnell, persönlich, ohne Agentur-Bürokratie.",
   ctaPrimary: "Kostenloses Erstgespräch",
   ctaSecondary: "Beispiele ansehen",
   trust: [

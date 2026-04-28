@@ -5,10 +5,12 @@ import { brand, navLinks } from "@/lib/content";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X, ArrowRight } from "@/lib/icons";
 import { useEffect, useState } from "react";
+import { useGyroContext } from "@/components/effects/gyro-provider";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { pos: gyroPos, active: gyroActive } = useGyroContext();
 
   useEffect(() => {
     function onScroll() {
@@ -36,12 +38,28 @@ export function Navbar() {
       >
         <nav
           className={cn(
-            "flex w-full max-w-6xl items-center justify-between gap-4 rounded-full px-3 py-2 transition-all duration-500",
+            "relative flex w-full max-w-6xl items-center justify-between gap-4 rounded-full px-3 py-2 transition-all duration-500",
             scrolled
               ? "glass-strong shadow-[0_15px_40px_-15px_rgba(0,0,0,0.7)]"
               : "glass-pill"
           )}
         >
+          {/* Gyro border reflection */}
+          {gyroActive && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-full"
+              style={{
+                background: `radial-gradient(circle at ${gyroPos.x}% ${gyroPos.y}%, rgba(255,255,255,0.5) 0%, transparent 50%)`,
+                padding: "1px",
+                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                WebkitMaskComposite: "xor",
+                maskComposite: "exclude",
+                transition: "background 0.08s ease",
+              }}
+            />
+          )}
+
           <a
             href="#top"
             className="flex items-center gap-2 pl-3 pr-1 group"

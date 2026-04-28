@@ -27,7 +27,12 @@
       "Bash(node -e \"const fs=require\\('fs'\\); const p='src/components/sections/hero.tsx'; const c=fs.readFileSync\\(p,'utf8'\\); fs.writeFileSync\\(p,c\\);\")",
       "Bash(git init *)",
       "Bash(git remote *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git branch *)",
+      "Bash(git commit -m 'fix: remove hardcoded Windows path from next.config.ts *)",
+      "Bash(git commit *)"
     ]
   }
 }

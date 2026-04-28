@@ -4,12 +4,63 @@ import { hero } from "@/lib/content";
 import { GradientOrbs } from "@/components/effects/gradient-orbs";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Magnetic } from "@/components/ui/magnetic-button";
-import { ArrowRight, ArrowDown } from "@/lib/icons";
-import { motion, useReducedMotion } from "motion/react";
+import { ArrowRight, ArrowDown, TrendingUp, Globe, BadgeEuro, ShieldCheck } from "@/lib/icons";
+import { motion, useReducedMotion, AnimatePresence } from "motion/react";
+import { useState, useEffect } from "react";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { Star } from "@/lib/icons";
+
+const WORDS = ["Handwerker", "Frisöre", "Cafés", "Restaurants"];
+
+function RollingHeadline({ reduce }: { reduce: boolean }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % WORDS.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <h1 className="mt-7 font-display text-[clamp(3.25rem,8.5vw,6.75rem)] font-semibold leading-[0.9] tracking-tight">
+      <motion.span
+        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
+        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+        className="block whitespace-nowrap text-foreground"
+      >
+        Schnell sichtbar.
+      </motion.span>
+      <motion.span
+        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
+        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
+        className="block mt-1 text-foreground text-[clamp(2rem,5.5vw,4.5rem)]"
+      >
+        Webseiten für
+      </motion.span>
+      <motion.span
+        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
+        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.34 }}
+        className="block mt-1 overflow-hidden"
+      >
+        <AnimatePresence mode="wait">
+          <motion.em
+            key={WORDS[index]}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 48, filter: "blur(6px)" }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -48, filter: "blur(6px)" }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block font-serif italic font-normal text-gradient"
+          >
+            {WORDS[index]}
+          </motion.em>
+        </AnimatePresence>
+      </motion.span>
+    </h1>
+  );
+}
 
 export function HeroSection() {
   const reduce = useReducedMotion();
@@ -17,14 +68,14 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden pt-32 pb-24 md:pt-44 md:pb-36 lg:min-h-[100svh] lg:flex lg:items-center"
+      className="relative isolate overflow-hidden pt-28 pb-8 md:pt-36 md:pb-12"
       aria-label="Einleitung"
     >
       <GradientOrbs />
       <div aria-hidden className="absolute inset-0 grid-bg" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-16 px-6 lg:grid-cols-12 lg:gap-8 lg:items-center">
-        <div className="lg:col-span-7 xl:col-span-6 space-y-0">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-16 px-6 lg:grid-cols-12 lg:gap-4 lg:items-center">
+        <div className="lg:col-span-8 xl:col-span-7 space-y-0">
 
           {/* Eyebrow */}
           <motion.div
@@ -45,25 +96,7 @@ export function HeroSection() {
           </motion.div>
 
           {/* Headline */}
-          <h1 className="mt-7 font-display text-[clamp(3.25rem,8.5vw,6.75rem)] font-semibold leading-[0.9] tracking-tight text-balance">
-            <motion.span
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-              animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="block text-foreground"
-            >
-              Schnell sichtbar.
-            </motion.span>
-            <motion.span
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-              animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
-              className="block mt-1"
-            >
-              <em className="font-serif italic text-gradient font-normal">Sofort</em>{" "}
-              <span className="text-foreground">überzeugend.</span>
-            </motion.span>
-          </h1>
+          <RollingHeadline reduce={!!reduce} />
 
           {/* Subtitle */}
           <motion.p
@@ -94,59 +127,59 @@ export function HeroSection() {
             </ShinyButton>
           </motion.div>
 
-          {/* Urgency / social proof */}
+          {/* Trust pills */}
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.66 }}
-            className="mt-5 flex items-center gap-3"
+            className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted"
           >
-            <div className="flex -space-x-2">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <span
-                  key={i}
-                  aria-hidden
-                  className="inline-block h-7 w-7 rounded-full border-2 border-background"
-                  style={{
-                    background: i % 2 === 0
-                      ? "linear-gradient(135deg,#ff2d8f,#c026d3)"
-                      : "linear-gradient(135deg,#8b5cf6,#c026d3)",
-                  }}
-                />
-              ))}
-            </div>
-            <p className="text-xs text-muted">
-              <span className="font-semibold text-foreground">7 Anfragen</span> diese Woche aus der Region
-            </p>
+            <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
+            <span><span className="font-semibold text-foreground">Spezialisiert</span> auf KMUs</span>
+            <span><span className="font-semibold text-foreground">Region</span> Haßberge</span>
           </motion.div>
 
-          {/* Trust bar */}
+          {/* Feature grid */}
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
-            className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-white/[0.07] pt-7"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
+            className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24"
           >
-            <div className="flex items-center gap-1.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5 fill-pink text-pink" aria-hidden />
-              ))}
-              <span className="ml-1.5 text-xs font-medium text-muted">5.0 · 30+ Empfehlungen</span>
-            </div>
-            <div className="hidden h-3 w-px bg-white/10 sm:block" />
-            <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted">
-              {hero.trust.map((t) => (
-                <span key={t.label}>
-                  <span className="font-semibold text-foreground">{t.value}</span>{" "}
-                  {t.label}
+            {[
+              { icon: TrendingUp,  text: "Täglich neue Anfragen",       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
+              { icon: Globe,       text: "Verkaufsstarke Webseite",      grad: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
+              { icon: BadgeEuro,   text: "Mehr Buchungen. Mehr Umsatz.", grad: "linear-gradient(135deg,#ff2d8f,#8b5cf6)" },
+              { icon: ShieldCheck, text: "0,0 Technik-Stress",           grad: "linear-gradient(135deg,#6d28d9,#8b5cf6)" },
+            ].map(({ icon: Icon, text, grad }) => (
+              <div
+                key={text}
+                className="relative flex items-center gap-3 overflow-hidden rounded-2xl px-4 py-3.5"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  backdropFilter: "blur(24px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(24px) saturate(180%)",
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.25)",
+                }}
+              >
+                {/* subtle inner glow */}
+                <div className="pointer-events-none absolute inset-0 rounded-2xl" style={{ background: "radial-gradient(ellipse at 30% 0%, rgba(255,255,255,0.06) 0%, transparent 60%)" }} />
+                <span
+                  className="relative flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl shadow-lg"
+                  style={{ background: grad, boxShadow: `0 4px 14px rgba(0,0,0,0.3)` }}
+                >
+                  <Icon className="h-4 w-4 text-white" strokeWidth={1.75} />
                 </span>
-              ))}
-            </div>
+                <span className="relative text-xs font-medium leading-snug text-foreground/90">{text}</span>
+              </div>
+            ))}
           </motion.div>
+
         </div>
 
         {/* Right column — laptop visual */}
-        <div className="relative lg:col-span-5 xl:col-span-6">
+        <div className="relative lg:col-span-4 xl:col-span-5">
           <div className="relative h-[340px] w-full sm:h-[460px] lg:h-[620px]">
             <LaptopHero />
           </div>
@@ -214,7 +247,7 @@ function LaptopHero() {
         animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
         whileHover={reduce ? {} : { scale: 1.04, y: -2 }}
-        className="absolute bottom-10 -left-2 z-20 cursor-default sm:bottom-16 sm:-left-6"
+        className="absolute bottom-10 left-6 z-20 cursor-default sm:bottom-16 sm:left-8"
         aria-hidden
       >
         <div className="rounded-2xl glass-strong px-5 py-3.5 shadow-[0_12px_48px_-8px_rgba(0,0,0,0.7)]">

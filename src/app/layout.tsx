@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Bricolage_Grotesque, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
+import { GyroProvider } from "@/components/effects/gyro-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,11 +23,11 @@ const bricolage = Bricolage_Grotesque({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const instrument = Instrument_Serif({
+const instrument = Playfair_Display({
   variable: "--font-instrument",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
   style: ["italic", "normal"],
 });
 
@@ -87,7 +88,9 @@ export default function RootLayout({
         >
           Zum Hauptinhalt springen
         </a>
-        <LenisProvider>{children}</LenisProvider>
+        <GyroProvider>
+          <LenisProvider>{children}</LenisProvider>
+        </GyroProvider>
       </body>
     </html>
   );

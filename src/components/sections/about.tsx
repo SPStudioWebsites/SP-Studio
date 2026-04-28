@@ -12,7 +12,7 @@ export function AboutSection() {
     <section
       id="ueber-uns"
       aria-labelledby="ueber-uns-h"
-      className="relative overflow-hidden py-28 md:py-36"
+      className="relative overflow-hidden py-16 md:py-24"
     >
       <div
         aria-hidden
