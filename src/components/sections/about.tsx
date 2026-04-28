@@ -6,6 +6,7 @@ import { Pill } from "@/components/ui/pill";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Quote, MapPin } from "@/lib/icons";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 export function AboutSection() {
   return (
@@ -30,7 +31,7 @@ export function AboutSection() {
                 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
               >
                 Aus Haßfurt.{" "}
-                <em className="font-serif italic font-normal text-gradient">Für die Region.</em>
+                <em className="font-serif italic font-normal text-gradient">Für dich.</em>
               </h2>
             </Reveal>
             <Reveal delay={0.2}>
@@ -50,14 +51,11 @@ export function AboutSection() {
                 <blockquote className="font-serif text-xl italic leading-relaxed text-foreground md:text-2xl">
                   &bdquo;{about.quote}&ldquo;
                 </blockquote>
-                <figcaption className="mt-4 text-sm text-muted">
-                  — {about.quoteAuthor}
-                </figcaption>
               </figure>
             </Reveal>
 
             <Reveal delay={0.4}>
-              <dl className="mt-10 grid grid-cols-3 gap-4">
+              <dl className="mt-10 grid grid-cols-2 gap-4">
                 {about.stats.map((s) => (
                   <div key={s.label} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
                     <dt className="font-display text-2xl font-semibold text-gradient md:text-3xl">
@@ -71,7 +69,17 @@ export function AboutSection() {
           </div>
 
           <Reveal delay={0.2} className="lg:col-span-6">
-            <RegionMap />
+            <div className="relative overflow-hidden rounded-3xl">
+              <Image
+                src="/Über-Mich.jpeg"
+                alt="Simon, Inhaber Schnell-Sichtbar.de"
+                width={800}
+                height={1000}
+                className="w-full object-cover"
+                style={{ maxHeight: "600px" }}
+              />
+              <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }} />
+            </div>
           </Reveal>
         </div>
       </div>

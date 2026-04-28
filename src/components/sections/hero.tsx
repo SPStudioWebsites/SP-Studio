@@ -22,7 +22,7 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
   }, []);
 
   return (
-    <h1 className="mt-7 font-display text-[clamp(2.4rem,8.5vw,6.75rem)] font-semibold leading-[0.95] tracking-tight">
+    <h1 className="mt-7 font-display text-[3.25rem] md:text-[clamp(2.4rem,8.5vw,6.75rem)] font-semibold leading-[0.95] tracking-tight">
       <motion.span
         initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -35,7 +35,7 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
         initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
-        className="block mt-1 text-foreground text-[clamp(2rem,5.5vw,4.5rem)]"
+        className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]"
       >
         Webseiten für
       </motion.span>
@@ -103,7 +103,7 @@ export function HeroSection() {
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.38 }}
-            className="mt-8 max-w-lg text-lg leading-relaxed text-muted text-pretty"
+            className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg"
           >
             {hero.subtitle}
           </motion.p>
@@ -136,7 +136,7 @@ export function HeroSection() {
           >
             <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
             <span><span className="font-semibold text-foreground">Spezialisiert</span> auf KMUs</span>
-            <span><span className="font-semibold text-foreground">Region</span> Haßberge</span>
+            <span><span className="font-semibold text-foreground">Region</span> Franken</span>
           </motion.div>
 
           {/* Feature grid */}
@@ -269,7 +269,7 @@ function LaptopHero() {
         <div className="rounded-2xl glass-strong px-5 py-3.5 shadow-[0_12px_48px_-8px_rgba(0,0,0,0.7)]">
           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-muted">Fertig in</p>
           <p className="mt-0.5 font-display text-[1.75rem] font-bold leading-none text-foreground">14 Tage</p>
-          <p className="mt-1 text-[9px] text-violet font-medium">garantierte Lieferzeit</p>
+          <p className="mt-1 text-[9px] text-violet font-medium">durchschnittliche Lieferzeit</p>
         </div>
       </motion.div>
     </div>

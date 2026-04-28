@@ -24,7 +24,7 @@ export const navLinks = [
 ] as const;
 
 export const hero = {
-  eyebrow: "Webagentur · Region Haßberge",
+  eyebrow: "Webagentur · Region Franken",
   title: ["Schnell sichtbar.", "*Sofort* überzeugend."],
   subtitle:
     "Wir bauen Webseiten für Frisöre, Restaurants, Handwerker und KMUs in Haßfurt, Ebern, Hofheim und Umgebung — schnell, persönlich, ohne Agentur-Bürokratie.",
@@ -221,18 +221,18 @@ export const process = [
 ] as const;
 
 export const about = {
-  eyebrow: "Über uns",
+  eyebrow: "Über mich",
   title: ["Aus Haßfurt.", "Für die *Region*."],
   body: [
-    "Wir sind keine 200-Mann-Agentur aus Berlin. Wir sind ein kleines Team aus Haßfurt, das genau weiß, wie Geschäft in Unterfranken funktioniert.",
-    "Du erreichst uns persönlich. Wir kommen vorbei. Wir sprechen deine Sprache. Und wir bauen Webseiten, die nicht nur schick aussehen — sondern Anfragen, Termine und Umsatz bringen.",
+    "Die meisten Webdesigner haben noch nie eine Anzeige für einen Schreiner geschaltet. Ich schon.",
+    "Ich bin Simon und arbeite bereits seit über 3 Jahren im Marketing. Für Handwerksbetriebe und lokale Dienstleister aus der Region, die nicht wussten, wie sie online Kunden gewinnen sollen. Ich habe ihre Social-Media-Auftritte aufgebaut, Kampagnen geschaltet, Reichweite aufgebaut, Webseiten erstellt und dabei eines gelernt:",
+    "Genau das ist der Unterschied bei Schnell-Sichtbar.de. Ich designe keine Seiten, die gut aussehen und dann nichts tun. Ich baue Websites, die auf echten Marketingprinzipien basieren: mit klarer Botschaft, lokalem SEO und einem Aufbau, der Besucher zu Kunden macht.",
+    "Und weil ich weiß, wie viel Zeit du als Unternehmer nicht hast, mache ich das schnell und ohne Agentur-Umweg. Du hast eine Frage? Du schreibst mir. Nicht einem Praktikanten.",
   ],
-  quote:
-    "Eine Website soll arbeiten — nicht nur gut aussehen. Genau dafür sind wir da.",
-  quoteAuthor: "Inhaber, Schnell-Sichtbar.de",
+  quote: "Aus der Region Unterfranken. Für Betriebe, die online endlich sichtbar sein wollen.",
+  quoteAuthor: "Simon, Inhaber Schnell-Sichtbar.de",
   stats: [
-    { value: "5+", label: "Jahre Erfahrung" },
-    { value: "30+", label: "umgesetzte Projekte" },
+    { value: "3+", label: "Jahre Erfahrung" },
     { value: "100 %", label: "aus der Region" },
   ],
   cities: [
@@ -301,36 +301,36 @@ export const testimonials = {
 
 export const faq = [
   {
-    q: "Was kostet eine Website?",
-    a: "Eine professionelle Website beginnt bei uns ab 1.490 € einmalig — inklusive Design, Entwicklung, SEO-Grundlagen und Schulung. Größere Projekte mit Online-Buchung oder Shop sprechen wir individuell ab. Du bekommst immer einen Festpreis vorher.",
+    q: "Was kostet eine Website bei SP Studio?",
+    a: "Eine professionelle Website beginnt ab 699 € einmalig — inklusive Design, Entwicklung und SEO-Grundlagen. Größere Projekte mit Online-Buchung oder Shop besprechen wir individuell. Du bekommst immer einen Festpreis, bevor auch nur eine Zeile Code geschrieben wird.",
   },
   {
-    q: "Wie schnell ist meine Seite online?",
-    a: "Unsere Standard-Lieferzeit liegt bei 14 Tagen ab Briefing. Bei größeren Projekten planen wir gemeinsam realistisch. Eilig? Wir haben einen Express-Slot für 7 Tage.",
+    q: "Wie schnell ist meine Website online?",
+    a: "Im Durchschnitt 14 Tage — vom ersten Gespräch bis zum Launch. Bei größeren Projekten planen wir das gemeinsam realistisch. Und wenn es schnell gehen muss: Es gibt einen Express-Slot für 7 Tage Lieferzeit.",
   },
   {
     q: "Brauche ich technisches Wissen?",
-    a: "Nein. Wir kümmern uns um alles Technische — Domain, Hosting, E-Mail, SSL. Du bekommst eine kurze Einweisung in das System, das wir bewusst so einfach halten, dass du Texte und Bilder selbst pflegen kannst.",
+    a: "Kein bisschen. Du lieferst die Infos zu deinem Betrieb, ich kümmere mich um den Rest. Kein Fachchinesisch, keine langen Erklärungen — du siehst das Ergebnis, nicht den Prozess.",
+  },
+  {
+    q: "Wie läuft die Zusammenarbeit ab?",
+    a: "Einfach und klar strukturiert. Zuerst führen wir ein kostenloses Erstgespräch — persönlich oder per Video. Danach bekommst du ein konkretes Angebot. Nach deiner Freigabe starten wir mit Design und Entwicklung. Du gibst einmal Feedback, wir setzen es um. Dann geht deine Seite online. Kein hin und her, keine langen Warteschleifen.",
   },
   {
     q: "Was passiert nach dem Launch?",
-    a: "Auf Wunsch betreuen wir die Seite weiter — Hosting, Updates, kleine Änderungen. Du kannst aber auch alles selbst übernehmen oder zu einem anderen Anbieter wechseln. Wir binden dich nicht.",
-  },
-  {
-    q: "Macht ihr auch nur SEO ohne neue Website?",
-    a: "Ja. Wir analysieren deine bestehende Seite, optimieren Local SEO, Google Unternehmensprofil und technische Performance. Auch isoliert buchbar.",
-  },
-  {
-    q: "Ist Hosting inklusive?",
-    a: "Im ersten Jahr ist Hosting auf deutschen Servern inklusive. Danach kostet es 19 € / Monat — oder du nimmst dein eigenes Hosting, das ist ebenfalls möglich.",
+    a: "Du entscheidest. Auf Wunsch übernehme ich Hosting, Updates und kleine Änderungen als monatliche Betreuung. Du kannst aber auch alles selbst übernehmen oder zu einem anderen Anbieter wechseln. Deine Website, dein Code — kein Lock-in.",
   },
   {
     q: "Kann ich später selbst Inhalte ändern?",
-    a: "Ja — wir bauen ein einfaches Redaktionssystem ein, mit dem du Texte, Bilder und Öffnungszeiten in Minuten anpassen kannst. Schulung inklusive.",
+    a: "Ja. Du bekommst auf Wunsch den vollständigen Code deiner Website. Änderungen kannst du selbst vornehmen, einen Entwickler deiner Wahl beauftragen oder jederzeit zu mir kommen. Keine versteckten Abhängigkeiten.",
   },
   {
-    q: "Wo sitzt ihr genau?",
-    a: "In Haßfurt, mitten in der Region Haßberge. Wir kommen für Erstgespräche gerne bei dir vorbei — von Königsberg bis Zeil und überall dazwischen.",
+    q: "Was ist der Unterschied zwischen einer normalen und einer SEO-optimierten Website?",
+    a: "Eine normale Website ist online. Eine SEO-optimierte Website wird gefunden. Der Unterschied liegt in Dingen wie Seitenstruktur, Ladezeit, lokalen Keywords, technischer Auszeichnung und Google-Sichtbarkeit. Wir bauen keine Seiten die nur existieren — sondern Seiten die gefunden werden.",
+  },
+  {
+    q: "Wer braucht eine lokale Website?",
+    a: "Jeder Betrieb, der Kunden aus der Region gewinnen will. Ob Handwerker, Dienstleister, Praxis oder kleines Unternehmen: Wer lokal gefunden werden will, braucht eine Website die für genau diese Suchen gebaut ist. Eine allgemeine Seite reicht nicht mehr — Google bevorzugt Seiten mit lokalem Bezug, echten Standortangaben und klaren Leistungsbeschreibungen.",
   },
 ] as const;
 

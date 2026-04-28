@@ -37,7 +37,7 @@ export function ProcessSection() {
     <section
       id="ablauf"
       aria-labelledby="ablauf-h"
-      className="relative overflow-hidden py-16 md:py-24"
+      className="relative overflow-hidden pt-4 pb-16 md:pt-6 md:pb-24"
     >
       <div aria-hidden className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-pink/5 blur-[120px]" />
       <div aria-hidden className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-violet/5 blur-[120px]" />
@@ -121,6 +121,78 @@ export function ProcessSection() {
               );
             })}
           </div>
+        </div>
+
+        {/* Objection handler — animated box below timeline */}
+        <div className="mt-16 flex flex-col items-center">
+          {/* Connector from timeline bottom */}
+          <div className="h-10 w-px bg-gradient-to-b from-violet/60 to-transparent md:ml-0 self-start ml-5 md:self-center" />
+
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.96 }}
+            whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              backdropFilter: "blur(28px) saturate(180%)",
+              WebkitBackdropFilter: "blur(28px) saturate(180%)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.3)",
+            }}
+          >
+            {/* Subtle gradient glow */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.18) 0%, transparent 65%)" }}
+            />
+
+            {/* Top border glow */}
+            <div
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-px rounded-full"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.6) 50%, transparent)" }}
+            />
+
+            <p className="relative font-mono text-xs font-semibold uppercase tracking-[0.22em] text-violet/80">
+              Das Beste daran
+            </p>
+            <h3 className="relative mt-3 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+              Du brauchst null{" "}
+              <em className="font-serif italic font-normal text-gradient">Vorkenntnisse.</em>
+            </h3>
+            <p className="relative mt-2 text-base text-muted text-pretty">
+              Wir kümmern uns um alles Technische — von Anfang bis Launch. Du entscheidest nur, wie es aussehen soll.
+            </p>
+
+            <ul className="relative mt-6 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">
+              {[
+                "Keine Vorkenntnisse nötig",
+                "Persönliche Betreuung von A bis Z",
+                "Fertig in durchschnittlich 14 Tagen",
+                "Individuell ohne Technik-Bla-Bla",
+              ].map((item, i) => (
+                <motion.li
+                  key={item}
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, x: -12 }}
+                  whileInView={reduce ? { opacity: 1 } : { opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.07 }}
+                  className="flex items-center gap-3 text-[15px] text-foreground/90"
+                >
+                  <span
+                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
+                    style={{ background: "linear-gradient(135deg, #ff2d8f, #8b5cf6)" }}
+                  >
+                    <Check className="h-2.5 w-2.5 text-white" />
+                  </span>
+                  {item}
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
       </div>
     </section>
