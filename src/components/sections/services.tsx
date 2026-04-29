@@ -150,9 +150,10 @@ function PricingCard({
       <GlassCard
         variant={pkg.popular ? "strong" : "default"}
         className={cn(
-          "relative flex h-full flex-col overflow-hidden p-8",
-          pkg.popular &&
-            "shadow-[0_0_60px_-10px_rgba(255,45,143,0.35)] border-pink/20"
+          "relative flex h-full flex-col overflow-hidden",
+          pkg.popular
+            ? "p-8 shadow-[0_0_60px_-10px_rgba(255,45,143,0.35)] border-pink/20"
+            : "p-6"
         )}
       >
         {pkg.popular && (
@@ -179,19 +180,19 @@ function PricingCard({
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted/70">
             {String(index + 1).padStart(2, "0")}
           </p>
-          <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground">
+          <h3 className={cn("mt-2 font-display font-semibold tracking-tight text-foreground", pkg.popular ? "text-2xl" : "text-xl")}>
             {pkg.name}
           </h3>
-          <p className="mt-1 text-sm text-muted">{pkg.tagline}</p>
+          <p className={cn("mt-1 text-muted", pkg.popular ? "text-sm" : "text-xs")}>{pkg.tagline}</p>
         </div>
 
         {/* Price */}
-        <div className="mt-7 border-t border-white/[0.07] pt-7">
+        <div className={cn("border-t border-white/[0.07]", pkg.popular ? "mt-7 pt-7" : "mt-5 pt-5")}>
           <div className="flex items-end gap-1">
             <span
               className={cn(
-                "font-display text-[2.5rem] font-bold leading-none tracking-tight",
-                pkg.popular ? "text-gradient" : "text-foreground"
+                "font-display font-bold leading-none tracking-tight",
+                pkg.popular ? "text-[2.5rem] text-gradient" : "text-[2rem] text-foreground"
               )}
             >
               {pkg.price}
@@ -201,27 +202,27 @@ function PricingCard({
         </div>
 
         {/* Features */}
-        <ul className="mt-7 flex-1 space-y-3">
+        <ul className={cn("flex-1", pkg.popular ? "mt-7 space-y-3" : "mt-5 space-y-2.5")}>
           {pkg.features.map((f) => (
-            <li key={f} className="flex items-start gap-3">
+            <li key={f} className="flex items-start gap-2.5">
               <span
                 className={cn(
-                  "mt-0.5 flex size-5 flex-shrink-0 items-center justify-center rounded-full",
+                  "mt-0.5 flex flex-shrink-0 items-center justify-center rounded-full",
                   pkg.popular
-                    ? "bg-gradient-to-br from-pink to-violet"
-                    : "bg-white/[0.07] border border-white/10"
+                    ? "size-5 bg-gradient-to-br from-pink to-violet"
+                    : "size-4 bg-white/[0.07] border border-white/10"
                 )}
                 aria-hidden
               >
-                <Check className="h-2.5 w-2.5 text-white" />
+                <Check className={cn("text-white", pkg.popular ? "h-2.5 w-2.5" : "h-2 w-2")} />
               </span>
-              <span className="text-sm leading-relaxed text-foreground/80">{f}</span>
+              <span className={cn("leading-relaxed text-foreground/80", pkg.popular ? "text-sm" : "text-xs")}>{f}</span>
             </li>
           ))}
         </ul>
 
         {/* CTA */}
-        <div className="mt-8">
+        <div className={pkg.popular ? "mt-8" : "mt-6"}>
           {pkg.popular ? (
             <ShinyButton href="#kontakt" size="lg" className="w-full justify-center">
               {pkg.cta}
@@ -230,7 +231,7 @@ function PricingCard({
             <ShinyButton
               href="#kontakt"
               variant="ghost"
-              size="lg"
+              size="md"
               className="w-full justify-center"
             >
               {pkg.cta}

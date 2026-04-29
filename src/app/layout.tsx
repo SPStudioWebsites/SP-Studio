@@ -4,6 +4,7 @@ import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { GyroProvider } from "@/components/effects/gyro-provider";
 import { ConsentManager } from "@/components/analytics/consent-manager";
+import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -118,6 +119,7 @@ export default function RootLayout({
         <GyroProvider>
           <LenisProvider>{children}</LenisProvider>
         </GyroProvider>
+        <MobileCtaBar />
         <ConsentManager />
       </body>
     </html>

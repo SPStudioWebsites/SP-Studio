@@ -113,7 +113,7 @@ export function HeroSection() {
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.52 }}
-            className="mt-10"
+            className="mt-10 flex justify-center lg:justify-start"
           >
             <Magnetic strength={0.22}>
               <ShinyButton
@@ -137,6 +137,37 @@ export function HeroSection() {
             <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
             <span><span className="font-semibold text-foreground">Spezialisiert</span> auf KMUs</span>
             <span><span className="font-semibold text-foreground">Region</span> Franken</span>
+          </motion.div>
+
+          {/* Trust metric badges — mobile only (floating cards are desktop-only) */}
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
+            className="mt-4 grid grid-cols-2 gap-3 lg:hidden"
+          >
+            <div
+              className="rounded-2xl px-4 py-3"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.10)",
+              }}
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-muted">Ø mehr Anfragen</p>
+              <p className="mt-0.5 font-display text-2xl font-bold leading-none text-foreground">+180%</p>
+              <p className="mt-1 text-[9px] font-medium text-pink">nach Website-Launch</p>
+            </div>
+            <div
+              className="rounded-2xl px-4 py-3"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.10)",
+              }}
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-muted">Fertig in</p>
+              <p className="mt-0.5 font-display text-2xl font-bold leading-none text-foreground">14 Tage</p>
+              <p className="mt-1 text-[9px] font-medium text-violet">durchschnittliche Lieferzeit</p>
+            </div>
           </motion.div>
 
           {/* Feature grid */}

@@ -10,7 +10,9 @@ import {
   ArrowRight,
   Loader2,
   AlertCircle,
+  Phone,
 } from "@/lib/icons";
+import { brand } from "@/lib/content";
 import { useActionState } from "react";
 import { submitContact, type ContactState } from "@/app/actions/contact";
 import { motion, AnimatePresence } from "motion/react";
@@ -53,7 +55,21 @@ export function ContactSection() {
           </Reveal>
         </div>
 
-        <div className="mt-16 mx-auto max-w-3xl">
+        {/* Phone CTA — prominent on mobile */}
+        <Reveal delay={0.25}>
+          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <a
+              href={`tel:${brand.phone}`}
+              className="group flex h-12 items-center gap-3 rounded-full border border-white/[0.12] bg-white/[0.04] px-6 text-sm font-medium text-foreground/90 transition-colors hover:border-pink/30 hover:bg-pink/[0.06]"
+            >
+              <Phone className="h-4 w-4 text-pink" />
+              <span className="font-semibold text-foreground">Anrufen</span>
+            </a>
+            <span className="text-xs text-muted">oder Formular nutzen</span>
+          </div>
+        </Reveal>
+
+        <div className="mt-10 mx-auto max-w-3xl">
           <Reveal delay={0.15}>
             <GlassCard variant="strong" className="relative overflow-hidden p-7 md:p-10">
               <AnimatePresence mode="wait">
