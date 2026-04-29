@@ -23,7 +23,7 @@ export function FAQSection() {
                 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
               >
                 Häufige Fragen.{" "}
-                <em className="font-serif italic font-normal text-gradient">Klare</em>{" "}
+                <em className="font-display font-extrabold not-italic text-gradient">Klare</em>{" "}
                 Antworten.
               </h2>
             </Reveal>

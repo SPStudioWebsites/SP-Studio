@@ -32,7 +32,7 @@ export function PortfolioSection() {
                 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
               >
                 So{" "}
-                <em className="font-serif italic font-normal text-gradient">könnte</em>{" "}
+                <em className="font-display font-extrabold not-italic text-gradient">könnte</em>{" "}
                 deine aussehen.
               </h2>
             </Reveal>

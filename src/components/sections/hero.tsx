@@ -4,7 +4,7 @@ import { hero } from "@/lib/content";
 import { GradientOrbs } from "@/components/effects/gradient-orbs";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Magnetic } from "@/components/ui/magnetic-button";
-import { ArrowRight, ArrowDown, TrendingUp, Globe, BadgeEuro, ShieldCheck } from "@/lib/icons";
+import { ArrowRight, TrendingUp, Globe, BadgeEuro, ShieldCheck } from "@/lib/icons";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
@@ -43,7 +43,7 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
         initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.34 }}
-        className="block mt-1 overflow-hidden"
+        className="block mt-1 overflow-hidden pb-3"
       >
         <AnimatePresence mode="wait">
           <motion.em
@@ -52,7 +52,7 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: -48, filter: "blur(6px)" }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-block font-serif italic font-normal text-gradient"
+            className="inline-block font-display font-extrabold not-italic text-gradient pr-[0.08em]"
           >
             {WORDS[index]}
           </motion.em>
@@ -113,18 +113,18 @@ export function HeroSection() {
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.52 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
+            className="mt-10"
           >
-            <Magnetic strength={0.18}>
-              <ShinyButton href="#kontakt" size="lg">
+            <Magnetic strength={0.22}>
+              <ShinyButton
+                href="#kontakt"
+                size="lg"
+                className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_22px_70px_-8px_rgba(255,45,143,1)] px-12 text-base font-semibold"
+              >
                 {hero.ctaPrimary}
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </ShinyButton>
             </Magnetic>
-            <ShinyButton href="#beispiele" variant="ghost" size="lg">
-              {hero.ctaSecondary}
-              <ArrowDown className="h-4 w-4" />
-            </ShinyButton>
           </motion.div>
 
           {/* Trust pills */}
@@ -231,7 +231,7 @@ function LaptopHero() {
         className="relative z-10 w-full"
       >
         <Image
-          src="/laptop-herov2.png"
+          src="/laptop-hero-transparent.png"
           alt="Moderne Website auf einem MacBook Pro — Beispiel für ein SP Studio Webdesign-Projekt"
           width={2752}
           height={1536}

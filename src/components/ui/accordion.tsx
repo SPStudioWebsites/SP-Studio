@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { ChevronDown } from "@/lib/icons";
 
@@ -51,22 +51,17 @@ export function Accordion({
                 <ChevronDown className="h-4 w-4" />
               </span>
             </button>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  key="content"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
-                >
-                  <p className="px-5 pb-6 pr-14 text-sm leading-relaxed text-muted md:px-7 md:pb-7 md:text-[15px]">
-                    {it.a}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <motion.div
+              initial={false}
+              animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+              aria-hidden={!isOpen}
+            >
+              <p className="px-5 pb-6 pr-14 text-sm leading-relaxed text-muted md:px-7 md:pb-7 md:text-[15px]">
+                {it.a}
+              </p>
+            </motion.div>
           </li>
         );
       })}

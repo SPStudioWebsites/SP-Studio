@@ -5,12 +5,16 @@ import { brand, navLinks } from "@/lib/content";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X, ArrowRight } from "@/lib/icons";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useGyroContext } from "@/components/effects/gyro-provider";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pos: gyroPos, active: gyroActive } = useGyroContext();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  function link(hash: string) { return isHome ? hash : `/${hash}`; }
 
   useEffect(() => {
     function onScroll() {
@@ -61,7 +65,7 @@ export function Navbar() {
           )}
 
           <a
-            href="#top"
+            href={link("#top")}
             className="flex items-center gap-2 pl-3 pr-1 group"
             aria-label={brand.name}
           >
@@ -79,7 +83,7 @@ export function Navbar() {
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
-                  href={l.href}
+                  href={link(l.href)}
                   className="rounded-full px-4 py-2 text-sm font-medium text-foreground/75 transition-colors duration-200 hover:bg-white/[0.05] hover:text-foreground"
                 >
                   {l.label}
@@ -90,7 +94,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <a
-              href="#kontakt"
+              href={link("#kontakt")}
               className="group hidden h-10 items-center gap-2 rounded-full pl-5 pr-1.5 text-sm font-medium text-white sm:inline-flex"
               style={{
                 background:
@@ -155,7 +159,7 @@ export function Navbar() {
                   }}
                 >
                   <a
-                    href={l.href}
+                    href={link(l.href)}
                     onClick={() => setMobileOpen(false)}
                     className="block py-4 font-display text-3xl font-medium tracking-tight text-foreground/90 hover:text-pink"
                   >
@@ -171,7 +175,7 @@ export function Navbar() {
                 className="mt-8"
               >
                 <a
-                  href="#kontakt"
+                  href={link("#kontakt")}
                   onClick={() => setMobileOpen(false)}
                   className="flex h-14 items-center justify-center gap-2 rounded-full text-base font-medium text-white"
                   style={{

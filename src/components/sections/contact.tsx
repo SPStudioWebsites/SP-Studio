@@ -1,16 +1,12 @@
 "use client";
 
-import { contact, brand } from "@/lib/content";
+import { contact } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
 import { Pill } from "@/components/ui/pill";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import {
   CheckCircle2,
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
   ArrowRight,
   Loader2,
   AlertCircle,
@@ -46,7 +42,7 @@ export function ContactSection() {
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
               Lass uns reden.{" "}
-              <em className="font-serif italic font-normal text-gradient">Kostenlos.</em>{" "}
+              <em className="font-display font-extrabold not-italic text-gradient">Kostenlos.</em>{" "}
               Unverbindlich.
             </h2>
           </Reveal>
@@ -57,8 +53,8 @@ export function ContactSection() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-12">
-          <Reveal delay={0.15} className="lg:col-span-7">
+        <div className="mt-16 mx-auto max-w-3xl">
+          <Reveal delay={0.15}>
             <GlassCard variant="strong" className="relative overflow-hidden p-7 md:p-10">
               <AnimatePresence mode="wait">
                 {state.ok ? (
@@ -159,57 +155,6 @@ export function ContactSection() {
                   </motion.form>
                 )}
               </AnimatePresence>
-            </GlassCard>
-          </Reveal>
-
-          <Reveal delay={0.25} className="lg:col-span-5">
-            <GlassCard variant="default" className="flex h-full flex-col justify-between p-7 md:p-9">
-              <div>
-                <h3 className="font-display text-2xl font-semibold tracking-tight">
-                  Direkt erreichbar
-                </h3>
-                <p className="mt-2 text-sm text-muted">
-                  Lieber telefonieren oder vorbeikommen? Geht auch.
-                </p>
-
-                <ul className="mt-7 space-y-5">
-                  <ContactRow
-                    icon={<Mail className="h-4 w-4" />}
-                    label="E-Mail"
-                    value={brand.email}
-                    href={`mailto:${brand.email}`}
-                  />
-                  <ContactRow
-                    icon={<Phone className="h-4 w-4" />}
-                    label="Telefon"
-                    value={brand.phoneDisplay}
-                    href={`tel:${brand.phone}`}
-                  />
-                  <ContactRow
-                    icon={<MapPin className="h-4 w-4" />}
-                    label="Adresse"
-                    value={`${brand.address.street}, ${brand.address.zip} ${brand.address.city}`}
-                  />
-                  <ContactRow
-                    icon={<Clock className="h-4 w-4" />}
-                    label="Sprechzeit"
-                    value={brand.hours}
-                  />
-                </ul>
-              </div>
-
-              <div className="mt-10 rounded-2xl border border-pink/20 bg-pink/[0.06] p-5">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-pink">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink opacity-75" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pink" />
-                  </span>
-                  Aktuell verfügbar
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/85">
-                  Im April 2026 sind noch <strong>3 Slots</strong> für neue Projekte frei.
-                </p>
-              </div>
             </GlassCard>
           </Reveal>
         </div>

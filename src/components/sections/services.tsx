@@ -100,7 +100,7 @@ export function ServicesSection() {
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
               Klare Pakete.{" "}
-              <em className="font-serif italic font-normal text-gradient">Keine Überraschungen.</em>
+              <em className="font-display font-extrabold not-italic text-gradient">Keine Überraschungen.</em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>

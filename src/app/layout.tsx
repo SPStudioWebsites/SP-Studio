@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display, Cormorant_Garamond, Fraunces } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { GyroProvider } from "@/components/effects/gyro-provider";
+import { ConsentManager } from "@/components/analytics/consent-manager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,14 +32,30 @@ const instrument = Playfair_Display({
   style: ["italic", "normal"],
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  style: ["italic", "normal"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  style: ["italic", "normal"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://schnell-sichtbar.de"),
   title: {
-    default: "Schnell-Sichtbar.de — Webseiten für lokale Unternehmen in der Region Haßberge",
+    default: "Schnell-Sichtbar.de | Webdesign für Handwerker in Franken",
     template: "%s · Schnell-Sichtbar.de",
   },
   description:
-    "Premium Webseiten für Frisöre, Restaurants, Handwerker und Studios in Haßfurt, Ebern, Hofheim und Umgebung. Schnell. Persönlich. Lokal.",
+    "Webdesign Haßfurt & Region Haßberge – Webseiten für Handwerker, Frisöre & Restaurants. Schnell online, lokal gefunden. Jetzt kostenlos beraten lassen.",
   keywords: [
     "Webagentur Haßberge",
     "Webdesign Haßfurt",
@@ -49,17 +66,27 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Schnell-Sichtbar.de" }],
   openGraph: {
-    title: "Schnell-Sichtbar.de — Webseiten für lokale Unternehmen",
+    title: "Schnell-Sichtbar.de | Webdesign für Handwerker in Franken",
     description:
-      "Premium Webseiten für KMUs in der Region Haßberge. Schnell. Persönlich. Lokal.",
+      "Webdesign Haßfurt & Region Haßberge – Webseiten für Handwerker, Frisöre & Restaurants. Schnell online, lokal gefunden. Jetzt kostenlos beraten lassen.",
     type: "website",
     locale: "de_DE",
     siteName: "Schnell-Sichtbar.de",
+    images: [
+      {
+        url: "/laptop-hero-transparent.png",
+        width: 2752,
+        height: 1536,
+        alt: "Schnell-Sichtbar.de – Webdesign für lokale Unternehmen in Franken",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Schnell-Sichtbar.de",
-    description: "Premium Webseiten für lokale Unternehmen in der Region Haßberge.",
+    title: "Schnell-Sichtbar.de | Webdesign für Handwerker in Franken",
+    description:
+      "Webdesign Haßfurt & Region Haßberge – Webseiten für Handwerker, Frisöre & Restaurants. Schnell online, lokal gefunden.",
+    images: ["/laptop-hero-transparent.png"],
   },
 };
 
@@ -78,7 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${instrument.variable}`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${instrument.variable} ${cormorant.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
@@ -91,6 +118,7 @@ export default function RootLayout({
         <GyroProvider>
           <LenisProvider>{children}</LenisProvider>
         </GyroProvider>
+        <ConsentManager />
       </body>
     </html>
   );

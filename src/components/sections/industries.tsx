@@ -113,7 +113,7 @@ export function IndustriesSection() {
               className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl text-balance"
             >
               Wir kennen{" "}
-              <em className="font-serif italic font-normal text-gradient">deine</em>{" "}
+              <em className="font-display font-extrabold not-italic text-gradient">deine</em>{" "}
               Branche.
             </h2>
             <p className="mt-3 text-sm text-muted md:text-base">

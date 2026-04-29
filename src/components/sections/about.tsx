@@ -31,7 +31,7 @@ export function AboutSection() {
                 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
               >
                 Aus Haßfurt.{" "}
-                <em className="font-serif italic font-normal text-gradient">Für dich.</em>
+                <em className="font-display font-extrabold not-italic text-gradient">Für dich.</em>
               </h2>
             </Reveal>
             <Reveal delay={0.2}>

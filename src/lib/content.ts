@@ -4,13 +4,13 @@ export const brand = {
   tagline: "Webseiten, die wirken. Aus der Region Haßberge.",
   region: "Region Haßberge",
   address: {
-    street: "Marktplatz 1",
-    zip: "97437",
-    city: "Haßfurt",
+    street: "Kahlberg 3",
+    zip: "97531",
+    city: "Theres",
   },
   email: "kontakt@schnell-sichtbar.de",
-  phone: "+49 9521 000000",
-  phoneDisplay: "09521 000 000",
+  phone: "+4917622783639",
+  phoneDisplay: "0176/22783639",
   hours: "Mo–Fr 9:00 – 18:00",
 };
 
@@ -203,7 +203,7 @@ export const process = [
   {
     n: "02",
     title: "Konzept & Design",
-    desc: "Innerhalb von 5 Tagen bekommst du ein Designvorschlag — Wireframe, Farben, Typo, Mockups. Mit Feedback-Schleifen ohne Limit.",
+    desc: "Innerhalb von 5 Tagen bekommst du ein Designvorschlag — Wireframe, Farben, Typo, Mockups. Mit Feedback-Schleifen.",
     points: ["Wireframes", "Designvorschläge", "Feedback-Runden"],
   },
   {
@@ -355,16 +355,17 @@ export const contact = {
 export const footer = {
   claim: "Premium Webseiten für lokale Unternehmen aus der Region Haßberge.",
   sitemap: [
-    { label: "Leistungen", href: "#leistungen" },
+    { label: "Home", href: "#top" },
     { label: "Branchen", href: "#branchen" },
-    { label: "Beispiele", href: "#beispiele" },
     { label: "Ablauf", href: "#ablauf" },
+    { label: "Über mich", href: "#ueber-uns" },
     { label: "FAQ", href: "#faq" },
+    { label: "Leistungen", href: "#leistungen" },
     { label: "Kontakt", href: "#kontakt" },
   ],
   legal: [
-    { label: "Impressum", href: "#" },
-    { label: "Datenschutz", href: "#" },
-    { label: "AGB", href: "#" },
+    { label: "Impressum", href: "/impressum" },
+    { label: "Datenschutz", href: "/datenschutz" },
+    { label: "AGB", href: "/agb" },
   ],
 };

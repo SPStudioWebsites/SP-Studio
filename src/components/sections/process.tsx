@@ -53,7 +53,7 @@ export function ProcessSection() {
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
               In{" "}
-              <em className="font-serif italic font-normal text-gradient">
+              <em className="font-display font-extrabold not-italic text-gradient">
                 vier Schritten
               </em>{" "}
               zur fertigen Website.
@@ -121,12 +121,9 @@ export function ProcessSection() {
               );
             })}
           </div>
-        </div>
 
-        {/* Objection handler — animated box below timeline */}
-        <div className="mt-16 flex flex-col items-center">
-          {/* Connector from timeline bottom */}
-          <div className="h-10 w-px bg-gradient-to-b from-violet/60 to-transparent md:ml-0 self-start ml-5 md:self-center" />
+          {/* Das beste Daran box — inside ref so the timeline line extends to it */}
+          <div className="mt-16 flex flex-col items-center">
 
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.96 }}
@@ -161,7 +158,7 @@ export function ProcessSection() {
             </p>
             <h3 className="relative mt-3 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
               Du brauchst null{" "}
-              <em className="font-serif italic font-normal text-gradient">Vorkenntnisse.</em>
+              <em className="font-display font-extrabold not-italic text-gradient">Vorkenntnisse.</em>
             </h3>
             <p className="relative mt-2 text-base text-muted text-pretty">
               Wir kümmern uns um alles Technische — von Anfang bis Launch. Du entscheidest nur, wie es aussehen soll.
@@ -193,6 +190,7 @@ export function ProcessSection() {
               ))}
             </ul>
           </motion.div>
+          </div>
         </div>
       </div>
     </section>

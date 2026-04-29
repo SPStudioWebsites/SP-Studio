@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { JsonLd } from "@/components/seo/json-ld";
 import { HeroSection } from "@/components/sections/hero";
 import { IndustriesSection } from "@/components/sections/industries";
 import { ServicesSection } from "@/components/sections/services";
@@ -13,6 +14,7 @@ import { Grain } from "@/components/effects/grain";
 export default function Home() {
   return (
     <>
+      <JsonLd />
       <ScrollProgress />
       <Grain />
       <Navbar />
@@ -67,6 +69,6 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
-    </>
+</>
   );
 }
