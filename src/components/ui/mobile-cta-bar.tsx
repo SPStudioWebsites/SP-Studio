@@ -1,17 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { brand } from "@/lib/content";
 import { Phone, ArrowRight } from "@/lib/icons";
 
 export function MobileCtaBar() {
   const [visible, setVisible] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     function onScroll() {
-      setVisible(window.scrollY > 320);
+      const y = window.scrollY;
+      const dir = y > lastScrollY.current ? "down" : "up";
+      lastScrollY.current = y;
+
+      // Hide completely when contact section is in view
+      const kontakt = document.getElementById("kontakt");
+      if (kontakt) {
+        const rect = kontakt.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          setVisible(false);
+          return;
+        }
+      }
+
+      if (y < 320) { setVisible(false); return; }
+      setVisible(dir === "down");
     }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -23,15 +40,9 @@ export function MobileCtaBar() {
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-0 left-0 right-0 z-[60] sm:hidden"
-          style={{
-            background: "rgba(10,10,10,0.92)",
-            backdropFilter: "blur(20px) saturate(160%)",
-            WebkitBackdropFilter: "blur(20px) saturate(160%)",
-            borderTop: "1px solid rgba(255,255,255,0.08)",
-            paddingBottom: "env(safe-area-inset-bottom)",
-          }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed bottom-4 left-4 right-4 z-[60] sm:hidden rounded-2xl glass-pill overflow-hidden"
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
           <div className="flex gap-3 px-4 py-3">
             <a

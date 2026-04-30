@@ -13,7 +13,7 @@ import {
   Phone,
 } from "@/lib/icons";
 import { brand } from "@/lib/content";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { submitContact, type ContactState } from "@/app/actions/contact";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -22,6 +22,9 @@ const initialState: ContactState = { ok: false };
 
 export function ContactSection() {
   const [state, formAction, pending] = useActionState(submitContact, initialState);
+  const [fields, setFields] = useState({ name: "", company: "", email: "", phone: "", branche: "", message: "" });
+  const set = (k: keyof typeof fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setFields(f => ({ ...f, [k]: e.target.value }));
 
   return (
     <section
@@ -100,11 +103,15 @@ export function ContactSection() {
                         autoComplete="name"
                         error={state.errors?.name}
                         required
+                        value={fields.name}
+                        onChange={set("name")}
                       />
                       <Field
                         name="company"
                         label="Unternehmen"
                         autoComplete="organization"
+                        value={fields.company}
+                        onChange={set("company")}
                       />
                       <Field
                         name="email"
@@ -113,24 +120,32 @@ export function ContactSection() {
                         autoComplete="email"
                         error={state.errors?.email}
                         required
+                        value={fields.email}
+                        onChange={set("email")}
                       />
                       <Field
                         name="phone"
                         type="tel"
                         label="Telefon (optional)"
                         autoComplete="tel"
+                        value={fields.phone}
+                        onChange={set("phone")}
                       />
                     </div>
                     <SelectField
                       name="branche"
                       label="Branche"
                       options={contact.branchen as unknown as string[]}
+                      value={fields.branche}
+                      onChange={set("branche")}
                     />
                     <TextareaField
                       name="message"
                       label="Worum geht's?"
                       error={state.errors?.message}
                       required
+                      value={fields.message}
+                      onChange={set("message")}
                     />
                     <label className="mt-1 flex items-start gap-3 text-xs text-muted">
                       <input
@@ -202,19 +217,11 @@ function SuccessPanel({ message }: { message?: string }) {
 }
 
 function Field({
-  name,
-  label,
-  type = "text",
-  required,
-  autoComplete,
-  error,
+  name, label, type = "text", required, autoComplete, error, value, onChange,
 }: {
-  name: string;
-  label: string;
-  type?: string;
-  required?: boolean;
-  autoComplete?: string;
-  error?: string;
+  name: string; label: string; type?: string; required?: boolean;
+  autoComplete?: string; error?: string;
+  value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <label className="group relative block">
@@ -225,6 +232,8 @@ function Field({
         type={type}
         name={name}
         autoComplete={autoComplete}
+        value={value}
+        onChange={onChange}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${name}-err` : undefined}
         className={cn(
@@ -244,15 +253,10 @@ function Field({
 }
 
 function TextareaField({
-  name,
-  label,
-  required,
-  error,
+  name, label, required, error, value, onChange,
 }: {
-  name: string;
-  label: string;
-  required?: boolean;
-  error?: string;
+  name: string; label: string; required?: boolean; error?: string;
+  value: string; onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }) {
   return (
     <label className="block">
@@ -262,6 +266,8 @@ function TextareaField({
       <textarea
         name={name}
         rows={4}
+        value={value}
+        onChange={onChange}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${name}-err` : undefined}
         className={cn(
@@ -282,13 +288,10 @@ function TextareaField({
 }
 
 function SelectField({
-  name,
-  label,
-  options,
+  name, label, options, value, onChange,
 }: {
-  name: string;
-  label: string;
-  options: string[];
+  name: string; label: string; options: string[];
+  value: string; onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
   return (
     <label className="block">
@@ -297,7 +300,8 @@ function SelectField({
       </span>
       <select
         name={name}
-        defaultValue=""
+        value={value}
+        onChange={onChange}
         className="h-12 w-full rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 text-sm text-foreground transition-colors duration-200 hover:border-white/[0.16] focus:border-pink/60 focus:bg-white/[0.04] focus:outline-none"
       >
         <option value="" disabled>Bitte wählen …</option>
