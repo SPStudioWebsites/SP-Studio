@@ -53,7 +53,7 @@ export async function submitContact(
   const resend = new Resend(apiKey);
 
   const { error } = await resend.emails.send({
-    from:    "Kontaktformular <onboarding@resend.dev>",
+    from:    "Kontaktformular <kontakt@schnell-sichtbar.de>",
     to:      "kontakt@schnell-sichtbar.de",
     replyTo: data.email,
     subject: `Neue Anfrage von ${data.name}${data.company ? ` (${data.company})` : ""}`,
