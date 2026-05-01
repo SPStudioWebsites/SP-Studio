@@ -39,7 +39,8 @@
       "Bash(Select-Object Name)",
       "PowerShell(head -20)",
       "Bash(Get-ChildItem -Path . -Recurse -Filter \"layout.*\")",
-      "Bash(Head -20)"
+      "Bash(Head -20)",
+      "PowerShell(magick *)"
     ]
   }
 }

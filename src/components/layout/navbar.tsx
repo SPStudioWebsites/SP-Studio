@@ -7,6 +7,7 @@ import { Menu, X, ArrowRight } from "@/lib/icons";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useGyroContext } from "@/components/effects/gyro-provider";
+import Image from "next/image";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -122,14 +123,8 @@ export function Navbar() {
             />
           )}
 
-          <a href={link("#top")} className="flex items-center gap-2 pl-3 pr-1 group" aria-label={brand.name}>
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pink to-violet shadow-[0_0_18px_-2px_rgba(255,45,143,0.8)]">
-              <span className="absolute inset-[2px] rounded-full bg-[#0a0a0a]" />
-              <span className="relative font-display text-[15px] font-bold leading-none text-gradient">S</span>
-            </span>
-            <span className="hidden text-[15px] font-semibold tracking-tight sm:block">
-              {brand.short}<span className="text-pink">.de</span>
-            </span>
+          <a href={link("#top")} className="flex items-center pl-2 pr-1" aria-label={brand.name}>
+            <Image src="/logo.png" alt={brand.name} width={2861} height={430} className="h-8 w-auto" quality={100} priority />
           </a>
 
           <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex">
@@ -191,14 +186,8 @@ export function Navbar() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5">
-              <a href={link("#top")} onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
-                <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pink to-violet shadow-[0_0_18px_-2px_rgba(255,45,143,0.8)]">
-                  <span className="absolute inset-[2px] rounded-full bg-[#0a0a0a]" />
-                  <span className="relative font-display text-[15px] font-bold leading-none text-gradient">S</span>
-                </span>
-                <span className="text-[15px] font-semibold tracking-tight">
-                  {brand.short}<span className="text-pink">.de</span>
-                </span>
+              <a href={link("#top")} onClick={() => setMobileOpen(false)} className="flex items-center">
+                <Image src="/logo.png" alt={brand.name} width={200} height={40} className="h-8 w-auto" />
               </a>
               <button
                 type="button"
