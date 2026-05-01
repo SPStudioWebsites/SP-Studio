@@ -1,15 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display, Cormorant_Garamond, Fraunces } from "next/font/google";
 import "./globals.css";
-import dynamic from "next/dynamic";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { GyroProvider } from "@/components/effects/gyro-provider";
 import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
-
-const ConsentManager = dynamic(
-  () => import("@/components/analytics/consent-manager").then((m) => m.ConsentManager),
-  { ssr: false }
-);
+import { ConsentManagerClient } from "@/components/analytics/consent-manager-client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -125,7 +120,7 @@ export default function RootLayout({
           <LenisProvider>{children}</LenisProvider>
         </GyroProvider>
         <MobileCtaBar />
-        <ConsentManager />
+        <ConsentManagerClient />
       </body>
     </html>
   );
