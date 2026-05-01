@@ -65,8 +65,8 @@
     to   { transform: translateY(calc(-100% - var(--gap))); }
   }
   @keyframes shiny-text {
-    0%, 90%, 100% { background-position: calc(-100% - var(--shiny-width)) 0; }
-    30%, 60%      { background-position: calc(100% + var(--shiny-width)) 0; }
+    0%, 90%, 100% { transform: translateX(-100%); }
+    30%, 60%      { transform: translateX(100%); }
   }
   @keyframes drift {
     0%   { transform: translate3d(0,0,0) scale(1); }
