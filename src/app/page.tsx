@@ -1,15 +1,29 @@
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { JsonLd } from "@/components/seo/json-ld";
 import { HeroSection } from "@/components/sections/hero";
-import { IndustriesSection } from "@/components/sections/industries";
-import { ServicesSection } from "@/components/sections/services";
-import { ProcessSection } from "@/components/sections/process";
-import { AboutSection } from "@/components/sections/about";
-import { FAQSection } from "@/components/sections/faq";
-import { ContactSection } from "@/components/sections/contact";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Grain } from "@/components/effects/grain";
+
+const IndustriesSection = dynamic(() =>
+  import("@/components/sections/industries").then((m) => m.IndustriesSection)
+);
+const ProcessSection = dynamic(() =>
+  import("@/components/sections/process").then((m) => m.ProcessSection)
+);
+const AboutSection = dynamic(() =>
+  import("@/components/sections/about").then((m) => m.AboutSection)
+);
+const FAQSection = dynamic(() =>
+  import("@/components/sections/faq").then((m) => m.FAQSection)
+);
+const ServicesSection = dynamic(() =>
+  import("@/components/sections/services").then((m) => m.ServicesSection)
+);
+const ContactSection = dynamic(() =>
+  import("@/components/sections/contact").then((m) => m.ContactSection)
+);
 
 export default function Home() {
   return (
