@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 const reducedVariants: Variants = {
   hidden: { opacity: 0 },
@@ -31,6 +31,10 @@ export function Reveal({
     ? reducedVariants
     : { hidden: { opacity: 0, y }, visible: { opacity: 1, y: 0 } };
 
+  const [willChange, setWillChange] = useState<"transform, opacity" | "auto">(
+    reduce ? "auto" : "transform, opacity"
+  );
+
   return (
     <Comp
       className={className}
@@ -38,11 +42,9 @@ export function Reveal({
       whileInView="visible"
       viewport={{ once, amount }}
       variants={variants}
-      transition={{
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1],
-        delay,
-      }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+      style={{ willChange }}
+      onAnimationComplete={() => setWillChange("auto")}
     >
       {children}
     </Comp>
@@ -105,6 +107,10 @@ export function RevealItem({
   y?: number;
 }) {
   const reduce = useReducedMotion();
+  const [willChange, setWillChange] = useState<"transform, opacity" | "auto">(
+    reduce ? "auto" : "transform, opacity"
+  );
+
   return (
     <motion.div
       className={className}
@@ -114,6 +120,8 @@ export function RevealItem({
           : { hidden: { opacity: 0, y }, visible: { opacity: 1, y: 0 } }
       }
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      style={{ willChange }}
+      onAnimationComplete={() => setWillChange("auto")}
     >
       {children}
     </motion.div>

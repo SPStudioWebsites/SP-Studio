@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 import { useState } from "react";
 import { ChevronDown } from "@/lib/icons";
 
@@ -51,17 +50,32 @@ export function Accordion({
                 <ChevronDown className="h-4 w-4" />
               </span>
             </button>
-            <motion.div
-              initial={false}
-              animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden"
+
+            {/*
+              grid-template-rows: 0fr → 1fr avoids layout reflow on every frame.
+              Browser compositor handles it without touching getBoundingClientRect.
+              Supported: Chrome 107+, Safari 16+, Firefox 109+
+            */}
+            <div
               aria-hidden={!isOpen}
+              style={{
+                display: "grid",
+                gridTemplateRows: isOpen ? "1fr" : "0fr",
+                transition: "grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1)",
+              }}
             >
-              <p className="px-5 pb-6 pr-14 text-sm leading-relaxed text-muted md:px-7 md:pb-7 md:text-[15px]">
-                {it.a}
-              </p>
-            </motion.div>
+              <div
+                style={{
+                  minHeight: 0,
+                  opacity: isOpen ? 1 : 0,
+                  transition: "opacity 0.4s cubic-bezier(0.22,1,0.36,1)",
+                }}
+              >
+                <p className="px-5 pb-6 pr-14 text-sm leading-relaxed text-muted md:px-7 md:pb-7 md:text-[15px]">
+                  {it.a}
+                </p>
+              </div>
+            </div>
           </li>
         );
       })}

@@ -269,6 +269,27 @@
   .scrollbar-none { scrollbar-width: none; }
 }
 
+@media (max-width: 768px) {
+  /* Reduce compositing cost on mobile GPUs — blur scales quadratically.
+     blur(8px) is ~6x cheaper than blur(20px). Box-shadows unchanged. */
+  .glass {
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    backdrop-filter: blur(8px) saturate(120%);
+  }
+  .glass-strong {
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+  .glass-mobile {
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+  }
+  .glass-pill {
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+    backdrop-filter: blur(10px) saturate(130%);
+  }
+}
+
 /* Accent font switcher overrides — set via data-accent on <html> */
 html[data-accent="sans"]      .font-serif { font-family: var(--font-geist-sans); }
 html[data-accent="playfair"]  .font-serif { font-family: var(--font-instrument); }
