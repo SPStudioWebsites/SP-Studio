@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display, Cormorant_Garamond, Fraunces } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { GyroProvider } from "@/components/effects/gyro-provider";
-import { ConsentManager } from "@/components/analytics/consent-manager";
 import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
+
+const ConsentManager = dynamic(
+  () => import("@/components/analytics/consent-manager").then((m) => m.ConsentManager),
+  { ssr: false }
+);
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

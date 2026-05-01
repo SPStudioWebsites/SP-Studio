@@ -34,7 +34,10 @@
       "Bash(Select-Object -First 300)",
       "Bash(xargs grep *)",
       "Bash(grep -l \"Array.prototype.at\\\\|Object.fromEntries\" node_modules/motion/dist/motion.js node_modules/@base-ui/react/dist/index.js)",
-      "Bash(grep -c \"Array.prototype.at\\\\|Object.fromEntries\" node_modules/motion/dist/motion.js)"
+      "Bash(grep -c \"Array.prototype.at\\\\|Object.fromEntries\" node_modules/motion/dist/motion.js)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\" -Directory)",
+      "Bash(Select-Object Name)",
+      "PowerShell(head -20)"
     ]
   }
 }

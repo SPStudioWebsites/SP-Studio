@@ -1,18 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Script from "next/script";
 import Link from "next/link";
 
 const GA_ID = "G-XXXXXXXXXX"; // ← eure GA-ID eintragen (z.B. G-ABC123DEF4)
 
 export function ConsentManager() {
-  const [consent, setConsent] = useState<"accepted" | "declined" | null>(null);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("cookie-consent") as "accepted" | "declined" | null;
-    setConsent(stored);
-  }, []);
+  const [consent, setConsent] = useState<"accepted" | "declined" | null>(() =>
+    localStorage.getItem("cookie-consent") as "accepted" | "declined" | null
+  );
 
   function accept() {
     localStorage.setItem("cookie-consent", "accepted");
