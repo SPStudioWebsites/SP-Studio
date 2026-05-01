@@ -37,7 +37,9 @@
       "Bash(grep -c \"Array.prototype.at\\\\|Object.fromEntries\" node_modules/motion/dist/motion.js)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\" -Directory)",
       "Bash(Select-Object Name)",
-      "PowerShell(head -20)"
+      "PowerShell(head -20)",
+      "Bash(Get-ChildItem -Path . -Recurse -Filter \"layout.*\")",
+      "Bash(Head -20)"
     ]
   }
 }
