@@ -48,9 +48,9 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
         <AnimatePresence mode="wait">
           <motion.em
             key={WORDS[index]}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 48, filter: "blur(6px)" }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -48, filter: "blur(6px)" }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40 }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -40 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="inline-block font-display font-extrabold not-italic text-gradient pr-[0.08em]"
           >
@@ -185,11 +185,9 @@ export function HeroSection() {
             ].map(({ icon: Icon, text, grad }) => (
               <div
                 key={text}
-                className="relative flex items-center gap-3 overflow-hidden rounded-2xl px-4 py-3.5"
+                className="relative flex items-center gap-3 overflow-hidden rounded-2xl px-4 py-3.5 glass-feature"
                 style={{
                   background: "rgba(255,255,255,0.04)",
-                  backdropFilter: "blur(24px) saturate(180%)",
-                  WebkitBackdropFilter: "blur(24px) saturate(180%)",
                   border: "1px solid rgba(255,255,255,0.10)",
                   boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.25)",
                 }}

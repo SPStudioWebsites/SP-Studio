@@ -267,6 +267,10 @@
   .text-pretty { text-wrap: pretty; }
   .scrollbar-none::-webkit-scrollbar { display: none; }
   .scrollbar-none { scrollbar-width: none; }
+  .glass-feature {
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+  }
 }
 
 @media (max-width: 768px) {
@@ -287,6 +291,10 @@
   .glass-pill {
     -webkit-backdrop-filter: blur(10px) saturate(130%);
     backdrop-filter: blur(10px) saturate(130%);
+  }
+  .glass-feature {
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    backdrop-filter: blur(8px) saturate(120%);
   }
 }
 

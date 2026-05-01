@@ -18,6 +18,17 @@ function useReducedOrbs() {
 
 export function GradientOrbs({ className }: { className?: string }) {
   const mobile = useReducedOrbs();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      setLoaded(true);
+    } else {
+      const onLoad = () => setLoaded(true);
+      window.addEventListener("load", onLoad);
+      return () => window.removeEventListener("load", onLoad);
+    }
+  }, []);
 
   return (
     <div
@@ -34,6 +45,7 @@ export function GradientOrbs({ className }: { className?: string }) {
           opacity: mobile ? 0.28 : 0.40,
           background:
             "radial-gradient(circle at center, rgba(255,45,143,0.55) 0%, rgba(255,45,143,0.15) 40%, transparent 70%)",
+          animationPlayState: loaded ? "running" : "paused",
         }}
       />
       <div
@@ -43,6 +55,7 @@ export function GradientOrbs({ className }: { className?: string }) {
           opacity: mobile ? 0.24 : 0.35,
           background:
             "radial-gradient(circle at center, rgba(139,92,246,0.6) 0%, rgba(139,92,246,0.15) 40%, transparent 70%)",
+          animationPlayState: loaded ? "running" : "paused",
         }}
       />
       <div
@@ -52,6 +65,7 @@ export function GradientOrbs({ className }: { className?: string }) {
           opacity: mobile ? 0.18 : 0.25,
           background:
             "radial-gradient(circle at center, rgba(192,38,211,0.5) 0%, transparent 65%)",
+          animationPlayState: loaded ? "running" : "paused",
         }}
       />
     </div>
