@@ -46,7 +46,11 @@
       "Bash(node -e \"const fs = require\\('fs'\\); const src = fs.readFileSync\\('./node_modules/liquid-glass-react/dist/index.esm.js', 'utf8'\\); const match = src.match\\(/return \\\\\\([\\\\s\\\\S]{0,3000}/\\); console.log\\(match ? match[0].slice\\(0,2000\\) : 'no match'\\)\")",
       "Bash(node -e ' *)",
       "Bash(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 3)",
-      "Bash(Select-Object -First 3)"
+      "Bash(Select-Object -First 3)",
+      "Bash(findstr *)",
+      "Bash(Remove-Item \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\\\\src\\\\hooks\\\\use-gyro.ts\" -Force)",
+      "Bash(Remove-Item \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\\\\src\\\\components\\\\effects\\\\gyro-provider.tsx\" -Force)",
+      "Bash(Write-Output \"deleted\")"
     ]
   }
 }

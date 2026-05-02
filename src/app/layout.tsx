@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display, Cormorant_Garamond, Fraunces } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
-import { GyroProvider } from "@/components/effects/gyro-provider";
 import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
 import { ConsentManagerClient } from "@/components/analytics/consent-manager-client";
 
@@ -126,9 +125,7 @@ export default function RootLayout({
         >
           Zum Hauptinhalt springen
         </a>
-        <GyroProvider>
-          <LenisProvider>{children}</LenisProvider>
-        </GyroProvider>
+        <LenisProvider>{children}</LenisProvider>
         <MobileCtaBar />
         <ConsentManagerClient />
       </body>

@@ -6,7 +6,6 @@ import { AnimatePresence, motion, useMotionValue, useVelocity, useSpring, animat
 import { Menu, X, ArrowRight } from "@/lib/icons";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useGyroContext } from "@/components/effects/gyro-provider";
 import Image from "next/image";
 
 export function Navbar() {
@@ -25,7 +24,6 @@ export function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const scrollLockRef = useRef(0);
   const scrollEndCleanupRef = useRef<() => void>(() => {});
-  const { pos: gyroPos, active: gyroActive } = useGyroContext();
   const pathname = usePathname();
   const isHome = pathname === "/";
 
@@ -120,21 +118,6 @@ export function Navbar() {
           isMobile ? "glass-pill" : scrolled ? "glass-strong" : "glass-pill"
         )}
       >
-        {gyroActive && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: `radial-gradient(circle at ${gyroPos.x}% ${gyroPos.y}%, rgba(255,255,255,0.5) 0%, transparent 50%)`,
-              padding: "1px",
-              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              WebkitMaskComposite: "xor",
-              maskComposite: "exclude",
-              transition: "background 0.08s ease",
-            }}
-          />
-        )}
-
         {/* Top row */}
         <div className="flex items-center justify-between gap-4 px-3 py-2">
           <a

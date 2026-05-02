@@ -6,8 +6,6 @@ import { Pill } from "@/components/ui/pill";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { useRef, useState } from "react";
 import { Check } from "@/lib/icons";
-import { useGyroContext } from "@/components/effects/gyro-provider";
-import type { GyroPos } from "@/hooks/use-gyro";
 
 const ACCENT = [
   "from-pink to-fuchsia-500",
@@ -24,7 +22,6 @@ const GLOW = [
 ];
 
 export function ProcessSection() {
-  const { pos: gyroPos, active: gyroActive } = useGyroContext();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -39,8 +36,8 @@ export function ProcessSection() {
       aria-labelledby="ablauf-h"
       className="relative overflow-hidden pt-4 pb-16 md:pt-6 md:pb-24"
     >
-      <div aria-hidden className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-pink/5 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-violet/5 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-pink/5 blur-[120px] hidden md:block" />
+      <div aria-hidden className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-violet/5 blur-[120px] hidden md:block" />
 
       <div className="relative mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-3xl text-center">
@@ -88,7 +85,7 @@ export function ProcessSection() {
                 >
                   {/* Left slot */}
                   <div className={`hidden md:block md:w-1/2 md:pr-14 ${onLeft ? "" : "md:invisible"}`}>
-                    {onLeft && <StepCard step={step} index={i} gyroPos={gyroActive ? gyroPos : undefined} />}
+                    {onLeft && <StepCard step={step} index={i} />}
                   </div>
 
                   {/* Center node */}
@@ -102,7 +99,7 @@ export function ProcessSection() {
                         {step.n}
                       </span>
                       <span
-                        className="absolute inset-0 animate-ping rounded-full opacity-20"
+                        className="absolute inset-0 animate-ping rounded-full opacity-20 hidden md:block"
                         style={{ background: `radial-gradient(circle, ${GLOW[i]}, transparent)` }}
                       />
                     </div>
@@ -110,12 +107,12 @@ export function ProcessSection() {
 
                   {/* Right slot */}
                   <div className={`hidden md:block md:w-1/2 md:pl-14 ${!onLeft ? "" : "md:invisible"}`}>
-                    {!onLeft && <StepCard step={step} index={i} gyroPos={gyroActive ? gyroPos : undefined} />}
+                    {!onLeft && <StepCard step={step} index={i} />}
                   </div>
 
                   {/* Mobile card */}
                   <div className="pl-14 md:hidden">
-                    <StepCard step={step} index={i} gyroPos={gyroActive ? gyroPos : undefined} />
+                    <StepCard step={step} index={i} />
                   </div>
                 </motion.div>
               );
@@ -130,11 +127,9 @@ export function ProcessSection() {
             whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
+            className="glass-feature relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
             style={{
               background: "rgba(255,255,255,0.04)",
-              backdropFilter: "blur(28px) saturate(180%)",
-              WebkitBackdropFilter: "blur(28px) saturate(180%)",
               border: "1px solid rgba(255,255,255,0.1)",
               boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.3)",
             }}
@@ -200,21 +195,15 @@ export function ProcessSection() {
 function StepCard({
   step,
   index,
-  gyroPos,
 }: {
   step: (typeof process)[number];
   index: number;
-  gyroPos?: GyroPos;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [mouse, setMouse] = useState<GyroPos>({ x: 50, y: 50 });
+  const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [hovered, setHovered] = useState(false);
 
-  const reflectPos    = gyroPos ?? mouse;
-  const reflectActive = gyroPos ? true : hovered;
-
   function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (gyroPos) return; // gyro takes over on mobile
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     setMouse({
@@ -227,29 +216,27 @@ function StepCard({
     <div
       ref={cardRef}
       onMouseMove={onMouseMove}
-      onMouseEnter={() => { if (!gyroPos) setHovered(true); }}
-      onMouseLeave={() => { if (!gyroPos) setHovered(false); }}
-      className="group relative overflow-hidden rounded-2xl p-6"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="glass-feature group relative overflow-hidden rounded-2xl p-6"
       style={{
         background: "rgba(255,255,255,0.04)",
-        backdropFilter: "blur(28px) saturate(180%)",
-        WebkitBackdropFilter: "blur(28px) saturate(180%)",
         border: "1px solid rgba(255,255,255,0.08)",
         boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 40px rgba(0,0,0,0.3)",
       }}
     >
-      {/* Border reflection — mouse on desktop, gyro on mobile */}
+      {/* Border reflection on hover */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-2xl"
         style={{
-          background: `radial-gradient(circle at ${reflectPos.x}% ${reflectPos.y}%, rgba(255,255,255,0.55) 0%, transparent 45%)`,
+          background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(255,255,255,0.55) 0%, transparent 45%)`,
           padding: "1px",
           WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "xor",
           maskComposite: "exclude",
-          opacity: reflectActive ? 1 : 0,
-          transition: gyroPos ? "opacity 0.6s ease, background 0.1s ease" : "opacity 0.4s ease",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.4s ease",
         }}
       />
 
