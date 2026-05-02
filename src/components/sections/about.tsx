@@ -77,6 +77,8 @@ export function AboutSection() {
                 height={1000}
                 className="w-full object-cover"
                 style={{ maxHeight: "600px" }}
+                quality={80}
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }} />
             </div>

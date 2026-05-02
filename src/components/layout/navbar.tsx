@@ -126,7 +126,7 @@ export function Navbar() {
             className="flex items-center pl-2 pr-1"
             aria-label={brand.name}
           >
-            <Image src="/logo.png" alt={brand.name} width={2861} height={430} className="h-6 w-auto" quality={100} priority />
+            <Image src="/logo.png" alt={brand.name} width={2861} height={430} className="h-6 w-auto" quality={80} sizes="(max-width: 768px) 150px, 200px" priority />
           </a>
 
           <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex">
