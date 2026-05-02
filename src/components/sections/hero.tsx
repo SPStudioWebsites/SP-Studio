@@ -23,22 +23,12 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
 
   return (
     <h1 className="mt-7 font-display text-[3.25rem] md:text-[clamp(2.4rem,8.5vw,6.75rem)] font-semibold leading-[0.95] tracking-tight">
-      <motion.span
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-        className="block text-foreground"
-      >
+      <span className="block text-foreground">
         Schnell sichtbar.
-      </motion.span>
-      <motion.span
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
-        className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]"
-      >
+      </span>
+      <span className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
         Webseiten für
-      </motion.span>
+      </span>
       <motion.span
         initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}

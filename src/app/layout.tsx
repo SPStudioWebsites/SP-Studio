@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display, Cormorant_Garamond, Fraunces } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
@@ -32,21 +32,6 @@ const instrument = Playfair_Display({
   style: ["italic", "normal"],
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-  style: ["italic", "normal"],
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-  style: ["italic", "normal"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://schnell-sichtbar.de"),
@@ -115,7 +100,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${instrument.variable} ${cormorant.variable} ${fraunces.variable}`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${instrument.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">

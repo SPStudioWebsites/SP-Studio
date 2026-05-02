@@ -297,11 +297,6 @@
   }
 }
 
-/* Accent font switcher overrides — set via data-accent on <html> */
-html[data-accent="sans"]      .font-serif { font-family: var(--font-geist-sans); }
-html[data-accent="playfair"]  .font-serif { font-family: var(--font-instrument); }
-html[data-accent="cormorant"] .font-serif { font-family: var(--font-cormorant); }
-html[data-accent="fraunces"]  .font-serif { font-family: var(--font-fraunces); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
