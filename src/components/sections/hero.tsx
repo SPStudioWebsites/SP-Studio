@@ -72,7 +72,7 @@ export function HeroSection() {
         <div className="lg:col-span-8 xl:col-span-7 space-y-0">
 
           {/* Eyebrow */}
-          <div className="inline-flex">
+          <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
             <div className="group inline-flex items-center gap-2 rounded-full glass-pill px-3.5 py-1.5">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink opacity-75" />
@@ -85,15 +85,17 @@ export function HeroSection() {
           </div>
 
           {/* Headline */}
-          <RollingHeadline reduce={!!reduce} />
+          <div className="hero-enter" style={{ animationDelay: "80ms" }}>
+            <RollingHeadline reduce={!!reduce} />
+          </div>
 
           {/* Subtitle */}
-          <p className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg">
+          <p className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg hero-enter" style={{ animationDelay: "160ms" }}>
             {hero.subtitle}
           </p>
 
           {/* CTA */}
-          <div className="mt-10 flex justify-center lg:justify-start">
+          <div className="mt-10 flex justify-center lg:justify-start hero-enter" style={{ animationDelay: "240ms" }}>
             {isMobile ? (
               <ShinyButton
                 href="#kontakt"
@@ -118,7 +120,7 @@ export function HeroSection() {
           </div>
 
           {/* Trust pills */}
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted">
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted hero-enter" style={{ animationDelay: "300ms" }}>
             <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
             <span><span className="font-semibold text-foreground">Spezialisiert</span> auf KMUs</span>
             <span><span className="font-semibold text-foreground">Region</span> Franken</span>
@@ -151,7 +153,7 @@ export function HeroSection() {
           </div>
 
           {/* Feature grid */}
-          <div className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24">
+          <div className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24 hero-enter" style={{ animationDelay: "360ms" }}>
             {[
               { icon: TrendingUp,  text: "Täglich neue Anfragen",       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
               { icon: Globe,       text: "Verkaufsstarke Webseite",      grad: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
