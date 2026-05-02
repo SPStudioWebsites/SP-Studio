@@ -52,7 +52,9 @@
       "Bash(Remove-Item \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\\\\src\\\\components\\\\effects\\\\gyro-provider.tsx\" -Force)",
       "Bash(Write-Output \"deleted\")",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\\\\public\" -File | Where-Object { $_.Extension -match '\\\\.\\(jpg|jpeg|png|webp|svg|avif\\)$' } | Select-Object Name, @{Name='SizeKB';Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\\\\public\\\\Favicons\" -File | Select-Object Name, @{Name='SizeKB';Expression={[math]::Round\\($_.Length/1KB, 2\\)}})"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\user\\\\meine-website\\\\Schnell-Sichtbar\\\\public\\\\Favicons\" -File | Select-Object Name, @{Name='SizeKB';Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
+      "Bash(npm uninstall *)",
+      "Bash(del *)"
     ]
   }
 }

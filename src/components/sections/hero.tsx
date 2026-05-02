@@ -64,6 +64,18 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
 
 export function HeroSection() {
   const reduce = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const mobileInit = (y: number) => reduce ? { opacity: 0 } : isMobile ? { opacity: 0 } : { opacity: 0, y };
+  const mobileAnim = (y: number) => reduce ? { opacity: 1 } : isMobile ? { opacity: 1 } : { opacity: 1, y: 0 };
 
   return (
     <section
@@ -79,8 +91,8 @@ export function HeroSection() {
 
           {/* Eyebrow */}
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            initial={mobileInit(20)}
+            animate={mobileAnim(20)}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex"
           >
@@ -100,8 +112,8 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <motion.p
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            initial={mobileInit(16)}
+            animate={mobileAnim(16)}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.38 }}
             className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg"
           >
@@ -110,12 +122,12 @@ export function HeroSection() {
 
           {/* CTA */}
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            initial={mobileInit(16)}
+            animate={mobileAnim(16)}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.52 }}
             className="mt-10 flex justify-center lg:justify-start"
           >
-            <Magnetic strength={0.22}>
+            {isMobile ? (
               <ShinyButton
                 href="#kontakt"
                 size="lg"
@@ -124,13 +136,24 @@ export function HeroSection() {
                 {hero.ctaPrimary}
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </ShinyButton>
-            </Magnetic>
+            ) : (
+              <Magnetic strength={0.22}>
+                <ShinyButton
+                  href="#kontakt"
+                  size="lg"
+                  className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_22px_70px_-8px_rgba(255,45,143,1)] px-12 text-base font-semibold"
+                >
+                  {hero.ctaPrimary}
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </ShinyButton>
+              </Magnetic>
+            )}
           </motion.div>
 
           {/* Trust pills */}
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            initial={mobileInit(12)}
+            animate={mobileAnim(12)}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.66 }}
             className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted"
           >
@@ -141,8 +164,8 @@ export function HeroSection() {
 
           {/* Trust metric badges — mobile only (floating cards are desktop-only) */}
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            initial={mobileInit(12)}
+            animate={mobileAnim(12)}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
             className="mt-4 grid grid-cols-2 gap-3 lg:hidden"
           >
@@ -172,8 +195,8 @@ export function HeroSection() {
 
           {/* Feature grid */}
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            initial={mobileInit(16)}
+            animate={mobileAnim(16)}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
             className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24"
           >
