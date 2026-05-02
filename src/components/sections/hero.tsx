@@ -29,13 +29,8 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
       <span className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
         Webseiten für
       </span>
-      <motion.span
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.34 }}
-        className="block mt-1 overflow-hidden pb-3"
-      >
-        <AnimatePresence mode="wait">
+      <span className="block mt-1 overflow-hidden pb-3">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.em
             key={WORDS[index]}
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40 }}
@@ -47,7 +42,7 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
             {WORDS[index]}
           </motion.em>
         </AnimatePresence>
-      </motion.span>
+      </span>
     </h1>
   );
 }
