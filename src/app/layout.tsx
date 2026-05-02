@@ -4,6 +4,7 @@ import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
 import { ConsentManagerClient } from "@/components/analytics/consent-manager-client";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -113,6 +114,7 @@ export default function RootLayout({
         <LenisProvider>{children}</LenisProvider>
         <MobileCtaBar />
         <ConsentManagerClient />
+        <Analytics />
       </body>
     </html>
   );
