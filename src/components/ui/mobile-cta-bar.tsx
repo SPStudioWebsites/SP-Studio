@@ -7,6 +7,7 @@ import { Phone, ArrowRight } from "@/lib/icons";
 
 export function MobileCtaBar() {
   const [visible, setVisible] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -33,9 +34,15 @@ export function MobileCtaBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => setMenuOpen((e as CustomEvent<{ open: boolean }>).detail.open);
+    window.addEventListener("mobilemenu", handler);
+    return () => window.removeEventListener("mobilemenu", handler);
+  }, []);
+
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !menuOpen && (
         <motion.div
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

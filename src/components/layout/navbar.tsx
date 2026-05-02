@@ -14,30 +14,36 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHash, setActiveHash] = useState<string>("#top");
 
-  // Desktop indicator
   const [indicator, setIndicator] = useState({ left: 0, top: 0, width: 0, height: 0 });
   const listRef = useRef<HTMLUListElement>(null);
   const itemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
 
-  // Mobile indicator
-  const [mobileIndicator, setMobileIndicator] = useState({ top: 0, height: 0 });
+  const [mobileIndicator, setMobileIndicator] = useState({ left: 0, top: 0, width: 0, height: 0 });
   const mobileListRef = useRef<HTMLUListElement>(null);
   const mobileItemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
 
+  const [isMobile, setIsMobile] = useState(false);
   const scrollLockRef = useRef(0);
+  const scrollEndCleanupRef = useRef<() => void>(() => {});
   const { pos: gyroPos, active: gyroActive } = useGyroContext();
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  // Entry animation
   const yMV = useMotionValue(-90);
   const velocity = useVelocity(yMV);
   const scaleYSpring = useSpring(1, { stiffness: 200, damping: 14, mass: 0.5 });
   const scaleXSpring = useSpring(1, { stiffness: 200, damping: 14, mass: 0.5 });
 
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   function link(hash: string) { return isHome ? hash : `/${hash}`; }
 
-  // Desktop indicator position
   useEffect(() => {
     const item = itemRefs.current.get(activeHash);
     const list = listRef.current;
@@ -47,7 +53,6 @@ export function Navbar() {
     setIndicator({ left: ir.left - lr.left, top: ir.top - lr.top, width: ir.width, height: ir.height });
   }, [activeHash]);
 
-  // Mobile indicator position — measure after menu opens + on activeHash change
   useEffect(() => {
     if (!mobileOpen) return;
     const timeout = setTimeout(() => {
@@ -56,7 +61,7 @@ export function Navbar() {
       if (!item || !list) return;
       const lr = list.getBoundingClientRect();
       const ir = item.getBoundingClientRect();
-      setMobileIndicator({ top: ir.top - lr.top, height: ir.height });
+      setMobileIndicator({ left: 0, top: ir.top - lr.top, width: lr.width, height: ir.height });
     }, 60);
     return () => clearTimeout(timeout);
   }, [activeHash, mobileOpen]);
@@ -81,6 +86,7 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    window.dispatchEvent(new CustomEvent("mobilemenu", { detail: { open: mobileOpen } }));
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
@@ -96,35 +102,48 @@ export function Navbar() {
   }, []);
 
   return (
-    <>
-      <motion.header
-        style={{ y: yMV }}
-        className="fixed inset-x-0 top-3 z-50 flex justify-center px-4"
+    <motion.header
+      style={{ y: yMV }}
+      className="fixed inset-x-0 top-3 z-50 flex justify-center px-4"
+    >
+      <motion.nav
+        initial={{ borderRadius: isMobile ? 20 : 9999 }}
+        animate={{ borderRadius: isMobile ? 20 : mobileOpen ? 20 : 9999 }}
+        transition={{
+          borderRadius: (!isMobile && !mobileOpen)
+            ? { delay: 0.55, type: "spring", stiffness: 400, damping: 30 }
+            : { duration: 0 },
+        }}
+        style={{ scaleX: scaleXSpring, scaleY: scaleYSpring, overflow: "hidden" }}
+        className={cn(
+          "relative flex w-full max-w-6xl flex-col [transition:background_500ms_ease,box-shadow_500ms_ease,backdrop-filter_500ms_ease]",
+          isMobile ? "glass-pill" : scrolled ? "glass-strong" : "glass-pill"
+        )}
       >
-        <motion.nav
-          style={{ scaleX: scaleXSpring, scaleY: scaleYSpring }}
-          className={cn(
-            "relative flex w-full max-w-6xl items-center justify-between gap-4 rounded-full px-3 py-2 transition-all duration-500",
-            scrolled ? "glass-strong" : "glass-pill"
-          )}
-        >
-          {gyroActive && (
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-full"
-              style={{
-                background: `radial-gradient(circle at ${gyroPos.x}% ${gyroPos.y}%, rgba(255,255,255,0.5) 0%, transparent 50%)`,
-                padding: "1px",
-                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                WebkitMaskComposite: "xor",
-                maskComposite: "exclude",
-                transition: "background 0.08s ease",
-              }}
-            />
-          )}
+        {gyroActive && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background: `radial-gradient(circle at ${gyroPos.x}% ${gyroPos.y}%, rgba(255,255,255,0.5) 0%, transparent 50%)`,
+              padding: "1px",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              transition: "background 0.08s ease",
+            }}
+          />
+        )}
 
-          <a href={link("#top")} className="flex items-center pl-2 pr-1" aria-label={brand.name}>
-            <Image src="/logo.png" alt={brand.name} width={2861} height={430} className="h-8 w-auto" quality={100} priority />
+        {/* Top row */}
+        <div className="flex items-center justify-between gap-4 px-3 py-2">
+          <a
+            href={link("#top")}
+            onClick={() => mobileOpen && setMobileOpen(false)}
+            className="flex items-center pl-2 pr-1"
+            aria-label={brand.name}
+          >
+            <Image src="/logo.png" alt={brand.name} width={2861} height={430} className="h-6 w-auto" quality={100} priority />
           </a>
 
           <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex">
@@ -165,97 +184,141 @@ export function Navbar() {
             </a>
             <button
               type="button"
-              onClick={() => setMobileOpen(true)}
-              aria-label="Menü öffnen"
+              onClick={() => setMobileOpen(v => !v)}
+              aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-foreground/85 hover:bg-white/[0.06] lg:hidden cursor-pointer"
             >
-              <Menu className="h-4 w-4" />
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <X className="h-4 w-4" />
+                  </motion.span>
+                ) : (
+                  <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <Menu className="h-4 w-4" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </div>
-        </motion.nav>
-      </motion.header>
+        </div>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="glass-mobile fixed inset-0 z-[70] flex flex-col lg:hidden"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5">
-              <a href={link("#top")} onClick={() => setMobileOpen(false)} className="flex items-center">
-                <Image src="/logo.png" alt={brand.name} width={200} height={40} className="h-8 w-auto" />
-              </a>
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Menü schließen"
-                className="flex h-10 w-10 items-center justify-center rounded-full cursor-pointer glass-nav-indicator"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Divider */}
-            <div className="mx-6 h-px bg-white/[0.06]" />
-
-            {/* Nav items with sliding indicator */}
-            <nav className="flex flex-col px-4 pt-8">
-              <ul ref={mobileListRef} className="relative flex flex-col">
-                {mobileIndicator.height > 0 && (
-                  <motion.div
-                    aria-hidden
-                    className="glass-nav-indicator pointer-events-none absolute left-0 right-0 rounded-2xl"
-                    animate={{ top: mobileIndicator.top, height: mobileIndicator.height }}
-                    transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.7 }}
-                  />
-                )}
-                {navLinks.map((l, i) => (
-                  <motion.li
-                    key={l.href}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 + 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    ref={node => { if (node) mobileItemRefs.current.set(l.href, node); else mobileItemRefs.current.delete(l.href); }}
-                  >
-                    <a
-                      href={link(l.href)}
-                      onClick={() => { setActiveHash(l.href); scrollLockRef.current = Date.now() + 900; setMobileOpen(false); }}
-                      className={cn(
-                        "relative z-10 flex items-center px-4 py-3.5 font-display text-3xl font-medium tracking-tight transition-colors duration-200",
-                        activeHash === l.href ? "text-foreground" : "text-foreground/50"
-                      )}
-                    >
-                      {l.label}
-                    </a>
-                  </motion.li>
-                ))}
-              </ul>
-            </nav>
-
-            {/* CTA */}
+        {/* Mobile expanded section */}
+        <AnimatePresence>
+          {mobileOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="px-6 pb-6 pt-4"
+              key="mobile-menu"
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+              transition={{
+                height: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+              }}
+              className="overflow-hidden lg:hidden"
             >
-              <a
-                href={link("#kontakt")}
-                onClick={() => setMobileOpen(false)}
-                className="flex h-14 w-full items-center justify-center gap-2 rounded-full text-base font-medium text-white"
-                style={{ background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)", boxShadow: "0 12px 40px -10px rgba(255,45,143,0.6)" }}
+              <div className="flex flex-col" style={{ minHeight: "calc(100dvh - 80px)" }}>
+              <div className="mx-4 h-px bg-white/[0.06]" />
+
+              <nav className="flex flex-col px-4 pt-8">
+                <ul ref={mobileListRef} className="relative flex flex-col">
+                  {mobileIndicator.width > 0 && (
+                    <motion.div
+                      aria-hidden
+                      className="glass-nav-indicator pointer-events-none absolute rounded-2xl"
+                      animate={{ left: mobileIndicator.left + 8, top: mobileIndicator.top + 4, width: mobileIndicator.width - 16, height: mobileIndicator.height - 8 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.7 }}
+                    />
+                  )}
+                  {navLinks.map((l, i) => (
+                    <motion.li
+                      key={l.href}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.06 + 0.28, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      ref={node => { if (node) mobileItemRefs.current.set(l.href, node); else mobileItemRefs.current.delete(l.href); }}
+                    >
+                      <a
+                        href={link(l.href)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setActiveHash(l.href);
+                          scrollLockRef.current = Date.now() + 3000;
+                          scrollEndCleanupRef.current();
+                          setTimeout(() => {
+                            document.body.style.overflow = "";
+                            const target = l.href === "#top" ? 0 : (() => {
+                              const el = document.getElementById(l.href.slice(1));
+                              return el ? el.getBoundingClientRect().top + window.scrollY - 80 : null;
+                            })();
+                            if (target === null) { setMobileOpen(false); return; }
+                            window.scrollTo({ top: target, behavior: "smooth" });
+                            let rafId: number;
+                            const check = () => {
+                              if (Math.abs(window.scrollY - target) < 8) {
+                                setMobileOpen(false);
+                              } else {
+                                rafId = requestAnimationFrame(check);
+                              }
+                            };
+                            rafId = requestAnimationFrame(check);
+                            scrollEndCleanupRef.current = () => cancelAnimationFrame(rafId);
+                          }, 420);
+                        }}
+                        className={cn(
+                          "relative z-10 flex w-full items-center justify-center py-4 font-display text-2xl font-medium tracking-tight transition-colors duration-200",
+                          activeHash === l.href ? "text-foreground" : "text-foreground/50"
+                        )}
+                      >
+                        {l.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="px-6 pb-6 pt-4"
               >
-                Kostenloses Erstgespräch
-                <ArrowRight className="h-4 w-4" />
-              </a>
+                <a
+                  href={link("#kontakt")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setActiveHash("#kontakt");
+                    scrollLockRef.current = Date.now() + 3000;
+                    scrollEndCleanupRef.current();
+                    document.body.style.overflow = "";
+                    const el = document.getElementById("kontakt");
+                    if (!el) { setMobileOpen(false); return; }
+                    const target = el.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top: target, behavior: "smooth" });
+                    let rafId: number;
+                    const check = () => {
+                      if (Math.abs(window.scrollY - target) < 8) {
+                        setMobileOpen(false);
+                      } else {
+                        rafId = requestAnimationFrame(check);
+                      }
+                    };
+                    rafId = requestAnimationFrame(check);
+                    scrollEndCleanupRef.current = () => cancelAnimationFrame(rafId);
+                  }}
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-full text-base font-medium text-white"
+                  style={{ background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)", boxShadow: "0 12px 40px -10px rgba(255,45,143,0.6)" }}
+                >
+                  Kostenloses Erstgespräch
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </motion.div>
+              </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </motion.header>
   );
 }
