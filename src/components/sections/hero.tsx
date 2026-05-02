@@ -64,9 +64,6 @@ export function HeroSection() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const mobileInit = (y: number) => reduce ? { opacity: 0 } : isMobile ? { opacity: 0 } : { opacity: 0, y };
-  const mobileAnim = (y: number) => reduce ? { opacity: 1 } : isMobile ? { opacity: 1 } : { opacity: 1, y: 0 };
-
   return (
     <section
       id="top"
@@ -80,12 +77,7 @@ export function HeroSection() {
         <div className="lg:col-span-8 xl:col-span-7 space-y-0">
 
           {/* Eyebrow */}
-          <motion.div
-            initial={mobileInit(20)}
-            animate={mobileAnim(20)}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex"
-          >
+          <div className="inline-flex">
             <div className="group inline-flex items-center gap-2 rounded-full glass-pill px-3.5 py-1.5">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink opacity-75" />
@@ -95,28 +87,18 @@ export function HeroSection() {
                 <span>{hero.eyebrow}</span>
               </AnimatedShinyText>
             </div>
-          </motion.div>
+          </div>
 
           {/* Headline */}
           <RollingHeadline reduce={!!reduce} />
 
           {/* Subtitle */}
-          <motion.p
-            initial={mobileInit(16)}
-            animate={mobileAnim(16)}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.38 }}
-            className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg"
-          >
+          <p className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg">
             {hero.subtitle}
-          </motion.p>
+          </p>
 
           {/* CTA */}
-          <motion.div
-            initial={mobileInit(16)}
-            animate={mobileAnim(16)}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.52 }}
-            className="mt-10 flex justify-center lg:justify-start"
-          >
+          <div className="mt-10 flex justify-center lg:justify-start">
             {isMobile ? (
               <ShinyButton
                 href="#kontakt"
@@ -138,27 +120,17 @@ export function HeroSection() {
                 </ShinyButton>
               </Magnetic>
             )}
-          </motion.div>
+          </div>
 
           {/* Trust pills */}
-          <motion.div
-            initial={mobileInit(12)}
-            animate={mobileAnim(12)}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.66 }}
-            className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted"
-          >
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted">
             <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
             <span><span className="font-semibold text-foreground">Spezialisiert</span> auf KMUs</span>
             <span><span className="font-semibold text-foreground">Region</span> Franken</span>
-          </motion.div>
+          </div>
 
           {/* Trust metric badges — mobile only (floating cards are desktop-only) */}
-          <motion.div
-            initial={mobileInit(12)}
-            animate={mobileAnim(12)}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
-            className="mt-4 grid grid-cols-2 gap-3 lg:hidden"
-          >
+          <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden">
             <div
               className="rounded-2xl px-4 py-3"
               style={{
@@ -181,15 +153,10 @@ export function HeroSection() {
               <p className="mt-0.5 font-display text-2xl font-bold leading-none text-foreground">14 Tage</p>
               <p className="mt-1 text-[9px] font-medium text-violet">durchschnittliche Lieferzeit</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Feature grid */}
-          <motion.div
-            initial={mobileInit(16)}
-            animate={mobileAnim(16)}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
-            className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24"
-          >
+          <div className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24">
             {[
               { icon: TrendingUp,  text: "Täglich neue Anfragen",       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
               { icon: Globe,       text: "Verkaufsstarke Webseite",      grad: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
@@ -216,7 +183,7 @@ export function HeroSection() {
                 <span className="relative text-xs font-medium leading-snug text-foreground/90">{text}</span>
               </div>
             ))}
-          </motion.div>
+          </div>
 
         </div>
 
@@ -228,11 +195,8 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.3, duration: 0.6 }}
+      {/* Scroll cue — desktop only, CSS animation */}
+      <div
         className={cn(
           "absolute bottom-8 left-1/2 -translate-x-1/2",
           reduce ? "hidden" : "hidden md:flex"
@@ -240,13 +204,9 @@ export function HeroSection() {
         aria-hidden
       >
         <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/15 p-1">
-          <motion.span
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            className="h-1.5 w-0.5 rounded-full bg-pink/80"
-          />
+          <span className="h-1.5 w-0.5 rounded-full bg-pink/80 animate-bounce" />
         </span>
-      </motion.div>
+      </div>
     </section>
   );
 }
