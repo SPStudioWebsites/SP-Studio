@@ -121,7 +121,7 @@ export function ServicesSection() {
         {/* Footer note */}
         <Reveal delay={0.4}>
           <p className="mt-10 text-center text-xs text-muted">
-            Alle Preise zzgl. MwSt. · Individuelle Anpassungen auf Anfrage möglich
+            Alle Preise sind Endpreise. Gemäß §19 UStG wird keine Umsatzsteuer erhoben.
           </p>
         </Reveal>
       </div>
