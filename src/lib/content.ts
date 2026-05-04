@@ -367,6 +367,5 @@ export const footer = {
   legal: [
     { label: "Impressum", href: "/impressum" },
     { label: "Datenschutz", href: "/datenschutz" },
-    { label: "AGB", href: "/agb" },
   ],
 };

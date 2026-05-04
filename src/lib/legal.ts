@@ -19,7 +19,7 @@ export const impressum = {
     email: "kontakt@schnell-sichtbar.de",
   },
 
-  ustId: "Wird nach Erteilung ergänzt.", // ← USt-ID eintragen sobald vorhanden
+  kleinunternehmer: "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.",
 
   beruf: "Freiberuflicher Webdesigner / selbstständiger Gewerbetreibender.",
   behoerde: "Landratsamt Haßberge",
