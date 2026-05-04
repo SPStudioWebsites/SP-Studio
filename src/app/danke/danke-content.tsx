@@ -7,7 +7,7 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { Accordion } from "@/components/ui/accordion";
 import { GradientOrbs } from "@/components/effects/gradient-orbs";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/reveal";
-import { Search, Phone, CheckCircle2, Star, Quote } from "@/lib/icons";
+import { Search, Phone, CheckCircle2 } from "@/lib/icons";
 
 const steps = [
   {
@@ -27,22 +27,6 @@ const steps = [
   },
 ];
 
-const placeholderTestimonials = [
-  {
-    quote:
-      "Innerhalb einer Woche war meine neue Website online — ich hätte nie gedacht, dass das so schnell geht.",
-    author: "M. Bauer",
-    role: "Malerbetrieb",
-    location: "Haßfurt",
-  },
-  {
-    quote:
-      "Simon hat genau verstanden, was ich brauche. Kein unnötiges Hin und Her, einfach direkt umgesetzt.",
-    author: "K. Fischer",
-    role: "Elektrikerin",
-    location: "Bamberg",
-  },
-];
 
 const faqItems = [
   {
@@ -191,8 +175,8 @@ export function DankeContent() {
         </RevealStagger>
       </section>
 
-      {/* ── PERSONAL + TESTIMONIALS ── */}
-      <section className="relative mx-auto max-w-5xl px-6 pb-16 md:pb-24">
+      {/* ── PERSONAL ── */}
+      <section className="relative mx-auto max-w-3xl px-6 pb-16 md:pb-24">
         <div
           aria-hidden
           className="pointer-events-none absolute -inset-x-32 top-1/2 -translate-y-1/2 flex justify-end"
@@ -207,92 +191,42 @@ export function DankeContent() {
           />
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
-          {/* Personal intro — slide from left */}
-          <Reveal y={0} delay={0} className="lg:mt-[3.75rem]">
-            <motion.div
-              initial={reduce ? { opacity: 0 } : { opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.75, ease }}
-            >
-              <GlassCard variant="elevated" className="p-8 md:p-10">
-                <div className="flex items-center gap-4">
-                  <Image
-                  src="/simon-danke.jpg"
-                  alt="Simon Pörschke"
-                  width={80}
-                  height={80}
-                  className="h-20 w-20 shrink-0 rounded-full object-cover"
-                />
-                  <div>
-                    <p className="font-display text-lg font-semibold text-foreground">
-                      Simon Pörschke
-                    </p>
-                    <p className="text-sm text-muted">Webdesigner · Unterfranken</p>
-                  </div>
+        <Reveal y={0} delay={0}>
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, ease }}
+          >
+            <GlassCard variant="elevated" className="p-8 md:p-10">
+              <div className="flex items-center gap-4">
+                <Image
+                src="/simon-danke.jpg"
+                alt="Simon Pörschke"
+                width={80}
+                height={80}
+                className="h-20 w-20 shrink-0 rounded-full object-cover"
+              />
+                <div>
+                  <p className="font-display text-lg font-semibold text-foreground">
+                    Simon Pörschke
+                  </p>
+                  <p className="text-sm text-muted">Webdesigner · Unterfranken</p>
                 </div>
-                <p className="mt-6 text-sm leading-relaxed text-muted">
-                  Ich bin lokaler Webdesigner aus der Region Haßberge/Bamberg und
-                  helfe kleinen Betrieben, online sichtbar zu werden — mit
-                  modernen Websites, die schnell fertig sind und wirklich
-                  funktionieren.
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-muted">
-                  Kein Agentur-Overhead, keine langen Wartezeiten. Ich setze dein
-                  Projekt persönlich um — meistens innerhalb von 1–2 Wochen.
-                </p>
-              </GlassCard>
-            </motion.div>
-          </Reveal>
-
-          {/* Testimonials — stagger from right */}
-          <div className="flex flex-col gap-4">
-            <Reveal y={0}>
-              <motion.p
-                className="text-xs font-semibold uppercase tracking-widest text-muted"
-                initial={reduce ? { opacity: 0 } : { opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, ease }}
-              >
-                Beispiel-Stimmen · zur Veranschaulichung
-              </motion.p>
-            </Reveal>
-            {placeholderTestimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.65, ease, delay: 0.1 + i * 0.12 }}
-              >
-                <GlassCard variant="default" className="p-6">
-                  <Quote className="mb-3 h-5 w-5 text-pink/40" aria-hidden />
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className="h-3 w-3 fill-pink/80 text-pink/80" aria-hidden />
-                    ))}
-                  </div>
-                  <blockquote className="mt-3 text-sm leading-relaxed text-foreground/90">
-                    &bdquo;{t.quote}&ldquo;
-                  </blockquote>
-                  <figcaption className="mt-4 flex items-center gap-2.5 border-t border-white/[0.06] pt-4">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pink/80 to-violet/80 text-xs font-semibold text-white">
-                      {t.author.charAt(0)}
-                    </span>
-                    <span className="flex flex-col text-xs">
-                      <span className="font-medium text-foreground">{t.author}</span>
-                      <span className="text-muted">
-                        {t.role} · {t.location}
-                      </span>
-                    </span>
-                  </figcaption>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-muted">
+                Ich bin lokaler Webdesigner aus der Region Haßberge/Bamberg und
+                helfe kleinen Betrieben, online sichtbar zu werden — mit
+                modernen Websites, die schnell fertig sind und wirklich
+                funktionieren.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">
+                Kein Agentur-Overhead, keine langen Wartezeiten. Ich setze dein
+                Projekt persönlich um — meistens innerhalb von 1–2 Wochen.
+              </p>
+            </GlassCard>
+          </motion.div>
+        </Reveal>
       </section>
 
       {/* ── CTA ── */}

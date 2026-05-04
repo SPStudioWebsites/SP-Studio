@@ -62,7 +62,8 @@
       "Bash(curl -I https://schnell-sichtbar.de/)",
       "Bash(curl -I https://www.schnell-sichtbar.de/)",
       "Bash(lsof -ti:3000)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/impressum)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/impressum)",
+      "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-user-meine-website-Schnell-Sichtbar\\\\f9fcd768-37e1-4862-9f48-86620dbca984\\\\tasks\\\\b225ibqwk.output' -Wait | Select-String -Pattern 'Ready|Error|error|failed|FAILED'\")"
     ]
   }
 }
