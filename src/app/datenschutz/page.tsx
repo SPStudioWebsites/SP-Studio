@@ -44,14 +44,18 @@ export default function DatenschutzPage() {
         </a>
       </p>
 
-      <h2>7. Ihre Rechte</h2>
+      <h2>7. Vercel Analytics &amp; Speed Insights</h2>
+      <p>{d.vercelAnalyticsHinweis}</p>
+      <p>{d.vercelSpeedInsightsHinweis}</p>
+
+      <h2>8. Ihre Rechte</h2>
       <p>
         Sie haben jederzeit das Recht auf Auskunft, Berichtigung oder Löschung Ihrer gespeicherten
         personenbezogenen Daten. Kontakt:{" "}
         <a href={`mailto:${d.verantwortlicher.email}`}>{d.verantwortlicher.email}</a>
       </p>
 
-      <h2>8. Beschwerderecht</h2>
+      <h2>9. Beschwerderecht</h2>
       <p>{d.aufsichtsbehoerde}</p>
     </LegalLayout>
   );

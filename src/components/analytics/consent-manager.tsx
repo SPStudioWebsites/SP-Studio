@@ -4,7 +4,8 @@ import { useState } from "react";
 import Script from "next/script";
 import Link from "next/link";
 
-const GA_ID = "G-XXXXXXXXXX"; // ← eure GA-ID eintragen (z.B. G-ABC123DEF4)
+// TODO: echte Google Analytics Measurement-ID hier eintragen (Format: G-XXXXXXXXXX)
+const GA_ID = "G-XXXXXXXXXX";
 
 export function ConsentManager() {
   const [consent, setConsent] = useState<"accepted" | "declined" | null>(() =>

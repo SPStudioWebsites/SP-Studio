@@ -4,10 +4,11 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 function useReducedOrbs() {
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 768px)").matches : false
+  );
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
-    setMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setMobile(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -17,16 +18,14 @@ function useReducedOrbs() {
 
 export function GradientOrbs({ className }: { className?: string }) {
   const mobile = useReducedOrbs();
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() =>
+    typeof window !== "undefined" ? document.readyState === "complete" : false
+  );
 
   useEffect(() => {
-    if (document.readyState === "complete") {
-      setLoaded(true);
-    } else {
-      const onLoad = () => setLoaded(true);
-      window.addEventListener("load", onLoad);
-      return () => window.removeEventListener("load", onLoad);
-    }
+    const onLoad = () => setLoaded(true);
+    window.addEventListener("load", onLoad);
+    return () => window.removeEventListener("load", onLoad);
   }, []);
 
   return (

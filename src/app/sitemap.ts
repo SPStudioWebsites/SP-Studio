@@ -17,6 +17,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPosts,
     { url: `${base}/impressum`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/datenschutz`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${base}/agb`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 }

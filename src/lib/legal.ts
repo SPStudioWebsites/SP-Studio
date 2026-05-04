@@ -59,68 +59,12 @@ export const datenschutz = {
   hosting:
     "Diese Website wird bei Vercel Inc., 340 Pine Street, Suite 900, San Francisco, CA 94104, USA gehostet.",
 
+  vercelAnalyticsHinweis:
+    "Wir nutzen Vercel Analytics (Vercel Inc., USA), um anonymisierte Nutzungsstatistiken zu erheben (Seitenaufrufe, Herkunftsland, Gerätekategorie). Vercel Analytics setzt keine Cookies und erhebt keine personenbezogenen Daten im Sinne der DSGVO. Die Daten werden aggregiert gespeichert und nicht mit einzelnen Personen verknüpft. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an anonymer Reichweitenmessung). Weitere Infos: vercel.com/legal/privacy-policy",
+
+  vercelSpeedInsightsHinweis:
+    "Wir nutzen Vercel Speed Insights (Vercel Inc., USA), um die Ladegeschwindigkeit und Performance der Website zu messen. Speed Insights überträgt technische Metriken (Core Web Vitals) an Vercel. Es werden keine personenbezogenen Daten gespeichert. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an technischer Qualitätssicherung).",
+
   aufsichtsbehoerde:
     "Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 27, 91522 Ansbach.",
-};
-
-// ============================================================
-
-export const agb = {
-  title: "Allgemeine Geschäftsbedingungen",
-
-  stand: "April 2026",
-  firma: "Schnell-Sichtbar.de, Simon Pörschke, 97531 Theres",
-
-  paragraphen: [
-    {
-      titel: "§ 1 Geltungsbereich",
-      text: 'Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Simon Pöske (nachfolgend „Auftragnehmer") und dem Kunden (nachfolgend „Auftraggeber") über die Erstellung von Websites, Webdesign-Leistungen sowie damit verbundene Dienstleistungen. Abweichende Bedingungen des Auftraggebers werden nicht anerkannt.',
-    },
-    {
-      titel: "§ 2 Vertragsschluss",
-      text: "Ein Vertrag kommt zustande durch die schriftliche oder elektronische Auftragsbestätigung des Auftragnehmers. Angebote sind freibleibend und unverbindlich. Die Angebotsgültigkeit beträgt 30 Tage.",
-    },
-    {
-      titel: "§ 3 Leistungsumfang",
-      text: "Der Leistungsumfang ergibt sich aus dem jeweiligen Angebot bzw. der Auftragsbestätigung. Änderungen oder Erweiterungen des vereinbarten Leistungsumfangs bedürfen der schriftlichen Vereinbarung und können zusätzliche Kosten verursachen.",
-    },
-    {
-      titel: "§ 4 Mitwirkungspflichten des Auftraggebers",
-      text: "Der Auftraggeber stellt alle für die Durchführung des Auftrags erforderlichen Unterlagen, Informationen und Zugangsdaten rechtzeitig zur Verfügung. Verzögerungen durch verspätete Zulieferung gehen nicht zu Lasten des Auftragnehmers und können Terminverschiebungen rechtfertigen.",
-    },
-    {
-      titel: "§ 5 Vergütung und Zahlung",
-      text: "Die Vergütung ergibt sich aus dem vereinbarten Angebot. Sofern nicht anders vereinbart, gilt folgende Zahlungsstruktur: 50 % Anzahlung bei Auftragserteilung, 50 % bei Abnahme. Rechnungen sind innerhalb von 14 Tagen ohne Abzug zu begleichen.",
-    },
-    {
-      titel: "§ 6 Abnahme und Übergabe",
-      text: "Nach Fertigstellung wird das Werk zur Abnahme bereitgestellt. Der Auftraggeber hat 7 Tage Zeit, das Werk zu prüfen und etwaige Mängel schriftlich zu benennen. Nach Ablauf dieser Frist gilt das Werk als abgenommen. Unwesentliche Mängel berechtigen nicht zur Abnahmeverweigerung.",
-    },
-    {
-      titel: "§ 7 Nutzungsrechte",
-      text: "Nach vollständiger Bezahlung erhält der Auftraggeber das einfache, nicht übertragbare Nutzungsrecht an den erstellten Werken. Quellcodes und Entwicklungsdateien verbleiben beim Auftragnehmer, sofern nicht ausdrücklich anderes vereinbart wurde.",
-    },
-    {
-      titel: "§ 8 Urheberrecht und Referenznennung",
-      text: "Der Auftragnehmer behält das Urheberrecht an allen erstellten Werken. Er ist berechtigt, die erstellten Arbeiten zu Referenzzwecken in seinem Portfolio zu verwenden, sofern der Auftraggeber nicht ausdrücklich widerspricht.",
-    },
-    {
-      titel: "§ 9 Gewährleistung",
-      text: "Der Auftragnehmer gewährleistet, dass die erbrachten Leistungen den vereinbarten Spezifikationen entsprechen. Die Gewährleistungsfrist beträgt 12 Monate ab Abnahme. Mängel sind unverzüglich schriftlich zu rügen.",
-    },
-    {
-      titel: "§ 10 Haftungsbeschränkung",
-      text: "Die Haftung des Auftragnehmers ist auf Vorsatz und grobe Fahrlässigkeit beschränkt. Eine Haftung für mittelbare Schäden, entgangenen Gewinn oder Datenverlust ist ausgeschlossen, soweit gesetzlich zulässig.",
-    },
-    {
-      titel: "§ 11 Vertraulichkeit",
-      text: "Beide Parteien verpflichten sich, alle im Rahmen des Auftrags erlangten vertraulichen Informationen der jeweils anderen Partei nicht an Dritte weiterzugeben.",
-    },
-    {
-      titel: "§ 12 Schlussbestimmungen",
-      text: "Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist, soweit gesetzlich zulässig, der Sitz des Auftragnehmers. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.",
-    },
-  ],
-
-  kontaktEmail: "kontakt@schnell-sichtbar.de",
 };

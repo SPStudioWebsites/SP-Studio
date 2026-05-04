@@ -301,7 +301,7 @@ export const testimonials = {
 
 export const faq = [
   {
-    q: "Was kostet eine Website bei SP Studio?",
+    q: "Was kostet eine Website bei Schnell-Sichtbar.de?",
     a: "Eine professionelle Website beginnt ab 699 € einmalig — inklusive Design, Entwicklung und SEO-Grundlagen. Größere Projekte mit Online-Buchung oder Shop besprechen wir individuell. Du bekommst immer einen Festpreis, bevor auch nur eine Zeile Code geschrieben wird.",
   },
   {

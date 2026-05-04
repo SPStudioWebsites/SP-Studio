@@ -21,10 +21,24 @@ interface ContactInput {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+function esc(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
+
 export async function submitContact(
   _prev: ContactState,
   formData: FormData
 ): Promise<ContactState> {
+  // Honeypot: legitimate users leave this blank; bots fill it
+  if (String(formData.get("website") ?? "")) {
+    return { ok: true };
+  }
+
   const data: ContactInput = {
     name:    String(formData.get("name")    ?? "").trim(),
     company: String(formData.get("company") ?? "").trim(),
@@ -36,10 +50,21 @@ export async function submitContact(
   };
 
   const errors: ContactState["errors"] = {};
-  if (data.name.length < 2)       errors.name    = "Bitte gib deinen Namen an.";
-  if (!EMAIL_RE.test(data.email)) errors.email   = "Bitte gültige E-Mail-Adresse angeben.";
-  if (data.message.length < 10)   errors.message = "Bitte schreibe uns ein paar Worte mehr (min. 10 Zeichen).";
-  if (data.privacy !== "on")      errors.privacy = "Bitte stimme der Datenverarbeitung zu.";
+
+  if (data.name.length < 2)        errors.name    = "Bitte gib deinen Namen an.";
+  else if (data.name.length > 100) errors.name    = "Name darf max. 100 Zeichen lang sein.";
+
+  if (data.company.length > 120)   errors.company = "Unternehmen darf max. 120 Zeichen lang sein.";
+  if (data.branche.length > 80)    errors.branche = "Branche darf max. 80 Zeichen lang sein.";
+  if (data.phone.length > 40)      errors.phone   = "Telefon darf max. 40 Zeichen lang sein.";
+
+  if (data.email.length > 254)          errors.email = "E-Mail darf max. 254 Zeichen lang sein.";
+  else if (!EMAIL_RE.test(data.email))  errors.email = "Bitte gültige E-Mail-Adresse angeben.";
+
+  if (data.message.length < 10)          errors.message = "Bitte schreibe uns ein paar Worte mehr (min. 10 Zeichen).";
+  else if (data.message.length > 3000)   errors.message = "Nachricht darf max. 3.000 Zeichen lang sein.";
+
+  if (data.privacy !== "on") errors.privacy = "Bitte stimme der Datenverarbeitung zu.";
 
   if (Object.keys(errors).length > 0) {
     return { ok: false, message: "Bitte überprüfe die markierten Felder.", errors };
@@ -64,17 +89,17 @@ export async function submitContact(
         <p style="color:#666;margin-top:0;font-size:13px">${new Date().toLocaleString("de-DE")}</p>
         <hr style="border:none;border-top:1px solid #e5e5e5;margin:20px 0"/>
         <table style="width:100%;border-collapse:collapse;font-size:14px">
-          <tr><td style="padding:8px 0;color:#666;width:130px">Name</td><td style="padding:8px 0;font-weight:600">${data.name}</td></tr>
-          ${data.company ? `<tr><td style="padding:8px 0;color:#666">Unternehmen</td><td style="padding:8px 0">${data.company}</td></tr>` : ""}
-          <tr><td style="padding:8px 0;color:#666">E-Mail</td><td style="padding:8px 0"><a href="mailto:${data.email}" style="color:#ff2d8f">${data.email}</a></td></tr>
-          ${data.phone ? `<tr><td style="padding:8px 0;color:#666">Telefon</td><td style="padding:8px 0"><a href="tel:${data.phone}" style="color:#ff2d8f">${data.phone}</a></td></tr>` : ""}
-          ${data.branche ? `<tr><td style="padding:8px 0;color:#666">Branche</td><td style="padding:8px 0">${data.branche}</td></tr>` : ""}
+          <tr><td style="padding:8px 0;color:#666;width:130px">Name</td><td style="padding:8px 0;font-weight:600">${esc(data.name)}</td></tr>
+          ${data.company ? `<tr><td style="padding:8px 0;color:#666">Unternehmen</td><td style="padding:8px 0">${esc(data.company)}</td></tr>` : ""}
+          <tr><td style="padding:8px 0;color:#666">E-Mail</td><td style="padding:8px 0"><a href="mailto:${esc(data.email)}" style="color:#ff2d8f">${esc(data.email)}</a></td></tr>
+          ${data.phone ? `<tr><td style="padding:8px 0;color:#666">Telefon</td><td style="padding:8px 0"><a href="tel:${esc(data.phone)}" style="color:#ff2d8f">${esc(data.phone)}</a></td></tr>` : ""}
+          ${data.branche ? `<tr><td style="padding:8px 0;color:#666">Branche</td><td style="padding:8px 0">${esc(data.branche)}</td></tr>` : ""}
         </table>
         <hr style="border:none;border-top:1px solid #e5e5e5;margin:20px 0"/>
         <p style="font-size:13px;color:#666;margin-bottom:8px">Nachricht</p>
-        <p style="background:#f9f9f9;padding:16px;border-radius:8px;font-size:14px;line-height:1.6;white-space:pre-wrap">${data.message}</p>
+        <p style="background:#f9f9f9;padding:16px;border-radius:8px;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(data.message)}</p>
         <hr style="border:none;border-top:1px solid #e5e5e5;margin:20px 0"/>
-        <p style="font-size:12px;color:#999">Direkt antworten: einfach auf diese Mail antworten — geht direkt an ${data.email}</p>
+        <p style="font-size:12px;color:#999">Direkt antworten: einfach auf diese Mail antworten — geht direkt an ${esc(data.email)}</p>
       </div>
     `,
   });

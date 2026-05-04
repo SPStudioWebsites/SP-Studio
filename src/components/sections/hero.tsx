@@ -49,11 +49,12 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
 
 export function HeroSection() {
   const reduce = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 1023px)").matches : false
+  );
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1023px)");
-    setIsMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -231,7 +232,7 @@ function LaptopHero() {
       >
         <Image
           src="/laptop-hero-transparent.png"
-          alt="Moderne Website auf einem MacBook Pro — Beispiel für ein SP Studio Webdesign-Projekt"
+          alt="Moderne Website auf einem MacBook Pro — Beispiel für ein Schnell-Sichtbar.de Webdesign-Projekt"
           width={2752}
           height={1536}
           className="w-full drop-shadow-[0_50px_110px_rgba(255,45,143,0.25)]"

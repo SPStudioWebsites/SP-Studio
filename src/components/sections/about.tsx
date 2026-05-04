@@ -3,9 +3,7 @@
 import { about } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
 import { Pill } from "@/components/ui/pill";
-import { GlassCard } from "@/components/ui/glass-card";
-import { Quote, MapPin } from "@/lib/icons";
-import { motion } from "motion/react";
+import { Quote } from "@/lib/icons";
 import Image from "next/image";
 
 export function AboutSection() {
@@ -89,69 +87,3 @@ export function AboutSection() {
   );
 }
 
-function RegionMap() {
-  return (
-    <div className="relative">
-      <GlassCard variant="strong" className="relative aspect-[5/4] overflow-hidden p-6">
-        <div className="absolute inset-0 opacity-50">
-          <svg
-            viewBox="0 0 100 80"
-            xmlns="http://www.w3.org/2000/svg"
-            className="absolute inset-0 h-full w-full"
-            aria-hidden
-          >
-            <defs>
-              <radialGradient id="grad-region" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#ff2d8f" stopOpacity="0.18" />
-                <stop offset="60%" stopColor="#8b5cf6" stopOpacity="0.08" />
-                <stop offset="100%" stopColor="transparent" />
-              </radialGradient>
-            </defs>
-            <rect width="100" height="80" fill="url(#grad-region)" />
-            <path
-              d="M15,20 Q25,10 40,15 T70,18 Q85,22 88,40 Q90,58 78,68 Q60,78 40,72 Q22,68 14,55 Q8,38 15,20 Z"
-              fill="rgba(255,255,255,0.025)"
-              stroke="rgba(255,45,143,0.35)"
-              strokeWidth="0.4"
-              strokeDasharray="1.5 1.5"
-            />
-          </svg>
-        </div>
-
-        {/* Hotspots */}
-        {about.cities.map((c, i) => (
-          <motion.div
-            key={c.name}
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.5,
-              delay: 0.3 + i * 0.08,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="absolute"
-            style={{
-              left: `${c.x}%`,
-              top: `${c.y}%`,
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <div className="group relative">
-              <span className="absolute inset-0 -z-10 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink/30 blur-md animate-pulse-soft" />
-              <span className="block h-2.5 w-2.5 rounded-full bg-pink shadow-[0_0_15px_rgba(255,45,143,0.9)]" />
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 whitespace-nowrap text-[11px] font-medium text-foreground/85">
-                {c.name}
-              </span>
-            </div>
-          </motion.div>
-        ))}
-
-        <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full glass-pill px-4 py-2 text-xs font-medium">
-          <MapPin className="h-3.5 w-3.5 text-pink" aria-hidden />
-          Termin vor Ort möglich
-        </div>
-      </GlassCard>
-    </div>
-  );
-}

@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Schnell-Sichtbar.de
 
-## Getting Started
+Marketing-Website fuer Schnell-Sichtbar.de: lokale Webdesign- und Local-SEO-Angebote fuer kleine Unternehmen in der Region Hassberge/Franken.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js 16 mit App Router
+- React 19
+- Tailwind CSS 4
+- MDX-Blog ueber `src/content/blog`
+- Resend fuer das Kontaktformular
+- Vercel Analytics und Vercel Speed Insights
+- Google Analytics vorbereitet ueber Consent-Banner
+
+## Lokale Entwicklung
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Der Dev-Server laeuft standardmaessig unter `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npx tsc --noEmit --incremental false
+npm run build
+```
 
-## Learn More
+Hinweis: Falls TypeScript noch alte `.next/types` referenziert, `.next` entfernen und den Build/Dev-Server neu starten.
 
-To learn more about Next.js, take a look at the following resources:
+## Environment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Fuer das Kontaktformular wird lokal und in Produktion benoetigt:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+RESEND_API_KEY=...
+```
 
-## Deploy on Vercel
+Google Analytics ist aktuell im Consent Manager vorbereitet. Die Platzhalter-ID `G-XXXXXXXXXX` in `src/components/analytics/consent-manager.tsx` muss vor echter Nutzung durch die korrekte Measurement-ID ersetzt werden.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Das Projekt ist fuer Vercel vorbereitet. Vor dem Deployment pruefen:
+
+- `RESEND_API_KEY` ist in Vercel gesetzt.
+- Google-Analytics-ID ist ersetzt, falls GA genutzt werden soll.
+- `npm run lint` und `npm run build` laufen sauber.
+- Datenschutztexte passen zu den aktivierten Tracking-Diensten.

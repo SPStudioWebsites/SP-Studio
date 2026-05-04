@@ -36,10 +36,5 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostSlugs(): string[] {
-  if (!fs.existsSync(BLOG_DIR)) return [];
-
-  return fs
-    .readdirSync(BLOG_DIR)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(".mdx", ""));
+  return getAllPosts().map((post) => post.slug);
 }

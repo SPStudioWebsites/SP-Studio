@@ -156,7 +156,7 @@ export function ContactSection() {
                       />
                       <span>
                         {contact.privacy}{" "}
-                        <a href="#" className="underline underline-offset-2 hover:text-foreground">
+                        <a href="/datenschutz" className="underline underline-offset-2 hover:text-foreground">
                           Datenschutz
                         </a>
                         .
@@ -165,6 +165,10 @@ export function ContactSection() {
                     {state.errors?.privacy && (
                       <p className="-mt-3 text-xs text-red-300">{state.errors.privacy}</p>
                     )}
+                    {/* Honeypot — hidden from humans, filled by bots */}
+                    <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>
+                      <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                    </div>
                     <div className="mt-3 flex items-center justify-between">
                       <p className="text-xs text-muted">
                         Wir antworten innerhalb von 24 Stunden.
@@ -313,30 +317,3 @@ function SelectField({
   );
 }
 
-function ContactRow({
-  icon,
-  label,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href?: string;
-}) {
-  const Inner = (
-    <li className="group flex items-center gap-4">
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.025] text-pink transition-colors group-hover:border-pink/30 group-hover:bg-pink/10">
-        {icon}
-      </span>
-      <span className="flex flex-col">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
-          {label}
-        </span>
-        <span className="text-sm text-foreground">{value}</span>
-      </span>
-    </li>
-  );
-  if (href) return <a href={href}>{Inner}</a>;
-  return Inner;
-}

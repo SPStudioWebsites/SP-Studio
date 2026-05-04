@@ -85,7 +85,7 @@ export function ProcessSection() {
                 >
                   {/* Left slot */}
                   <div className={`hidden md:block md:w-1/2 md:pr-14 ${onLeft ? "" : "md:invisible"}`}>
-                    {onLeft && <StepCard step={step} index={i} />}
+                    {onLeft && <StepCard step={step} />}
                   </div>
 
                   {/* Center node */}
@@ -107,12 +107,12 @@ export function ProcessSection() {
 
                   {/* Right slot */}
                   <div className={`hidden md:block md:w-1/2 md:pl-14 ${!onLeft ? "" : "md:invisible"}`}>
-                    {!onLeft && <StepCard step={step} index={i} />}
+                    {!onLeft && <StepCard step={step} />}
                   </div>
 
                   {/* Mobile card */}
                   <div className="pl-14 md:hidden">
-                    <StepCard step={step} index={i} />
+                    <StepCard step={step} />
                   </div>
                 </motion.div>
               );
@@ -194,10 +194,8 @@ export function ProcessSection() {
 
 function StepCard({
   step,
-  index,
 }: {
   step: (typeof process)[number];
-  index: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });

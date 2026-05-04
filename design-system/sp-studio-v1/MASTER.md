@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** SP Studio V1
+**Project:** Schnell-Sichtbar.de (ehemals SP Studio V1)
 **Generated:** 2026-04-27 19:48:42
 **Category:** B2B Service
 

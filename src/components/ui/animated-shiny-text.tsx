@@ -6,14 +6,11 @@ import {
 
 import { cn } from "@/lib/utils"
 
-export interface AnimatedShinyTextProps extends ComponentPropsWithoutRef<"span"> {
-  shimmerWidth?: number
-}
+export type AnimatedShinyTextProps = ComponentPropsWithoutRef<"span">
 
 export const AnimatedShinyText: FC<AnimatedShinyTextProps> = ({
   children,
   className,
-  shimmerWidth = 100,
   ...props
 }) => {
   return (
