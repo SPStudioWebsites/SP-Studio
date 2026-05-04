@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { DankeContent } from "./danke-content";
@@ -16,7 +15,6 @@ export default function DankePage() {
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <DotPattern className="opacity-[0.10] text-white" width={24} height={24} />
       </div>
-      <Navbar />
       <DankeContent />
       <Footer />
     </>

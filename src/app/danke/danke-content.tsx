@@ -69,7 +69,7 @@ export function DankeContent() {
       <GradientOrbs />
 
       {/* ── HERO ── */}
-      <section className="relative mx-auto max-w-3xl px-6 pb-16 pt-32 text-center md:pb-24 md:pt-40">
+      <section className="relative mx-auto max-w-3xl px-6 pb-16 pt-20 text-center md:pb-24 md:pt-30">
         {/* Pulsing hero glow */}
         <motion.div
           aria-hidden
@@ -372,15 +372,35 @@ export function DankeContent() {
           <Accordion items={faqItems} />
         </Reveal>
         <Reveal y={16} delay={0.2}>
-          <p className="mt-10 text-center text-sm text-muted">
-            Noch eine andere Frage?{" "}
+          <div className="mt-20 flex justify-center">
             <Link
               href="/"
-              className="font-medium text-pink underline-offset-4 hover:underline"
+              className="relative inline-flex h-15 items-center gap-3 overflow-hidden rounded-full px-8 text-sm font-semibold text-white shadow-[0_0_30px_-8px_rgba(255,45,143,0.6)] transition-all hover:shadow-[0_0_40px_-6px_rgba(255,45,143,0.75)] hover:scale-[1.03]"
+              style={{
+                background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)",
+              }}
             >
-              Zurück zur Startseite
+              {!reduce && (
+                <motion.span
+                  aria-hidden
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.30) 50%, transparent 70%)",
+                    backgroundSize: "200% 100%",
+                  }}
+                  animate={{ backgroundPosition: ["150% 0%", "-50% 0%"] }}
+                  transition={{
+                    duration: 2.4,
+                    ease: "linear",
+                    repeat: Infinity,
+                    repeatDelay: 1.6,
+                  }}
+                />
+              )}
+              <span className="relative z-10">← Zurück zur Startseite</span>
             </Link>
-          </p>
+          </div>
         </Reveal>
       </section>
     </main>
