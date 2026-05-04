@@ -362,6 +362,7 @@ export const footer = {
     { label: "FAQ", href: "#faq" },
     { label: "Leistungen", href: "#leistungen" },
     { label: "Kontakt", href: "#kontakt" },
+    { label: "Blog", href: "/blog" },
   ],
   legal: [
     { label: "Impressum", href: "/impressum" },
