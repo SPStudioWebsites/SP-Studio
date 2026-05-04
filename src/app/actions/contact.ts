@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { Resend } from "resend";
 
 export type ContactState = {
@@ -83,8 +84,5 @@ export async function submitContact(
     return { ok: false, message: "Beim Senden ist ein Fehler aufgetreten — bitte versuch es nochmal oder ruf uns an." };
   }
 
-  return {
-    ok: true,
-    message: "Danke für deine Nachricht! Wir melden uns innerhalb von 24 Stunden bei dir.",
-  };
+  redirect("/danke");
 }
