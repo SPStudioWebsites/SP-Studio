@@ -9,8 +9,8 @@ export const brand = {
     city: "Theres",
   },
   email: "kontakt@schnell-sichtbar.de",
-  phone: "+4917622783639",
-  phoneDisplay: "0176/22783639",
+  phone: "+491785407221",
+  phoneDisplay: "0178/5407221",
   hours: "Mo–Fr 9:00 – 18:00",
 };
 

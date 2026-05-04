@@ -14,8 +14,8 @@ export const impressum = {
   },
 
   kontakt: {
-    telefon: "0176/22783639",
-    telefonHref: "+4917622783639",
+    telefon: "0178/5407221",
+    telefonHref: "+491785407221",
     email: "kontakt@schnell-sichtbar.de",
   },
 
@@ -42,8 +42,8 @@ export const datenschutz = {
     street: "Kahlberg 3",        // ← deine Straße
     zip: "97531",
     city: "Theres",
-    telefon: "0176/22783639",
-    telefonHref: "+4917622783639",
+    telefon: "0178/5407221",
+    telefonHref: "+491785407221",
     email: "kontakt@schnell-sichtbar.de",
   },
 
