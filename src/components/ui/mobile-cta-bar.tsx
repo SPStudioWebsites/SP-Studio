@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { brand } from "@/lib/content";
 import { Phone, ArrowRight } from "@/lib/icons";
 
 export function MobileCtaBar() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
@@ -39,6 +41,8 @@ export function MobileCtaBar() {
     window.addEventListener("mobilemenu", handler);
     return () => window.removeEventListener("mobilemenu", handler);
   }, []);
+
+  if (pathname === "/danke") return null;
 
   return (
     <AnimatePresence>
