@@ -29,28 +29,7 @@ export const hero = {
   subtitle:
     "Wir bauen Webseiten für Frisöre, Restaurants, Handwerker und KMUs in Haßfurt, Ebern, Hofheim und Umgebung — schnell, persönlich, ohne Agentur-Bürokratie.",
   ctaPrimary: "Kostenloses Erstgespräch",
-  ctaSecondary: "Beispiele ansehen",
-  trust: [
-    { value: "Region", label: "Haßberge" },
-    { value: "ø 14 Tage", label: "Lieferzeit" },
-    { value: "inklusive", label: "Hosting & Pflege" },
-  ],
 };
-
-export const trustPills = [
-  "Salon Mara",
-  "Café Linde",
-  "Bäckerei Eger",
-  "Praxis Dr. Roth",
-  "Schreinerei Vogel",
-  "Yoga Lina",
-  "Trattoria Sorrento",
-  "Autohaus Becker",
-  "Hotel Adler",
-  "Floristik Sommer",
-  "Physio Vital",
-  "Pizzeria Rustica",
-];
 
 export const services = [
   {
@@ -130,69 +109,6 @@ export const industries = [
   },
 ] as const;
 
-export const portfolio = [
-  {
-    name: "Salon Mara",
-    branche: "Friseur",
-    location: "Haßfurt",
-    tags: ["Webdesign", "Online-Buchung", "Local SEO"],
-    metric: "Beispiel-Ziel: + 240 % Anfragen",
-    accent: "pink",
-    mock: {
-      brand: "MARA",
-      headline: "Cut. Color. Confidence.",
-      sub: "Termin in 30 Sekunden online buchen",
-      cta: "Termin buchen",
-      tone: "warm",
-    },
-  },
-  {
-    name: "Trattoria Sorrento",
-    branche: "Restaurant",
-    location: "Ebern",
-    tags: ["Webdesign", "Reservierung", "Speisekarte"],
-    metric: "Beispiel-Ziel: + 50 Reservierungen / Woche",
-    accent: "violet",
-    mock: {
-      brand: "Sorrento",
-      headline: "Italienisch. Familiär. Seit 1998.",
-      sub: "Tisch reservieren — heute Abend ab 18 Uhr",
-      cta: "Tisch reservieren",
-      tone: "italian",
-    },
-  },
-  {
-    name: "Schreinerei Vogel",
-    branche: "Handwerk",
-    location: "Hofheim",
-    tags: ["Webdesign", "Referenzen", "SEO"],
-    metric: "Beispiel-Ziel: 14 Tage Build",
-    accent: "pink",
-    mock: {
-      brand: "VOGEL",
-      headline: "Möbel mit Charakter.",
-      sub: "Maßanfertigungen aus Massivholz — direkt aus Unterfranken",
-      cta: "Beratungstermin",
-      tone: "wood",
-    },
-  },
-  {
-    name: "Bewegungsraum Lina",
-    branche: "Yoga-Studio",
-    location: "Königsberg",
-    tags: ["Webdesign", "Kursplan", "Mitgliedschaft"],
-    metric: "Beispiel-Ziel: 30 % mehr Drop-ins",
-    accent: "violet",
-    mock: {
-      brand: "Bewegungsraum",
-      headline: "Atmen. Loslassen. Ankommen.",
-      sub: "Probestunde diese Woche kostenlos",
-      cta: "Probestunde buchen",
-      tone: "soft",
-    },
-  },
-] as const;
-
 export const process = [
   {
     n: "01",
@@ -242,60 +158,6 @@ export const about = {
     { name: "Königsberg", x: 25, y: 50 },
     { name: "Zeil a. Main", x: 70, y: 60 },
     { name: "Eltmann", x: 60, y: 75 },
-  ],
-};
-
-export const testimonials = {
-  featured: {
-    quote:
-      "So könnte eine Stimme klingen, die viele unserer Wunschkund:innen formulieren würden — auf der ganzen Linie persönlich und ehrlich.",
-    author: "Beispiel-Stimme",
-    role: "Inhaberin · Salon (Beispiel)",
-    location: "Haßfurt",
-  },
-  list: [
-    {
-      quote:
-        "Endlich eine Website, die wir selbst pflegen können. Die Buchungen kommen jetzt direkt rein — ohne Telefon-Pingpong.",
-      author: "Andrea M. (Beispiel)",
-      role: "Salon-Inhaberin",
-      location: "Haßfurt",
-    },
-    {
-      quote:
-        "Persönlich, schnell, fair. Wir hatten in 14 Tagen eine Seite, die wirklich aussieht wie unser Restaurant.",
-      author: "Marco S. (Beispiel)",
-      role: "Restaurant",
-      location: "Ebern",
-    },
-    {
-      quote:
-        "Die Anfragen über die Website sind explodiert. Das Beste: wenn wir was brauchen, sind sie sofort am Telefon.",
-      author: "Heinrich V. (Beispiel)",
-      role: "Schreinermeister",
-      location: "Hofheim",
-    },
-    {
-      quote:
-        "Kein Schnickschnack, kein Englisch-Marketing-Kauderwelsch. Einfach gute Arbeit aus der Region.",
-      author: "Lina K. (Beispiel)",
-      role: "Yoga-Lehrerin",
-      location: "Königsberg",
-    },
-    {
-      quote:
-        "Unser Google-Profil hat sich verdoppelt im Ranking. Wir hätten das nie alleine hinbekommen.",
-      author: "Dr. T. Roth (Beispiel)",
-      role: "Praxis",
-      location: "Zeil",
-    },
-    {
-      quote:
-        "Beratung wie vom Nachbarn — Ergebnis wie aus der Großstadt. Genau das richtige Mischverhältnis.",
-      author: "Petra E. (Beispiel)",
-      role: "Bäckerei",
-      location: "Eltmann",
-    },
   ],
 };
 
