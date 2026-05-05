@@ -1,9 +1,8 @@
-import { brand, faq, process } from "@/lib/content";
+import { brand, process } from "@/lib/content";
 
 const BASE = "https://schnell-sichtbar.de";
 
 const localBusiness = {
-  "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
   "@id": `${BASE}/#business`,
   name: brand.name,
@@ -40,7 +39,6 @@ const localBusiness = {
 };
 
 const person = {
-  "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${BASE}/#person`,
   name: "Simon Pörschke",
@@ -56,19 +54,9 @@ const person = {
   },
 };
 
-const faqPage = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: { "@type": "Answer", text: item.a },
-  })),
-};
-
 const howTo = {
-  "@context": "https://schema.org",
   "@type": "HowTo",
+  "@id": `${BASE}/#process`,
   name: "In vier Schritten zur fertigen Website",
   description: "Klar strukturiert, mit echten Zeitfenstern. Ohne Buzzwords.",
   step: process.map((step) => ({
@@ -83,18 +71,18 @@ const howTo = {
   })),
 };
 
-const schemas = [localBusiness, person, faqPage, howTo];
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [localBusiness, person, howTo],
+};
+
+const jsonLd = JSON.stringify(schemaGraph).replace(/</g, "\\u003c");
 
 export function JsonLd() {
   return (
-    <>
-      {schemas.map((schema, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: jsonLd }}
+    />
   );
 }
