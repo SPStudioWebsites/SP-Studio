@@ -21,13 +21,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { data } = matter(raw);
 
   const postUrl = `https://schnell-sichtbar.de/blog/${slug}`;
+  const cleanTitle = (data.title as string).replace(/\s*\|.*$/, "");
+  const ogImage = {
+    url: `https://schnell-sichtbar.de/blog/${slug}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: cleanTitle,
+  };
 
   return {
-    title: data.title,
+    title: cleanTitle,
     description: data.description,
+    authors: [{ name: "Simon Pörschke" }],
     alternates: { canonical: postUrl },
     openGraph: {
-      title: data.title,
+      title: cleanTitle,
       description: data.description,
       type: "article",
       url: postUrl,
@@ -35,11 +43,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Schnell-Sichtbar.de",
       publishedTime: data.date ? new Date(data.date as string).toISOString() : undefined,
       authors: ["Simon Pörschke"],
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: data.title,
+      title: cleanTitle,
       description: data.description,
+      images: [ogImage.url],
     },
   };
 }

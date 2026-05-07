@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     "Webdesign Ebern",
     "Webdesign Hofheim",
   ],
-  authors: [{ name: "Schnell-Sichtbar.de" }],
+  authors: [{ name: "Simon Pörschke" }],
   icons: {
     icon: [
       { url: "/Favicons/favicon.ico" },
