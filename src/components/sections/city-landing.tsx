@@ -15,6 +15,14 @@ import { ArrowRight, Check, MapPin, Calendar, TrendingUp, BadgeEuro, ShieldCheck
 import { brand } from "@/lib/content";
 import { CityHeroVisual } from "@/components/sections/city-hero-visual";
 
+const cityNavLinks = [
+  { label: "Warum lokal?", href: "#lokal-h" },
+  { label: "Ablauf",       href: "#ablauf" },
+  { label: "FAQ",          href: "#faq-city-h" },
+  { label: "Leistungen",   href: "#leistungen" },
+  { label: "Kontakt",      href: "#kontakt" },
+] as const;
+
 const ProcessSection = dynamic(() =>
   import("@/components/sections/process").then((m) => m.ProcessSection)
 );
@@ -122,7 +130,7 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
       />
       <ScrollProgress />
       <Grain />
-      <Navbar />
+      <Navbar localLinks={cityNavLinks} logoHref="/" />
 
       <main id="main" className="relative">
         {/* ── Hero ── */}

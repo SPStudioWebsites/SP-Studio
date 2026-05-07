@@ -8,10 +8,16 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-export function Navbar() {
+interface NavbarProps {
+  localLinks?: readonly { label: string; href: string }[];
+  logoHref?: string;
+}
+
+export function Navbar({ localLinks, logoHref }: NavbarProps = {}) {
+  const links = localLinks ?? navLinks;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState<string>("#top");
+  const [activeHash, setActiveHash] = useState<string>(links[0]?.href ?? "#top");
 
   const [indicator, setIndicator] = useState({ left: 0, top: 0, width: 0, height: 0 });
   const listRef = useRef<HTMLUListElement>(null);
@@ -41,7 +47,10 @@ export function Navbar() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  function link(hash: string) { return isHome ? hash : `/${hash}`; }
+  function link(hash: string) {
+    if (localLinks) return hash;
+    return isHome ? hash : `/${hash}`;
+  }
 
   useEffect(() => {
     const item = itemRefs.current.get(activeHash);
@@ -69,7 +78,7 @@ export function Navbar() {
     function onScroll() {
       setScrolled(window.scrollY > 30);
       if (Date.now() < scrollLockRef.current) return;
-      const ids = navLinks.map(l => l.href.slice(1));
+      const ids = links.map(l => l.href.slice(1));
       let current = "#top";
       for (const id of ids) {
         const el = document.getElementById(id);
@@ -122,7 +131,7 @@ export function Navbar() {
         {/* Top row */}
         <div className="flex items-center justify-between gap-4 px-3 py-2">
           <a
-            href={link("#top")}
+            href={logoHref ?? link("#top")}
             onClick={() => mobileOpen && setMobileOpen(false)}
             className="flex items-center pl-2 pr-1"
             aria-label={brand.name}
@@ -139,7 +148,7 @@ export function Navbar() {
                 transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.7 }}
               />
             )}
-            {navLinks.map((l) => (
+            {links.map((l) => (
               <li key={l.href} ref={node => { if (node) itemRefs.current.set(l.href, node); else itemRefs.current.delete(l.href); }}>
                 <a
                   href={link(l.href)}
@@ -213,7 +222,7 @@ export function Navbar() {
                       transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.7 }}
                     />
                   )}
-                  {navLinks.map((l, i) => (
+                  {links.map((l, i) => (
                     <motion.li
                       key={l.href}
                       initial={{ opacity: 0, x: -16 }}
