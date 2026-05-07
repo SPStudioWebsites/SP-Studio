@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Navbar } from "@/components/layout/navbar";
@@ -37,9 +38,10 @@ export interface CityLandingPageProps {
   heroSubtitle: string;
   pitchText: string;
   faq: readonly { q: string; a: string }[];
+  cityBlock?: ReactNode;
 }
 
-export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq }: CityLandingPageProps) {
+export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, cityBlock }: CityLandingPageProps) {
   const benefits = [
     {
       icon: MapPin,
@@ -372,6 +374,8 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq }: Ci
               </Reveal>
             </div>
           </section>
+
+          {cityBlock}
 
           {/* ── Ablauf ── */}
           <ProcessSection />
