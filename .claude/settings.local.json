@@ -66,7 +66,11 @@
       "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-user-meine-website-Schnell-Sichtbar\\\\f9fcd768-37e1-4862-9f48-86620dbca984\\\\tasks\\\\b225ibqwk.output' -Wait | Select-String -Pattern 'Ready|Error|error|failed|FAILED'\")",
       "Bash(grep -n -i \"faq\\\\|frage\\\\|\\\\?\\\\s*$\" /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/webdesign-fuer-handwerker-in-unterfranken.mdx)",
       "Bash(grep -n -i \"faq\\\\|frage\\\\|\\\\?\\\\s*$\" /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/guenstige-webseite-erstellen-lassen.mdx)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(mv /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/warum-dein-lokal-bei-google-unsichtbar-ist.mdx /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/website-fuer-restaurants-und-cafes-in-hassfurt.mdx)"
+    ],
+    "additionalDirectories": [
+      "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"
     ]
   }
 }
