@@ -6,6 +6,8 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Metadata } from "next";
+import { ScrollProgress } from "@/components/effects/scroll-progress";
+import { BlogBackground } from "@/components/effects/blog-background";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -64,14 +66,18 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
 
   let Post: React.ComponentType;
-  let data: Record<string, unknown>;
+  let data: Record<string, unknown> = {};
+  let readingTime = 3;
 
   try {
     const mod = await import(`@/content/blog/${slug}.mdx`);
     Post = mod.default;
     const filePath = path.join(process.cwd(), "src/content/blog", `${slug}.mdx`);
     const raw = fs.readFileSync(filePath, "utf-8");
-    data = matter(raw).data as Record<string, unknown>;
+    const parsed = matter(raw);
+    data = parsed.data as Record<string, unknown>;
+    const wordCount = parsed.content.split(/\s+/).filter(Boolean).length;
+    readingTime = Math.max(1, Math.round(wordCount / 200));
   } catch {
     notFound();
   }
@@ -127,39 +133,134 @@ export default async function BlogPostPage({ params }: Props) {
     ],
   }).replace(/</g, "\\u003c");
 
+  const category = (data.category as string) || "Webdesign & SEO";
+
   return (
-    <main className="mx-auto max-w-3xl px-6 pb-24 pt-36">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: blogSchema }} />
-      <Link
-        href="/blog"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-      >
-        ← Zurück zum Blog
-      </Link>
+    <>
+      <ScrollProgress />
+      <BlogBackground />
 
-      <time className="block font-sans text-sm text-muted">
-        {data.date
-          ? new Date(data.date as string).toLocaleDateString("de-DE", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          : ""}
-      </time>
+      <main className="relative mx-auto max-w-3xl px-6 pb-24 pt-36">
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: blogSchema }} />
 
-      <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-        {(data.title as string).replace(/\s*\|.*$/, "")}
-      </h1>
+          {/* Back link */}
+          <Link
+            href="/blog"
+            className="mb-10 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            ← Zurück zum Blog
+          </Link>
 
-      {Boolean(data.description) && (
-        <p className="mt-4 text-lg text-muted">{data.description as string}</p>
-      )}
+          {/* ── Post header ── */}
+          <div className="mt-2">
+            {/* Meta row */}
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center rounded-full border border-pink/20 bg-pink/10 px-3 py-1 text-xs font-semibold text-pink">
+                {category}
+              </span>
+              <span className="text-xs text-muted">·</span>
+              <time className="font-sans text-xs text-muted">
+                {data.date
+                  ? new Date(data.date as string).toLocaleDateString("de-DE", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""}
+              </time>
+              <span className="text-xs text-muted">·</span>
+              <span className="text-xs text-muted">{readingTime} Min. Lesezeit</span>
+            </div>
 
-      <hr className="my-10 border-border" />
+            <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl">
+              {(data.title as string).replace(/\s*\|.*$/, "")}
+            </h1>
 
-      <div className="[&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-foreground [&_p]:text-muted [&_p]:leading-relaxed [&_p]:mb-5 [&_a]:text-pink [&_a]:no-underline hover:[&_a]:underline [&_ul]:text-muted [&_ul]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-5 [&_ol]:text-muted [&_ol]:leading-relaxed [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-5 [&_strong]:text-foreground [&_strong]:font-semibold [&_blockquote]:border-l-2 [&_blockquote]:border-pink [&_blockquote]:pl-4 [&_blockquote]:text-muted [&_blockquote]:italic [&_blockquote]:my-6 [&_table]:w-full [&_table]:my-8 [&_table]:border-collapse [&_table]:text-sm [&_thead]:border-b [&_thead]:border-border [&_th]:text-left [&_th]:font-display [&_th]:font-semibold [&_th]:text-foreground [&_th]:py-3 [&_th]:pr-6 [&_td]:text-muted [&_td]:py-3 [&_td]:pr-6 [&_td]:border-b [&_td]:border-border [&_tr:last-child_td]:border-0 [&_td_strong]:text-pink">
-        <Post />
-      </div>
-    </main>
+            {Boolean(data.description) && (
+              <p className="mt-4 text-lg leading-relaxed text-muted">
+                {data.description as string}
+              </p>
+            )}
+
+            {/* Author row */}
+            <div className="mt-6 flex items-center gap-3">
+              <div
+                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+                style={{ background: "linear-gradient(135deg, #ff2d8f, #8b5cf6)" }}
+              >
+                S
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-foreground/90">Simon Pörschke</span>
+                <span className="text-xs text-muted">· Schnell-Sichtbar.de</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Gradient separator */}
+          <div className="my-10 h-px bg-gradient-to-r from-pink/50 via-violet/25 to-transparent" />
+
+          {/* ── Post content ── */}
+          <div className="blog-content">
+            <Post />
+          </div>
+
+          {/* ── End CTA card ── */}
+          <div
+            className="relative mt-16 overflow-hidden rounded-2xl p-8 text-center"
+            style={{
+              background: "linear-gradient(160deg, rgba(38,38,46,0.60) 0%, rgba(12,12,16,0.55) 100%)",
+              boxShadow:
+                "inset 0 1px 0 rgba(255,255,255,0.12), inset 0 0 0 1px rgba(255,255,255,0.07), 0 4px 32px rgba(0,0,0,0.35)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            {/* Top glow */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% -10%, rgba(255,45,143,0.15) 0%, transparent 60%)",
+              }}
+            />
+            <p className="relative mb-2 text-xs font-semibold uppercase tracking-widest text-pink">
+              Kostenlos & unverbindlich
+            </p>
+            <h2 className="relative mb-3 font-display text-2xl font-bold text-foreground">
+              Bereit, online sichtbar zu werden?
+            </h2>
+            <p className="relative mx-auto mb-7 max-w-sm text-muted">
+              Ich zeige dir, wie dein Betrieb bei Google besser abschneidet — in einem kurzen Gespräch.
+            </p>
+            <a
+              href="/#kontakt"
+              className="relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)",
+                boxShadow: "0 10px 40px -10px rgba(255,45,143,0.65)",
+              }}
+            >
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, transparent 55%)",
+                }}
+              />
+              <span className="relative">Jetzt Erstgespräch anfragen →</span>
+            </a>
+          </div>
+
+          {/* Bottom nav */}
+          <div className="mt-10 text-center">
+            <Link
+              href="/blog"
+              className="text-sm text-muted transition-colors hover:text-foreground"
+            >
+              ← Alle Beiträge anzeigen
+            </Link>
+          </div>
+      </main>
+    </>
   );
 }

@@ -315,3 +315,156 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Blog post content styles ─────────────────────────────── */
+
+.blog-content h2 {
+  font-family: var(--font-bricolage);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+  padding-left: 0.875rem;
+  border-left: 2px solid rgba(255, 45, 143, 0.55);
+}
+
+.blog-content h3 {
+  font-family: var(--font-bricolage);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--foreground);
+}
+
+.blog-content p {
+  color: var(--muted-foreground);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.blog-content a {
+  color: var(--pink);
+  text-decoration: none;
+}
+
+.blog-content a:hover {
+  text-decoration: underline;
+}
+
+/* Standalone CTA links — <p><a>text</a></p> → rendered as pill button
+   Exclude blockquote paragraphs: text nodes don't count as CSS siblings,
+   so :only-child would also match inline links with surrounding text. */
+.blog-content p:not(blockquote p):has(> a:only-child) {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.blog-content p:not(blockquote p) > a:only-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  background: linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%);
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.925rem;
+  text-decoration: none !important;
+  box-shadow: 0 10px 40px -10px rgba(255, 45, 143, 0.6);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-content p:not(blockquote p) > a:only-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.blog-content p:not(blockquote p) > a:only-child:hover {
+  box-shadow: 0 16px 50px -10px rgba(255, 45, 143, 0.9);
+  transform: translateY(-1px);
+  text-decoration: none !important;
+}
+
+.blog-content ul {
+  color: var(--muted-foreground);
+  line-height: 1.8;
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-content ol {
+  color: var(--muted-foreground);
+  line-height: 1.8;
+  list-style-type: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-content strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.blog-content blockquote {
+  background: rgba(255, 45, 143, 0.04);
+  border-left: 2px solid #ff2d8f;
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin: 1.75rem 0;
+  font-style: normal;
+}
+
+.blog-content blockquote p {
+  margin-bottom: 0;
+  color: var(--muted-strong);
+}
+
+.blog-content hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin: 2.25rem 0;
+}
+
+.blog-content table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.blog-content thead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.blog-content th {
+  text-align: left;
+  font-family: var(--font-bricolage);
+  font-weight: 600;
+  color: var(--foreground);
+  padding: 0.75rem 1.5rem 0.75rem 0;
+}
+
+.blog-content td {
+  color: var(--muted-foreground);
+  padding: 0.75rem 1.5rem 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.blog-content tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-content td strong {
+  color: var(--pink);
+}
