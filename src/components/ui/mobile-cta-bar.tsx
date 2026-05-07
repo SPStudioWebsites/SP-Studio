@@ -64,7 +64,7 @@ export function MobileCtaBar() {
               Anrufen
             </a>
             <a
-              href="#kontakt"
+              href="/#kontakt"
               className="flex h-12 flex-1 items-center justify-center gap-2 rounded-full text-sm font-semibold text-white"
               style={{
                 background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)",

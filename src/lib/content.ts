@@ -218,12 +218,12 @@ export const footer = {
   claim: "Premium Webseiten für lokale Unternehmen aus der Region Haßberge.",
   sitemap: [
     { label: "Home", href: "/" },
-    { label: "Branchen", href: "#branchen" },
-    { label: "Ablauf", href: "#ablauf" },
-    { label: "Über mich", href: "#ueber-uns" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Leistungen", href: "#leistungen" },
-    { label: "Kontakt", href: "#kontakt" },
+    { label: "Branchen", href: "/#branchen" },
+    { label: "Ablauf", href: "/#ablauf" },
+    { label: "Über mich", href: "/#ueber-uns" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Leistungen", href: "/#leistungen" },
+    { label: "Kontakt", href: "/#kontakt" },
     { label: "Blog", href: "/blog" },
   ],
   legal: [
