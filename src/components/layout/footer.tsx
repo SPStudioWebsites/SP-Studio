@@ -65,6 +65,21 @@ export function Footer() {
 
           <div className="md:col-span-2">
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+              Regionen
+            </h3>
+            <ul className="space-y-3 text-sm">
+              {footer.regions.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="text-foreground/80 transition-colors hover:text-pink">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-2">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-muted">
               Rechtliches
             </h3>
             <ul className="space-y-3 text-sm">

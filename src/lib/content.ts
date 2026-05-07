@@ -230,4 +230,8 @@ export const footer = {
     { label: "Impressum", href: "/impressum" },
     { label: "Datenschutz", href: "/datenschutz" },
   ],
+  regions: [
+    { label: "Webdesign Schweinfurt", href: "/webdesign-schweinfurt" },
+    { label: "Webdesign Haßfurt",     href: "/webdesign-hassfurt" },
+  ],
 };
