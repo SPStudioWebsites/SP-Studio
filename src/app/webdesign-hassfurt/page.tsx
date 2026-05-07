@@ -58,7 +58,7 @@ export default function WebdesignHassfurtPage() {
       city="Haßfurt"
       slug="webdesign-hassfurt"
       heroSubtitle="Ich erstelle professionelle Webseiten für Handwerker, Dienstleister und KMUs in Haßfurt und den Haßbergen — schnell, persönlich und direkt aus der Region."
-      pitchText="Ich bin Simon — und ich komme direkt aus Haßfurt. Kein Praktikant, kein Callcenter, keine Weitervermittlung. Wenn du eine Frage hast, schreibst du mir direkt. Ich kenne die Betriebe hier, ich kenne die Region, und ich baue Websites, die für echte Kunden in Haßfurt und Umgebung funktionieren."
+      pitchText="Ich bin Simon — und ich komme aus der Region Haßfurt. Kein Praktikant, kein Callcenter, keine Weitervermittlung. Wenn du eine Frage hast, schreibst du mir direkt. Ich kenne die Betriebe hier, ich kenne die Region, und ich baue Websites, die für echte Kunden in Haßfurt und Umgebung funktionieren."
       faq={faq}
     />
   );
