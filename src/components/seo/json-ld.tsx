@@ -1,4 +1,4 @@
-import { brand, process } from "@/lib/content";
+import { brand, process, faq } from "@/lib/content";
 
 const BASE = "https://schnell-sichtbar.de";
 
@@ -35,6 +35,7 @@ const localBusiness = {
   },
   description: brand.tagline,
   priceRange: "€€",
+  sameAs: ["https://maps.app.goo.gl/usAdLbggi5VHqWrR7"],
   founder: { "@id": `${BASE}/#person` },
 };
 
@@ -71,9 +72,22 @@ const howTo = {
   })),
 };
 
+const faqPage = {
+  "@type": "FAQPage",
+  "@id": `${BASE}/#faq`,
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+
 const schemaGraph = {
   "@context": "https://schema.org",
-  "@graph": [localBusiness, person, howTo],
+  "@graph": [localBusiness, person, howTo, faqPage],
 };
 
 const jsonLd = JSON.stringify(schemaGraph).replace(/</g, "\\u003c");

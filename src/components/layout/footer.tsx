@@ -36,10 +36,15 @@ export function Footer() {
                 <Phone className="h-4 w-4 text-pink" />
                 {brand.phoneDisplay}
               </a>
-              <p className="flex items-center gap-3">
+              <a
+                href="https://maps.app.goo.gl/usAdLbggi5VHqWrR7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 hover:text-foreground"
+              >
                 <MapPin className="h-4 w-4 text-pink" />
                 {brand.address.zip} {brand.address.city}
-              </p>
+              </a>
             </div>
           </div>
 

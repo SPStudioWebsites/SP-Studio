@@ -20,9 +20,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data } = matter(raw);
 
+  const postUrl = `https://schnell-sichtbar.de/blog/${slug}`;
+
   return {
     title: data.title,
     description: data.description,
+    alternates: { canonical: postUrl },
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      type: "article",
+      url: postUrl,
+      locale: "de_DE",
+      siteName: "Schnell-Sichtbar.de",
+      publishedTime: data.date ? new Date(data.date as string).toISOString() : undefined,
+      authors: ["Simon Pörschke"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.title,
+      description: data.description,
+    },
   };
 }
 
@@ -48,8 +66,60 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  const BASE = "https://schnell-sichtbar.de";
+  const postUrl = `${BASE}/blog/${slug}`;
+  const blogSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: data.title,
+        description: data.description,
+        datePublished: data.date
+          ? new Date(data.date as string).toISOString()
+          : undefined,
+        dateModified: data.lastModified
+          ? new Date(data.lastModified as string).toISOString()
+          : data.date
+          ? new Date(data.date as string).toISOString()
+          : undefined,
+        url: postUrl,
+        mainEntityOfPage: postUrl,
+        image: {
+          "@type": "ImageObject",
+          url: `${postUrl}/opengraph-image`,
+          width: 1200,
+          height: 630,
+        },
+        author: { "@id": `${BASE}/#person` },
+        publisher: { "@id": `${BASE}/#business` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: BASE },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${BASE}/blog` },
+          { "@type": "ListItem", position: 3, name: data.title, item: postUrl },
+        ],
+      },
+      ...(Array.isArray(data.faqs) && data.faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: (data.faqs as { q: string; a: string }[]).map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            },
+          ]
+        : []),
+    ],
+  }).replace(/</g, "\\u003c");
+
   return (
     <main className="mx-auto max-w-3xl px-6 pb-24 pt-36">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: blogSchema }} />
       <Link
         href="/blog"
         className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
@@ -68,7 +138,7 @@ export default async function BlogPostPage({ params }: Props) {
       </time>
 
       <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-        {data.title as string}
+        {(data.title as string).replace(/\s*\|.*$/, "")}
       </h1>
 
       {Boolean(data.description) && (
