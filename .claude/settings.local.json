@@ -67,7 +67,8 @@
       "Bash(grep -n -i \"faq\\\\|frage\\\\|\\\\?\\\\s*$\" /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/webdesign-fuer-handwerker-in-unterfranken.mdx)",
       "Bash(grep -n -i \"faq\\\\|frage\\\\|\\\\?\\\\s*$\" /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/guenstige-webseite-erstellen-lassen.mdx)",
       "Bash(node *)",
-      "Bash(mv /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/warum-dein-lokal-bei-google-unsichtbar-ist.mdx /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/website-fuer-restaurants-und-cafes-in-hassfurt.mdx)"
+      "Bash(mv /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/warum-dein-lokal-bei-google-unsichtbar-ist.mdx /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/website-fuer-restaurants-und-cafes-in-hassfurt.mdx)",
+      "Bash(echo \"Dev server started with PID $!\")"
     ],
     "additionalDirectories": [
       "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"
