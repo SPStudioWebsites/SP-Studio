@@ -68,7 +68,12 @@
       "Bash(grep -n -i \"faq\\\\|frage\\\\|\\\\?\\\\s*$\" /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/guenstige-webseite-erstellen-lassen.mdx)",
       "Bash(node *)",
       "Bash(mv /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/warum-dein-lokal-bei-google-unsichtbar-ist.mdx /Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog/website-fuer-restaurants-und-cafes-in-hassfurt.mdx)",
-      "Bash(echo \"Dev server started with PID $!\")"
+      "Bash(echo \"Dev server started with PID $!\")",
+      "Bash(convert --version)",
+      "Bash(python3 -c \"from PIL import Image; print\\('Pillow OK'\\)\")",
+      "Bash(python3 -c \"import PIL; print\\('PIL OK'\\)\")",
+      "Bash(mkdir -p /Users/Simon/meine-website/Schnell-Sichtbar/public/hero-crops)",
+      "Bash(python3)"
     ],
     "additionalDirectories": [
       "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"

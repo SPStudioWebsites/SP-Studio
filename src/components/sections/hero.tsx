@@ -6,10 +6,11 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { Magnetic } from "@/components/ui/magnetic-button";
 import { ArrowRight, TrendingUp, Globe, BadgeEuro, ShieldCheck } from "@/lib/icons";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
+
 import { useState, useEffect } from "react";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+
 
 const WORDS = ["Handwerker", "Frisöre", "Cafés", "Restaurants"];
 
@@ -24,12 +25,13 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
   return (
     <h1 className="mt-7 font-display text-[3.25rem] md:text-[clamp(2.4rem,8.5vw,6.75rem)] font-semibold leading-[0.95] tracking-tight">
       <span className="block text-foreground">
-        Schnell sichtbar.
+        Mehr Kunden.
       </span>
       <span className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
-        Webseiten für
+        Mehr Aufträge.
       </span>
-      <span className="block mt-1 overflow-hidden pb-3">
+      <span className="block mt-1 overflow-hidden pb-3 text-[2rem] md:text-[clamp(1.5rem,4vw,3rem)]">
+        <span className="text-foreground/60 font-semibold">Für </span>
         <AnimatePresence mode="wait" initial={false}>
           <motion.em
             key={WORDS[index]}
@@ -69,8 +71,8 @@ export function HeroSection() {
       <GradientOrbs />
       <div aria-hidden className="absolute inset-0 grid-bg" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-8 px-6 lg:grid-cols-12 lg:gap-4 lg:items-center">
-        <div className="lg:col-span-8 xl:col-span-7 space-y-0">
+      <div className="relative mx-auto w-full max-w-7xl px-6">
+        <div className="space-y-0">
 
           {/* Eyebrow */}
           <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
@@ -156,10 +158,10 @@ export function HeroSection() {
           {/* Feature grid */}
           <div className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24 hero-enter" style={{ animationDelay: "360ms" }}>
             {[
-              { icon: TrendingUp,  text: "Täglich neue Anfragen",       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
-              { icon: Globe,       text: "Verkaufsstarke Webseite",      grad: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
-              { icon: BadgeEuro,   text: "Mehr Buchungen. Mehr Umsatz.", grad: "linear-gradient(135deg,#ff2d8f,#8b5cf6)" },
-              { icon: ShieldCheck, text: "0,0 Technik-Stress",           grad: "linear-gradient(135deg,#6d28d9,#8b5cf6)" },
+              { icon: TrendingUp,  text: "Täglich neue Anfragen",          grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
+              { icon: Globe,       text: "Deine Webseite arbeitet 24/7",  grad: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
+              { icon: BadgeEuro,   text: "Mehr Buchungen. Mehr Umsatz.",  grad: "linear-gradient(135deg,#ff2d8f,#8b5cf6)" },
+              { icon: ShieldCheck, text: "In 14 Tagen live & fertig",     grad: "linear-gradient(135deg,#6d28d9,#8b5cf6)" },
             ].map(({ icon: Icon, text, grad }) => (
               <div
                 key={text}
@@ -185,12 +187,6 @@ export function HeroSection() {
 
         </div>
 
-        {/* Right column — laptop visual (desktop only) */}
-        <div className="relative hidden lg:block lg:col-span-4 xl:col-span-5">
-          <div className="relative h-[340px] w-full sm:h-[460px] lg:h-[620px]">
-            <LaptopHero />
-          </div>
-        </div>
       </div>
 
       {/* Scroll cue — desktop only, CSS animation */}
@@ -206,72 +202,5 @@ export function HeroSection() {
         </span>
       </div>
     </section>
-  );
-}
-
-function LaptopHero() {
-  const reduce = useReducedMotion();
-  return (
-    <div className="relative flex h-full items-center justify-center">
-      {/* Glow blobs */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink/25 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-4 bottom-8 h-56 w-56 rounded-full bg-violet/20 blur-3xl"
-      />
-
-      {/* Laptop */}
-      <motion.div
-        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: 28 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-        className="relative z-10 w-full"
-      >
-        <Image
-          src="/laptop-hero-transparent.png"
-          alt="Moderne Website auf einem MacBook Pro — Beispiel für ein Schnell-Sichtbar.de Webdesign-Projekt"
-          width={2752}
-          height={1536}
-          className="w-full drop-shadow-[0_50px_110px_rgba(255,45,143,0.25)]"
-          priority
-        />
-      </motion.div>
-
-
-      {/* Floating card — conversion metric */}
-      <motion.div
-        initial={reduce ? { opacity: 0 } : { opacity: 0, x: -20, y: 20 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
-        whileHover={reduce ? {} : { scale: 1.04, y: -2 }}
-        className="absolute bottom-10 left-6 z-20 cursor-default sm:bottom-16 sm:left-8"
-        aria-hidden
-      >
-        <div className="rounded-2xl glass-strong px-5 py-3.5 shadow-[0_12px_48px_-8px_rgba(0,0,0,0.7)]">
-          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-muted">Ø mehr Anfragen</p>
-          <p className="mt-0.5 font-display text-[1.75rem] font-bold leading-none text-foreground">+180%</p>
-          <p className="mt-1 text-[9px] text-pink font-medium">nach Website-Launch</p>
-        </div>
-      </motion.div>
-
-      {/* Floating card — turnaround */}
-      <motion.div
-        initial={reduce ? { opacity: 0 } : { opacity: 0, x: 20, y: -16 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 1.05 }}
-        whileHover={reduce ? {} : { scale: 1.04, y: -2 }}
-        className="absolute top-6 right-2 z-20 cursor-default sm:top-10 sm:right-0"
-        aria-hidden
-      >
-        <div className="rounded-2xl glass-strong px-5 py-3.5 shadow-[0_12px_48px_-8px_rgba(0,0,0,0.7)]">
-          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-muted">Fertig in</p>
-          <p className="mt-0.5 font-display text-[1.75rem] font-bold leading-none text-foreground">14 Tage</p>
-          <p className="mt-1 text-[9px] text-violet font-medium">durchschnittliche Lieferzeit</p>
-        </div>
-      </motion.div>
-    </div>
   );
 }

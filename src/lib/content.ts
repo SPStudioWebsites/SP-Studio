@@ -27,7 +27,7 @@ export const hero = {
   eyebrow: "Webagentur · Region Franken",
   title: ["Schnell sichtbar.", "*Sofort* überzeugend."],
   subtitle:
-    "Wir bauen Webseiten für Frisöre, Restaurants, Handwerker und KMUs in Haßfurt, Ebern, Hofheim und Umgebung — schnell, persönlich, ohne Agentur-Bürokratie.",
+    "Die meisten Betriebe verlieren täglich Kunden, weil ihre Webseite nicht überzeugt. Wir ändern das — in 14 Tagen, zum Festpreis.",
   ctaPrimary: "Kostenloses Erstgespräch",
 };
 
@@ -148,8 +148,8 @@ export const about = {
   quote: "Aus der Region Unterfranken. Für Betriebe, die online endlich sichtbar sein wollen.",
   quoteAuthor: "Simon, Inhaber Schnell-Sichtbar.de",
   stats: [
-    { value: "3+", label: "Jahre Erfahrung" },
-    { value: "100 %", label: "aus der Region" },
+    { value: "Ø +180%", label: "mehr Anfragen für Kunden" },
+    { value: "14 Tage", label: "bis zur fertigen Seite" },
   ],
   cities: [
     { name: "Haßfurt", x: 50, y: 55 },

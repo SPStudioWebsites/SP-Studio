@@ -1,253 +1,244 @@
 "use client";
 
-import { Reveal } from "@/components/ui/reveal";
-import { Pill } from "@/components/ui/pill";
-import {
-  Scissors,
-  UtensilsCrossed,
-  Hammer,
-  Stethoscope,
-  Dumbbell,
-  Store,
-  Check,
-  ChevronDown,
-} from "@/lib/icons";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { useState } from "react";
-import type { ComponentType } from "react";
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { ArrowRight } from "@/lib/icons";
 
-interface Industry {
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+interface BranchePanel {
   id: string;
-  name: string;
+  pill: string;
   headline: string;
-  text: string;
-  bullets: string[];
-  icon: ComponentType<{ className?: string; strokeWidth?: number }>;
+  subtitle: string;
+  screenshot: string;
+  screenshotAlt: string;
   colorA: string;
   colorB: string;
 }
 
-const industries: Industry[] = [
+const PANELS: BranchePanel[] = [
   {
     id: "handwerker",
-    name: "Handwerk",
-    headline: "Webseite für Handwerker, die Aufträge bringt",
-    text: "Viele Handwerker verlieren täglich Kunden, weil sie online nicht sichtbar sind. Wir erstellen deine Webseite so, dass Kunden dich bei Google sofort finden.",
-    bullets: ["Mehr Anfragen aus deiner Region", "Klare Darstellung deiner Leistungen", "Vertrauen durch Referenzen"],
-    icon: Hammer,
+    pill: "Handwerk",
+    headline: "Mehr Aufträge. Weniger Leerläufe.",
+    subtitle:
+      "Wer nicht online gefunden wird, verliert den Auftrag an die Konkurrenz — täglich. Deine Website ändert das.",
+    screenshot: "/Bildschirmfoto 2026-05-19 um 13.56.41.png",
+    screenshotAlt: "Beispiel-Webdesign für Handwerksbetrieb",
     colorA: "#ff2d8f",
     colorB: "#8b5cf6",
   },
   {
-    id: "friseur",
-    name: "Frisöre & Salons",
-    headline: "Webseite für Friseure, die Termine füllt",
-    text: "Deine Kunden suchen online nach Friseuren – wir sorgen dafür, dass sie dich finden und direkt buchen.",
-    bullets: ["Online-Buchung 24/7", "Mehr Neukunden durch Google", "Stylisten-Profile & Galerie"],
-    icon: Scissors,
-    colorA: "#ff2d8f",
-    colorB: "#c026d3",
-  },
-  {
-    id: "restaurant",
-    name: "Restaurants",
-    headline: "Webseite für Restaurants, die Gäste bringt",
-    text: "Mit einer optimierten Webseite bekommst du mehr Reservierungen und wirst bei Google besser gefunden.",
-    bullets: ["Tischreservierung online", "Speisekarte immer aktuell", "Mehr Sichtbarkeit in der Region"],
-    icon: UtensilsCrossed,
+    id: "eventlocations",
+    pill: "Eventlocations",
+    headline: "Dein Kalender soll ausgebucht sein.",
+    subtitle:
+      "Kunden entscheiden in 5 Minuten, ob sie buchen. Deine Website ist der erste — und oft einzige — Eindruck.",
+    screenshot: "/Bildschirmfoto 2026-05-19 um 15.39.25.png",
+    screenshotAlt: "Beispiel-Webdesign für Eventlocation",
     colorA: "#8b5cf6",
     colorB: "#6d28d9",
   },
   {
-    id: "cafe",
-    name: "Cafés",
-    headline: "Webseite für Cafés mit lokalem SEO",
-    text: "Werde sichtbar für Gäste in deiner Umgebung und steigere deine Besucherzahlen.",
-    bullets: ["Lokal bei Google sichtbar", "Öffnungszeiten & Karte", "Mehr Laufkundschaft"],
-    icon: Store,
-    colorA: "#c026d3",
-    colorB: "#8b5cf6",
-  },
-  {
-    id: "praxen",
-    name: "Praxen & Therapeuten",
-    headline: "Webseite für Praxen, der man vertraut",
-    text: "Patienten googeln ihren Arzt oder Therapeuten — stell sicher, dass sie dich finden und dir vertrauen.",
-    bullets: ["Online-Terminbuchung", "Team & Leistungen klar kommuniziert", "Seriöser erster Eindruck"],
-    icon: Stethoscope,
-    colorA: "#8b5cf6",
+    id: "friseure",
+    pill: "Friseure & Salons",
+    headline: "Leere Termine kosten Geld.",
+    subtitle:
+      "Kunden buchen abends um 22 Uhr. Wer keine Online-Buchung hat, verliert diese Kunden dauerhaft an die Konkurrenz.",
+    screenshot: "/Bildschirmfoto 2026-05-19 um 13.56.36.png",
+    screenshotAlt: "Beispiel-Webdesign für Friseursalon",
+    colorA: "#ff2d8f",
     colorB: "#c026d3",
   },
   {
-    id: "fitness",
-    name: "Fitness & Yoga",
-    headline: "Webseite für Studios, die Mitglieder gewinnt",
-    text: "Zeig deinen Kursplan, lass Probestunden buchen und gewinne neue Mitglieder — automatisch.",
-    bullets: ["Kursplan & Probestunden online", "Mehr Mitglieder durch Sichtbarkeit", "Mobile-optimiert"],
-    icon: Dumbbell,
+    id: "restaurants",
+    pill: "Restaurants & Cafés",
+    headline: "Volle Tische. Jeden Abend.",
+    subtitle:
+      "Eine gute Website füllt dienstags die Tische — nicht nur freitags. Mit Online-Reservierung und lokalem SEO.",
+    screenshot: "/Bildschirmfoto 2026-05-19 um 13.56.47.png",
+    screenshotAlt: "Beispiel-Webdesign für Restaurant",
     colorA: "#c026d3",
-    colorB: "#ff2d8f",
+    colorB: "#8b5cf6",
   },
 ];
 
+// ─── Browser Mockup ───────────────────────────────────────────────────────────
+
+function BrowserMockup({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div
+      className="overflow-hidden rounded-2xl"
+      style={{
+        border: "1px solid rgba(255,255,255,0.10)",
+        boxShadow: "0 40px 100px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)",
+      }}
+    >
+      <div
+        className="flex items-center gap-2 px-3 py-2"
+        style={{
+          background: "rgba(255,255,255,0.04)",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+        }}
+      >
+        <div className="flex gap-1.5">
+          <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+          <div className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+          <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+        </div>
+        <div
+          className="mx-2 flex flex-1 items-center justify-center rounded px-2 py-0.5"
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.07)",
+          }}
+        >
+          <span className="text-[9px] text-muted/40">mein-betrieb.de</span>
+        </div>
+      </div>
+      <div className="relative aspect-video">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover object-top"
+          quality={85}
+          sizes="(max-width: 1024px) 0vw, 45vw"
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+
 export function IndustriesSection() {
-  const reduce = useReducedMotion();
-  const [open, setOpen] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+
+  useGSAP(
+    () => {
+      const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
+      if (panels.length === 0) return;
+
+      // All panels except first start hidden — slightly small, from depth
+      gsap.set(panels.slice(1), { opacity: 0, scale: 0.82 });
+      gsap.set(panels[0], { opacity: 1, scale: 1 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=2500vh",
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            setActive(Math.round(self.progress * (panels.length - 1)));
+          },
+        },
+      });
+
+      panels.forEach((panel, i) => {
+        if (i === 0) return;
+        // Exit: panel rushes towards viewer and disappears
+        tl.to(
+          panels[i - 1],
+          { opacity: 0, scale: 1.35, duration: 1, ease: "power3.in" },
+          i - 1
+        );
+        // Enter: panel materialises from depth
+        tl.fromTo(
+          panel,
+          { opacity: 0, scale: 0.82 },
+          { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
+          i - 1
+        );
+      });
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section
-      id="branchen"
-      aria-labelledby="branchen-h"
-      className="relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-24"
-    >
-      {/* Ambient glow */}
-      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[400px] w-[70vw] max-w-3xl -translate-x-1/2 rounded-full bg-violet/5 blur-[120px]" />
+    <section id="branchen" ref={containerRef} aria-label="Branchen">
+      {/* Viewport-height container — GSAP pins this */}
+      <div className="relative h-screen">
 
-      <div className="relative mx-auto max-w-3xl px-6">
-        {/* Header */}
-        <Reveal>
-          <div className="mb-10 text-center">
-            <Pill tone="violet">Branchen</Pill>
-            <h2
-              id="branchen-h"
-              className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl text-balance"
+        {/* Panels — all stacked at absolute inset-0 */}
+        {PANELS.map((panel, i) => {
+          const gradient = `linear-gradient(135deg, ${panel.colorA}, ${panel.colorB})`;
+          return (
+            <div
+              key={panel.id}
+              ref={(el) => { panelRefs.current[i] = el; }}
+              className="absolute inset-0 flex items-center px-6 md:px-12 lg:px-20"
             >
-              Wir kennen{" "}
-              <em className="font-display font-extrabold not-italic text-gradient">deine</em>{" "}
-              Branche.
-            </h2>
-            <p className="mt-3 text-sm text-muted md:text-base">
-              Klapp deine Branche auf und sieh, was wir für dich tun können.
-            </p>
-          </div>
-        </Reveal>
+              <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
 
-        {/* Accordion */}
-        <ul className="flex flex-col gap-3">
-          {industries.map((industry, i) => {
-            const isOpen = open === i;
-            const Icon = industry.icon;
-            const gradient = `linear-gradient(135deg, ${industry.colorA}, ${industry.colorB})`;
-
-            return (
-              <motion.li
-                key={industry.id}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
-                whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
-                className="overflow-hidden rounded-2xl transition-colors duration-300"
-                style={{
-                  background: isOpen ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.03)",
-                  border: isOpen ? `1px solid rgba(255,255,255,0.14)` : "1px solid rgba(255,255,255,0.08)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                }}
-              >
-                {/* Trigger */}
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center gap-4 px-5 py-4 text-left cursor-pointer md:px-6 md:py-5"
-                >
-                  {/* Icon */}
-                  <span
-                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl shadow-md transition-transform duration-300"
-                    style={{
-                      background: gradient,
-                      transform: isOpen ? "scale(1.08)" : "scale(1)",
-                      boxShadow: isOpen ? `0 0 18px -4px ${industry.colorA}90` : "none",
-                    }}
-                  >
-                    <Icon className="h-5 w-5 text-white" strokeWidth={1.75} />
-                  </span>
-
-                  {/* Label */}
-                  <span className="flex-1 text-base font-semibold text-foreground md:text-lg">
-                    {industry.name}
-                  </span>
-
-                  {/* Chevron */}
-                  <span
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] transition-all duration-300"
-                    style={{
-                      borderColor: isOpen ? `${industry.colorA}50` : undefined,
-                      color: isOpen ? industry.colorA : undefined,
-                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
-                  >
-                    <ChevronDown className="h-4 w-4" />
-                  </span>
-                </button>
-
-                {/* Expanded content */}
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
+                {/* Left: Text */}
+                <div className="flex flex-col justify-center">
+                  <div className="mb-6">
+                    <span
+                      className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white"
+                      style={{ background: gradient }}
                     >
-                      {/* Gradient divider */}
-                      <div className="mx-5 h-px md:mx-6" style={{ background: `linear-gradient(90deg, ${industry.colorA}60, ${industry.colorB}60, transparent)` }} />
+                      {panel.pill}
+                    </span>
+                  </div>
 
-                      <div className="px-5 pb-6 pt-4 md:px-6 md:pb-7">
-                        <h3 className="font-display text-lg font-semibold text-foreground md:text-xl">
-                          {industry.headline}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-muted md:text-[15px]">
-                          {industry.text}
-                        </p>
-                        <ul className="mt-4 flex flex-col gap-2">
-                          {industry.bullets.map((b) => (
-                            <li key={b} className="flex items-center gap-2.5 text-sm text-foreground/85">
-                              <span
-                                className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
-                                style={{ background: gradient }}
-                              >
-                                <Check className="h-2.5 w-2.5 text-white" />
-                              </span>
-                              {b}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.li>
-            );
-          })}
-        </ul>
+                  <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-extrabold leading-[1.0] tracking-tight text-foreground text-balance">
+                    {panel.headline}
+                  </h2>
 
-        {/* CTA */}
-        <motion.div
-          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-          whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="mt-20 flex justify-center"
-        >
-          <a
-            href="#kontakt"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-9 py-4 text-base font-semibold text-white transition-all duration-500 hover:scale-[1.04]"
-            style={{
-              background: "linear-gradient(135deg, #ff2d8f 0%, #a855f7 50%, #8b5cf6 100%)",
-              boxShadow: "0 0 0 1px rgba(255,255,255,0.12) inset, 0 8px 32px -4px rgba(168,85,247,0.45), 0 2px 8px rgba(0,0,0,0.4)",
-            }}
-          >
-            {/* inner highlight */}
-            <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            {/* hover shimmer */}
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-            <span className="relative">Kostenlos Anfragen</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </motion.div>
+                  <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg text-pretty">
+                    {panel.subtitle}
+                  </p>
+
+                  <div className="mt-10">
+                    <a
+                      href="#kontakt"
+                      className="group inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.04]"
+                      style={{
+                        background: gradient,
+                        boxShadow: `0 8px 28px -4px ${panel.colorA}55`,
+                      }}
+                    >
+                      Website anfragen
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right: Browser Mockup — desktop only */}
+                <div className="hidden lg:block">
+                  <BrowserMockup src={panel.screenshot} alt={panel.screenshotAlt} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Dot navigation — inside pinned container so it stays visible */}
+        <div className="absolute right-6 top-1/2 z-50 hidden -translate-y-1/2 flex-col gap-3 sm:flex">
+          {PANELS.map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                "rounded-full transition-all duration-300",
+                active === i
+                  ? "h-3 w-3 bg-pink shadow-[0_0_8px_2px_rgba(255,45,143,0.5)]"
+                  : "h-2 w-2 bg-white/25"
+              )}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

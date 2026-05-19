@@ -15,7 +15,7 @@ const packages = [
     name: "Starter",
     price: "399 €",
     period: "einmalig",
-    tagline: "Für einen einfachen, sauberen Einstieg",
+    tagline: "Dein digitaler Auftritt — schnell online",
     features: [
       "Onepager mit klarer Grundstruktur",
       "Modernes, sauberes Design",
@@ -33,7 +33,7 @@ const packages = [
     name: "Wachstum",
     price: "699 €",
     period: "einmalig",
-    tagline: "Für mehr Anfragen und klare Struktur",
+    tagline: "Deine Webseite als Kundenmagnet",
     features: [
       "Individueller Onepager (kein Template)",
       "Struktur mit Fokus auf Anfragen & Vertrauen",
@@ -54,7 +54,7 @@ const packages = [
     name: "Premium",
     price: "1.199 €",
     period: "einmalig",
-    tagline: "Maximale Wirkung aus deinem Onepager",
+    tagline: "Volle Feuerkraft. Maximale Anfragen.",
     features: [
       "Alles aus Wachstum",
       "Erweiterte Seitenstruktur & stärkere Storyline",
@@ -99,13 +99,13 @@ export function ServicesSection() {
               id="leistungen-h"
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
-              Klare Pakete.{" "}
-              <em className="font-display font-extrabold not-italic text-gradient">Keine Überraschungen.</em>
+              Einmal investieren.{" "}
+              <em className="font-display font-extrabold not-italic text-gradient">Dauerhaft Kunden gewinnen.</em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
-              Drei klare Pakete — kein Kleingedrucktes, kein Preisschock.
+              Deine Website bezahlt sich selbst — mit jeder neuen Anfrage.
               Festpreis, bevor wir starten.
             </p>
           </Reveal>

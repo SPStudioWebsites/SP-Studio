@@ -49,17 +49,16 @@ export function ProcessSection() {
               id="ablauf-h"
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
-              In{" "}
+              In 14 Tagen{" "}
               <em className="font-display font-extrabold not-italic text-gradient">
-                vier Schritten
-              </em>{" "}
-              zur fertigen Website.
+                klingelt dein Telefon.
+              </em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
-              Klar strukturiert, mit echten Zeitfenstern. Ohne Buzzwords.
-              Ohne Folien-Marathon.
+              Kein Stress, kein Technik-Kram. Du lieferst die Infos —
+              wir liefern die Webseite.
             </p>
           </Reveal>
         </div>
@@ -152,11 +151,11 @@ export function ProcessSection() {
               Das Beste daran
             </p>
             <h3 className="relative mt-3 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-              Du brauchst null{" "}
-              <em className="font-display font-extrabold not-italic text-gradient">Vorkenntnisse.</em>
+              Du musst{" "}
+              <em className="font-display font-extrabold not-italic text-gradient">nichts wissen.</em>
             </h3>
             <p className="relative mt-2 text-base text-muted text-pretty">
-              Wir kümmern uns um alles Technische — von Anfang bis Launch. Du entscheidest nur, wie es aussehen soll.
+              Nur 30 Minuten deiner Zeit nötig — wir erledigen den Rest.
             </p>
 
             <ul className="relative mt-6 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">
