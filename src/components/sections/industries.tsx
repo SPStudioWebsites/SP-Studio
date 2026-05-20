@@ -170,7 +170,7 @@ export function IndustriesSection() {
   return (
     <section id="branchen" ref={containerRef} aria-label="Branchen">
       {/* Section heading — above the sticky panels */}
-      <div className="relative z-10 px-6 pt-10 sm:pt-16 md:pt-60 pb-2 text-center">
+      <div className="relative z-10 px-6 pt-20 sm:pt-28 md:pt-60 pb-2 text-center">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted/60">Branchen</p>
         <h2 className="mt-2 font-display text-[clamp(1.6rem,6vw,3rem)] md:text-5xl font-semibold tracking-tight text-foreground">
           Deine Branche.{" "}
@@ -188,7 +188,7 @@ export function IndustriesSection() {
             <div
               key={panel.id}
               ref={(el) => { panelRefs.current[i] = el; }}
-              className="absolute inset-0 flex items-start pt-[clamp(1rem,3vh,3rem)] md:pt-[9rem] px-6 md:px-12 lg:px-20"
+              className="absolute inset-0 flex items-start pt-[clamp(2rem,5vh,4rem)] md:pt-[9rem] px-6 md:px-12 lg:px-20"
             >
               <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
 

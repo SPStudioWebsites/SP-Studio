@@ -138,31 +138,6 @@ export function HeroSection() {
           </div>
 
 
-          {/* Trust metric badges — mobile only (floating cards are desktop-only) */}
-          <div className="mt-[12.5rem] grid grid-cols-2 gap-3 lg:hidden">
-            <div
-              className="rounded-2xl px-4 py-3"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.10)",
-              }}
-            >
-              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-muted">Ø mehr Anfragen</p>
-              <p className="mt-0.5 font-display text-2xl font-bold leading-none text-foreground">+180%</p>
-              <p className="mt-1 text-[9px] font-medium text-pink">nach Website-Launch</p>
-            </div>
-            <div
-              className="rounded-2xl px-4 py-3"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.10)",
-              }}
-            >
-              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-muted">Fertig in</p>
-              <p className="mt-0.5 font-display text-2xl font-bold leading-none text-foreground">14 Tage</p>
-              <p className="mt-1 text-[9px] font-medium text-violet">durchschnittliche Lieferzeit</p>
-            </div>
-          </div>
 
         </div>{/* end left column */}
 
