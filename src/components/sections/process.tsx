@@ -3,9 +3,10 @@
 import { process } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
 import { Pill } from "@/components/ui/pill";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform, useReducedMotion, useInView } from "motion/react";
 import { useRef, useState } from "react";
 import { Check } from "@/lib/icons";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const ACCENT = [
   "from-pink to-fuchsia-500",
@@ -118,72 +119,8 @@ export function ProcessSection() {
             })}
           </div>
 
-          {/* Das beste Daran box — inside ref so the timeline line extends to it */}
           <div className="mt-16 flex flex-col items-center">
-
-          <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.96 }}
-            whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="glass-feature relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.3)",
-            }}
-          >
-            {/* Subtle gradient glow */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.18) 0%, transparent 65%)" }}
-            />
-
-            {/* Top border glow */}
-            <div
-              aria-hidden
-              className="absolute inset-x-0 top-0 h-px rounded-full"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.6) 50%, transparent)" }}
-            />
-
-            <p className="relative font-mono text-xs font-semibold uppercase tracking-[0.22em] text-violet/80">
-              Das Beste daran
-            </p>
-            <h3 className="relative mt-3 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-              Du musst{" "}
-              <em className="font-display font-extrabold not-italic text-gradient">nichts wissen.</em>
-            </h3>
-            <p className="relative mt-2 text-base text-muted text-pretty">
-              Nur 30 Minuten deiner Zeit nötig — ich erledige den Rest.
-            </p>
-
-            <ul className="relative mt-6 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">
-              {[
-                "Keine Vorkenntnisse nötig",
-                "Persönliche Betreuung von A bis Z",
-                "Fertig in durchschnittlich 14 Tagen",
-                "Individuell ohne Technik-Bla-Bla",
-              ].map((item, i) => (
-                <motion.li
-                  key={item}
-                  initial={reduce ? { opacity: 0 } : { opacity: 0, x: -12 }}
-                  whileInView={reduce ? { opacity: 1 } : { opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.07 }}
-                  className="flex items-center gap-3 text-[15px] text-foreground/90"
-                >
-                  <span
-                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
-                    style={{ background: "linear-gradient(135deg, #ff2d8f, #8b5cf6)" }}
-                  >
-                    <Check className="h-2.5 w-2.5 text-white" />
-                  </span>
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
+            <BestBox reduce={!!reduce} />
           </div>
         </div>
       </div>
@@ -259,5 +196,99 @@ function StepCard({
         ))}
       </ul>
     </div>
+  );
+}
+
+function BestBox({ reduce }: { reduce: boolean }) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const beamActive = useInView(boxRef, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={boxRef}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.96 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className="glass-feature relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
+      style={{
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.3)",
+      }}
+    >
+      {/* Subtle gradient glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.18) 0%, transparent 65%)" }}
+      />
+
+      {/* Top border glow */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px rounded-full"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.6) 50%, transparent)" }}
+      />
+
+      {/* BorderBeam — activates when timeline line reaches the box */}
+      {beamActive && (
+        <>
+          <BorderBeam
+            size={140}
+            duration={11}
+            colorFrom="#ff2d8f"
+            colorTo="#8b5cf6"
+            borderWidth={1.5}
+          />
+          <BorderBeam
+            size={100}
+            duration={14}
+            delay={5.5}
+            colorFrom="#8b5cf6"
+            colorTo="#ff2d8f"
+            reverse
+            borderWidth={1.5}
+          />
+        </>
+      )}
+
+      <p className="relative font-mono text-xs font-semibold uppercase tracking-[0.22em] text-violet/80">
+        Das Beste daran
+      </p>
+      <h3 className="relative mt-3 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+        Du musst{" "}
+        <em className="font-display font-extrabold not-italic text-gradient">nichts wissen.</em>
+      </h3>
+      <p className="relative mt-2 text-base text-muted text-pretty">
+        Nur 30 Minuten deiner Zeit nötig — ich erledige den Rest.
+      </p>
+
+      <ul className="relative mt-6 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">
+        {[
+          "Keine Vorkenntnisse nötig",
+          "Persönliche Betreuung von A bis Z",
+          "Fertig in durchschnittlich 14 Tagen",
+          "Individuell ohne Technik-Bla-Bla",
+        ].map((item, i) => (
+          <motion.li
+            key={item}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, x: -12 }}
+            whileInView={reduce ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.07 }}
+            className="flex items-center gap-3 text-[15px] text-foreground/90"
+          >
+            <span
+              className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
+              style={{ background: "linear-gradient(135deg, #ff2d8f, #8b5cf6)" }}
+            >
+              <Check className="h-2.5 w-2.5 text-white" />
+            </span>
+            {item}
+          </motion.li>
+        ))}
+      </ul>
+    </motion.div>
   );
 }

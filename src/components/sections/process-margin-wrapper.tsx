@@ -1,34 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+// useLayoutEffect on client (no flash), useEffect on server (avoids SSR warning)
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export function ProcessMarginWrapper({ children }: { children: React.ReactNode }) {
-  const [mt, setMt] = useState<string>("-10rem");
+  // Start with undefined so no marginTop is applied until measured
+  const [mt, setMt] = useState<string | undefined>(undefined);
+  const triedRef = useRef(false);
 
-  useEffect(() => {
-    const compute = () => {
-      if (window.innerWidth >= 768) {
-        setMt("-28rem");
-        return;
-      }
-      // Measure the branchen heading (non-pinned part) to get exact overlap
-      const heading = document.querySelector(
-        "#branchen > div:first-child"
-      ) as HTMLElement | null;
-      if (heading) {
-        setMt(`-${Math.round(heading.offsetHeight)}px`);
-      }
-    };
+  const compute = () => {
+    if (window.innerWidth >= 768) {
+      setMt("-28rem");
+      return true;
+    }
+    const heading = document.querySelector(
+      "#branchen > div:first-child"
+    ) as HTMLElement | null;
+    if (heading) {
+      setMt(`-${Math.round(heading.offsetHeight)}px`);
+      return true;
+    }
+    return false;
+  };
 
-    compute();
-    // Small delay for dynamic imports to hydrate
-    const t = setTimeout(compute, 120);
-    window.addEventListener("resize", compute);
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("resize", compute);
-    };
+  useIsomorphicLayoutEffect(() => {
+    if (compute()) return;
+
+    // Branchen section not yet hydrated — retry once after dynamic import settles
+    const t = setTimeout(() => {
+      compute();
+      triedRef.current = true;
+    }, 150);
+
+    return () => clearTimeout(t);
   }, []);
 
-  return <div style={{ marginTop: mt }}>{children}</div>;
+  useEffect(() => {
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+
+  return <div style={mt !== undefined ? { marginTop: mt } : undefined}>{children}</div>;
 }
