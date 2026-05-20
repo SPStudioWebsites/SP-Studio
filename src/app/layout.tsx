@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
-import { MobileCtaBar } from "@/components/ui/mobile-cta-bar";
+
 import { ConsentManagerClient } from "@/components/analytics/consent-manager-client";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -113,7 +113,7 @@ export default function RootLayout({
           Zum Hauptinhalt springen
         </a>
         <LenisProvider>{children}</LenisProvider>
-        <MobileCtaBar />
+
         <ConsentManagerClient />
         <Analytics />
         <SpeedInsights />
