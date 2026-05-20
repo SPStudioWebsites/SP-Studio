@@ -170,16 +170,16 @@ export function IndustriesSection() {
   return (
     <section id="branchen" ref={containerRef} aria-label="Branchen">
       {/* Section heading — above the sticky panels */}
-      <div className="relative z-10 px-6 pt-24 md:pt-60 pb-2 text-center">
+      <div className="relative z-10 px-6 pt-10 sm:pt-16 md:pt-60 pb-2 text-center">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted/60">Branchen</p>
-        <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+        <h2 className="mt-2 font-display text-[clamp(1.6rem,6vw,3rem)] md:text-5xl font-semibold tracking-tight text-foreground">
           Deine Branche.{" "}
           <em className="font-display font-extrabold not-italic text-gradient">Deine Website.</em>
         </h2>
       </div>
 
       {/* Viewport-height container — GSAP pins this */}
-      <div className="relative h-screen">
+      <div className="relative h-[100dvh]">
 
         {/* Panels — all stacked at absolute inset-0 */}
         {PANELS.map((panel, i) => {
@@ -188,31 +188,31 @@ export function IndustriesSection() {
             <div
               key={panel.id}
               ref={(el) => { panelRefs.current[i] = el; }}
-              className="absolute inset-0 flex items-start pt-[3rem] md:pt-[9rem] px-6 md:px-12 lg:px-20"
+              className="absolute inset-0 flex items-start pt-[clamp(1rem,3vh,3rem)] md:pt-[9rem] px-6 md:px-12 lg:px-20"
             >
               <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
 
                 {/* Left: Text */}
                 <div className="flex flex-col justify-center">
-                  <div className="mb-6">
+                  <div className="mb-3 md:mb-6">
                     <span
-                      className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white"
+                      className="inline-flex items-center rounded-full px-3 py-1 md:px-4 md:py-1.5 text-xs font-semibold uppercase tracking-widest text-white"
                       style={{ background: gradient }}
                     >
                       {panel.pill}
                     </span>
                   </div>
 
-                  <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-extrabold leading-[1.0] tracking-tight text-foreground text-balance">
+                  <h2 className="font-display text-[clamp(1.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight text-foreground text-balance">
                     {panel.headline}
                   </h2>
 
-                  <p className="mt-4 max-w-md text-base leading-relaxed text-muted md:text-lg text-pretty">
+                  <p className="mt-2 md:mt-4 max-w-md text-sm md:text-lg leading-relaxed text-muted text-pretty">
                     {panel.subtitle}
                   </p>
 
                   {/* Mobile mockup — between subtitle and CTA */}
-                  <div className="mt-5 lg:hidden">
+                  <div className="mt-3 lg:hidden">
                     <div
                       className="overflow-hidden rounded-xl"
                       style={{
@@ -255,7 +255,7 @@ export function IndustriesSection() {
                     </div>
                   </div>
 
-                  <div className="mt-6">
+                  <div className="mt-4 md:mt-10">
                     <a
                       href="#kontakt"
                       className="group inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.04]"

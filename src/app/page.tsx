@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/sections/hero";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Grain } from "@/components/effects/grain";
 import { MorphingBackground } from "@/components/effects/morphing-background";
+import { ProcessMarginWrapper } from "@/components/sections/process-margin-wrapper";
 
 const IndustriesSection = dynamic(() =>
   import("@/components/sections/industries").then((m) => m.IndustriesSection)
@@ -68,9 +69,9 @@ export default function Home() {
           />
 
           <IndustriesSection />
-          <div className="-mt-[14rem] md:-mt-[28rem]">
+          <ProcessMarginWrapper>
             <ProcessSection />
-          </div>
+          </ProcessMarginWrapper>
           <AboutSection />
           <FAQSection />
         </div>
