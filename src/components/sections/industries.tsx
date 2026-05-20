@@ -170,7 +170,7 @@ export function IndustriesSection() {
   return (
     <section id="branchen" ref={containerRef} aria-label="Branchen">
       {/* Section heading — above the sticky panels */}
-      <div className="relative z-10 px-6 pt-60 pb-2 text-center">
+      <div className="relative z-10 px-6 pt-24 md:pt-60 pb-2 text-center">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted/60">Branchen</p>
         <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
           Deine Branche.{" "}
@@ -188,7 +188,7 @@ export function IndustriesSection() {
             <div
               key={panel.id}
               ref={(el) => { panelRefs.current[i] = el; }}
-              className="absolute inset-0 flex items-start pt-[14rem] px-6 md:px-12 lg:px-20"
+              className="absolute inset-0 flex items-start pt-[3rem] md:pt-[9rem] px-6 md:px-12 lg:px-20"
             >
               <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
 
@@ -207,11 +207,55 @@ export function IndustriesSection() {
                     {panel.headline}
                   </h2>
 
-                  <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg text-pretty">
+                  <p className="mt-4 max-w-md text-base leading-relaxed text-muted md:text-lg text-pretty">
                     {panel.subtitle}
                   </p>
 
-                  <div className="mt-10">
+                  {/* Mobile mockup — between subtitle and CTA */}
+                  <div className="mt-5 lg:hidden">
+                    <div
+                      className="overflow-hidden rounded-xl"
+                      style={{
+                        border: "1px solid rgba(255,255,255,0.10)",
+                        boxShadow: "0 16px 48px rgba(0,0,0,0.6)",
+                      }}
+                    >
+                      <div
+                        className="flex items-center gap-2 px-3 py-1.5"
+                        style={{
+                          background: "rgba(255,255,255,0.04)",
+                          borderBottom: "1px solid rgba(255,255,255,0.07)",
+                        }}
+                      >
+                        <div className="flex gap-1">
+                          <div className="h-2 w-2 rounded-full bg-[#ff5f57]" />
+                          <div className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
+                          <div className="h-2 w-2 rounded-full bg-[#28c840]" />
+                        </div>
+                        <div
+                          className="mx-2 flex flex-1 items-center justify-center rounded px-2 py-0.5"
+                          style={{
+                            background: "rgba(255,255,255,0.05)",
+                            border: "1px solid rgba(255,255,255,0.07)",
+                          }}
+                        >
+                          <span className="text-[8px] text-muted/40">mein-betrieb.de</span>
+                        </div>
+                      </div>
+                      <div className="relative aspect-[16/7]">
+                        <Image
+                          src={panel.screenshot}
+                          alt={panel.screenshotAlt}
+                          fill
+                          className="object-cover object-top"
+                          quality={80}
+                          sizes="(max-width: 1024px) 90vw, 0vw"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
                     <a
                       href="#kontakt"
                       className="group inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.04]"

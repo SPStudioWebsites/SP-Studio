@@ -66,17 +66,11 @@ export default function Home() {
               backgroundSize: `36px 36px`,
             }}
           />
-          {/* Film grain */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 mix-blend-overlay"
-            style={{
-              opacity: 0.6,
-              backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>")`,
-            }}
-          />
+
           <IndustriesSection />
-          <ProcessSection />
+          <div className="-mt-[14rem] md:-mt-[28rem]">
+            <ProcessSection />
+          </div>
           <AboutSection />
           <FAQSection />
         </div>

@@ -34,7 +34,7 @@ export function ProcessSection() {
     <section
       id="ablauf"
       aria-labelledby="ablauf-h"
-      className="relative overflow-hidden -mt-[28rem] pt-4 pb-16 md:pt-6 md:pb-24"
+      className="relative overflow-hidden pt-4 pb-16 md:pt-6 md:pb-24"
     >
       <div aria-hidden className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-pink/5 blur-[120px] hidden md:block" />
       <div aria-hidden className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-violet/5 blur-[120px] hidden md:block" />
