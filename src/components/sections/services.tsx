@@ -15,7 +15,7 @@ const packages = [
     name: "Starter",
     price: "399 €",
     period: "einmalig",
-    tagline: "Dein digitaler Auftritt — schnell online",
+    tagline: "Dein Auftritt, schnell online.",
     features: [
       "Onepager mit klarer Grundstruktur",
       "Modernes, sauberes Design",
@@ -54,7 +54,7 @@ const packages = [
     name: "Premium",
     price: "1.199 €",
     period: "einmalig",
-    tagline: "Volle Feuerkraft. Maximale Anfragen.",
+    tagline: "Alles drin. Maximale Wirkung.",
     features: [
       "Alles aus Wachstum",
       "Erweiterte Seitenstruktur & stärkere Storyline",

@@ -171,7 +171,7 @@ export function ContactSection() {
                     </div>
                     <div className="mt-3 flex items-center justify-between">
                       <p className="text-xs text-muted">
-                        Wir antworten innerhalb von 24 Stunden.
+                        Ich melde mich innerhalb von 24 Stunden.
                       </p>
                       <ShinyButton type="submit" disabled={pending} size="md">
                         {pending ? (
@@ -214,7 +214,7 @@ function SuccessPanel({ message }: { message?: string }) {
       </h3>
       <p className="mt-3 max-w-sm text-sm text-muted text-pretty">
         {message ??
-          "Wir melden uns innerhalb von 24 Stunden persönlich bei dir."}
+          "Ich melde mich innerhalb von 24 Stunden persönlich bei dir."}
       </p>
     </motion.div>
   );
@@ -280,7 +280,7 @@ function TextareaField({
             ? "border-red-400/50 focus:border-red-400/70"
             : "border-white/[0.08] hover:border-white/[0.16] focus:border-pink/60"
         )}
-        placeholder="Erzähl uns kurz von deinem Projekt — wir hören zu."
+        placeholder="Erzähl mir kurz von deinem Projekt — ich höre zu."
       />
       {error && (
         <span id={`${name}-err`} className="mt-1.5 block text-xs text-red-300">

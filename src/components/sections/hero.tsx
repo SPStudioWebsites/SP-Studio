@@ -1,15 +1,14 @@
 "use client";
 
 import { hero } from "@/lib/content";
-import { GradientOrbs } from "@/components/effects/gradient-orbs";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Magnetic } from "@/components/ui/magnetic-button";
-import { ArrowRight, TrendingUp, Globe, BadgeEuro, ShieldCheck } from "@/lib/icons";
+import { ArrowRight, Check } from "@/lib/icons";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 
 import { useState, useEffect } from "react";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
-import { cn } from "@/lib/utils";
+import { HeroMockup } from "@/components/ui/hero-mockup";
 
 
 const WORDS = ["Handwerker", "Frisöre", "Cafés", "Restaurants"];
@@ -65,14 +64,14 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden pt-28 pb-8 md:pt-36 md:pb-12"
+      className="relative isolate overflow-hidden pt-40 pb-8 md:pt-52 md:pb-12"
       aria-label="Einleitung"
     >
-      <GradientOrbs />
-      <div aria-hidden className="absolute inset-0 grid-bg" />
+<div aria-hidden className="absolute inset-0 grid-bg" />
 
       <div className="relative mx-auto w-full max-w-7xl px-6">
-        <div className="space-y-0">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
+        <div className="space-y-0 flex-1">
 
           {/* Eyebrow */}
           <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
@@ -97,8 +96,24 @@ export function HeroSection() {
             {hero.subtitle}
           </p>
 
+          {/* Bullets */}
+          <ul className="mt-10 space-y-3 hero-enter" style={{ animationDelay: "200ms" }}>
+            {[
+              { bold: "75 % der Kunden googeln zuerst.", rest: "Wer nicht gefunden wird, verliert täglich Aufträge." },
+              { bold: "Deine Website arbeitet 24/7.", rest: "Neue Anfragen kommen auch wenn du schläfst." },
+              { bold: "Direkt mit mir, kein Agentur-Umweg.", rest: "Aus der Region, persönlich erreichbar." },
+            ].map(({ bold, rest }) => (
+              <li key={bold} className="flex items-start gap-3 text-base text-muted">
+                <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-pink to-violet">
+                  <Check className="h-2.5 w-2.5 text-white" />
+                </span>
+                <span><span className="font-semibold text-foreground">{bold}</span>{" "}{rest}</span>
+              </li>
+            ))}
+          </ul>
+
           {/* CTA */}
-          <div className="mt-10 flex justify-center lg:justify-start hero-enter" style={{ animationDelay: "240ms" }}>
+          <div className="mt-14 mb-16 flex justify-center lg:justify-start hero-enter" style={{ animationDelay: "240ms" }}>
             {isMobile ? (
               <ShinyButton
                 href="#kontakt"
@@ -122,15 +137,9 @@ export function HeroSection() {
             )}
           </div>
 
-          {/* Trust pills */}
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-xs text-muted hero-enter" style={{ animationDelay: "300ms" }}>
-            <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
-            <span><span className="font-semibold text-foreground">Spezialisiert</span> auf KMUs</span>
-            <span><span className="font-semibold text-foreground">Region</span> Franken</span>
-          </div>
 
           {/* Trust metric badges — mobile only (floating cards are desktop-only) */}
-          <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden">
+          <div className="mt-[12.5rem] grid grid-cols-2 gap-3 lg:hidden">
             <div
               className="rounded-2xl px-4 py-3"
               style={{
@@ -155,52 +164,16 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Feature grid */}
-          <div className="mt-14 grid grid-cols-2 gap-2.5 pb-16 md:pb-24 hero-enter" style={{ animationDelay: "360ms" }}>
-            {[
-              { icon: TrendingUp,  text: "Täglich neue Anfragen",          grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
-              { icon: Globe,       text: "Deine Webseite arbeitet 24/7",  grad: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
-              { icon: BadgeEuro,   text: "Mehr Buchungen. Mehr Umsatz.",  grad: "linear-gradient(135deg,#ff2d8f,#8b5cf6)" },
-              { icon: ShieldCheck, text: "In 14 Tagen live & fertig",     grad: "linear-gradient(135deg,#6d28d9,#8b5cf6)" },
-            ].map(({ icon: Icon, text, grad }) => (
-              <div
-                key={text}
-                className="relative flex items-center gap-3 overflow-hidden rounded-2xl px-4 py-3.5 glass-feature"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.25)",
-                }}
-              >
-                {/* subtle inner glow */}
-                <div className="pointer-events-none absolute inset-0 rounded-2xl" style={{ background: "radial-gradient(ellipse at 30% 0%, rgba(255,255,255,0.06) 0%, transparent 60%)" }} />
-                <span
-                  className="relative flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl shadow-lg"
-                  style={{ background: grad, boxShadow: `0 4px 14px rgba(0,0,0,0.3)` }}
-                >
-                  <Icon className="h-4 w-4 text-white" strokeWidth={1.75} />
-                </span>
-                <span className="relative text-xs font-medium leading-snug text-foreground/90">{text}</span>
-              </div>
-            ))}
+        </div>{/* end left column */}
+
+          {/* Right column — mockup, desktop only */}
+          <div className="hidden lg:flex flex-shrink-0 items-center justify-center w-[520px]">
+            <HeroMockup />
           </div>
 
-        </div>
-
+        </div>{/* end flex row */}
       </div>
 
-      {/* Scroll cue — desktop only, CSS animation */}
-      <div
-        className={cn(
-          "absolute bottom-8 left-1/2 -translate-x-1/2",
-          reduce ? "hidden" : "hidden md:flex"
-        )}
-        aria-hidden
-      >
-        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/15 p-1">
-          <span className="h-1.5 w-0.5 rounded-full bg-pink/80 animate-bounce" />
-        </span>
-      </div>
     </section>
   );
 }

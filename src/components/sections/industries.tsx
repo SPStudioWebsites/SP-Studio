@@ -30,7 +30,7 @@ const PANELS: BranchePanel[] = [
     headline: "Mehr Aufträge. Weniger Leerläufe.",
     subtitle:
       "Wer nicht online gefunden wird, verliert den Auftrag an die Konkurrenz — täglich. Deine Website ändert das.",
-    screenshot: "/Bildschirmfoto 2026-05-19 um 13.56.41.png",
+    screenshot: "/Branchen/Hero-Handwerker.png",
     screenshotAlt: "Beispiel-Webdesign für Handwerksbetrieb",
     colorA: "#ff2d8f",
     colorB: "#8b5cf6",
@@ -41,7 +41,7 @@ const PANELS: BranchePanel[] = [
     headline: "Dein Kalender soll ausgebucht sein.",
     subtitle:
       "Kunden entscheiden in 5 Minuten, ob sie buchen. Deine Website ist der erste — und oft einzige — Eindruck.",
-    screenshot: "/Bildschirmfoto 2026-05-19 um 15.39.25.png",
+    screenshot: "/Branchen/Hero - Eventlocation.png",
     screenshotAlt: "Beispiel-Webdesign für Eventlocation",
     colorA: "#8b5cf6",
     colorB: "#6d28d9",
@@ -52,7 +52,7 @@ const PANELS: BranchePanel[] = [
     headline: "Leere Termine kosten Geld.",
     subtitle:
       "Kunden buchen abends um 22 Uhr. Wer keine Online-Buchung hat, verliert diese Kunden dauerhaft an die Konkurrenz.",
-    screenshot: "/Bildschirmfoto 2026-05-19 um 13.56.36.png",
+    screenshot: "/Branchen/Hero - Friseur.png",
     screenshotAlt: "Beispiel-Webdesign für Friseursalon",
     colorA: "#ff2d8f",
     colorB: "#c026d3",
@@ -63,7 +63,7 @@ const PANELS: BranchePanel[] = [
     headline: "Volle Tische. Jeden Abend.",
     subtitle:
       "Eine gute Website füllt dienstags die Tische — nicht nur freitags. Mit Online-Reservierung und lokalem SEO.",
-    screenshot: "/Bildschirmfoto 2026-05-19 um 13.56.47.png",
+    screenshot: "/Branchen/Hero-Cafe.png",
     screenshotAlt: "Beispiel-Webdesign für Restaurant",
     colorA: "#c026d3",
     colorB: "#8b5cf6",
@@ -148,18 +148,19 @@ export function IndustriesSection() {
 
       panels.forEach((panel, i) => {
         if (i === 0) return;
-        // Exit: panel rushes towards viewer and disappears
+        const base = i - 1;
+        // Exit first — panel rushes toward viewer
         tl.to(
           panels[i - 1],
-          { opacity: 0, scale: 1.35, duration: 1, ease: "power3.in" },
-          i - 1
+          { opacity: 0, scale: 1.35, duration: 0.5, ease: "power3.in" },
+          base
         );
-        // Enter: panel materialises from depth
+        // Enter after exit is 90% done — panel rises from depth
         tl.fromTo(
           panel,
           { opacity: 0, scale: 0.82 },
-          { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
-          i - 1
+          { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+          base + 0.45
         );
       });
     },
@@ -168,6 +169,15 @@ export function IndustriesSection() {
 
   return (
     <section id="branchen" ref={containerRef} aria-label="Branchen">
+      {/* Section heading — above the sticky panels */}
+      <div className="relative z-10 px-6 pt-60 pb-2 text-center">
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted/60">Branchen</p>
+        <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+          Deine Branche.{" "}
+          <em className="font-display font-extrabold not-italic text-gradient">Deine Website.</em>
+        </h2>
+      </div>
+
       {/* Viewport-height container — GSAP pins this */}
       <div className="relative h-screen">
 
@@ -178,7 +188,7 @@ export function IndustriesSection() {
             <div
               key={panel.id}
               ref={(el) => { panelRefs.current[i] = el; }}
-              className="absolute inset-0 flex items-center px-6 md:px-12 lg:px-20"
+              className="absolute inset-0 flex items-start pt-[14rem] px-6 md:px-12 lg:px-20"
             >
               <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
 

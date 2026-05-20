@@ -27,7 +27,7 @@ export const hero = {
   eyebrow: "Webagentur · Region Franken",
   title: ["Schnell sichtbar.", "*Sofort* überzeugend."],
   subtitle:
-    "Die meisten Betriebe verlieren täglich Kunden, weil ihre Webseite nicht überzeugt. Wir ändern das — in 14 Tagen, zum Festpreis.",
+    "Die meisten Betriebe verlieren täglich Kunden, weil ihre Webseite nicht überzeugt. Ich ändere das. In 14 Tagen, zum Festpreis.",
   ctaPrimary: "Kostenloses Erstgespräch",
 };
 
@@ -35,37 +35,37 @@ export const services = [
   {
     icon: "Layout",
     title: "Webdesign & Entwicklung",
-    desc: "Moderne, blitzschnelle Webseiten — handgebaut, responsive, suchmaschinenfreundlich.",
+    desc: "Moderne, schnelle Webseiten. Handgebaut, responsive und für Suchmaschinen optimiert.",
     bullets: ["Maßgeschneidertes Design", "Mobile-first", "Schneller Pageload"],
   },
   {
     icon: "Search",
     title: "Local SEO",
-    desc: "Damit dich Kund:innen aus Haßfurt, Ebern und Umgebung wirklich finden — auf Google und in Maps.",
+    desc: "Damit dich Kunden aus Haßfurt, Ebern und Umgebung wirklich finden. Auf Google und in Maps.",
     bullets: ["Keyword-Strategie", "Google-Optimierung", "Lokale Sichtbarkeit"],
   },
   {
     icon: "Calendar",
     title: "Online-Buchung",
-    desc: "Termine direkt über die Website — für Salons, Praxen und Studios.",
+    desc: "Termine direkt über deine Website. Für Salons, Praxen und Studios.",
     bullets: ["24/7 buchbar", "Kalender-Sync", "Erinnerungs-Mails"],
   },
   {
     icon: "MapPin",
     title: "Google Unternehmensprofil",
-    desc: "Komplett eingerichtet, gepflegt und optimiert. Mit Bewertungs-Workflow.",
+    desc: "Komplett eingerichtet, gepflegt und optimiert. Damit du bei Google Maps ganz oben erscheinst.",
     bullets: ["Setup & Verifizierung", "Foto-Pflege", "Bewertungs-Strategie"],
   },
   {
     icon: "Server",
     title: "Hosting & Pflege",
-    desc: "Sicheres Hosting in Deutschland, monatliche Updates, Ansprechpartner aus der Region.",
-    bullets: ["DSGVO-konform", "Backup täglich", "Support per Telefon"],
+    desc: "Sicheres Hosting in Deutschland, monatliche Updates. Und ich bin immer persönlich erreichbar.",
+    bullets: ["DSGVO-konform", "Tägliches Backup", "Support per Telefon"],
   },
   {
     icon: "Sparkles",
     title: "Branding-Light",
-    desc: "Logo-Refresh, klare Farbwelt, Visitenkarten — damit alles aus einem Guss wirkt.",
+    desc: "Logo-Refresh, klare Farbwelt, Visitenkarten. Damit dein Auftritt aus einem Guss wirkt.",
     bullets: ["Logo & Wordmark", "Farbsystem", "Print-Templates"],
   },
 ] as const;
@@ -91,7 +91,7 @@ export const industries = [
   },
   {
     icon: "Stethoscope",
-    name: "Praxen & Therapeut:innen",
+    name: "Praxen & Therapeuten",
     text: "Online-Termine, Team-Vorstellung, Sprechzeiten.",
     span: "lg:col-span-2",
   },
@@ -104,7 +104,7 @@ export const industries = [
   {
     icon: "Store",
     name: "Sonstige KMUs",
-    text: "Vom Hofladen bis zum Steuerbüro — wir machen euch sichtbar.",
+    text: "Vom Hofladen bis zum Steuerbüro. Ich mache dich sichtbar.",
     span: "lg:col-span-2",
   },
 ] as const;
@@ -113,26 +113,26 @@ export const process = [
   {
     n: "01",
     title: "Erstgespräch",
-    desc: "Kostenlos, 30 Minuten — telefonisch oder bei dir vor Ort. Wir hören zu, fragen nach und schicken dir ein klares Angebot.",
+    desc: "Kostenlos, 30 Minuten, telefonisch oder bei dir vor Ort. Ich höre zu, frage nach und schick dir danach ein klares Angebot.",
     points: ["Bedarfsanalyse", "Festpreis-Angebot", "Klarer Zeitplan"],
   },
   {
     n: "02",
     title: "Konzept & Design",
-    desc: "Innerhalb von 5 Tagen bekommst du ein Designvorschlag — Wireframe, Farben, Typo, Mockups. Mit Feedback-Schleifen.",
+    desc: "Innerhalb von 5 Tagen bekommst du einen Designvorschlag: Wireframe, Farben, Typo, Mockups. Mit Feedback-Runden bis es passt.",
     points: ["Wireframes", "Designvorschläge", "Feedback-Runden"],
   },
   {
     n: "03",
     title: "Entwicklung",
-    desc: "Wir bauen sauber: schnell, mobil-optimiert, suchmaschinenfreundlich. Keine Baukasten-Software. Kein Wordpress-Plugin-Chaos.",
-    points: ["Sauberer Code", "Performance & SEO", "Inhaltspflege geschult"],
+    desc: "Ich baue sauber: schnell, mobil-optimiert, suchmaschinenfreundlich. Keine Baukasten-Software. Kein WordPress-Plugin-Chaos.",
+    points: ["Sauberer Code", "Performance & SEO", "Einfache Pflege"],
   },
   {
     n: "04",
     title: "Launch & Betreuung",
-    desc: "Wir gehen gemeinsam live, schulen dich ein und kümmern uns auf Wunsch um Hosting, Pflege und Updates — solange du willst.",
-    points: ["Go-Live", "Schulung & Übergabe", "Hosting & Support"],
+    desc: "Ich gehe mit dir live, zeige dir alles und kümmere mich auf Wunsch um Hosting, Pflege und Updates. So lange du willst.",
+    points: ["Go-Live", "Persönliche Übergabe", "Hosting & Support"],
   },
 ] as const;
 
@@ -141,9 +141,9 @@ export const about = {
   title: ["Aus Haßfurt.", "Für die *Region*."],
   body: [
     "Die meisten Webdesigner haben noch nie eine Anzeige für einen Schreiner geschaltet. Ich schon.",
-    "Ich bin Simon und arbeite bereits seit über 3 Jahren im Marketing. Für Handwerksbetriebe und lokale Dienstleister aus der Region, die nicht wussten, wie sie online Kunden gewinnen sollen. Ich habe ihre Social-Media-Auftritte aufgebaut, Kampagnen geschaltet, Reichweite aufgebaut, Webseiten erstellt und dabei eines gelernt:",
-    "Genau das ist der Unterschied bei Schnell-Sichtbar.de. Ich designe keine Seiten, die gut aussehen und dann nichts tun. Ich baue Websites, die auf echten Marketingprinzipien basieren: mit klarer Botschaft, lokalem SEO und einem Aufbau, der Besucher zu Kunden macht.",
-    "Und weil ich weiß, wie viel Zeit du als Unternehmer nicht hast, mache ich das schnell und ohne Agentur-Umweg. Du hast eine Frage? Du schreibst mir. Nicht einem Praktikanten.",
+    "Ich bin Simon und arbeite seit über 3 Jahren im Marketing, für Handwerksbetriebe und lokale Dienstleister aus der Region. Ich habe ihre Social-Media-Auftritte aufgebaut, Kampagnen geschaltet, Webseiten erstellt und dabei eines gelernt: Eine Webseite allein bringt keine Kunden. Es braucht Strategie.",
+    "Genau das ist der Unterschied bei Schnell-Sichtbar.de. Ich baue keine Seiten, die gut aussehen und dann nichts tun. Ich baue Websites, die auf echten Marketingprinzipien basieren, mit klarer Botschaft, lokalem SEO und einem Aufbau, der Besucher zu Kunden macht.",
+    "Und weil ich weiß, wie wenig Zeit du als Unternehmer hast, läuft das bei mir schnell und ohne Umwege. Du hast eine Frage? Du schreibst mir. Nicht einem Praktikanten.",
   ],
   quote: "Aus der Region Unterfranken. Für Betriebe, die online endlich sichtbar sein wollen.",
   quoteAuthor: "Simon, Inhaber Schnell-Sichtbar.de",
@@ -164,23 +164,23 @@ export const about = {
 export const faq = [
   {
     q: "Was kostet eine Website bei Schnell-Sichtbar.de?",
-    a: "Eine professionelle Website beginnt ab 699 € einmalig — inklusive Design, Entwicklung und SEO-Grundlagen. Größere Projekte mit Online-Buchung oder Shop besprechen wir individuell. Du bekommst immer einen Festpreis, bevor auch nur eine Zeile Code geschrieben wird.",
+    a: "Eine professionelle Website beginnt ab 699 € einmalig, inklusive Design, Entwicklung und SEO-Grundlagen. Größere Projekte mit Online-Buchung oder Shop bespreche ich gerne individuell mit dir. Du bekommst immer einen Festpreis, bevor auch nur eine Zeile Code geschrieben wird.",
   },
   {
     q: "Wie schnell ist meine Website online?",
-    a: "Im Durchschnitt 14 Tage — vom ersten Gespräch bis zum Launch. Bei größeren Projekten planen wir das gemeinsam realistisch. Und wenn es schnell gehen muss: Es gibt einen Express-Slot für 7 Tage Lieferzeit.",
+    a: "Im Durchschnitt 14 Tage, vom ersten Gespräch bis zum Launch. Bei größeren Projekten plane ich das realistisch mit dir. Und wenn es wirklich schnell gehen muss: Es gibt einen Express-Slot mit 7 Tagen Lieferzeit.",
   },
   {
     q: "Brauche ich technisches Wissen?",
-    a: "Kein bisschen. Du lieferst die Infos zu deinem Betrieb, ich kümmere mich um den Rest. Kein Fachchinesisch, keine langen Erklärungen — du siehst das Ergebnis, nicht den Prozess.",
+    a: "Kein bisschen. Du lieferst die Infos zu deinem Betrieb, ich kümmere mich um alles andere. Kein Fachchinesisch, keine langen Erklärungen. Du siehst das Ergebnis, nicht den Prozess.",
   },
   {
     q: "Wie läuft die Zusammenarbeit ab?",
-    a: "Einfach und klar strukturiert. Zuerst führen wir ein kostenloses Erstgespräch — persönlich oder per Video. Danach bekommst du ein konkretes Angebot. Nach deiner Freigabe starten wir mit Design und Entwicklung. Du gibst einmal Feedback, wir setzen es um. Dann geht deine Seite online. Kein hin und her, keine langen Warteschleifen.",
+    a: "Einfach und klar. Zuerst führe ich ein kostenloses Erstgespräch mit dir, persönlich oder per Video. Danach bekommst du ein konkretes Angebot. Nach deiner Freigabe starte ich mit Design und Entwicklung. Du gibst einmal Feedback, ich setze es um. Dann geht deine Seite online. Kein Hin und Her, keine langen Warteschleifen.",
   },
   {
     q: "Was passiert nach dem Launch?",
-    a: "Du entscheidest. Auf Wunsch übernehme ich Hosting, Updates und kleine Änderungen als monatliche Betreuung. Du kannst aber auch alles selbst übernehmen oder zu einem anderen Anbieter wechseln. Deine Website, dein Code — kein Lock-in.",
+    a: "Das entscheidest du. Auf Wunsch übernehme ich Hosting, Updates und kleine Änderungen als monatliche Betreuung. Du kannst aber auch alles selbst übernehmen oder zu einem anderen Anbieter wechseln. Deine Website, dein Code, kein Lock-in.",
   },
   {
     q: "Kann ich später selbst Inhalte ändern?",
@@ -188,11 +188,11 @@ export const faq = [
   },
   {
     q: "Was ist der Unterschied zwischen einer normalen und einer SEO-optimierten Website?",
-    a: "Eine normale Website ist online. Eine SEO-optimierte Website wird gefunden. Der Unterschied liegt in Dingen wie Seitenstruktur, Ladezeit, lokalen Keywords, technischer Auszeichnung und Google-Sichtbarkeit. Wir bauen keine Seiten die nur existieren — sondern Seiten die gefunden werden.",
+    a: "Eine normale Website ist online. Eine SEO-optimierte Website wird gefunden. Der Unterschied liegt in Seitenstruktur, Ladezeit, lokalen Keywords und Google-Sichtbarkeit. Ich baue keine Seiten, die nur existieren. Sondern Seiten, die gefunden werden.",
   },
   {
     q: "Wer braucht eine lokale Website?",
-    a: "Jeder Betrieb, der Kunden aus der Region gewinnen will. Ob Handwerker, Dienstleister, Praxis oder kleines Unternehmen: Wer lokal gefunden werden will, braucht eine Website die für genau diese Suchen gebaut ist. Eine allgemeine Seite reicht nicht mehr — Google bevorzugt Seiten mit lokalem Bezug, echten Standortangaben und klaren Leistungsbeschreibungen.",
+    a: "Jeder Betrieb, der Kunden aus der Region gewinnen will. Ob Handwerker, Dienstleister, Praxis oder kleines Unternehmen: Wer lokal gefunden werden möchte, braucht eine Website, die genau dafür gebaut ist. Eine allgemeine Seite reicht längst nicht mehr. Google bevorzugt Seiten mit echtem lokalem Bezug, konkreten Standortangaben und klaren Leistungsbeschreibungen.",
   },
 ] as const;
 
@@ -200,12 +200,12 @@ export const contact = {
   eyebrow: "Kontakt",
   title: ["Lass uns reden.", "*Kostenlos.* Unverbindlich."],
   subtitle:
-    "Erzähl uns kurz von deinem Vorhaben — wir melden uns innerhalb von 24 Stunden zurück.",
+    "Erzähl mir kurz von deinem Vorhaben. Ich melde mich innerhalb von 24 Stunden persönlich bei dir.",
   branchen: [
     "Frisör / Salon",
     "Restaurant / Café",
     "Handwerk",
-    "Praxis / Therapeut:in",
+    "Praxis / Therapeut",
     "Fitness / Yoga",
     "Einzelhandel",
     "Sonstiges",
@@ -215,7 +215,7 @@ export const contact = {
 };
 
 export const footer = {
-  claim: "Premium Webseiten für lokale Unternehmen aus der Region Haßberge.",
+  claim: "Professionelle Webseiten für lokale Unternehmen aus der Region Haßberge.",
   sitemap: [
     { label: "Home", href: "/" },
     { label: "Branchen", href: "/#branchen" },

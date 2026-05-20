@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { HeroSection } from "@/components/sections/hero";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Grain } from "@/components/effects/grain";
+import { MorphingBackground } from "@/components/effects/morphing-background";
 
 const IndustriesSection = dynamic(() =>
   import("@/components/sections/industries").then((m) => m.IndustriesSection)
@@ -29,6 +30,7 @@ export default function Home() {
   return (
     <>
       <JsonLd />
+      <MorphingBackground />
       <ScrollProgress />
       <Grain />
       <Navbar />
@@ -60,7 +62,7 @@ export default function Home() {
             aria-hidden
             className="pointer-events-none absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px)`,
+              backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px)`,
               backgroundSize: `36px 36px`,
             }}
           />

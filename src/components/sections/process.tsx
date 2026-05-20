@@ -34,7 +34,7 @@ export function ProcessSection() {
     <section
       id="ablauf"
       aria-labelledby="ablauf-h"
-      className="relative overflow-hidden pt-4 pb-16 md:pt-6 md:pb-24"
+      className="relative overflow-hidden -mt-[28rem] pt-4 pb-16 md:pt-6 md:pb-24"
     >
       <div aria-hidden className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-pink/5 blur-[120px] hidden md:block" />
       <div aria-hidden className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-violet/5 blur-[120px] hidden md:block" />
@@ -58,7 +58,7 @@ export function ProcessSection() {
           <Reveal delay={0.2}>
             <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
               Kein Stress, kein Technik-Kram. Du lieferst die Infos —
-              wir liefern die Webseite.
+              ich liefere die Webseite.
             </p>
           </Reveal>
         </div>
@@ -155,7 +155,7 @@ export function ProcessSection() {
               <em className="font-display font-extrabold not-italic text-gradient">nichts wissen.</em>
             </h3>
             <p className="relative mt-2 text-base text-muted text-pretty">
-              Nur 30 Minuten deiner Zeit nötig — wir erledigen den Rest.
+              Nur 30 Minuten deiner Zeit nötig — ich erledige den Rest.
             </p>
 
             <ul className="relative mt-6 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">

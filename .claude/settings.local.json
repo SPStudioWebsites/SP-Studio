@@ -73,7 +73,9 @@
       "Bash(python3 -c \"from PIL import Image; print\\('Pillow OK'\\)\")",
       "Bash(python3 -c \"import PIL; print\\('PIL OK'\\)\")",
       "Bash(mkdir -p /Users/Simon/meine-website/Schnell-Sichtbar/public/hero-crops)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "WebFetch(domain:www.sliderrevolution.com)",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\('/Users/Simon/meine-website/Schnell-Sichtbar/public/iphone 17 Pro filled.png'\\); print\\(img.size\\)\")"
     ],
     "additionalDirectories": [
       "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"
