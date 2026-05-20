@@ -3,10 +3,9 @@
 import { process } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
 import { Pill } from "@/components/ui/pill";
-import { motion, useScroll, useTransform, useReducedMotion, useInView } from "motion/react";
-import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useReducedMotion, useMotionValueEvent } from "motion/react";
+import { useRef, useState, useEffect } from "react";
 import { Check } from "@/lib/icons";
-import { BorderBeam } from "@/components/ui/border-beam";
 
 const ACCENT = [
   "from-pink to-fuchsia-500",
@@ -23,12 +22,59 @@ const GLOW = [
 ];
 
 export function ProcessSection() {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  // lineCap.maxPx  = px from container-top to box-top  (line stops here)
+  // lineCap.triggerT = scrollYProgress value at which the box enters the viewport
+  const [lineCap, setLineCap] = useState({ maxPx: 0, triggerT: 0.75 });
+  const [beamActive, setBeamActive] = useState(false);
+
+  useEffect(() => {
+    const measure = () => {
+      const container = containerRef.current;
+      const box = boxRef.current;
+      if (!container || !box) return;
+
+      const maxPx =
+        box.getBoundingClientRect().top -
+        container.getBoundingClientRect().top;
+      const sectionH = container.offsetHeight;
+      const vh = window.innerHeight;
+
+      // With offset ["start A", "end 0"]:
+      // total scroll range = sectionH + A*vh
+      // T = maxPx / (sectionH + A*vh)
+      const A = 0.4;
+      const T = maxPx / (sectionH + A * vh);
+
+      setLineCap({
+        maxPx: Math.max(0, maxPx - 12),
+        triggerT: Math.max(0.05, Math.min(0.98, T)),
+      });
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.65", "end 0.35"],
+    target: containerRef,
+    offset: ["start 0.4", "end 0"],
   });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const lineHeight = useTransform(
+    scrollYProgress,
+    [0, lineCap.triggerT],
+    ["0px", `${lineCap.maxPx}px`],
+    { clamp: true }
+  );
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (!beamActive && v >= lineCap.triggerT * 0.985) setBeamActive(true);
+  });
+
   const reduce = useReducedMotion();
 
   return (
@@ -64,8 +110,13 @@ export function ProcessSection() {
           </Reveal>
         </div>
 
-        <div ref={ref} className="relative mt-20">
-          <div className="absolute left-5 top-0 bottom-0 w-px bg-white/[0.06] md:left-1/2 md:-translate-x-px" />
+        <div ref={containerRef} className="relative mt-20">
+          {/* Gray guide line — stops at box top */}
+          <div
+            className="absolute left-5 top-0 w-px bg-white/[0.06] md:left-1/2 md:-translate-x-px"
+            style={{ height: lineCap.maxPx > 0 ? `${lineCap.maxPx}px` : "100%" }}
+          />
+          {/* Animated gradient line — grows to box top then stops */}
           <motion.div
             style={{ height: lineHeight }}
             className="absolute left-5 top-0 w-px bg-gradient-to-b from-pink via-fuchsia-500 to-violet md:left-1/2 md:-translate-x-px"
@@ -120,7 +171,7 @@ export function ProcessSection() {
           </div>
 
           <div className="mt-16 flex flex-col items-center">
-            <BestBox reduce={!!reduce} />
+            <BestBox reduce={!!reduce} beamActive={beamActive} bRef={boxRef} />
           </div>
         </div>
       </div>
@@ -199,13 +250,18 @@ function StepCard({
   );
 }
 
-function BestBox({ reduce }: { reduce: boolean }) {
-  const boxRef = useRef<HTMLDivElement>(null);
-  const beamActive = useInView(boxRef, { once: true, margin: "-40px" });
-
+function BestBox({
+  reduce,
+  beamActive,
+  bRef,
+}: {
+  reduce: boolean;
+  beamActive: boolean;
+  bRef: React.RefObject<HTMLDivElement | null>;
+}) {
   return (
     <motion.div
-      ref={boxRef}
+      ref={bRef}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.96 }}
       whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -217,6 +273,8 @@ function BestBox({ reduce }: { reduce: boolean }) {
         boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.3)",
       }}
     >
+      {beamActive && <BorderTrace bRef={bRef} />}
+
       {/* Subtle gradient glow */}
       <div
         aria-hidden
@@ -230,28 +288,6 @@ function BestBox({ reduce }: { reduce: boolean }) {
         className="absolute inset-x-0 top-0 h-px rounded-full"
         style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.6) 50%, transparent)" }}
       />
-
-      {/* BorderBeam — activates when timeline line reaches the box */}
-      {beamActive && (
-        <>
-          <BorderBeam
-            size={140}
-            duration={11}
-            colorFrom="#ff2d8f"
-            colorTo="#8b5cf6"
-            borderWidth={1.5}
-          />
-          <BorderBeam
-            size={100}
-            duration={14}
-            delay={5.5}
-            colorFrom="#8b5cf6"
-            colorTo="#ff2d8f"
-            reverse
-            borderWidth={1.5}
-          />
-        </>
-      )}
 
       <p className="relative font-mono text-xs font-semibold uppercase tracking-[0.22em] text-violet/80">
         Das Beste daran
@@ -290,5 +326,72 @@ function BestBox({ reduce }: { reduce: boolean }) {
         ))}
       </ul>
     </motion.div>
+  );
+}
+
+function BorderTrace({ bRef }: { bRef: React.RefObject<HTMLDivElement | null> }) {
+  const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
+
+  useEffect(() => {
+    if (bRef.current) {
+      const r = bRef.current.getBoundingClientRect();
+      setDims({ w: r.width, h: r.height });
+    }
+  }, [bRef]);
+
+  if (!dims) return null;
+
+  return (
+    <svg
+      aria-hidden
+      className="pointer-events-none absolute inset-0"
+      width={dims.w}
+      height={dims.h}
+      style={{ overflow: "visible" }}
+    >
+      <defs>
+        <linearGradient id="bt-grad" x1="0" y1="0" x2={dims.w} y2={dims.h} gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#ff2d8f" />
+          <stop offset="55%" stopColor="#c026d3" />
+          <stop offset="100%" stopColor="#8b5cf6" />
+        </linearGradient>
+        <filter id="bt-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      {/* Glow halo — wider, softer, behind */}
+      <motion.rect
+        x={1} y={1}
+        width={dims.w - 2} height={dims.h - 2}
+        rx={16} ry={16}
+        fill="none"
+        stroke="url(#bt-grad)"
+        strokeWidth={6}
+        strokeOpacity={0.35}
+        filter="url(#bt-glow)"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 2, ease: [0.4, 0, 0.2, 1] }}
+      />
+
+      {/* Sharp border trace — on top */}
+      <motion.rect
+        x={1} y={1}
+        width={dims.w - 2} height={dims.h - 2}
+        rx={16} ry={16}
+        fill="none"
+        stroke="url(#bt-grad)"
+        strokeWidth={1.5}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 2, ease: [0.4, 0, 0.2, 1] }}
+      />
+    </svg>
   );
 }
