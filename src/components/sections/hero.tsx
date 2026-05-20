@@ -64,7 +64,7 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden pt-40 pb-8 md:pt-52 md:pb-12"
+      className="relative isolate overflow-hidden pt-24 pb-8 md:pt-52 md:pb-12"
       aria-label="Einleitung"
     >
 <div aria-hidden className="absolute inset-0 grid-bg" />
@@ -92,12 +92,12 @@ export function HeroSection() {
           </div>
 
           {/* Subtitle */}
-          <p className="mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg hero-enter" style={{ animationDelay: "160ms" }}>
+          <p className="mt-4 md:mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg hero-enter" style={{ animationDelay: "160ms" }}>
             {hero.subtitle}
           </p>
 
           {/* Bullets */}
-          <ul className="mt-10 space-y-3 hero-enter" style={{ animationDelay: "200ms" }}>
+          <ul className="mt-5 md:mt-10 space-y-2 md:space-y-3 hero-enter" style={{ animationDelay: "200ms" }}>
             {[
               { bold: "75 % der Kunden googeln zuerst.", rest: "Wer nicht gefunden wird, verliert täglich Aufträge." },
               { bold: "Deine Website arbeitet 24/7.", rest: "Neue Anfragen kommen auch wenn du schläfst." },
