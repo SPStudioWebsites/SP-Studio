@@ -64,19 +64,39 @@ export function ContactSection() {
           {/* Left: photo + personal text + phone CTA */}
           <Reveal delay={0.2}>
             <div className="flex flex-col gap-6">
-              <div className="relative w-full overflow-hidden rounded-3xl" style={{ aspectRatio: "3/4" }}>
+
+              {/* Portrait — desktop only */}
+              <div className="relative hidden lg:block w-full overflow-hidden rounded-3xl" style={{ aspectRatio: "3/4" }}>
                 <Image
                   src="/Über-Mich.jpeg"
                   alt="Simon Pöske, Inhaber Schnell-Sichtbar.de"
                   fill
                   className="object-cover object-top"
-                  sizes="(max-width: 1024px) 90vw, 380px"
+                  sizes="380px"
                   quality={85}
                 />
                 <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }} />
               </div>
 
-              <div>
+              {/* Compact avatar row — mobile only */}
+              <div className="flex lg:hidden items-center gap-4">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-white/[0.1] ring-2 ring-pink/25">
+                  <Image
+                    src="/Über-Mich.jpeg"
+                    alt="Simon Pöske"
+                    fill
+                    className="object-cover object-top"
+                    sizes="56px"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground text-sm leading-snug">Du schreibst direkt mit mir.</p>
+                  <p className="mt-0.5 text-xs text-muted">Kein Callcenter. Ich melde mich innerhalb 24h.</p>
+                </div>
+              </div>
+
+              {/* Text — desktop only */}
+              <div className="hidden lg:block">
                 <p className="font-semibold text-foreground text-lg leading-snug">
                   Du schreibst direkt mit mir.
                 </p>
@@ -87,7 +107,7 @@ export function ContactSection() {
 
               <a
                 href={`tel:${brand.phone}`}
-                className="inline-flex h-12 w-fit items-center gap-3 rounded-full border border-white/[0.12] bg-white/[0.04] px-6 text-sm font-medium text-foreground/90 transition-colors hover:border-pink/30 hover:bg-pink/[0.06]"
+                className="inline-flex h-11 w-fit items-center gap-3 rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-foreground/90 transition-colors hover:border-pink/30 hover:bg-pink/[0.06]"
               >
                 <Phone className="h-4 w-4 text-pink" />
                 <span className="font-semibold text-foreground">Lieber anrufen?</span>
@@ -98,7 +118,7 @@ export function ContactSection() {
           {/* Right: form */}
           <div>
           <Reveal delay={0.15}>
-            <GlassCard variant="strong" className="relative overflow-hidden p-7 md:p-10">
+            <GlassCard variant="strong" className="relative overflow-hidden p-5 md:p-8 lg:p-10">
               <AnimatePresence mode="wait">
                 {state.ok ? (
                   <SuccessPanel key="ok" message={state.message} />
@@ -193,8 +213,8 @@ export function ContactSection() {
                     <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>
                       <input type="text" name="website" tabIndex={-1} autoComplete="off" />
                     </div>
-                    <div className="mt-3 flex justify-end">
-                      <ShinyButton type="submit" disabled={pending} size="md">
+                    <div className="mt-3 flex">
+                      <ShinyButton type="submit" disabled={pending} size="md" className="w-full justify-center sm:w-auto sm:ml-auto">
                         {pending ? (
                           <>
                             <Loader2 className="h-4 w-4 animate-spin-slow" />
