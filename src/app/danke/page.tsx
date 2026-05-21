@@ -4,7 +4,7 @@ import { DankeContent } from "./danke-content";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Anfrage eingegangen — Schnell-Sichtbar.de",
+  title: "Anfrage eingegangen · Schnell-Sichtbar.de",
   robots: { index: false },
 };
 

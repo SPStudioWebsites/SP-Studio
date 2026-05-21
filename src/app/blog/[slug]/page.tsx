@@ -230,7 +230,7 @@ export default async function BlogPostPage({ params }: Props) {
               Bereit, online sichtbar zu werden?
             </h2>
             <p className="relative mx-auto mb-7 max-w-sm text-muted">
-              Ich zeige dir, wie dein Betrieb bei Google besser abschneidet — in einem kurzen Gespräch.
+              Ich zeige dir, wie dein Betrieb bei Google besser abschneidet, in einem kurzen Gespräch.
             </p>
             <a
               href="/#kontakt"

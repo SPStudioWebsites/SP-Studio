@@ -44,7 +44,7 @@ export function ConsentManager() {
         <div className="fixed bottom-[72px] left-0 right-0 z-50 p-4 sm:bottom-0 md:p-6">
           <div className="mx-auto max-w-2xl rounded-2xl border border-white/10 bg-[#111] backdrop-blur-md p-5 shadow-2xl">
             <p className="text-sm text-muted leading-relaxed">
-              Wir verwenden Cookies — technisch notwendige und (mit Ihrer Einwilligung) Google
+              Wir verwenden Cookies: technisch notwendige und (mit Ihrer Einwilligung) Google
               Analytics zur Reichweitenmessung. Mehr dazu in unserer{" "}
               <Link href="/datenschutz" className="text-pink underline underline-offset-2">
                 Datenschutzerklärung

@@ -280,7 +280,7 @@ function TextareaField({
             ? "border-red-400/50 focus:border-red-400/70"
             : "border-white/[0.08] hover:border-white/[0.16] focus:border-pink/60"
         )}
-        placeholder="Erzähl mir kurz von deinem Projekt — ich höre zu."
+        placeholder="Erzähl mir kurz von deinem Projekt. Ich höre zu."
       />
       {error && (
         <span id={`${name}-err`} className="mt-1.5 block text-xs text-red-300">

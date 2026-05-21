@@ -105,7 +105,7 @@ export function ServicesSection() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
-              Deine Website bezahlt sich selbst — mit jeder neuen Anfrage.
+              Deine Website bezahlt sich selbst, mit jeder neuen Anfrage.
               Festpreis, bevor wir starten.
             </p>
           </Reveal>

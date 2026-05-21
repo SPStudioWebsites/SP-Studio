@@ -13,17 +13,17 @@ const steps = [
   {
     Icon: Search,
     title: "Ich analysiere deine Website",
-    desc: "Noch vor unserem Gespräch schaue ich mir deinen aktuellen Online-Auftritt an — damit du sofort konkrete Tipps bekommst.",
+    desc: "Noch vor unserem Gespräch schaue ich mir deinen aktuellen Online-Auftritt an, damit du sofort konkrete Tipps bekommst.",
   },
   {
     Icon: Phone,
     title: "Wir telefonieren kurz",
-    desc: "Ein kurzes, unverbindliches Gespräch (ca. 15 Min.) — ich erkläre, was möglich ist und was für dich am meisten bringt.",
+    desc: "Ein kurzes, unverbindliches Gespräch (ca. 15 Min.), in dem ich erkläre, was möglich ist und was für dich am meisten bringt.",
   },
   {
     Icon: CheckCircle2,
     title: "Du bekommst ein konkretes Angebot",
-    desc: "Kein Bla-Bla — ein klares Angebot mit Preis, Umfang und Zeitplan. Du entscheidest, ob es passt.",
+    desc: "Kein Bla-Bla. Ein klares Angebot mit Preis, Umfang und Zeitplan. Du entscheidest, ob es passt.",
   },
 ];
 
@@ -216,13 +216,13 @@ export function DankeContent() {
               </div>
               <p className="mt-6 text-sm leading-relaxed text-muted">
                 Ich bin lokaler Webdesigner aus der Region Haßberge/Bamberg und
-                helfe kleinen Betrieben, online sichtbar zu werden — mit
+                helfe kleinen Betrieben, online sichtbar zu werden, mit
                 modernen Websites, die schnell fertig sind und wirklich
                 funktionieren.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 Kein Agentur-Overhead, keine langen Wartezeiten. Ich setze dein
-                Projekt persönlich um — meistens innerhalb von 1–2 Wochen.
+                Projekt persönlich um, meistens innerhalb von 1–2 Wochen.
               </p>
             </GlassCard>
           </motion.div>
@@ -254,7 +254,7 @@ export function DankeContent() {
               Schreib mir einfach auf WhatsApp
             </h2>
             <p className="mt-3 text-muted">
-              Schnelle Antwort garantiert — kein Formular, kein Warten.
+              Schnelle Antwort garantiert. Kein Formular, kein Warten.
             </p>
 
             {/* WhatsApp button with shine sweep */}
@@ -289,7 +289,7 @@ export function DankeContent() {
             </a>
 
             <p className="mt-5 text-sm text-muted">
-              Oder warte auf meinen Anruf — ich melde mich innerhalb von 24 Stunden.
+              Oder warte auf meinen Anruf. Ich melde mich innerhalb von 24 Stunden.
             </p>
           </GlassCard>
         </Reveal>

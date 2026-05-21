@@ -43,18 +43,20 @@ const featureCards = [
 export interface CityLandingPageProps {
   city: string;
   slug: string;
+  region?: string;
   heroSubtitle: string;
   pitchText: string;
   faq: readonly { q: string; a: string }[];
   cityBlock?: ReactNode;
+  areaServedExtra?: { name: string }[];
 }
 
-export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, cityBlock }: CityLandingPageProps) {
+export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubtitle, pitchText, faq, cityBlock, areaServedExtra = [] }: CityLandingPageProps) {
   const benefits = [
     {
       icon: MapPin,
       title: "Lokale Kenntnis",
-      desc: `Als regionaler Anbieter aus Unterfranken verstehe ich die ${city}er Märkte, lokale Suchgewohnheiten und wie deine Zielgruppe tickt.`,
+      desc: `Als regionaler Anbieter aus ${region} verstehe ich die ${city}er Märkte, lokale Suchgewohnheiten und wie deine Zielgruppe tickt.`,
       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)",
     },
     {
@@ -66,17 +68,17 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
     {
       icon: TrendingUp,
       title: "Mehr Anfragen durch SEO",
-      desc: `Ich baue keine Seiten, die nur existieren — sondern Seiten, die in ${city} gefunden werden und Anfragen generieren.`,
+      desc: `Ich baue keine Seiten, die nur existieren. Sondern Seiten, die in ${city} gefunden werden und Anfragen generieren.`,
       grad: "linear-gradient(135deg,#ff2d8f,#8b5cf6)",
     },
   ];
 
   const checkList = [
-    "Persönliche Beratung — kein Ticketsystem",
+    "Persönliche Beratung, kein Ticketsystem",
     "Spezialisiert auf KMUs & lokale Betriebe",
     `Beratung in ${city} & Umgebung möglich`,
     "Fertig in durchschnittlich 14 Tagen",
-    "Kein Lock-in — dein Code gehört dir",
+    "Kein Lock-in. Dein Code gehört dir",
     "Festpreis ohne versteckte Kosten",
   ];
 
@@ -100,7 +102,8 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
         },
         areaServed: [
           { "@type": "City", name: city },
-          { "@type": "AdministrativeArea", name: "Unterfranken" },
+          { "@type": "AdministrativeArea", name: region },
+          ...areaServedExtra.map((a) => ({ "@type": "City", name: a.name })),
         ],
         openingHoursSpecification: {
           "@type": "OpeningHoursSpecification",
@@ -118,6 +121,13 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
           name: item.q,
           acceptedAnswer: { "@type": "Answer", text: item.a },
         })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Startseite", item: "https://schnell-sichtbar.de" },
+          { "@type": "ListItem", position: 2, name: `Webdesign ${city}`, item: `https://schnell-sichtbar.de/${slug}` },
+        ],
       },
     ],
   };
@@ -152,7 +162,7 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pink" />
                   </span>
                   <span className="text-xs font-medium tracking-wide text-foreground/85">
-                    Webagentur · Region Unterfranken
+                    Webagentur · Region {region}
                   </span>
                 </div>
               </div>
@@ -197,8 +207,8 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
                 style={{ animationDelay: "300ms" }}
               >
                 <span><span className="font-semibold text-foreground">ø 14 Tage</span> Lieferzeit</span>
-                <span><span className="font-semibold text-foreground">Festpreis</span> — keine Überraschungen</span>
-                <span><span className="font-semibold text-foreground">Region</span> {city} & Unterfranken</span>
+                <span><span className="font-semibold text-foreground">Festpreis.</span> Keine Überraschungen</span>
+                <span><span className="font-semibold text-foreground">Region</span> {city} & {region}</span>
               </div>
 
               {/* Feature grid — mobile only */}
@@ -288,9 +298,9 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
                 </Reveal>
                 <Reveal delay={0.2}>
                   <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
-                    Als Webdesigner aus Unterfranken kenne ich die regionalen Märkte, Zielgruppen
-                    und Suchgewohnheiten — das macht den Unterschied zwischen einer Website die
-                    existiert und einer die gefunden wird.
+                    Als Webdesigner aus {region} kenne ich die regionalen Märkte, Zielgruppen
+                    und Suchgewohnheiten. Das macht den Unterschied zwischen einer Website, die
+                    existiert, und einer, die gefunden wird.
                   </p>
                 </Reveal>
               </div>
@@ -355,7 +365,7 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
                         </p>
                       </div>
                       <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl text-balance">
-                        Webdesign für {city} —{" "}
+                        Webdesign für {city}:{" "}
                         <em className="font-display font-extrabold not-italic text-gradient">
                           kein anonymes Studio.
                         </em>
@@ -408,7 +418,7 @@ export function CityLandingPage({ city, slug, heroSubtitle, pitchText, faq, city
                   </Reveal>
                   <Reveal delay={0.2}>
                     <p className="mt-5 text-base text-muted md:text-lg text-pretty">
-                      Du hast Fragen zu Webdesign in {city}? Schreib uns — wir antworten
+                      Du hast Fragen zu Webdesign in {city}? Schreib uns, wir antworten
                       persönlich, nicht per Chatbot.
                     </p>
                   </Reveal>

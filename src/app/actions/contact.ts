@@ -73,7 +73,7 @@ export async function submitContact(
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[contact] RESEND_API_KEY nicht gesetzt");
-    return { ok: false, message: "Technischer Fehler — bitte ruf uns direkt an." };
+    return { ok: false, message: "Technischer Fehler. Bitte ruf uns direkt an." };
   }
 
   const resend = new Resend(apiKey);
@@ -99,14 +99,14 @@ export async function submitContact(
         <p style="font-size:13px;color:#666;margin-bottom:8px">Nachricht</p>
         <p style="background:#f9f9f9;padding:16px;border-radius:8px;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(data.message)}</p>
         <hr style="border:none;border-top:1px solid #e5e5e5;margin:20px 0"/>
-        <p style="font-size:12px;color:#999">Direkt antworten: einfach auf diese Mail antworten — geht direkt an ${esc(data.email)}</p>
+        <p style="font-size:12px;color:#999">Direkt antworten: einfach auf diese Mail antworten, geht direkt an ${esc(data.email)}</p>
       </div>
     `,
   });
 
   if (error) {
     console.error("[contact] Resend error", error);
-    return { ok: false, message: "Beim Senden ist ein Fehler aufgetreten — bitte versuch es nochmal oder ruf uns an." };
+    return { ok: false, message: "Beim Senden ist ein Fehler aufgetreten. Bitte versuch es nochmal oder ruf uns an." };
   }
 
   redirect("/danke");

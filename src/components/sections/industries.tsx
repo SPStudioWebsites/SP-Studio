@@ -29,7 +29,7 @@ const PANELS: BranchePanel[] = [
     pill: "Handwerk",
     headline: "Mehr Aufträge. Weniger Leerläufe.",
     subtitle:
-      "Wer nicht online gefunden wird, verliert den Auftrag an die Konkurrenz — täglich. Deine Website ändert das.",
+      "Wer nicht online gefunden wird, verliert den Auftrag an die Konkurrenz, täglich. Deine Website ändert das.",
     screenshot: "/Branchen/Hero-Handwerker.png",
     screenshotAlt: "Beispiel-Webdesign für Handwerksbetrieb",
     colorA: "#ff2d8f",
@@ -40,7 +40,7 @@ const PANELS: BranchePanel[] = [
     pill: "Eventlocations",
     headline: "Dein Kalender soll ausgebucht sein.",
     subtitle:
-      "Kunden entscheiden in 5 Minuten, ob sie buchen. Deine Website ist der erste — und oft einzige — Eindruck.",
+      "Kunden entscheiden in 5 Minuten, ob sie buchen. Deine Website ist der erste und oft einzige Eindruck.",
     screenshot: "/Branchen/Hero - Eventlocation.png",
     screenshotAlt: "Beispiel-Webdesign für Eventlocation",
     colorA: "#8b5cf6",
@@ -62,7 +62,7 @@ const PANELS: BranchePanel[] = [
     pill: "Restaurants & Cafés",
     headline: "Volle Tische. Jeden Abend.",
     subtitle:
-      "Eine gute Website füllt dienstags die Tische — nicht nur freitags. Mit Online-Reservierung und lokalem SEO.",
+      "Eine gute Website füllt dienstags die Tische, nicht nur freitags. Mit Online-Reservierung und lokalem SEO.",
     screenshot: "/Branchen/Hero-Cafe.png",
     screenshotAlt: "Beispiel-Webdesign für Restaurant",
     colorA: "#c026d3",

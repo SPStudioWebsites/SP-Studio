@@ -29,7 +29,7 @@ export function FAQSection() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mt-5 text-base text-muted md:text-lg text-pretty">
-                Du hast eine Frage, die hier nicht steht? Schreib mir —
+                Du hast eine Frage, die hier nicht steht? Schreib mir,
                 ich antworte persönlich, nicht per Chatbot.
               </p>
             </Reveal>

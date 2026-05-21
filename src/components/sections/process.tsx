@@ -104,7 +104,7 @@ export function ProcessSection() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
-              Kein Stress, kein Technik-Kram. Du lieferst die Infos —
+              Kein Stress, kein Technik-Kram. Du lieferst die Infos,
               ich liefere die Webseite.
             </p>
           </Reveal>
@@ -297,7 +297,7 @@ function BestBox({
         <em className="font-display font-extrabold not-italic text-gradient">nichts wissen.</em>
       </h3>
       <p className="relative mt-2 text-base text-muted text-pretty">
-        Nur 30 Minuten deiner Zeit nötig — ich erledige den Rest.
+        Nur 30 Minuten deiner Zeit nötig. Ich erledige den Rest.
       </p>
 
       <ul className="relative mt-6 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">

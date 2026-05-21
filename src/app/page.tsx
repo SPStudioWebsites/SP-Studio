@@ -23,6 +23,9 @@ const FAQSection = dynamic(() =>
 const ServicesSection = dynamic(() =>
   import("@/components/sections/services").then((m) => m.ServicesSection)
 );
+const RegionsSection = dynamic(() =>
+  import("@/components/sections/regions").then((m) => m.RegionsSection)
+);
 const ContactSection = dynamic(() =>
   import("@/components/sections/contact").then((m) => m.ContactSection)
 );
@@ -78,6 +81,7 @@ export default function Home() {
 
         <ServicesSection />
         <ContactSection />
+        <RegionsSection />
       </main>
       <Footer />
 </>
