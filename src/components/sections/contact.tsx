@@ -6,7 +6,6 @@ import { Pill } from "@/components/ui/pill";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import {
-  CheckCircle2,
   ArrowRight,
   Loader2,
   AlertCircle,
@@ -14,6 +13,7 @@ import {
 } from "@/lib/icons";
 import { brand } from "@/lib/content";
 import { useActionState, useState } from "react";
+import Image from "next/image";
 import { submitContact, type ContactState } from "@/app/actions/contact";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -58,21 +58,45 @@ export function ContactSection() {
           </Reveal>
         </div>
 
-        {/* Phone CTA — prominent on mobile */}
-        <Reveal delay={0.25}>
-          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <a
-              href={`tel:${brand.phone}`}
-              className="group flex h-12 items-center gap-3 rounded-full border border-white/[0.12] bg-white/[0.04] px-6 text-sm font-medium text-foreground/90 transition-colors hover:border-pink/30 hover:bg-pink/[0.06]"
-            >
-              <Phone className="h-4 w-4 text-pink" />
-              <span className="font-semibold text-foreground">Anrufen</span>
-            </a>
-            <span className="text-xs text-muted">oder Formular nutzen</span>
-          </div>
-        </Reveal>
+        {/* Two-column: photo left, form right */}
+        <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-14 lg:items-start mx-auto max-w-6xl">
 
-        <div className="mt-10 mx-auto max-w-3xl">
+          {/* Left: photo + personal text + phone CTA */}
+          <Reveal delay={0.2}>
+            <div className="flex flex-col gap-6">
+              <div className="relative w-full overflow-hidden rounded-3xl" style={{ aspectRatio: "3/4" }}>
+                <Image
+                  src="/Über-Mich.jpeg"
+                  alt="Simon Pöske, Inhaber Schnell-Sichtbar.de"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 90vw, 380px"
+                  quality={85}
+                />
+                <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }} />
+              </div>
+
+              <div>
+                <p className="font-semibold text-foreground text-lg leading-snug">
+                  Du schreibst direkt mit mir.
+                </p>
+                <p className="mt-1.5 text-sm text-muted leading-relaxed">
+                  Kein Callcenter, kein Team. Ich persönlich melde mich innerhalb von 24 Stunden bei dir.
+                </p>
+              </div>
+
+              <a
+                href={`tel:${brand.phone}`}
+                className="inline-flex h-12 w-fit items-center gap-3 rounded-full border border-white/[0.12] bg-white/[0.04] px-6 text-sm font-medium text-foreground/90 transition-colors hover:border-pink/30 hover:bg-pink/[0.06]"
+              >
+                <Phone className="h-4 w-4 text-pink" />
+                <span className="font-semibold text-foreground">Lieber anrufen?</span>
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Right: form */}
+          <div>
           <Reveal delay={0.15}>
             <GlassCard variant="strong" className="relative overflow-hidden p-7 md:p-10">
               <AnimatePresence mode="wait">
@@ -169,10 +193,7 @@ export function ContactSection() {
                     <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>
                       <input type="text" name="website" tabIndex={-1} autoComplete="off" />
                     </div>
-                    <div className="mt-3 flex items-center justify-between">
-                      <p className="text-xs text-muted">
-                        Ich melde mich innerhalb von 24 Stunden.
-                      </p>
+                    <div className="mt-3 flex justify-end">
                       <ShinyButton type="submit" disabled={pending} size="md">
                         {pending ? (
                           <>
@@ -192,6 +213,8 @@ export function ContactSection() {
               </AnimatePresence>
             </GlassCard>
           </Reveal>
+          </div>
+
         </div>
       </div>
     </section>
@@ -206,9 +229,15 @@ function SuccessPanel({ message }: { message?: string }) {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="flex flex-col items-center py-12 text-center"
     >
-      <span className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-pink/20 ring-2 ring-pink/40">
-        <CheckCircle2 className="h-8 w-8 text-pink" />
-      </span>
+      <div className="relative mb-6 h-20 w-20 overflow-hidden rounded-full border border-white/10 ring-2 ring-pink/40 shadow-[0_0_24px_-4px_rgba(255,45,143,0.4)]">
+        <Image
+          src="/simon-danke.jpg"
+          alt="Simon — Danke für deine Anfrage!"
+          fill
+          className="object-cover"
+          sizes="80px"
+        />
+      </div>
       <h3 className="font-display text-3xl font-semibold tracking-tight">
         Danke! Anfrage angekommen.
       </h3>
