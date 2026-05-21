@@ -12,10 +12,7 @@ export function ProcessMarginWrapper({ children }: { children: React.ReactNode }
   const triedRef = useRef(false);
 
   const compute = () => {
-    if (window.innerWidth >= 768) {
-      setMt("-28rem");
-      return true;
-    }
+    if (window.innerWidth >= 768) return true; // handled by md:-mt-[34rem] CSS class in page.tsx
     const heading = document.querySelector(
       "#branchen > div:first-child"
     ) as HTMLElement | null;

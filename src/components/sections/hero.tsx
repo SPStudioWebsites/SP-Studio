@@ -2,12 +2,10 @@
 
 import { hero } from "@/lib/content";
 import { ShinyButton } from "@/components/ui/shiny-button";
-import { Magnetic } from "@/components/ui/magnetic-button";
 import { ArrowRight, Check } from "@/lib/icons";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 
 import { useState, useEffect } from "react";
-import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { HeroMockup } from "@/components/ui/hero-mockup";
 
 
@@ -22,15 +20,15 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
   }, []);
 
   return (
-    <h1 className="mt-7 font-display text-[3.25rem] md:text-[clamp(2.4rem,8.5vw,6.75rem)] font-semibold leading-[0.95] tracking-tight">
-      <span className="block text-foreground">
+    <h1 className="mt-7 font-display font-semibold leading-[0.95] tracking-tight">
+      <span className="block text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
         Mehr Kunden.
       </span>
       <span className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
         Mehr Aufträge.
       </span>
       <span className="block mt-1 overflow-hidden pb-3 text-[2rem] md:text-[clamp(1.5rem,4vw,3rem)]">
-        <span className="text-foreground/60 font-semibold">Für </span>
+        <span className="text-foreground font-semibold">Für </span>
         <AnimatePresence mode="wait" initial={false}>
           <motion.em
             key={WORDS[index]}
@@ -75,14 +73,22 @@ export function HeroSection() {
 
           {/* Eyebrow */}
           <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
-            <div className="group inline-flex items-center gap-2 rounded-full glass-pill px-3.5 py-1.5">
+            <div className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full glass-pill px-3.5 py-1.5">
+              {/* Pill shine sweep */}
+              <span
+                aria-hidden
+                className="animate-shiny-text pointer-events-none absolute inset-0"
+                style={{
+                  background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)",
+                }}
+              />
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pink" />
               </span>
-              <AnimatedShinyText className="inline-flex items-center justify-center text-xs font-medium tracking-wide">
-                <span>{hero.eyebrow}</span>
-              </AnimatedShinyText>
+              <span className="relative text-xs font-medium tracking-wide text-foreground/85">
+                {hero.eyebrow}
+              </span>
             </div>
           </div>
 
@@ -118,22 +124,20 @@ export function HeroSection() {
               <ShinyButton
                 href="#kontakt"
                 size="lg"
-                className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_22px_70px_-8px_rgba(255,45,143,1)] px-12 text-base font-semibold"
+                className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_24px_64px_-6px_rgba(255,45,143,0.95)] hover:-translate-y-1.5 px-12 text-base font-semibold animate-cta-pulse"
               >
                 {hero.ctaPrimary}
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </ShinyButton>
             ) : (
-              <Magnetic strength={0.22}>
-                <ShinyButton
-                  href="#kontakt"
-                  size="lg"
-                  className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_22px_70px_-8px_rgba(255,45,143,1)] px-12 text-base font-semibold"
-                >
-                  {hero.ctaPrimary}
-                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </ShinyButton>
-              </Magnetic>
+              <ShinyButton
+                href="#kontakt"
+                size="lg"
+                className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_24px_64px_-6px_rgba(255,45,143,0.95)] hover:-translate-y-1.5 px-12 text-base font-semibold animate-cta-pulse"
+              >
+                {hero.ctaPrimary}
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </ShinyButton>
             )}
           </div>
 

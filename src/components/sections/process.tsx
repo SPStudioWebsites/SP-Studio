@@ -81,7 +81,7 @@ export function ProcessSection() {
     <section
       id="ablauf"
       aria-labelledby="ablauf-h"
-      className="relative overflow-hidden pt-4 pb-16 md:pt-6 md:pb-24"
+      className="relative overflow-hidden pt-4 pb-10 md:pt-6 md:pb-20"
     >
       <div aria-hidden className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-pink/5 blur-[120px] hidden md:block" />
       <div aria-hidden className="pointer-events-none absolute right-0 bottom-1/3 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-violet/5 blur-[120px] hidden md:block" />
@@ -172,6 +172,21 @@ export function ProcessSection() {
 
           <div className="mt-16 flex flex-col items-center">
             <BestBox reduce={!!reduce} beamActive={beamActive} bRef={boxRef} />
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <a
+              href="#kontakt"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm md:px-10 md:py-4 md:text-base md:gap-2.5 font-semibold text-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_44px_-4px_rgba(255,45,143,0.8)] animate-cta-pulse"
+              style={{
+                background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)",
+                boxShadow: "0 6px 36px -6px rgba(255,45,143,0.5)",
+              }}
+            >
+              <span className="absolute inset-px rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-60 mix-blend-overlay" />
+              <span className="relative">Jetzt kostenlos beraten lassen</span>
+              <Check className="relative h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+            </a>
           </div>
         </div>
       </div>

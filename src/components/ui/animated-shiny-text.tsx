@@ -27,7 +27,7 @@ export const AnimatedShinyText: FC<AnimatedShinyTextProps> = ({
         className="animate-shiny-text pointer-events-none absolute inset-0"
         style={
           {
-            background: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%)`,
+            background: `radial-gradient(ellipse 28% 75% at 50% 50%, rgba(255,255,255,0.55) 0%, transparent 100%)`,
           } as CSSProperties
         }
       />

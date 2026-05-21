@@ -72,9 +72,11 @@ export default function Home() {
           />
 
           <IndustriesSection />
-          <ProcessMarginWrapper>
-            <ProcessSection />
-          </ProcessMarginWrapper>
+          <div className="md:-mt-[34rem]">
+            <ProcessMarginWrapper>
+              <ProcessSection />
+            </ProcessMarginWrapper>
+          </div>
           <AboutSection />
           <FAQSection />
         </div>

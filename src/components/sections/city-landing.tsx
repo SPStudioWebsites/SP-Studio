@@ -156,12 +156,17 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
             <div className="lg:col-span-7 xl:col-span-7">
               {/* Eyebrow */}
               <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
-                <div className="group inline-flex items-center gap-2 rounded-full glass-pill px-3.5 py-1.5">
+                <div className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full glass-pill px-3.5 py-1.5">
+                  <span
+                    aria-hidden
+                    className="animate-shiny-text pointer-events-none absolute inset-0"
+                    style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }}
+                  />
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink opacity-75" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pink" />
                   </span>
-                  <span className="text-xs font-medium tracking-wide text-foreground/85">
+                  <span className="relative text-xs font-medium tracking-wide text-foreground/85">
                     Webagentur · Region {region}
                   </span>
                 </div>
