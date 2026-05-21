@@ -488,3 +488,25 @@
 .blog-content td strong {
   color: var(--pink);
 }
+
+.blog-content img {
+  width: 100%;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.blog-content figure {
+  margin: 2rem 0;
+}
+
+.blog-content figcaption {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.38);
+  font-style: italic;
+}

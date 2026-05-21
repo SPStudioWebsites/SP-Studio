@@ -75,7 +75,12 @@
       "Bash(mkdir -p /Users/Simon/meine-website/Schnell-Sichtbar/public/hero-crops)",
       "Bash(python3)",
       "WebFetch(domain:www.sliderrevolution.com)",
-      "Bash(python3 -c \"from PIL import Image; img = Image.open\\('/Users/Simon/meine-website/Schnell-Sichtbar/public/iphone 17 Pro filled.png'\\); print\\(img.size\\)\")"
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\('/Users/Simon/meine-website/Schnell-Sichtbar/public/iphone 17 Pro filled.png'\\); print\\(img.size\\)\")",
+      "mcp__apify__search-actors",
+      "Bash(nano-banana \"Bamberg Germany historic city view, Bamberger Dom cathedral on the hill, red sandstone architecture, Regnitz river, medieval old town, golden hour light, photorealistic travel photography, wide establishing shot\" -s 2K -a 16:9 -o bamberg-altstadt --model pro)",
+      "Bash(nano-banana \"cozy German restaurant interior in Bamberg, rustic Franconian Wirtshaus atmosphere, wooden tables, warm candlelight, beer steins, stone walls, authentic bavarian pub, guests dining, inviting ambiance, photorealistic\" -s 2K -a 16:9 -o bamberg-restaurant --model pro)",
+      "Bash(nano-banana \"professional modern restaurant website on laptop screen, dark elegant design, hero section with food photography, German language navigation bar with Speisekarte and Reservierung, pink and violet accent colors, clean minimal layout, high-end web design mockup\" -s 2K -a 16:9 -o website-restaurant-bamberg --model pro)",
+      "Bash(nano-banana \"Google search results page on smartphone screen, showing local restaurant search for Bamberg Germany, Google Maps Local Pack with 3 restaurant listings showing star ratings and photos, realistic mobile UI, hand holding phone\" -s 2K -a 9:16 -o google-local-pack-bamberg --model pro)"
     ],
     "additionalDirectories": [
       "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"

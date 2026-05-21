@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: Props) {
       <ScrollProgress />
       <BlogBackground />
 
-      <main className="relative mx-auto max-w-3xl px-6 pb-24 pt-36">
+      <main className="relative mx-auto max-w-5xl px-6 pb-24 pt-36">
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: blogSchema }} />
 
           {/* Back link */}
