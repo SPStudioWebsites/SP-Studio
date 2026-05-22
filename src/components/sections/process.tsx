@@ -96,9 +96,9 @@ export function ProcessSection() {
               id="ablauf-h"
               className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
             >
-              In 14 Tagen{" "}
+              Fertig in 14 Tagen.{" "}
               <em className="font-display font-extrabold not-italic text-gradient">
-                klingelt dein Telefon.
+                Dann klingelt dein Telefon.
               </em>
             </h2>
           </Reveal>

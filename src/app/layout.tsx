@@ -38,18 +38,18 @@ const instrument = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://schnell-sichtbar.de"),
   title: {
-    default: "Schnell-Sichtbar.de | Webdesign für Handwerker in Franken",
+    default: "Schnell-Sichtbar.de | Webdesign Franken",
     template: "%s · Schnell-Sichtbar.de",
   },
   description:
-    "Webdesign Haßfurt & Region Haßberge – Webseiten für Handwerker, Frisöre & Restaurants. Schnell online, lokal gefunden. Jetzt kostenlos beraten lassen.",
+    "Webdesign Franken – professionelle Webseiten für lokale Unternehmen in der Region. Für Handwerker, Restaurants, Salons & mehr. Festpreis, schnell online.",
   keywords: [
+    "Webdesign Franken",
+    "Webagentur Franken",
+    "Webdesign Unterfranken",
+    "Webseite erstellen Franken",
+    "Webdesign lokale Unternehmen",
     "Webagentur Haßberge",
-    "Webdesign Haßfurt",
-    "Webseite für Restaurant",
-    "Local SEO Unterfranken",
-    "Webdesign Ebern",
-    "Webdesign Hofheim",
   ],
   authors: [{ name: "Simon Pörschke" }],
   icons: {
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
     apple: { url: "/Favicons/apple-touch-icon.png", sizes: "180x180" },
   },
   openGraph: {
-    title: "Schnell-Sichtbar.de | Webdesign für Handwerker in Franken",
+    title: "Schnell-Sichtbar.de | Webdesign Franken",
     description:
-      "Webdesign Haßfurt & Region Haßberge – Webseiten für Handwerker, Frisöre & Restaurants. Schnell online, lokal gefunden. Jetzt kostenlos beraten lassen.",
+      "Webdesign Franken – professionelle Webseiten für lokale Unternehmen in der Region. Für Handwerker, Restaurants, Salons & mehr. Festpreis, schnell online.",
     type: "website",
     locale: "de_DE",
     siteName: "Schnell-Sichtbar.de",
@@ -80,9 +80,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Schnell-Sichtbar.de | Webdesign für Handwerker in Franken",
+    title: "Schnell-Sichtbar.de | Webdesign Franken",
     description:
-      "Webdesign Haßfurt & Region Haßberge – Webseiten für Handwerker, Frisöre & Restaurants. Schnell online, lokal gefunden.",
+      "Webdesign Franken – professionelle Webseiten für lokale Unternehmen. Für Handwerker, Restaurants, Salons & mehr. Festpreis, schnell online.",
     images: ["/laptop-hero-transparent.png"],
   },
 };

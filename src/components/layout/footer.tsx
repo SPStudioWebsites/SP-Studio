@@ -1,4 +1,5 @@
 import { brand, footer } from "@/lib/content";
+import { getRegionLinks } from "@/lib/region-links";
 import { Mail, Phone, MapPin, Heart } from "@/lib/icons";
 
 export function Footer() {
@@ -68,7 +69,7 @@ export function Footer() {
               Regionen
             </h3>
             <ul className="space-y-3 text-sm">
-              {footer.regions.map((l) => (
+              {getRegionLinks().map((l) => (
                 <li key={l.href}>
                   <a href={l.href} className="text-foreground/80 transition-colors hover:text-pink">
                     {l.label}

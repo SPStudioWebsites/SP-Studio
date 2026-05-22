@@ -19,13 +19,18 @@ const localBusiness = {
   },
   areaServed: [
     { "@type": "City", name: "Haßfurt" },
+    { "@type": "City", name: "Schweinfurt" },
+    { "@type": "City", name: "Bamberg" },
+    { "@type": "City", name: "Würzburg" },
     { "@type": "City", name: "Ebern" },
     { "@type": "City", name: "Hofheim in Unterfranken" },
     { "@type": "City", name: "Königsberg in Bayern" },
     { "@type": "City", name: "Zeil am Main" },
     { "@type": "City", name: "Eltmann" },
-    { "@type": "AdministrativeArea", name: "Haßberge" },
+    { "@type": "AdministrativeArea", name: "Franken" },
     { "@type": "AdministrativeArea", name: "Unterfranken" },
+    { "@type": "AdministrativeArea", name: "Oberfranken" },
+    { "@type": "AdministrativeArea", name: "Haßberge" },
   ],
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -33,7 +38,7 @@ const localBusiness = {
     opens: "09:00",
     closes: "18:00",
   },
-  description: brand.tagline,
+  description: "Webdesign Franken für lokale Unternehmen – professionelle Webseiten für Handwerker, Restaurants, Frisöre & Salons in der Region.",
   priceRange: "€€",
   sameAs: ["https://maps.app.goo.gl/usAdLbggi5VHqWrR7"],
   founder: { "@id": `${BASE}/#person` },
@@ -52,6 +57,26 @@ const person = {
     postalCode: brand.address.zip,
     addressRegion: "Unterfranken",
     addressCountry: "DE",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/simon-poerschke",
+    "https://www.xing.com/profile/Simon_Poerschke",
+    "https://www.instagram.com/schnellsichtbar",
+    "https://www.facebook.com/schnellsichtbar",
+  ],
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": `${BASE}/#website`,
+  url: BASE,
+  name: "Schnell-Sichtbar.de",
+  description: "Webdesign für Handwerker, Gastronomen und Salons in Franken",
+  publisher: { "@id": `${BASE}/#person` },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${BASE}/?s={search_term_string}`,
+    "query-input": "required name=search_term_string",
   },
 };
 
@@ -87,7 +112,7 @@ const faqPage = {
 
 const schemaGraph = {
   "@context": "https://schema.org",
-  "@graph": [localBusiness, person, howTo, faqPage],
+  "@graph": [localBusiness, person, website, howTo, faqPage],
 };
 
 const jsonLd = JSON.stringify(schemaGraph).replace(/</g, "\\u003c");

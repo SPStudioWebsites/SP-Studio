@@ -1,4 +1,26 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+
+export const metadata: Metadata = {
+  title: "Webdesign Franken | Schnell-Sichtbar.de",
+  description:
+    "Webdesign Franken für lokale Unternehmen – professionelle Webseiten für Handwerker, Restaurants, Frisöre & Salons in der Region. Festpreis ab 399 €. Kostenlose Beratung.",
+  keywords: [
+    "Webdesign Franken",
+    "Webagentur Franken",
+    "Webdesign Unterfranken",
+    "Webseite erstellen Franken",
+    "Webdesign für Handwerker",
+    "Webdesign für Restaurants",
+    "lokale Webseite Franken",
+  ],
+  alternates: { canonical: "https://schnell-sichtbar.de" },
+  openGraph: {
+    title: "Webdesign Franken | Schnell-Sichtbar.de",
+    description:
+      "Webdesign Franken für lokale Unternehmen – professionelle Webseiten für Handwerker, Restaurants & Salons. Festpreis ab 399 €.",
+  },
+};
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { JsonLd } from "@/components/seo/json-ld";

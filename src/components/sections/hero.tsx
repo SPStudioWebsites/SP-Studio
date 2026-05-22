@@ -21,6 +21,9 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
 
   return (
     <h1 className="mt-7 font-display font-semibold leading-[0.95] tracking-tight">
+      <span className="block text-foreground/60 text-[1rem] md:text-[1.25rem] font-medium tracking-widest uppercase mb-3">
+        Webdesign Franken
+      </span>
       <span className="block text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
         Mehr Kunden.
       </span>

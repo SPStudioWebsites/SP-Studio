@@ -24,7 +24,7 @@ export const navLinks = [
 ] as const;
 
 export const hero = {
-  eyebrow: "Webagentur · Region Franken",
+  eyebrow: "Webdesign aus Franken",
   title: ["Schnell sichtbar.", "*Sofort* überzeugend."],
   subtitle:
     "Die meisten Betriebe verlieren täglich Kunden, weil ihre Webseite nicht überzeugt. Ich ändere das. In 14 Tagen, zum Festpreis.",
@@ -231,6 +231,7 @@ export const footer = {
     { label: "Datenschutz", href: "/datenschutz" },
   ],
   regions: [
+    { label: "Webdesign Nürnberg",    href: "/webdesign-nuernberg" },
     { label: "Webdesign Haßfurt",     href: "/webdesign-hassfurt" },
     { label: "Webdesign Schweinfurt", href: "/webdesign-schweinfurt" },
     { label: "Webdesign Bamberg",     href: "/webdesign-bamberg" },
