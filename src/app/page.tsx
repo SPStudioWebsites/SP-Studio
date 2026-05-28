@@ -39,6 +39,9 @@ const ProcessSection = dynamic(() =>
 const AboutSection = dynamic(() =>
   import("@/components/sections/about").then((m) => m.AboutSection)
 );
+const WhyWebsiteSection = dynamic(() =>
+  import("@/components/sections/why-website").then((m) => m.WhyWebsiteSection)
+);
 const FAQSection = dynamic(() =>
   import("@/components/sections/faq").then((m) => m.FAQSection)
 );
@@ -99,6 +102,7 @@ export default function Home() {
               <ProcessSection />
             </ProcessMarginWrapper>
           </div>
+          <WhyWebsiteSection />
           <AboutSection />
           <FAQSection />
         </div>

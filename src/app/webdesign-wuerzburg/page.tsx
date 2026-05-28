@@ -65,6 +65,18 @@ const faq = [
     q: "Kann mein Weingut oder meine Vinothek von einer Website profitieren?",
     a: "Absolut. Frankenwein ist eine der bekanntesten deutschen Weinregionen, und Würzburger Weingüter sowie Weinstuben werden täglich über Google gesucht. Eine professionelle Website mit lokalem SEO bringt Touristen und Einheimische direkt zu dir, auch wenn sie noch gar nicht wussten, dass es dich gibt.",
   },
+  {
+    q: "Welche Branchen profitieren in Würzburg am meisten von einer neuen Webseite?",
+    a: "In Würzburg profitieren besonders Gastronomie und Weingüter (durch Tourismus und Frankenwein-Reisende), Friseure und Beauty-Studios (durch 28.000 Studierende), Ärzte und Therapeuten, Handwerksbetriebe (Sanitär, Elektrik, Schreinerei) sowie Hotels, Pensionen und Ferienwohnungen. Auch B2B-Dienstleister rund um Universität und Kliniken haben einen großen Suchmarkt: Steuerberater, IT-Dienstleister, Personalberatungen. Wer in einer dieser Branchen lokal sichtbar ist, hat in Würzburg einen klaren Vorteil.",
+  },
+  {
+    q: "Wie wichtig ist Google My Business für Betriebe in Würzburg?",
+    a: "Sehr wichtig. In einer Stadt mit so viel Tourismus und Studierenden entscheiden Maps-Bewertungen und Öffnungszeiten oft in Sekunden, ob jemand zu dir kommt oder zur Konkurrenz. Suchanfragen wie 'Mittagstisch Würzburg Marktplatz' oder 'Friseur Würzburg Sanderau' zeigen zuerst die Google-Maps-Box. Ich richte das Profil korrekt ein, hole Bewertungen ab und sorge dafür, dass dein Eintrag nahtlos mit deiner Webseite zusammenarbeitet.",
+  },
+  {
+    q: "Lohnt sich eine Webseite auch, wenn ich schon viele Stammkunden habe?",
+    a: "Ja. Würzburg hat einen ständigen Zustrom an Neukunden: 28.000 Studierende, die alle paar Jahre wechseln, Hunderttausende Touristen und Weinreisende, neu zugezogene Familien aus dem ganzen Maintal. Ohne digitale Sichtbarkeit verpasst du diese Zielgruppen komplett. Eine moderne Webseite ist die Grundlage dafür, dass auch in zehn Jahren noch Anfragen reinkommen – ohne dass du jedes Jahr neue Werbe-Kampagnen schalten musst.",
+  },
 ] as const;
 
 const standortBlock = (
@@ -133,6 +145,58 @@ const standortBlock = (
                 aus ganz Deutschland wegen des Frankenweins und 28.000 Studierende, die lokal
                 konsumieren. Gastronomie, Weingüter, Handel und Dienstleister, die online
                 gefunden werden, bedienen alle drei Gruppen ohne zusätzliches Werbebudget.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-10">
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Stadtteile und Quartiere
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Sanderau, Grombühl, Heidingsfeld & Co.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Würzburger suchen quartiersgenau: &quot;Friseur Sanderau&quot;, &quot;Café
+                Grombühl&quot;, &quot;Hausarzt Heidingsfeld&quot;, &quot;Pizzeria Frauenland&quot;.
+                Ich optimiere deine Webseite gezielt für deine Stadtteile – Altstadt,
+                Sanderau, Grombühl, Heidingsfeld, Frauenland, Zellerau, Versbach, Lengfeld
+                und die umliegenden Orte Höchberg, Veitshöchheim, Estenfeld, Eibelstadt
+                sowie das gesamte Weinanbaugebiet rund um die Stadt.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-pink/70">
+                Branchen mit lokalem Hebel
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Wein, Gastronomie, Gesundheit.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Würzburg lebt von Frankenwein (Würzburger Stein, Würzburger Pfaffenberg,
+                Iphofen, Volkach), einer reichen Gastroszene zwischen Studenten-Kneipen
+                und Sterneküche und einem starken Gesundheitssektor (Uniklinik, Missioklinik,
+                zahlreiche Fachärzte). Dazu kommen Handwerk, Einzelhandel und touristische
+                Anbieter. Jede dieser Branchen braucht eigene SEO-Strategien – ich kenne
+                die Unterschiede und baue Seiten, die in der richtigen Nische ranken.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Studierende und Pendler
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Eine Stadt, die nie stillsteht.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                28.000 Studierende der Julius-Maximilians-Universität und der Hochschule
+                für angewandte Wissenschaften suchen täglich nach Wohnungen, Lokalen,
+                Friseuren, Reparaturwerkstätten und Dienstleistungen. Dazu kommen
+                Tausende Pendler aus Kitzingen, Marktheidenfeld, Ochsenfurt und Bad
+                Kissingen. Eine Webseite, die für mobile Suche optimiert und in Maps
+                gut sichtbar ist, erreicht alle diese Gruppen – ohne dass du dafür
+                jeden Monat neue Werbeanzeigen schalten musst.
               </p>
             </div>
           </div>

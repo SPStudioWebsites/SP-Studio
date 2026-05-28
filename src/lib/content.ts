@@ -194,6 +194,26 @@ export const faq = [
     q: "Wer braucht eine lokale Website?",
     a: "Jeder Betrieb, der Kunden aus der Region gewinnen will. Ob Handwerker, Dienstleister, Praxis oder kleines Unternehmen: Wer lokal gefunden werden möchte, braucht eine Website, die genau dafür gebaut ist. Eine allgemeine Seite reicht längst nicht mehr. Google bevorzugt Seiten mit echtem lokalem Bezug, konkreten Standortangaben und klaren Leistungsbeschreibungen.",
   },
+  {
+    q: "Wie schnell rechnet sich eine neue Webseite?",
+    a: "In den meisten Fällen schon nach wenigen neuen Kunden. Rechne einmal kurz: Wenn eine professionelle Webseite ab 699 € einmalig kostet und ein einziger neuer Stammkunde im Jahr 1.000–3.000 € Umsatz bringt, ist die Investition oft schon im ersten Monat reingespielt. Im Vergleich zu Google Ads, wo jeder Klick neu kostet, oder Print-Werbung, die einmal gedruckt wird und dann wirkungslos verstaubt, arbeitet eine gute Webseite jeden Tag im Jahr für dich – ohne weitere Kosten.",
+  },
+  {
+    q: "Was bringt eine moderne Webseite mehr als eine alte oder selbstgebaute?",
+    a: "Eine moderne Webseite lädt in unter 2 Sekunden, sieht auf dem Handy perfekt aus (über 70 % der Suchanfragen kommen heute mobil), wird von Google als vertrauenswürdig eingestuft und führt Besucher gezielt zu Kontakt, Buchung oder Anruf. Eine alte oder selbstgebaute Seite ist meist langsam, mobil kaputt, ohne SEO-Grundlagen und ohne klare Conversion-Pfade. Der Unterschied zeigt sich konkret: ähnlich viele Besucher, aber drei- bis fünfmal mehr Anfragen.",
+  },
+  {
+    q: "Reicht nicht eine Facebook- oder Instagram-Seite statt einer Webseite?",
+    a: "Nein. Social Media ist ein nützlicher Kanal, aber kein Ersatz für eine eigene Webseite. Bei Google rankt Facebook nicht für deine lokalen Keywords. Du gehörst dir nicht selbst – Meta kann jederzeit Algorithmen oder Regeln ändern. Und Kunden, die ernsthaft suchen (Handwerker, Steuerberater, Arzttermin), erwarten eine echte Webseite mit klaren Informationen. Social Media ergänzt deine Webseite, ersetzt sie aber nicht.",
+  },
+  {
+    q: "Was unterscheidet eine 'Profi-Webseite' von einem Wix- oder Jimdo-Baukasten?",
+    a: "Baukasten-Lösungen sehen am Anfang einfach aus, haben aber strukturelle Probleme: langsame Ladezeiten, eingeschränkte SEO, unsaubere HTML-Struktur, monatliche Mietkosten ohne Eigentum am Code. Eine handgebaute Webseite (wie ich sie liefere) ist schnell, sauber strukturiert, technisch vollständig SEO-optimiert und gehört dir komplett – einmal bezahlt, lebenslang nutzbar. Der Unterschied im Google-Ranking ist nach 3–6 Monaten meist deutlich sichtbar.",
+  },
+  {
+    q: "Wie wichtig ist Mobile-First wirklich für lokale Betriebe?",
+    a: "Entscheidend. Über 70 Prozent aller lokalen Suchanfragen kommen vom Smartphone – jemand sucht eine Pizzeria, einen Notdienst, eine Werkstatt unterwegs. Wenn deine Webseite auf dem Handy zu klein, zu langsam oder unübersichtlich ist, ist der Kunde in 3 Sekunden wieder weg. Mobile-First heißt: Die Seite wird zuerst für das Handy designt und entwickelt, nicht nachträglich angepasst. Genau so baue ich.",
+  },
 ] as const;
 
 export const contact = {

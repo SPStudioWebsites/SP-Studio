@@ -64,6 +64,18 @@ const faq = [
     q: "Kann meine Website auch Touristen ansprechen?",
     a: "Absolut. Bamberg zieht jährlich Hunderttausende Besucher an, für Gastronomie, Hotels und Läden in der Innenstadt ist das eine riesige Chance. Ich baue Websites, die sowohl auf Deutsch als auch für internationale Suchanfragen gut auffindbar sind.",
   },
+  {
+    q: "Welche Branchen profitieren in Bamberg am meisten von einer neuen Webseite?",
+    a: "Besonders stark profitieren in Bamberg die klassischen lokalen Branchen mit hoher Suchnachfrage: Gastronomie (Brauereigaststätten, Cafés in der Sandstraße, Restaurants in der Inselstadt), Hotels und Pensionen, Friseure, Kosmetikstudios, Handwerksbetriebe (Sanitär, Elektrik, Maler, Dachdecker im Landkreis Bamberg) sowie Einzelhändler in der Innenstadt. Aber auch spezialisierte Dienstleister wie Steuerberater, Physiotherapeuten oder Hochzeitsfotografen finden über Google deutlich mehr Kunden als über klassische Mundpropaganda.",
+  },
+  {
+    q: "Wie wichtig ist Google My Business für Betriebe in Bamberg?",
+    a: "In einer Touristenstadt wie Bamberg ist Google My Business (heute Google Unternehmensprofil) absolut entscheidend. Viele Suchanfragen wie 'Restaurant Bamberg in der Nähe' oder 'Friseur Bamberg offen' zeigen nicht klassische Webseiten, sondern die Google-Maps-Box mit Bewertungen, Öffnungszeiten und Fotos. Ich richte das Profil ein, verknüpfe es korrekt mit deiner Webseite und sorge dafür, dass beide zusammen ranken. Ohne diese Verbindung verschenkt man in Bamberg einen Großteil der lokalen Sichtbarkeit.",
+  },
+  {
+    q: "Lohnt sich eine Webseite auch, wenn ich schon viele Stammkunden habe?",
+    a: "Ja, und zwar gerade dann. Stammkunden sind die Basis, aber sie sterben, ziehen weg, wechseln Anbieter oder werden weniger. Ohne digitale Sichtbarkeit fehlt der Nachschub an Neukunden. In Bamberg, wo jährlich Tausende neue Bewohner zuziehen und Hunderttausende Touristen kommen, ist eine moderne Webseite die einfachste Versicherung gegen schrumpfende Auftragsbücher. Wer heute nicht sichtbar ist, merkt es oft erst, wenn es zu spät ist.",
+  },
 ] as const;
 
 const standortBlock = (
@@ -131,6 +143,56 @@ const standortBlock = (
                 an. Restaurants, Cafés, Läden und Attraktionen werden über Google Maps und
                 Websuche gebucht, meist noch vor der Anreise. Eine lokal optimierte Website
                 erschließt dir diesen Kundenstrom ohne Werbebudget, dauerhaft.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-10">
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Stadtteile und Quartiere
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Lokale Suche denkt in Quartieren.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Suchanfragen in Bamberg laufen oft sehr quartiersnah: &quot;Friseur Sandstraße&quot;,
+                &quot;Café Inselstadt&quot;, &quot;Bäcker Wunderburg&quot;, &quot;Handwerker
+                Gaustadt&quot;, &quot;Restaurant Gärtnerstadt&quot;. Ich optimiere deine Webseite
+                gezielt für die Stadtteile, in denen du tätig bist – Innenstadt, Inselstadt,
+                Sandstraße, Wunderburg, Gartenstadt, Gaustadt oder die umliegenden Orte
+                Stegaurach, Hallstadt, Memmelsdorf und Bischberg.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-pink/70">
+                Branchen mit lokalem Hebel
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Bier, Tourismus, Handwerk.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Bamberg ist geprägt von Brauereitradition (neun aktive Brauereien im Stadtgebiet),
+                einer lebendigen Gastroszene rund um Rauchbier und fränkische Küche, sowie einem
+                soliden Mittelstand aus Handwerk und Dienstleistungen im Landkreis. Diese Vielfalt
+                bedeutet: jede Branche braucht eigene SEO-Strategien. Eine Brauereigaststätte
+                wird anders gefunden als ein Sanitärbetrieb in Stegaurach. Ich baue beides.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Touristenstrom als Dauerumsatz
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Internationale Gäste, deutsche Suchgewohnheiten.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Über 700.000 Übernachtungen pro Jahr, dazu Tagesgäste aus ganz Deutschland und
+                dem Ausland. Touristen entscheiden auf dem Smartphone, wo sie essen, schlafen
+                und einkaufen – meist auf Google Maps und über Sterne-Bewertungen. Eine Webseite,
+                die mobil schnell lädt, klare Speisekarten zeigt und Online-Reservierung erlaubt,
+                gewinnt diese Kunden. Eine veraltete Seite verliert sie an die Konkurrenz im
+                Nachbarhaus.
               </p>
             </div>
           </div>

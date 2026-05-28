@@ -66,6 +66,18 @@ const faq = [
     q: "Muss ich die Texte für meine Website selbst schreiben?",
     a: "Nein. Wenn du die Grundinfos zu deinem Betrieb teilst, formuliere ich die Texte für dich: verständlich, überzeugend und SEO-optimiert auf Haßfurt und die Haßberge ausgerichtet. Du kannst natürlich auch eigene Inhalte einbringen.",
   },
+  {
+    q: "Welche Branchen profitieren in Haßfurt und den Haßbergen am meisten?",
+    a: "Im Landkreis Haßberge profitieren besonders Handwerksbetriebe (Sanitär, Elektrik, Maler, Schreinerei, Dachdecker), Landwirtschaftszulieferer und Direktvermarkter, Gastronomiebetriebe entlang des Mains (Zeil, Haßfurt, Eltmann), Pflegedienste, Tierärzte sowie kleine Manufakturen und Hofläden. Gerade auf dem Land ist die Konkurrenz online noch gering – wer hier eine moderne Webseite hat, ist oft der einzige in seiner Nische, der überhaupt bei Google auftaucht.",
+  },
+  {
+    q: "Wie wichtig ist Google My Business für Betriebe in Haßfurt?",
+    a: "Sehr wichtig. Gerade in ländlichen Regionen wie den Haßbergen ist das Google-Unternehmensprofil oft die erste und einzige Information, die Kunden über dich finden. Suchanfragen wie 'Bäcker Haßfurt offen', 'Werkstatt Zeil am Main' oder 'Friseur Ebern in der Nähe' zeigen Maps-Einträge ganz oben. Ich richte das Profil ein, hole Bewertungen und verknüpfe es sauber mit deiner Webseite, damit beide gemeinsam für lokale Suchen ranken.",
+  },
+  {
+    q: "Lohnt sich eine Webseite auch, wenn ich schon viele Stammkunden habe?",
+    a: "Ja, gerade in der Region Haßberge. Ländliche Strukturen verändern sich: Junge Generationen suchen alles online, Stammkunden ziehen weg oder werden weniger mobil, neue Bewohner kommen ohne Verbindungen in die Region. Ohne digitale Sichtbarkeit reißt der Nachschub an Neukunden früher oder später ab. Eine moderne Webseite ist die einfachste Versicherung dagegen – einmal investiert, arbeitet sie über Jahre für dich.",
+  },
 ] as const;
 
 const regionBlock = (
@@ -134,6 +146,57 @@ const regionBlock = (
                 Das bedeutet: Wer jetzt handelt, besetzt die vorderen Plätze bei lokalen
                 Suchanfragen, bevor es die Konkurrenz tut. Eine gute Website ist im
                 Haßberge-Kreis noch immer ein echter Wettbewerbsvorteil.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-10">
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Orte und Ortsteile
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Vom Main bis in die Haßberge.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Im Landkreis Haßberge gibt es nicht nur Haßfurt selbst, sondern zahlreiche
+                Marktgemeinden und Dörfer, in denen lokale Suche entscheidend ist:
+                &quot;Werkstatt Zeil am Main&quot;, &quot;Hofladen Knetzgau&quot;,
+                &quot;Sanitär Ebern&quot;, &quot;Restaurant Königsberg&quot;. Ich optimiere
+                deine Webseite für die Orte, in denen du tätig bist – Haßfurt, Zeil am Main,
+                Eltmann, Ebern, Königsberg, Hofheim, Knetzgau, Stettfeld, Theres, Wonfurt,
+                Sand am Main und das gesamte Maintal.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-pink/70">
+                Branchen mit lokalem Hebel
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Handwerk, Landwirtschaft, Direktvermarkter.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Die Haßberge sind geprägt von einer starken Handwerks-Tradition (Schreinerei,
+                Sanitär, Bau, Dachdecker), landwirtschaftlichen Betrieben mit Direktvermarktung
+                (Hofläden, Metzgereien, Bäckereien, Brennereien), Gastronomie entlang des Mains
+                sowie kleinen Manufakturen. Anders als in der Großstadt geht es hier nicht um
+                hartes SEO-Wettrüsten, sondern um saubere Grundlagen: eine schnelle, mobile
+                Webseite mit klaren Leistungen reicht oft schon, um die Konkurrenz zu überholen.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Wenig Konkurrenz, klare Vorteile
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Wer früh dran ist, gewinnt langfristig.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Im Landkreis Haßberge ist die Online-Konkurrenz in vielen Branchen noch
+                überschaubar. Wer jetzt eine moderne Webseite hat, besetzt die ersten
+                Google-Plätze für Suchanfragen in Haßfurt, Ebern, Zeil und Umgebung – und
+                hält diese Position oft jahrelang. Genau das ist die größte Chance auf dem
+                Land: niedrige Eintrittsbarrieren, dauerhafte Sichtbarkeit, planbare Anfragen.
               </p>
             </div>
           </div>

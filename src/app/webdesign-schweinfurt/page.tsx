@@ -65,6 +65,18 @@ const faq = [
     q: "Muss ich die Texte für meine Website selbst schreiben?",
     a: "Nein. Wenn du die Grundinfos zu deinem Betrieb teilst, formuliere ich die Texte für dich: verständlich, überzeugend und SEO-optimiert auf Schweinfurt ausgerichtet. Du kannst natürlich auch eigene Inhalte einbringen.",
   },
+  {
+    q: "Welche Branchen profitieren in Schweinfurt am meisten von einer neuen Webseite?",
+    a: "In Schweinfurt profitieren besonders Handwerksbetriebe (Sanitär, Elektrik, KFZ, Schreinerei, Bau), Industriedienstleister und Zulieferer (durch die starke lokale Industrie um SKF, ZF Sachs, Bosch Rexroth), Gastronomie und Hotels, Friseure, Kosmetikstudios sowie Ärzte und Therapeuten. Auch klassische Einzelhändler in der Innenstadt und am Marktplatz finden über eine gute Webseite und Maps-Optimierung deutlich mehr Laufkundschaft – gerade weil viele Mitbewerber online noch unterinvestiert sind.",
+  },
+  {
+    q: "Wie wichtig ist Google My Business für Betriebe in Schweinfurt?",
+    a: "Entscheidend. Schweinfurter suchen sehr lokal – 'Werkstatt Schweinfurt Hafen', 'Friseur Schweinfurt Innenstadt', 'Italiener Schweinfurt offen'. Google zeigt dabei zuerst die Maps-Box mit Bewertungen, Telefonnummer und Öffnungszeiten. Wer dort nicht oder nur schlecht gepflegt auftaucht, ist für viele Schweinfurter praktisch unsichtbar. Ich richte das Profil ein, optimiere es für lokale Keywords und sorge dafür, dass deine Webseite und der Maps-Eintrag gemeinsam ranken.",
+  },
+  {
+    q: "Lohnt sich eine Webseite auch, wenn ich schon viele Stammkunden habe?",
+    a: "Ja. Schweinfurt ist eine Industriestadt im Wandel: Strukturwandel, Arbeitsplatzveränderungen, demografische Verschiebungen. Stammkunden gehen in Rente, ziehen weg oder wechseln Anbieter. Ohne digitale Sichtbarkeit fehlt der Nachschub an Neukunden – und das merkt man oft erst, wenn die Auftragsbücher schon dünner werden. Eine moderne Webseite ist die einfachste Versicherung gegen das schleichende Abwandern und arbeitet rund um die Uhr für dich.",
+  },
 ] as const;
 
 const wirtschaftsstandortBlock = (
@@ -134,6 +146,59 @@ const wirtschaftsstandortBlock = (
                 in Schweinfurt bedeutet das: Wer keine professionelle Website mit lokalem
                 SEO hat, verschenkt täglich Aufträge. Eine einmalige Investition in eine
                 gute Website bringt dauerhaft neue Kunden, ohne laufende Werbekosten.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-10">
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Stadtteile und Umland
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Innenstadt, Hafen, Niederwerrn und mehr.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Schweinfurter suchen quartiersnah: &quot;Werkstatt Schweinfurt Hafen&quot;,
+                &quot;Friseur Niederwerrn&quot;, &quot;Italiener Schweinfurt Innenstadt&quot;,
+                &quot;Sanitär Sennfeld&quot;. Ich optimiere deine Webseite gezielt für die
+                Stadtteile, in denen du tätig bist – Innenstadt, Hafen-Ost, Oberndorf,
+                Bergl, Steinberg, Deutschhof sowie die umliegenden Gemeinden Niederwerrn,
+                Sennfeld, Schonungen, Gochsheim, Schwebheim, Üchtelhausen und das gesamte
+                Schweinfurter Land.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-pink/70">
+                Branchen mit lokalem Hebel
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Industrie, Handwerk, Dienstleister.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Schweinfurt ist Heimat international agierender Industrie (SKF, ZF Sachs,
+                Bosch Rexroth, Schaeffler), aber vor allem eines dichten Netzes mittlerer
+                Handwerksbetriebe und lokaler Dienstleister, die diese Industrie umringen.
+                B2B-Zulieferer, technische Werkstätten, Reinigungen, IT-Dienstleister,
+                Personalvermittler – sie alle haben enge lokale Zielgruppen. Eine gute
+                Webseite und sauberes lokales SEO sind hier oft der entscheidende Faktor,
+                um sich gegen größere Wettbewerber zu behaupten.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Pendler und Einzugsgebiet
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Zehntausende Pendler täglich.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Schweinfurt ist ein wichtiges wirtschaftliches Zentrum in Unterfranken,
+                mit Zehntausenden Pendlern pro Tag aus Haßfurt, Bad Kissingen, Gerolzhofen,
+                Volkach und dem ganzen Landkreis. Sie alle suchen Friseure, Werkstätten,
+                Mittagsrestaurants, Ärzte oder Dienstleister in Arbeitsplatznähe. Eine
+                mobil optimierte Webseite mit Maps-Eintrag erreicht diese Zielgruppe
+                automatisch – ohne dass du dafür extra werben musst.
               </p>
             </div>
           </div>

@@ -65,6 +65,18 @@ const faq = [
     q: "Kann ich auch als Handwerker in Nürnberg von einer Website profitieren?",
     a: "Absolut. Nürnberg hat einen riesigen Bedarf an lokalen Handwerkern. Mit einer suchoptimierten Website erscheinst du bei 'Dachdecker Nürnberg', 'Maler Nürnberg Süd' oder 'Sanitär Nürnberg' – und das ohne Werbebudget, dauerhaft.",
   },
+  {
+    q: "Welche Branchen profitieren in Nürnberg am meisten von einer neuen Webseite?",
+    a: "In Nürnberg ist die Spannbreite groß: stark profitieren klassische Handwerksbetriebe (Sanitär, Elektrik, Schreinerei, KFZ in den Gewerbegebieten Maiach und Langwasser), Gastronomie und Hotels in der Altstadt und Gostenhof, Friseure und Kosmetikstudios in den Stadtteilen, Ärzte und Therapeuten, Steuerberater, Anwaltskanzleien sowie spezialisierte B2B-Dienstleister rund um die Industrie. Auch kleine Manufakturen und Direktvermarkter (Lebkuchen, Bratwurst, Bier) bekommen über eine gute Webseite Bestellungen aus ganz Deutschland.",
+  },
+  {
+    q: "Wie wichtig ist Google My Business für Betriebe in Nürnberg?",
+    a: "Sehr wichtig. In einer Großstadt mit über 500.000 Einwohnern sind die meisten Suchanfragen lokal: 'Friseur Nürnberg in der Nähe', 'Italiener Nürnberg Altstadt', 'Notdienst Elektriker Nürnberg'. Google zeigt dabei zuerst das sogenannte Local Pack – also drei Google-Unternehmensprofile mit Bewertungen und Maps-Standort. Wer dort nicht auftaucht, ist für viele Nürnberger praktisch unsichtbar. Ich richte das Profil ein und verknüpfe es so mit deiner Webseite, dass beide gemeinsam ranken.",
+  },
+  {
+    q: "Lohnt sich eine Webseite auch, wenn ich schon viele Stammkunden habe?",
+    a: "Ja – gerade dann. Nürnberg ist eine sehr dynamische Stadt mit hoher Fluktuation: jedes Jahr ziehen Tausende neue Menschen aus der ganzen Metropolregion, aus Studienorten und aus dem Ausland zu. Ohne digitale Sichtbarkeit erreichst du diese Zielgruppen nicht. Eine professionelle Webseite ist die einfachste Versicherung gegen schwankende Auftragslagen, sie arbeitet 24/7 und macht dich auch für Neukunden auffindbar, die noch nie von dir gehört haben.",
+  },
 ] as const;
 
 const standortBlock = (
@@ -132,6 +144,59 @@ const standortBlock = (
                 gesamten Umland eine der größten Wirtschaftsregionen Deutschlands. Eine
                 lokal optimierte Website für Nürnberg erschließt dir diesen gesamten Markt –
                 dauerhaft und ohne laufende Werbekosten.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-10">
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Stadtteile und Quartiere
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Nürnberg ist nicht ein Markt. Es sind 90.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Nürnberg hat über 90 Stadtteile, und Kunden suchen quartiersnah: &quot;Friseur
+                Gostenhof&quot;, &quot;Italiener Altstadt&quot;, &quot;Sanitär Langwasser&quot;,
+                &quot;Steuerberater Mögeldorf&quot;, &quot;Café St. Johannis&quot;. Ich
+                optimiere deine Webseite für die Stadtteile, in denen du arbeitest – Altstadt,
+                Gostenhof, St. Johannis, Mögeldorf, Wöhrd, Maxfeld, Schweinau, Langwasser,
+                Zerzabelshof, Eibach oder die umliegenden Orte Fürth, Erlangen, Stein,
+                Feucht, Lauf und das gesamte Nürnberger Land.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-pink/70">
+                Branchen mit lokalem Hebel
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Handwerk, Industrie, Dienstleistung.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Nürnberg ist Heimat eines extrem dichten Handwerks-Netzes, einer starken
+                Industrie (Siemens, Schaeffler, MAN, GfK) und einer großen Bandbreite
+                lokaler Dienstleister. Diese Vielfalt heißt: jede Branche braucht eigene
+                SEO-Strategien. Ein Maler in Langwasser wird anders gefunden als ein
+                IT-Dienstleister in der Südstadt oder eine Hochzeitsfotografin in der
+                Altstadt. Ich kenne die Suchgewohnheiten der jeweiligen Zielgruppe und
+                baue Webseiten, die in der richtigen Nische ranken.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-violet/70">
+                Pendler und Metropolregion
+              </p>
+              <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-foreground md:text-xl text-balance">
+                Täglich 200.000 Pendler. Alle suchen lokal.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted text-pretty md:text-base">
+                Über 200.000 Menschen pendeln täglich nach Nürnberg zur Arbeit – aus Fürth,
+                Erlangen, Schwabach, dem Nürnberger Land, Roth und dem gesamten Umland.
+                Sie alle suchen Friseure, Ärzte, Mittagsrestaurants, Werkstätten oder
+                Dienstleister in der Nähe ihres Arbeitsplatzes. Eine lokal optimierte
+                Webseite erschließt dir nicht nur die 500.000 Einwohner Nürnbergs, sondern
+                den gesamten Wirtschaftsraum der Metropolregion mit 3,6 Millionen Menschen.
               </p>
             </div>
           </div>

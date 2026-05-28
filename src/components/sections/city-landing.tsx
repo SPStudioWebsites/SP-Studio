@@ -11,7 +11,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Accordion } from "@/components/ui/accordion";
-import { ArrowRight, Check, MapPin, Calendar, TrendingUp, BadgeEuro, ShieldCheck, Globe } from "@/lib/icons";
+import { ArrowRight, Check, MapPin, Calendar, TrendingUp, BadgeEuro, ShieldCheck, Globe, Search, Clock, Sparkles } from "@/lib/icons";
 import { brand } from "@/lib/content";
 import { CityHeroVisual } from "@/components/sections/city-hero-visual";
 
@@ -395,6 +395,120 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
                   </div>
                 </div>
               </Reveal>
+            </div>
+          </section>
+
+          {/* ── Warum moderne Webseite ── */}
+          <section aria-labelledby="warum-modern-h" className="relative overflow-hidden py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6">
+              <div className="mx-auto max-w-3xl text-center">
+                <Reveal>
+                  <Pill>Warum eine moderne Webseite?</Pill>
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <h2
+                    id="warum-modern-h"
+                    className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
+                  >
+                    Eine moderne Webseite ist in {city}{" "}
+                    <em className="font-display font-extrabold not-italic text-gradient">
+                      kein Nice-to-have.
+                    </em>{" "}
+                    Sie ist ein Muss.
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.2}>
+                  <p className="mx-auto mt-5 max-w-2xl text-base text-muted md:text-lg text-pretty">
+                    Über 90 % aller Kaufentscheidungen beginnen heute bei Google. Wer in {city}{" "}
+                    nicht auf den ersten Plätzen erscheint oder mit einer veralteten Webseite überzeugen
+                    muss, verliert täglich Anfragen an die Konkurrenz – ohne es zu merken. Eine
+                    professionelle Webseite ist die Investition mit dem besten Hebel für lokale
+                    Betriebe: sie arbeitet rund um die Uhr, kostet einmalig und bringt dauerhaft
+                    neue Kunden.
+                  </p>
+                </Reveal>
+              </div>
+
+              <div className="mt-14 grid gap-5 md:grid-cols-3">
+                <Reveal delay={0.1}>
+                  <GlassCard hover className="flex h-full flex-col gap-4 p-7">
+                    <span
+                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl"
+                      style={{
+                        background: "linear-gradient(135deg,#ff2d8f,#c026d3)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
+                      }}
+                    >
+                      <Search className="h-5 w-5 text-white" strokeWidth={1.75} />
+                    </span>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                      Mehr Anfragen, weniger Werbebudget
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted text-pretty">
+                      Wer in {city} bei Suchen wie „Friseur in der Nähe", „Restaurant {city}{" "}
+                      Bewertungen" oder „{city} Handwerker Notdienst" oben steht, bekommt
+                      Anfragen ohne dafür für jeden Klick zu bezahlen. Lokale SEO ist die
+                      einzige Marketing-Investition, die sich nach 6–12 Monaten verselbstständigt:
+                      einmal richtig aufgebaut, generiert deine Webseite dauerhaft Kunden – auch
+                      nachts, am Wochenende und im Urlaub. Google-Ads kosten dich jeden Klick
+                      neu. Deine eigene Sichtbarkeit gehört dir.
+                    </p>
+                  </GlassCard>
+                </Reveal>
+
+                <Reveal delay={0.2}>
+                  <GlassCard hover className="flex h-full flex-col gap-4 p-7">
+                    <span
+                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl"
+                      style={{
+                        background: "linear-gradient(135deg,#8b5cf6,#6d28d9)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
+                      }}
+                    >
+                      <Clock className="h-5 w-5 text-white" strokeWidth={1.75} />
+                    </span>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                      Deine Webseite verkauft, während du arbeitest
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted text-pretty">
+                      Anstatt jeden Anruf selbst entgegenzunehmen, übernimmt die Webseite einen
+                      Großteil der Vorqualifizierung: Online-Terminbuchung, Kontaktformular,
+                      WhatsApp-Anbindung, Speisekarte, Preisliste, Anfahrt. Kunden in {city}{" "}
+                      erwarten heute, dass sie sich um 23 Uhr informieren und buchen können –
+                      ohne dass jemand zurückruft. Jede Stunde, in der dein Telefon nicht
+                      klingelt, weil die Webseite die Antwort schon gegeben hat, ist gewonnene
+                      Zeit – und gewonnener Umsatz, der sonst zur Konkurrenz gewandert wäre.
+                    </p>
+                  </GlassCard>
+                </Reveal>
+
+                <Reveal delay={0.3}>
+                  <GlassCard hover className="flex h-full flex-col gap-4 p-7">
+                    <span
+                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl"
+                      style={{
+                        background: "linear-gradient(135deg,#ff2d8f,#8b5cf6)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
+                      }}
+                    >
+                      <Sparkles className="h-5 w-5 text-white" strokeWidth={1.75} />
+                    </span>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                      Vertrauen vor dem ersten Kontakt
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted text-pretty">
+                      Über 70 % aller Suchanfragen in {city} kommen vom Smartphone. Eine
+                      veraltete, langsame oder auf dem Handy kaputte Webseite ist 2026 das
+                      Erste, was potenzielle Kunden sehen – und oft auch das Letzte. Eine
+                      moderne, schnelle und mobil optimierte Webseite signalisiert:
+                      Professionalität, Aktualität, Vertrauen. Sie ist deine digitale
+                      Visitenkarte, deine Schaufensterscheibe und dein Verkäufer in einem –
+                      24/7 und ohne Krankheitstage. Ein gepflegter Auftritt entscheidet, ob
+                      jemand anruft oder weiterklickt.
+                    </p>
+                  </GlassCard>
+                </Reveal>
+              </div>
             </div>
           </section>
 

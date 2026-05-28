@@ -27,4 +27,5 @@ export {
   AlertCircle,
   TrendingUp,
   BadgeEuro,
+  Clock,
 } from "lucide-react";

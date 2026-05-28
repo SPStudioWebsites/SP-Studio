@@ -27,6 +27,47 @@ export default function BlogPage() {
           Praxisnahe Tipps zu lokalem SEO und Webdesign – damit du online gefunden wirst.
         </p>
 
+        <div className="mt-10 space-y-6 text-base leading-relaxed text-muted">
+          <p>
+            Hier findest du Artikel aus der Praxis: wie lokale Betriebe in Franken bei
+            Google sichtbar werden, was eine moderne Webseite heute leisten muss und welche
+            Fehler dich Anfragen kosten. Geschrieben für Inhaber kleiner und mittlerer
+            Unternehmen, die wenig Zeit, aber klare Erwartungen haben – ohne Marketing-Floskeln,
+            ohne Fachchinesisch, ohne Verkaufsdruck.
+          </p>
+          <p>
+            <strong className="text-foreground">Über welche Themen schreibe ich?</strong>{" "}
+            Schwerpunkt ist alles, was lokale Sichtbarkeit beeinflusst: Local SEO, Google
+            Unternehmensprofil, technisches Webdesign (Ladezeit, Mobile-First, Core Web
+            Vitals), Conversion-Optimierung (warum Besucher zu Kunden werden – oder eben
+            nicht), branchen­spezifische Tipps für Handwerker, Restaurants, Cafés, Salons
+            und Dienstleister sowie regionale Besonderheiten in Unter-, Mittel- und
+            Oberfranken.
+          </p>
+          <p>
+            <strong className="text-foreground">Für wen sind die Artikel?</strong>{" "}
+            Für Handwerksmeister, die mehr Anfragen wollen, ohne jeden Klick zu bezahlen.
+            Für Gastronomen, die ihre Tische auch in ruhigen Monaten füllen wollen. Für
+            Friseure, Therapeuten und Salon-Inhaber, die Online-Buchung etablieren möchten.
+            Und für alle, die wissen wollen, was eine wirklich gute Webseite von einer
+            durchschnittlichen unterscheidet – und warum das oft den Unterschied zwischen
+            Wachstum und Stillstand macht.
+          </p>
+          <p>
+            <strong className="text-foreground">Region im Fokus:</strong>{" "}
+            Bamberg, Würzburg, Schweinfurt, Nürnberg, Haßfurt, Forchheim, Kitzingen,
+            Aschaffenburg, Bad Kissingen, Coburg sowie die Landkreise Haßberge, Bamberg,
+            Würzburg, Schweinfurt, Kitzingen und Main-Spessart. Jede Region hat ihre
+            eigenen Suchmärkte, Wettbewerbslagen und Branchen­schwerpunkte – und genau
+            darauf gehe ich in den Artikeln konkret ein.
+          </p>
+          <p>
+            Wenn dir ein Thema fehlt oder du eine konkrete Frage zu deinem Betrieb hast,
+            schreib mir einfach. Aus guten Leserfragen entstehen die nützlichsten Artikel –
+            und ich antworte persönlich, nicht per Chatbot.
+          </p>
+        </div>
+
         <div className="mt-16 space-y-4">
           {posts.length === 0 ? (
             <p className="text-muted">Bald kommen die ersten Beiträge.</p>
