@@ -28,4 +28,5 @@ export {
   TrendingUp,
   BadgeEuro,
   Clock,
+  Minus,
 } from "lucide-react";

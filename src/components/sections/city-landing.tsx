@@ -18,13 +18,15 @@ import { CityHeroVisual } from "@/components/sections/city-hero-visual";
 const cityNavLinks = [
   { label: "Warum lokal?", href: "#lokal-h" },
   { label: "Ablauf",       href: "#ablauf" },
-  { label: "FAQ",          href: "#faq-city-h" },
   { label: "Leistungen",   href: "#leistungen" },
   { label: "Kontakt",      href: "#kontakt" },
 ] as const;
 
 const ProcessSection = dynamic(() =>
   import("@/components/sections/process").then((m) => m.ProcessSection)
+);
+const WhyMeSection = dynamic(() =>
+  import("@/components/sections/why-me").then((m) => m.WhyMeSection)
 );
 const ServicesSection = dynamic(() =>
   import("@/components/sections/services").then((m) => m.ServicesSection)
@@ -56,7 +58,7 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
     {
       icon: MapPin,
       title: "Lokale Kenntnis",
-      desc: `Als regionaler Anbieter aus ${region} verstehe ich die ${city}er Märkte, lokale Suchgewohnheiten und wie deine Zielgruppe tickt.`,
+      desc: `Als regionaler Anbieter aus ${region} verstehe ich die ${city}er Märkte, lokale Suchgewohnheiten und wie deine Zielgruppe tickt. Auf Anfrage zeige ich dir gerne Webdesign-Referenzen aus der Region.`,
       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)",
     },
     {
@@ -74,8 +76,8 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
   ];
 
   const checkList = [
-    "Persönliche Beratung, kein Ticketsystem",
-    "Spezialisiert auf KMUs & lokale Betriebe",
+    "Zentraler Ansprechpartner, kein Ticketsystem",
+    "Individuelle Lösungen statt Baukasten",
     `Beratung in ${city} & Umgebung möglich`,
     "Fertig in durchschnittlich 14 Tagen",
     "Kein Lock-in. Dein Code gehört dir",
@@ -177,10 +179,12 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
                 className="mt-7 font-display font-semibold leading-[1] tracking-tight hero-enter text-[2.8rem] md:text-[clamp(2.4rem,7vw,5.5rem)]"
                 style={{ animationDelay: "80ms" }}
               >
-                <span className="block text-foreground">Webdesign</span>
-                <em className="block mt-1 font-display font-extrabold not-italic text-gradient pr-[0.05em]">
-                  {city}.
-                </em>
+                <span className="block text-foreground">
+                  Webdesign{" "}
+                  <em className="font-display font-extrabold not-italic text-gradient pr-[0.05em]">
+                    {city}.
+                  </em>
+                </span>
                 <span className="block mt-2 text-foreground text-[1.9rem] md:text-[clamp(1.5rem,4vw,3rem)]">
                   Webseiten, die Kunden bringen.
                 </span>
@@ -256,7 +260,7 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
           </div>
         </section>
 
-        {/* ── Warum lokal + Prozess + FAQ ── */}
+        {/* ── Warum lokal + Prozess + WhyMe ── */}
         <div
           className="relative"
           style={{
@@ -422,7 +426,8 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
                     Über 90 % aller Kaufentscheidungen beginnen heute bei Google. Wer in {city}{" "}
                     nicht auf den ersten Plätzen erscheint oder mit einer veralteten Webseite überzeugen
                     muss, verliert täglich Anfragen an die Konkurrenz – ohne es zu merken. Eine
-                    professionelle Webseite ist die Investition mit dem besten Hebel für lokale
+                    professionelle Webseite mit responsive Design, sauberem Content Management System
+                    und solider technischer Basis ist die Investition mit dem besten Hebel für lokale
                     Betriebe: sie arbeitet rund um die Uhr, kostet einmalig und bringt dauerhaft
                     neue Kunden.
                   </p>
@@ -500,11 +505,11 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
                       Über 70 % aller Suchanfragen in {city} kommen vom Smartphone. Eine
                       veraltete, langsame oder auf dem Handy kaputte Webseite ist 2026 das
                       Erste, was potenzielle Kunden sehen – und oft auch das Letzte. Eine
-                      moderne, schnelle und mobil optimierte Webseite signalisiert:
-                      Professionalität, Aktualität, Vertrauen. Sie ist deine digitale
-                      Visitenkarte, deine Schaufensterscheibe und dein Verkäufer in einem –
-                      24/7 und ohne Krankheitstage. Ein gepflegter Auftritt entscheidet, ob
-                      jemand anruft oder weiterklickt.
+                      moderne, schnelle und mobil optimierte Webseite mit responsive Webdesign
+                      signalisiert technisches Know-how, Aktualität und Vertrauen. Sie ist
+                      deine digitale Visitenkarte, deine Schaufensterscheibe und dein Verkäufer
+                      in einem – 24/7 und ohne Krankheitstage. Ein gepflegter Auftritt
+                      entscheidet, ob jemand anruft oder weiterklickt.
                     </p>
                   </GlassCard>
                 </Reveal>
@@ -517,47 +522,8 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
           {/* ── Ablauf ── */}
           <ProcessSection />
 
-          {/* ── FAQ ── */}
-          <section aria-labelledby="faq-city-h" className="relative overflow-hidden py-16 md:py-24">
-            <div className="mx-auto max-w-7xl px-6">
-              <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-                <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
-                  <Reveal>
-                    <Pill>FAQ</Pill>
-                  </Reveal>
-                  <Reveal delay={0.1}>
-                    <h2
-                      id="faq-city-h"
-                      className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
-                    >
-                      Häufige Fragen.{" "}
-                      <em className="font-display font-extrabold not-italic text-gradient">Klare</em>{" "}
-                      Antworten.
-                    </h2>
-                  </Reveal>
-                  <Reveal delay={0.2}>
-                    <p className="mt-5 text-base text-muted md:text-lg text-pretty">
-                      Du hast Fragen zu Webdesign in {city}? Schreib uns, wir antworten
-                      persönlich, nicht per Chatbot.
-                    </p>
-                  </Reveal>
-                  <Reveal delay={0.3}>
-                    <a
-                      href="#kontakt"
-                      className="mt-8 inline-flex h-12 items-center gap-3 rounded-full glass px-5 text-sm font-medium text-foreground transition-all hover:border-pink/40 hover:bg-pink/[0.06] cursor-pointer group"
-                    >
-                      <MapPin className="h-4 w-4 text-pink" aria-hidden />
-                      Frage stellen
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    </a>
-                  </Reveal>
-                </div>
-                <Reveal delay={0.15} className="lg:col-span-7">
-                  <Accordion items={faq} />
-                </Reveal>
-              </div>
-            </div>
-          </section>
+          {/* ── Warum ich ── */}
+          <WhyMeSection />
         </div>
 
         {/* ── Pakete & Preise ── */}
@@ -565,6 +531,48 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
 
         {/* ── Kontakt ── */}
         <ContactSection />
+
+        {/* ── FAQ ── */}
+        <section aria-labelledby="faq-city-h" className="relative overflow-hidden py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
+                <Reveal>
+                  <Pill>FAQ</Pill>
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <h2
+                    id="faq-city-h"
+                    className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
+                  >
+                    Häufige Fragen.{" "}
+                    <em className="font-display font-extrabold not-italic text-gradient">Klare</em>{" "}
+                    Antworten.
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.2}>
+                  <p className="mt-5 text-base text-muted md:text-lg text-pretty">
+                    Du hast Fragen zu Webdesign in {city}? Schreib uns, wir antworten
+                    persönlich, nicht per Chatbot.
+                  </p>
+                </Reveal>
+                <Reveal delay={0.3}>
+                  <a
+                    href="#kontakt"
+                    className="mt-8 inline-flex h-12 items-center gap-3 rounded-full glass px-5 text-sm font-medium text-foreground transition-all hover:border-pink/40 hover:bg-pink/[0.06] cursor-pointer group"
+                  >
+                    <MapPin className="h-4 w-4 text-pink" aria-hidden />
+                    Frage stellen
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </a>
+                </Reveal>
+              </div>
+              <Reveal delay={0.15} className="lg:col-span-7">
+                <Accordion items={faq} />
+              </Reveal>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

@@ -42,6 +42,9 @@ const AboutSection = dynamic(() =>
 const WhyWebsiteSection = dynamic(() =>
   import("@/components/sections/why-website").then((m) => m.WhyWebsiteSection)
 );
+const WhyMeSection = dynamic(() =>
+  import("@/components/sections/why-me").then((m) => m.WhyMeSection)
+);
 const FAQSection = dynamic(() =>
   import("@/components/sections/faq").then((m) => m.FAQSection)
 );
@@ -66,7 +69,7 @@ export default function Home() {
       <main id="main" className="relative">
         <HeroSection />
 
-        {/* Subtle premium background block: Branchen → FAQ */}
+        {/* Subtle premium background block: Branchen → WhyMe */}
         <div
           className="relative"
           style={{
@@ -104,11 +107,12 @@ export default function Home() {
           </div>
           <WhyWebsiteSection />
           <AboutSection />
-          <FAQSection />
+          <WhyMeSection />
         </div>
 
         <ServicesSection />
         <ContactSection />
+        <FAQSection />
         <RegionsSection />
       </main>
       <Footer />

@@ -18,8 +18,8 @@ export const navLinks = [
   { label: "Home", href: "#top" },
   { label: "Branchen", href: "#branchen" },
   { label: "Ablauf", href: "#ablauf" },
+  { label: "Warum Webseite", href: "#warum-webseite" },
   { label: "Über mich", href: "#ueber-uns" },
-  { label: "FAQ", href: "#faq" },
   { label: "Leistungen", href: "#leistungen" },
 ] as const;
 
