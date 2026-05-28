@@ -3,15 +3,13 @@
 import { hero } from "@/lib/content";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { ArrowRight, Check } from "@/lib/icons";
-import { motion, useReducedMotion, AnimatePresence } from "motion/react";
-
 import { useState, useEffect } from "react";
 import { HeroMockup } from "@/components/ui/hero-mockup";
 
 
 const WORDS = ["Handwerker", "Frisöre", "Cafés", "Restaurants"];
 
-function RollingHeadline({ reduce }: { reduce: boolean }) {
+function RollingHeadline() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -32,36 +30,18 @@ function RollingHeadline({ reduce }: { reduce: boolean }) {
       </span>
       <span className="block mt-1 overflow-hidden pb-3 text-[2rem] md:text-[clamp(1.5rem,4vw,3rem)]">
         <span className="text-foreground font-semibold">Für </span>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.em
-            key={WORDS[index]}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -40 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-block font-display font-extrabold not-italic text-gradient pr-[0.08em]"
-          >
-            {WORDS[index]}
-          </motion.em>
-        </AnimatePresence>
+        <em
+          key={WORDS[index]}
+          className="rolling-word-enter inline-block font-display font-extrabold not-italic text-gradient pr-[0.08em]"
+        >
+          {WORDS[index]}
+        </em>
       </span>
     </h1>
   );
 }
 
 export function HeroSection() {
-  const reduce = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.matchMedia("(max-width: 1023px)").matches : false
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
   return (
     <section
       id="top"
@@ -97,7 +77,7 @@ export function HeroSection() {
 
           {/* Headline */}
           <div className="hero-enter" style={{ animationDelay: "80ms" }}>
-            <RollingHeadline reduce={!!reduce} />
+            <RollingHeadline />
           </div>
 
           {/* Subtitle */}
@@ -123,25 +103,14 @@ export function HeroSection() {
 
           {/* CTA */}
           <div className="mt-14 mb-16 flex justify-center lg:justify-start hero-enter" style={{ animationDelay: "240ms" }}>
-            {isMobile ? (
-              <ShinyButton
-                href="#kontakt"
-                size="lg"
-                className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_24px_64px_-6px_rgba(255,45,143,0.95)] hover:-translate-y-1.5 px-12 text-base font-semibold animate-cta-pulse"
-              >
-                {hero.ctaPrimary}
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </ShinyButton>
-            ) : (
-              <ShinyButton
-                href="#kontakt"
-                size="lg"
-                className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_24px_64px_-6px_rgba(255,45,143,0.95)] hover:-translate-y-1.5 px-12 text-base font-semibold animate-cta-pulse"
-              >
-                {hero.ctaPrimary}
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </ShinyButton>
-            )}
+            <ShinyButton
+              href="#kontakt"
+              size="lg"
+              className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_24px_64px_-6px_rgba(255,45,143,0.95)] hover:-translate-y-1.5 px-12 text-base font-semibold animate-cta-pulse"
+            >
+              {hero.ctaPrimary}
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </ShinyButton>
           </div>
 
 

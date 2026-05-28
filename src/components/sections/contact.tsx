@@ -15,7 +15,6 @@ import { brand } from "@/lib/content";
 import { useActionState, useState } from "react";
 import Image from "next/image";
 import { submitContact, type ContactState } from "@/app/actions/contact";
-import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const initialState: ContactState = { ok: false };
@@ -119,15 +118,11 @@ export function ContactSection() {
           <div>
           <Reveal delay={0.15}>
             <GlassCard variant="strong" className="relative overflow-hidden p-5 md:p-8 lg:p-10">
-              <AnimatePresence mode="wait">
-                {state.ok ? (
-                  <SuccessPanel key="ok" message={state.message} />
-                ) : (
-                  <motion.form
-                    key="form"
+              {state.ok ? (
+                <SuccessPanel message={state.message} />
+              ) : (
+                  <form
                     action={formAction}
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
                     className="grid gap-5"
                     noValidate
                   >
@@ -228,9 +223,8 @@ export function ContactSection() {
                         )}
                       </ShinyButton>
                     </div>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+                  </form>
+              )}
             </GlassCard>
           </Reveal>
           </div>
@@ -243,12 +237,7 @@ export function ContactSection() {
 
 function SuccessPanel({ message }: { message?: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="flex flex-col items-center py-12 text-center"
-    >
+    <div className="contact-success-enter flex flex-col items-center py-12 text-center">
       <div className="relative mb-6 h-20 w-20 overflow-hidden rounded-full border border-white/10 ring-2 ring-pink/40 shadow-[0_0_24px_-4px_rgba(255,45,143,0.4)]">
         <Image
           src="/simon-danke.jpg"
@@ -265,7 +254,7 @@ function SuccessPanel({ message }: { message?: string }) {
         {message ??
           "Ich melde mich innerhalb von 24 Stunden persönlich bei dir."}
       </p>
-    </motion.div>
+    </div>
   );
 }
 
@@ -365,4 +354,3 @@ function SelectField({
     </label>
   );
 }
-

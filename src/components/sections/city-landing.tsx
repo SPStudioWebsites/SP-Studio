@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -14,6 +13,10 @@ import { Accordion } from "@/components/ui/accordion";
 import { ArrowRight, Check, MapPin, Calendar, TrendingUp, BadgeEuro, ShieldCheck, Globe, Search, Clock, Sparkles } from "@/lib/icons";
 import { brand } from "@/lib/content";
 import { CityHeroVisual } from "@/components/sections/city-hero-visual";
+import { ProcessSection } from "@/components/sections/process";
+import { WhyMeSection } from "@/components/sections/why-me";
+import { ServicesSection } from "@/components/sections/services";
+import { ContactSection } from "@/components/sections/contact";
 
 const cityNavLinks = [
   { label: "Warum lokal?", href: "#lokal-h" },
@@ -21,19 +24,6 @@ const cityNavLinks = [
   { label: "Leistungen",   href: "#leistungen" },
   { label: "Kontakt",      href: "#kontakt" },
 ] as const;
-
-const ProcessSection = dynamic(() =>
-  import("@/components/sections/process").then((m) => m.ProcessSection)
-);
-const WhyMeSection = dynamic(() =>
-  import("@/components/sections/why-me").then((m) => m.WhyMeSection)
-);
-const ServicesSection = dynamic(() =>
-  import("@/components/sections/services").then((m) => m.ServicesSection)
-);
-const ContactSection = dynamic(() =>
-  import("@/components/sections/contact").then((m) => m.ContactSection)
-);
 
 const featureCards = [
   { icon: TrendingUp, text: "Täglich neue Anfragen",       grad: "linear-gradient(135deg,#ff2d8f,#c026d3)" },
@@ -450,8 +440,8 @@ export function CityLandingPage({ city, slug, region = "Unterfranken", heroSubti
                       Mehr Anfragen, weniger Werbebudget
                     </h3>
                     <p className="text-sm leading-relaxed text-muted text-pretty">
-                      Wer in {city} bei Suchen wie „Friseur in der Nähe", „Restaurant {city}{" "}
-                      Bewertungen" oder „{city} Handwerker Notdienst" oben steht, bekommt
+                      Wer in {city} bei Suchen wie „Friseur in der Nähe&quot;, „Restaurant {city}{" "}
+                      Bewertungen&quot; oder „{city} Handwerker Notdienst&quot; oben steht, bekommt
                       Anfragen ohne dafür für jeden Klick zu bezahlen. Lokale SEO ist die
                       einzige Marketing-Investition, die sich nach 6–12 Monaten verselbstständigt:
                       einmal richtig aufgebaut, generiert deine Webseite dauerhaft Kunden – auch

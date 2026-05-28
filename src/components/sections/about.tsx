@@ -1,5 +1,3 @@
-"use client";
-
 import { about } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
 import { Pill } from "@/components/ui/pill";
@@ -86,4 +84,3 @@ export function AboutSection() {
     </section>
   );
 }
-

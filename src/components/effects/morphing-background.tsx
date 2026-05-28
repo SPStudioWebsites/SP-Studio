@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useEffect, useRef } from "react";
 
 export function MorphingBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,52 +8,73 @@ export function MorphingBackground() {
   const blobBRef = useRef<HTMLDivElement>(null);
   const blobCRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    const st = {
-      trigger: document.documentElement,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 2,
+  useEffect(() => {
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
+
+    void Promise.all([
+      import("gsap"),
+      import("gsap/ScrollTrigger"),
+    ]).then(([{ default: gsap }, { ScrollTrigger }]) => {
+      if (cancelled) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const ctx = gsap.context(() => {
+        const st = {
+          trigger: document.documentElement,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 2,
+        };
+
+        // Hue shift on scroll
+        const proxy = { hue: 0 };
+        gsap.to(proxy, {
+          hue: 50,
+          ease: "none",
+          scrollTrigger: st,
+          onUpdate: () => {
+            if (containerRef.current) {
+              containerRef.current.style.filter = `hue-rotate(${proxy.hue}deg)`;
+            }
+          },
+        });
+
+        // Blob A: drifts down-right as page scrolls
+        gsap.to(blobARef.current, {
+          x: "35vw",
+          y: "40vh",
+          ease: "none",
+          scrollTrigger: st,
+        });
+
+        // Blob B: drifts up-left as page scrolls
+        gsap.to(blobBRef.current, {
+          x: "-38vw",
+          y: "-35vh",
+          ease: "none",
+          scrollTrigger: st,
+        });
+
+        // Blob C: moves diagonally and scales up slightly
+        gsap.to(blobCRef.current, {
+          x: "25vw",
+          y: "-45vh",
+          scale: 1.4,
+          ease: "none",
+          scrollTrigger: st,
+        });
+      });
+
+      cleanup = () => ctx.revert();
+    });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
     };
-
-    // Hue shift on scroll
-    const proxy = { hue: 0 };
-    gsap.to(proxy, {
-      hue: 50,
-      ease: "none",
-      scrollTrigger: st,
-      onUpdate: () => {
-        if (containerRef.current) {
-          containerRef.current.style.filter = `hue-rotate(${proxy.hue}deg)`;
-        }
-      },
-    });
-
-    // Blob A: drifts down-right as page scrolls
-    gsap.to(blobARef.current, {
-      x: "35vw",
-      y: "40vh",
-      ease: "none",
-      scrollTrigger: st,
-    });
-
-    // Blob B: drifts up-left as page scrolls
-    gsap.to(blobBRef.current, {
-      x: "-38vw",
-      y: "-35vh",
-      ease: "none",
-      scrollTrigger: st,
-    });
-
-    // Blob C: moves diagonally and scales up slightly
-    gsap.to(blobCRef.current, {
-      x: "25vw",
-      y: "-45vh",
-      scale: 1.4,
-      ease: "none",
-      scrollTrigger: st,
-    });
-  });
+  }, []);
 
   return (
     <div

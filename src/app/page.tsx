@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   title: "Webdesign Franken | Schnell-Sichtbar.de",
@@ -29,34 +28,15 @@ import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Grain } from "@/components/effects/grain";
 import { MorphingBackground } from "@/components/effects/morphing-background";
 import { ProcessMarginWrapper } from "@/components/sections/process-margin-wrapper";
-
-const IndustriesSection = dynamic(() =>
-  import("@/components/sections/industries").then((m) => m.IndustriesSection)
-);
-const ProcessSection = dynamic(() =>
-  import("@/components/sections/process").then((m) => m.ProcessSection)
-);
-const AboutSection = dynamic(() =>
-  import("@/components/sections/about").then((m) => m.AboutSection)
-);
-const WhyWebsiteSection = dynamic(() =>
-  import("@/components/sections/why-website").then((m) => m.WhyWebsiteSection)
-);
-const WhyMeSection = dynamic(() =>
-  import("@/components/sections/why-me").then((m) => m.WhyMeSection)
-);
-const FAQSection = dynamic(() =>
-  import("@/components/sections/faq").then((m) => m.FAQSection)
-);
-const ServicesSection = dynamic(() =>
-  import("@/components/sections/services").then((m) => m.ServicesSection)
-);
-const RegionsSection = dynamic(() =>
-  import("@/components/sections/regions").then((m) => m.RegionsSection)
-);
-const ContactSection = dynamic(() =>
-  import("@/components/sections/contact").then((m) => m.ContactSection)
-);
+import { IndustriesSection } from "@/components/sections/industries";
+import { ProcessSection } from "@/components/sections/process";
+import { AboutSection } from "@/components/sections/about";
+import { WhyWebsiteSection } from "@/components/sections/why-website";
+import { WhyMeSection } from "@/components/sections/why-me";
+import { FAQSection } from "@/components/sections/faq";
+import { ServicesSection } from "@/components/sections/services";
+import { RegionsSection } from "@/components/sections/regions";
+import { ContactSection } from "@/components/sections/contact";
 
 export default function Home() {
   return (

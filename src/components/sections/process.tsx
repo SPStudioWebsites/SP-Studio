@@ -3,8 +3,8 @@
 import { process } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
 import { Pill } from "@/components/ui/pill";
-import { motion, useScroll, useTransform, useReducedMotion, useMotionValueEvent } from "motion/react";
 import { useRef, useState, useEffect } from "react";
+import type { CSSProperties, MouseEvent, RefObject } from "react";
 import { Check } from "@/lib/icons";
 
 const ACCENT = [
@@ -28,17 +28,22 @@ export function ProcessSection() {
   // lineCap.maxPx  = px from container-top to box-top  (line stops here)
   // lineCap.triggerT = scrollYProgress value at which the box enters the viewport
   const [lineCap, setLineCap] = useState({ maxPx: 0, triggerT: 0.75 });
+  const [lineHeight, setLineHeight] = useState(0);
   const [beamActive, setBeamActive] = useState(false);
 
   useEffect(() => {
-    const measure = () => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
       const container = containerRef.current;
       const box = boxRef.current;
       if (!container || !box) return;
 
-      const maxPx =
+      const rawMaxPx =
         box.getBoundingClientRect().top -
         container.getBoundingClientRect().top;
+      const maxPx = Math.max(0, rawMaxPx - 12);
       const sectionH = container.offsetHeight;
       const vh = window.innerHeight;
 
@@ -46,36 +51,39 @@ export function ProcessSection() {
       // total scroll range = sectionH + A*vh
       // T = maxPx / (sectionH + A*vh)
       const A = 0.4;
-      const T = maxPx / (sectionH + A * vh);
+      const T = rawMaxPx / (sectionH + A * vh);
+      const triggerT = Math.max(0.05, Math.min(0.98, T));
 
-      setLineCap({
-        maxPx: Math.max(0, maxPx - 12),
-        triggerT: Math.max(0.05, Math.min(0.98, T)),
-      });
+      setLineCap((prev) =>
+        Math.abs(prev.maxPx - maxPx) > 0.5 || Math.abs(prev.triggerT - triggerT) > 0.001
+          ? { maxPx, triggerT }
+          : prev
+      );
+
+      const rect = container.getBoundingClientRect();
+      const progress = Math.max(
+        0,
+        Math.min(1, (vh * A - rect.top) / (sectionH + A * vh))
+      );
+      const nextHeight = Math.max(0, Math.min(maxPx, maxPx * (progress / triggerT)));
+      setLineHeight(nextHeight);
+      if (progress >= triggerT * 0.985) setBeamActive(true);
     };
 
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.4", "end 0"],
-  });
-
-  const lineHeight = useTransform(
-    scrollYProgress,
-    [0, lineCap.triggerT],
-    ["0px", `${lineCap.maxPx}px`],
-    { clamp: true }
-  );
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (!beamActive && v >= lineCap.triggerT * 0.985) setBeamActive(true);
-  });
-
-  const reduce = useReducedMotion();
 
   return (
     <section
@@ -117,8 +125,8 @@ export function ProcessSection() {
             style={{ height: lineCap.maxPx > 0 ? `${lineCap.maxPx}px` : "100%" }}
           />
           {/* Animated gradient line — grows to box top then stops */}
-          <motion.div
-            style={{ height: lineHeight }}
+          <div
+            style={{ height: `${lineHeight}px` }}
             className="absolute left-5 top-0 w-px bg-gradient-to-b from-pink via-fuchsia-500 to-violet md:left-1/2 md:-translate-x-px"
           />
 
@@ -126,12 +134,10 @@ export function ProcessSection() {
             {process.map((step, i) => {
               const onLeft = i % 2 === 0;
               return (
-                <motion.div
+                <Reveal
                   key={step.n}
-                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40 }}
-                  whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.05 * i }}
+                  y={40}
+                  delay={0.05 * i}
                   className="relative md:flex md:min-h-[160px] md:items-center"
                 >
                   {/* Left slot */}
@@ -165,13 +171,13 @@ export function ProcessSection() {
                   <div className="pl-14 md:hidden">
                     <StepCard step={step} />
                   </div>
-                </motion.div>
+                </Reveal>
               );
             })}
           </div>
 
           <div className="mt-16 flex flex-col items-center">
-            <BestBox reduce={!!reduce} beamActive={beamActive} bRef={boxRef} />
+            <BestBox beamActive={beamActive} bRef={boxRef} />
           </div>
 
           <div className="mt-12 flex justify-center">
@@ -203,7 +209,7 @@ function StepCard({
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [hovered, setHovered] = useState(false);
 
-  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+  function onMouseMove(e: MouseEvent<HTMLDivElement>) {
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     setMouse({
@@ -218,26 +224,13 @@ function StepCard({
       onMouseMove={onMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="glass-feature group relative overflow-hidden rounded-2xl p-6"
-      style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 40px rgba(0,0,0,0.3)",
-      }}
+      className={`process-step-card glass-feature group relative overflow-hidden rounded-2xl p-6 ${hovered ? "is-hovered" : ""}`}
+      style={{ "--spot-x": `${mouse.x}%`, "--spot-y": `${mouse.y}%` } as CSSProperties}
     >
       {/* Border reflection on hover */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-2xl"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(255,255,255,0.55) 0%, transparent 45%)`,
-          padding: "1px",
-          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-          opacity: hovered ? 1 : 0,
-          transition: "opacity 0.4s ease",
-        }}
+        className="process-step-reflection pointer-events-none absolute inset-0 rounded-2xl"
       />
 
       {/* Content */}
@@ -266,22 +259,16 @@ function StepCard({
 }
 
 function BestBox({
-  reduce,
   beamActive,
   bRef,
 }: {
-  reduce: boolean;
   beamActive: boolean;
-  bRef: React.RefObject<HTMLDivElement | null>;
+  bRef: RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <motion.div
+    <div
       ref={bRef}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.96 }}
-      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-feature relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
+      className="reveal-on-scroll reveal-y-32 glass-feature relative w-full max-w-2xl overflow-hidden rounded-2xl p-8 text-center"
       style={{
         background: "rgba(255,255,255,0.04)",
         border: "1px solid rgba(255,255,255,0.1)",
@@ -322,13 +309,10 @@ function BestBox({
           "Fertig in durchschnittlich 14 Tagen",
           "Individuell ohne Technik-Bla-Bla",
         ].map((item, i) => (
-          <motion.li
+          <li
             key={item}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, x: -12 }}
-            whileInView={reduce ? { opacity: 1 } : { opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.07 }}
-            className="flex items-center gap-3 text-[15px] text-foreground/90"
+            className="process-check-item flex items-center gap-3 text-[15px] text-foreground/90"
+            style={{ "--process-check-delay": `${0.1 + i * 0.07}s` } as CSSProperties}
           >
             <span
               className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
@@ -337,14 +321,14 @@ function BestBox({
               <Check className="h-2.5 w-2.5 text-white" />
             </span>
             {item}
-          </motion.li>
+          </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }
 
-function BorderTrace({ bRef }: { bRef: React.RefObject<HTMLDivElement | null> }) {
+function BorderTrace({ bRef }: { bRef: RefObject<HTMLDivElement | null> }) {
   const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
 
   useEffect(() => {
@@ -381,7 +365,7 @@ function BorderTrace({ bRef }: { bRef: React.RefObject<HTMLDivElement | null> })
       </defs>
 
       {/* Glow halo — wider, softer, behind */}
-      <motion.rect
+      <rect
         x={1} y={1}
         width={dims.w - 2} height={dims.h - 2}
         rx={16} ry={16}
@@ -390,22 +374,24 @@ function BorderTrace({ bRef }: { bRef: React.RefObject<HTMLDivElement | null> })
         strokeWidth={6}
         strokeOpacity={0.35}
         filter="url(#bt-glow)"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 2, ease: [0.4, 0, 0.2, 1] }}
+        pathLength={1}
+        strokeDasharray={1}
+        strokeDashoffset={1}
+        className="border-trace-draw"
       />
 
       {/* Sharp border trace — on top */}
-      <motion.rect
+      <rect
         x={1} y={1}
         width={dims.w - 2} height={dims.h - 2}
         rx={16} ry={16}
         fill="none"
         stroke="url(#bt-grad)"
         strokeWidth={1.5}
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 2, ease: [0.4, 0, 0.2, 1] }}
+        pathLength={1}
+        strokeDasharray={1}
+        strokeDashoffset={1}
+        className="border-trace-draw"
       />
     </svg>
   );

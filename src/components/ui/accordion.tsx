@@ -58,19 +58,9 @@ export function Accordion({
             */}
             <div
               aria-hidden={!isOpen}
-              style={{
-                display: "grid",
-                gridTemplateRows: isOpen ? "1fr" : "0fr",
-                transition: "grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1)",
-              }}
+              className={cn("accordion-panel", isOpen && "accordion-panel-open")}
             >
-              <div
-                style={{
-                  minHeight: 0,
-                  opacity: isOpen ? 1 : 0,
-                  transition: "opacity 0.4s cubic-bezier(0.22,1,0.36,1)",
-                }}
-              >
+              <div className="accordion-content">
                 <p className="px-5 pb-6 pr-14 text-sm leading-relaxed text-muted md:px-7 md:pb-7 md:text-[15px]">
                   {it.a}
                 </p>

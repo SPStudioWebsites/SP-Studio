@@ -1,12 +1,7 @@
-"use client";
+import { cn } from "@/lib/utils";
+import type { ElementType, ReactNode } from "react";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
-import { useState, type ReactNode } from "react";
-
-const reducedVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
+type RevealTag = keyof typeof tags;
 
 export function Reveal({
   children,
@@ -21,30 +16,22 @@ export function Reveal({
   className?: string;
   delay?: number;
   y?: number;
-  as?: keyof typeof tags;
+  as?: RevealTag;
   amount?: number;
   once?: boolean;
 }) {
-  const reduce = useReducedMotion();
-  const Comp = tags[Tag];
-  const variants = reduce
-    ? reducedVariants
-    : { hidden: { opacity: 0, y }, visible: { opacity: 1, y: 0 } };
-
-  const [willChange, setWillChange] = useState<"transform, opacity" | "auto">(
-    reduce ? "auto" : "transform, opacity"
-  );
+  const Comp = tags[Tag] as ElementType;
 
   return (
     <Comp
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount }}
-      variants={variants}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
-      style={{ willChange }}
-      onAnimationComplete={() => setWillChange("auto")}
+      className={cn(
+        "reveal-on-scroll",
+        yClass(y),
+        delayClass(delay),
+        !once && "reveal-repeat",
+        amount !== 0.2 && amountClass(amount),
+        className
+      )}
     >
       {children}
     </Comp>
@@ -52,16 +39,16 @@ export function Reveal({
 }
 
 const tags = {
-  div: motion.div,
-  section: motion.section,
-  article: motion.article,
-  span: motion.span,
-  h1: motion.h1,
-  h2: motion.h2,
-  h3: motion.h3,
-  p: motion.p,
-  li: motion.li,
-  ul: motion.ul,
+  div: "div",
+  section: "section",
+  article: "article",
+  span: "span",
+  h1: "h1",
+  h2: "h2",
+  h3: "h3",
+  p: "p",
+  li: "li",
+  ul: "ul",
 } as const;
 
 export function RevealStagger({
@@ -80,20 +67,18 @@ export function RevealStagger({
   once?: boolean;
 }) {
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount }}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: { staggerChildren, delayChildren: delay },
-        },
-      }}
+    <div
+      className={cn(
+        "reveal-stagger",
+        delayClass(delay),
+        staggerClass(staggerChildren),
+        !once && "reveal-repeat",
+        amount !== 0.2 && amountClass(amount),
+        className
+      )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -106,24 +91,32 @@ export function RevealItem({
   className?: string;
   y?: number;
 }) {
-  const reduce = useReducedMotion();
-  const [willChange, setWillChange] = useState<"transform, opacity" | "auto">(
-    reduce ? "auto" : "transform, opacity"
-  );
-
   return (
-    <motion.div
-      className={className}
-      variants={
-        reduce
-          ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
-          : { hidden: { opacity: 0, y }, visible: { opacity: 1, y: 0 } }
-      }
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      style={{ willChange }}
-      onAnimationComplete={() => setWillChange("auto")}
+    <div
+      className={cn("reveal-item", yClass(y), className)}
     >
       {children}
-    </motion.div>
+    </div>
   );
+}
+
+function delayClass(delay: number) {
+  if (delay === 0) return undefined;
+  const key = Math.round(delay * 1000);
+  return `reveal-delay-${key}`;
+}
+
+function staggerClass(stagger: number) {
+  if (stagger === 0.08) return undefined;
+  const key = Math.round(stagger * 1000);
+  return `reveal-stagger-${key}`;
+}
+
+function yClass(y: number) {
+  if (y === 24) return undefined;
+  return `reveal-y-${y}`;
+}
+
+function amountClass(amount: number) {
+  return `reveal-amount-${Math.round(amount * 100)}`;
 }

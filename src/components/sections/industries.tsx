@@ -1,14 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "@/lib/icons";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -124,48 +119,66 @@ export function IndustriesSection() {
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
 
-  useGSAP(
-    () => {
+  useEffect(() => {
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
+
+    void Promise.all([
+      import("gsap"),
+      import("gsap/ScrollTrigger"),
+    ]).then(([{ default: gsap }, { ScrollTrigger }]) => {
+      if (cancelled) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
       const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
       if (panels.length === 0) return;
 
-      // All panels except first start hidden — slightly small, from depth
-      gsap.set(panels.slice(1), { opacity: 0, scale: 0.82 });
-      gsap.set(panels[0], { opacity: 1, scale: 1 });
+      const ctx = gsap.context(() => {
+        // All panels except first start hidden — slightly small, from depth
+        gsap.set(panels.slice(1), { opacity: 0, scale: 0.82 });
+        gsap.set(panels[0], { opacity: 1, scale: 1 });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=2500vh",
-          pin: true,
-          scrub: 1,
-          onUpdate: (self) => {
-            setActive(Math.round(self.progress * (panels.length - 1)));
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=2500vh",
+            pin: true,
+            scrub: 1,
+            onUpdate: (self) => {
+              setActive(Math.round(self.progress * (panels.length - 1)));
+            },
           },
-        },
+        });
+
+        panels.forEach((panel, i) => {
+          if (i === 0) return;
+          const base = i - 1;
+          // Exit first — panel rushes toward viewer
+          tl.to(
+            panels[i - 1],
+            { opacity: 0, scale: 1.35, duration: 0.5, ease: "power3.in" },
+            base
+          );
+          // Enter after exit is 90% done — panel rises from depth
+          tl.fromTo(
+            panel,
+            { opacity: 0, scale: 0.82 },
+            { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+            base + 0.45
+          );
+        });
       });
 
-      panels.forEach((panel, i) => {
-        if (i === 0) return;
-        const base = i - 1;
-        // Exit first — panel rushes toward viewer
-        tl.to(
-          panels[i - 1],
-          { opacity: 0, scale: 1.35, duration: 0.5, ease: "power3.in" },
-          base
-        );
-        // Enter after exit is 90% done — panel rises from depth
-        tl.fromTo(
-          panel,
-          { opacity: 0, scale: 0.82 },
-          { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
-          base + 0.45
-        );
-      });
-    },
-    { scope: containerRef }
-  );
+      cleanup = () => ctx.revert();
+    });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+  }, []);
 
   return (
     <section id="branchen" ref={containerRef} aria-label="Branchen">
@@ -189,6 +202,7 @@ export function IndustriesSection() {
               key={panel.id}
               ref={(el) => { panelRefs.current[i] = el; }}
               className="absolute inset-0 flex items-start pt-[clamp(2rem,5vh,4rem)] md:pt-[9rem] px-6 md:px-12 lg:px-20"
+              style={{ opacity: i === 0 ? 1 : 0, transform: i === 0 ? "scale(1)" : "scale(0.82)" }}
             >
               <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
+import { RevealRuntime } from "@/components/ui/reveal-runtime";
 
 import { ConsentManagerClient } from "@/components/analytics/consent-manager-client";
 import { Analytics } from "@vercel/analytics/next";
@@ -113,6 +114,7 @@ export default function RootLayout({
           Zum Hauptinhalt springen
         </a>
         <LenisProvider>{children}</LenisProvider>
+        <RevealRuntime />
 
         <ConsentManagerClient />
         <Analytics />

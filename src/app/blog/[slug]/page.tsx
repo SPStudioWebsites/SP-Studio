@@ -232,7 +232,7 @@ export default async function BlogPostPage({ params }: Props) {
             <p className="relative mx-auto mb-7 max-w-sm text-muted">
               Ich zeige dir, wie dein Betrieb bei Google besser abschneidet, in einem kurzen Gespräch.
             </p>
-            <a
+            <Link
               href="/#kontakt"
               className="relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
               style={{
@@ -248,7 +248,7 @@ export default async function BlogPostPage({ params }: Props) {
                 }}
               />
               <span className="relative">Jetzt Erstgespräch anfragen →</span>
-            </a>
+            </Link>
           </div>
 
           {/* Bottom nav */}

@@ -1,12 +1,9 @@
-"use client";
-
 import { Reveal } from "@/components/ui/reveal";
 import { GlassCard } from "@/components/ui/glass-card";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Pill } from "@/components/ui/pill";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Check } from "@/lib/icons";
-import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const packages = [
@@ -114,7 +111,17 @@ export function ServicesSection() {
         {/* Pricing grid */}
         <div className="mt-16 grid items-center gap-6 md:grid-cols-3 lg:gap-8">
           {packages.map((pkg, i) => (
-            <PricingCard key={pkg.id} pkg={pkg} index={i} />
+            <Reveal
+              key={pkg.id}
+              delay={i * 0.12}
+              y={40}
+              className={cn(
+                "relative",
+                pkg.popular && "md:-mt-4 md:mb-4 z-10"
+              )}
+            >
+              <PricingCard pkg={pkg} index={i} />
+            </Reveal>
           ))}
         </div>
 
@@ -136,17 +143,8 @@ function PricingCard({
   pkg: (typeof packages)[number];
   index: number;
 }) {
-  const reduce = useReducedMotion();
-
   return (
-    <motion.div
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40 }}
-      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.12 }}
-      whileHover={reduce ? undefined : { y: pkg.popular ? -6 : -4 }}
-      className={cn("relative", pkg.popular && "md:-mt-4 md:mb-4 z-10")}
-    >
+    <div className={cn("pricing-card-motion", pkg.popular && "pricing-card-motion-popular")}>
       <GlassCard
         variant={pkg.popular ? "strong" : "default"}
         className={cn(
@@ -239,6 +237,6 @@ function PricingCard({
           )}
         </div>
       </GlassCard>
-    </motion.div>
+    </div>
   );
 }
