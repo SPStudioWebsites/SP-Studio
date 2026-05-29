@@ -47,6 +47,15 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       }
       let frame = requestAnimationFrame(raf);
 
+      if (window.location.hash) {
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          setTimeout(() => {
+            lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.2 });
+          }, 100);
+        }
+      }
+
       function onAnchor(e: MouseEvent) {
         const a = (e.target as HTMLElement)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
         if (!a) return;
