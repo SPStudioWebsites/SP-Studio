@@ -87,7 +87,12 @@
       "WebFetch(domain:stevens-webdesign-franken.de)",
       "Bash(git log *)",
       "Read(//Applications/Google Chrome.app/Contents/MacOS/**)",
-      "Read(//Applications/Chromium.app/Contents/MacOS/**)"
+      "Read(//Applications/Chromium.app/Contents/MacOS/**)",
+      "Bash(echo \"TSC_EXIT=$?\")",
+      "Bash(pkill -f \"next dev --webpack\")",
+      "Bash(pkill -f \"PORT=4137\")",
+      "Bash(lsof -ti:4137)",
+      "Bash(xargs kill -9)"
     ],
     "additionalDirectories": [
       "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"
