@@ -12,10 +12,43 @@ export function ProcessMarginWrapper({ children }: { children: React.ReactNode }
   const triedRef = useRef(false);
 
   const compute = () => {
-    if (window.innerWidth >= 768) return true; // handled by md:-mt-[34rem] CSS class in page.tsx
-    const heading = document.querySelector(
-      "#branchen > div:first-child"
-    ) as HTMLElement | null;
+    const section = document.getElementById("branchen");
+    if (!section) return false;
+
+    if (window.innerWidth >= 768) {
+      // Desktop/laptop: the Branchen panels live in a 100dvh pinned container.
+      // Their content is anchored to the TOP, so the bottom of the container is
+      // empty after the pinned scroll. Pull the Ablauf section up by exactly that
+      // empty space so it sits right under the last panel — on EVERY viewport.
+      //
+      // The empty space = 100dvh − panelPaddingTop − contentHeight. It scales with
+      // viewport height AND content height (the inline mockup grows with width), so
+      // a fixed value (the old -mt-[34rem]) only looked right at one screen size and
+      // badly over-/under-lapped on every other display. Must be measured.
+      const container = section.lastElementChild as HTMLElement | null;
+      const panels = container
+        ? (Array.from(container.children).filter(
+            (el) => el instanceof HTMLElement && el.querySelector(".max-w-7xl")
+          ) as HTMLElement[])
+        : [];
+      if (container && panels.length > 0) {
+        const padTop = parseFloat(getComputedStyle(panels[0]).paddingTop) || 0;
+        const contentH = Math.max(
+          ...panels.map(
+            (p) => (p.querySelector(".max-w-7xl") as HTMLElement).offsetHeight
+          )
+        );
+        const empty = container.offsetHeight - padTop - contentH;
+        // Clamp ≤ 0: on short screens the content already fills (or overflows) the
+        // viewport, so no upward pull is needed — never push the section down.
+        setMt(`${Math.round(Math.min(0, -empty))}px`);
+        return true;
+      }
+      return false;
+    }
+
+    // Mobile (<768) — unchanged: cancel the tall heading block.
+    const heading = section.firstElementChild as HTMLElement | null;
     if (heading) {
       setMt(`-${Math.round(heading.offsetHeight)}px`);
       return true;
@@ -24,15 +57,24 @@ export function ProcessMarginWrapper({ children }: { children: React.ReactNode }
   };
 
   useIsomorphicLayoutEffect(() => {
-    if (compute()) return;
+    const ok = compute();
 
-    // Branchen section not yet hydrated — retry once after dynamic import settles
-    const t = setTimeout(() => {
-      compute();
-      triedRef.current = true;
-    }, 150);
+    // If the Branchen section isn't measurable yet (dynamic import / hydration),
+    // retry once after it settles.
+    const t = ok
+      ? undefined
+      : setTimeout(() => {
+          compute();
+          triedRef.current = true;
+        }, 150);
 
-    return () => clearTimeout(t);
+    // Re-measure once web fonts finish loading — text height can shift slightly,
+    // which changes the panel content height the margin is derived from.
+    document.fonts?.ready.then(() => compute());
+
+    return () => {
+      if (t) clearTimeout(t);
+    };
   }, []);
 
   useEffect(() => {

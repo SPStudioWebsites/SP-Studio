@@ -80,11 +80,9 @@ export default function Home() {
           />
 
           <IndustriesSection />
-          <div className="md:-mt-[34rem]">
-            <ProcessMarginWrapper>
-              <ProcessSection />
-            </ProcessMarginWrapper>
-          </div>
+          <ProcessMarginWrapper>
+            <ProcessSection />
+          </ProcessMarginWrapper>
           <WhyWebsiteSection />
           <AboutSection />
           <WhyMeSection />

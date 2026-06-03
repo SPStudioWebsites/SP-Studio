@@ -84,7 +84,10 @@
       "WebFetch(domain:www.schnell-sichtbar.de)",
       "WebSearch",
       "WebFetch(domain:www.webdesigner-franken.de)",
-      "WebFetch(domain:stevens-webdesign-franken.de)"
+      "WebFetch(domain:stevens-webdesign-franken.de)",
+      "Bash(git log *)",
+      "Read(//Applications/Google Chrome.app/Contents/MacOS/**)",
+      "Read(//Applications/Chromium.app/Contents/MacOS/**)"
     ],
     "additionalDirectories": [
       "/Users/Simon/meine-website/Schnell-Sichtbar/src/content/blog"
