@@ -235,7 +235,8 @@ export const contact = {
 };
 
 export const footer = {
-  claim: "Professionelle Webseiten für lokale Unternehmen aus der Region Haßberge.",
+  claim:
+    "Moderne Webseiten für lokale Betriebe in der Region Haßberge & Franken – die nicht nur gut aussehen, sondern Anfragen und Umsatz bringen. Jetzt anfragen!",
   sitemap: [
     { label: "Home", href: "/" },
     { label: "Branchen", href: "/#branchen" },

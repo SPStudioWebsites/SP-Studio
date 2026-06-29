@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     template: "%s · Schnell-Sichtbar.de",
   },
   description:
-    "Webdesign Franken – professionelle Webseiten für lokale Unternehmen in der Region. Für Handwerker, Restaurants, Salons & mehr. Festpreis, schnell online.",
+    "Du willst online gefunden werden? Ich baue professionelle Webseiten für lokale Unternehmen in Franken – Festpreis ab 399 €, schnell online. Jetzt anfragen.",
   keywords: [
     "Webdesign Franken",
     "Webagentur Franken",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Schnell-Sichtbar.de | Webdesign Franken",
     description:
-      "Webdesign Franken – professionelle Webseiten für lokale Unternehmen in der Region. Für Handwerker, Restaurants, Salons & mehr. Festpreis, schnell online.",
+      "Du willst online gefunden werden? Ich baue professionelle Webseiten für lokale Unternehmen in Franken – Festpreis ab 399 €, schnell online. Jetzt anfragen.",
     type: "website",
     locale: "de_DE",
     siteName: "Schnell-Sichtbar.de",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Schnell-Sichtbar.de | Webdesign Franken",
     description:
-      "Webdesign Franken – professionelle Webseiten für lokale Unternehmen. Für Handwerker, Restaurants, Salons & mehr. Festpreis, schnell online.",
+      "Du willst online gefunden werden? Ich baue professionelle Webseiten für lokale Unternehmen in Franken – Festpreis ab 399 €, schnell online. Jetzt anfragen.",
     images: ["/laptop-hero-transparent.png"],
   },
 };
