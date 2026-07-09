@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Bricolage_Grotesque, Playfair_Display } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Fraunces, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/effects/lenis-provider";
 import { RevealRuntime } from "@/components/ui/reveal-runtime";
@@ -8,7 +8,8 @@ import { ConsentManagerClient } from "@/components/analytics/consent-manager-cli
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const geistSans = Geist({
+// Body — Inter: maximally legible, trustworthy UI sans.
+const geistSans = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
@@ -20,18 +21,18 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const bricolage = Bricolage_Grotesque({
+// Display/headings — Plus Jakarta Sans: friendly-geometric, modern, confident.
+const bricolage = Plus_Jakarta_Sans({
   variable: "--font-bricolage",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
-const instrument = Playfair_Display({
+// Editorial accent (pull-quotes) — Fraunces: warm, trustworthy serif.
+const instrument = Fraunces({
   variable: "--font-instrument",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
   style: ["italic", "normal"],
 });
 
@@ -89,7 +90,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#faf9f6",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -103,7 +104,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${instrument.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${instrument.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">

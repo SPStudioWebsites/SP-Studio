@@ -2,12 +2,24 @@
 
 import { hero } from "@/lib/content";
 import { ShinyButton } from "@/components/ui/shiny-button";
-import { ArrowRight, Check } from "@/lib/icons";
+import { ArrowRight, Check, MapPin, BadgeEuro, ShieldCheck, Clock } from "@/lib/icons";
 import { useState, useEffect } from "react";
-import { HeroMockup } from "@/components/ui/hero-mockup";
+import { HeroVisual } from "@/components/ui/hero-visual";
 
+const WORDS = ["Handwerker", "Frisöre", "Cafés", "Restaurants", "Praxen"];
 
-const WORDS = ["Handwerker", "Frisöre", "Cafés", "Restaurants"];
+const BULLETS = [
+  { bold: "75 % googeln zuerst.", rest: "Wer nicht gefunden wird, verliert täglich Aufträge." },
+  { bold: "In 14 Tagen online.", rest: "Kein monatelanges Warten, kein Baukasten-Frust." },
+  { bold: "Direkt mit mir.", rest: "Kein Agentur-Umweg, kein Callcenter – aus der Region." },
+];
+
+const TRUST = [
+  { icon: MapPin, label: "Aus Theres · Haßberge" },
+  { icon: BadgeEuro, label: "Festpreis, kein Abo" },
+  { icon: ShieldCheck, label: "DSGVO · Hosting in DE" },
+  { icon: Clock, label: "Antwort in 24 h" },
+];
 
 function RollingHeadline() {
   const [index, setIndex] = useState(0);
@@ -18,21 +30,22 @@ function RollingHeadline() {
   }, []);
 
   return (
-    <h1 className="mt-7 font-display font-semibold leading-[0.95] tracking-tight">
-      <span className="block text-foreground/60 text-[1rem] md:text-[1.25rem] font-medium tracking-widest uppercase mb-3">
-        Webdesign Franken
+    <h1 className="mt-6 font-display font-extrabold leading-[1.02] tracking-tight text-foreground">
+      {/* SEO keyword line — carries "Webdesign … Franken" in the H1 */}
+      <span className="mb-3 block text-[0.62rem] font-semibold uppercase tracking-[0.1em] text-[#1e5eff] sm:text-[0.72rem] sm:tracking-[0.14em] sm:mb-4">
+        {hero.keywordLine}
       </span>
-      <span className="block text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
-        Mehr Kunden.
+      <span className="block text-[2rem] sm:text-[2.4rem] md:text-[clamp(2.4rem,5vw,4.1rem)]">
+        Endlich eine Website,
       </span>
-      <span className="block mt-1 text-foreground text-[2.5rem] md:text-[clamp(2rem,5.5vw,4.5rem)]">
-        Mehr Aufträge.
+      <span className="block text-[2rem] sm:text-[2.4rem] md:text-[clamp(2.4rem,5vw,4.1rem)]">
+        die <span className="text-[#1e5eff]">Kunden bringt.</span>
       </span>
-      <span className="block mt-1 overflow-hidden pb-3 text-[2rem] md:text-[clamp(1.5rem,4vw,3rem)]">
-        <span className="text-foreground font-semibold">Für </span>
+      <span className="mt-3 block overflow-hidden pb-1 text-[1.2rem] sm:text-[1.4rem] md:text-[clamp(1.35rem,3vw,2.1rem)] font-bold text-muted-strong">
+        Für{" "}
         <em
           key={WORDS[index]}
-          className="rolling-word-enter inline-block font-display font-extrabold not-italic text-gradient pr-[0.08em]"
+          className="rolling-word-enter inline-block not-italic font-extrabold text-[#1e5eff]"
         >
           {WORDS[index]}
         </em>
@@ -45,86 +58,104 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden pt-24 pb-8 md:pt-52 md:pb-12"
+      className="relative isolate overflow-hidden pt-28 pb-10 md:pt-40 md:pb-16"
       aria-label="Einleitung"
     >
-<div aria-hidden className="absolute inset-0 grid-bg" />
+      {/* subtle top grid + soft accent glow */}
+      <div aria-hidden className="absolute inset-0 grid-bg" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 -left-24 h-[520px] w-[520px] gradient-orb-a"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-10 right-0 h-[440px] w-[440px] gradient-orb-b"
+      />
 
       <div className="relative mx-auto w-full max-w-7xl px-6">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
-        <div className="space-y-0 flex-1">
-
-          {/* Eyebrow */}
-          <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
-            <div className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full glass-pill px-3.5 py-1.5">
-              {/* Pill shine sweep */}
-              <span
-                aria-hidden
-                className="animate-shiny-text pointer-events-none absolute inset-0"
-                style={{
-                  background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)",
-                }}
-              />
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pink" />
-              </span>
-              <span className="relative text-xs font-medium tracking-wide text-foreground/85">
-                {hero.eyebrow}
+          <div className="flex-1">
+            {/* Eyebrow */}
+            <div className="inline-flex hero-enter" style={{ animationDelay: "0ms" }}>
+              <span className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full glass-pill px-3.5 py-1.5">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1e5eff] opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#1e5eff]" />
+                </span>
+                <span className="relative text-xs font-medium tracking-wide text-foreground/75">
+                  {hero.eyebrow}
+                </span>
               </span>
             </div>
-          </div>
 
-          {/* Headline */}
-          <div className="hero-enter" style={{ animationDelay: "80ms" }}>
-            <RollingHeadline />
-          </div>
+            {/* Headline */}
+            <div className="hero-enter" style={{ animationDelay: "80ms" }}>
+              <RollingHeadline />
+            </div>
 
-          {/* Subtitle */}
-          <p className="mt-4 md:mt-8 max-w-lg text-xs leading-relaxed text-muted text-pretty md:text-lg hero-enter" style={{ animationDelay: "160ms" }}>
-            {hero.subtitle}
-          </p>
-
-          {/* Bullets */}
-          <ul className="mt-5 md:mt-10 space-y-2 md:space-y-3 hero-enter" style={{ animationDelay: "200ms" }}>
-            {[
-              { bold: "75 % der Kunden googeln zuerst.", rest: "Wer nicht gefunden wird, verliert täglich Aufträge." },
-              { bold: "Deine Website arbeitet 24/7.", rest: "Neue Anfragen kommen auch wenn du schläfst." },
-              { bold: "Direkt mit mir, kein Agentur-Umweg.", rest: "Aus der Region, persönlich erreichbar." },
-            ].map(({ bold, rest }) => (
-              <li key={bold} className="flex items-start gap-3 text-base text-muted">
-                <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-pink to-violet">
-                  <Check className="h-2.5 w-2.5 text-white" />
-                </span>
-                <span><span className="font-semibold text-foreground">{bold}</span>{" "}{rest}</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA */}
-          <div className="mt-14 mb-16 flex justify-center lg:justify-start hero-enter" style={{ animationDelay: "240ms" }}>
-            <ShinyButton
-              href="#kontakt"
-              size="lg"
-              className="shadow-[0_16px_60px_-8px_rgba(255,45,143,0.8)] hover:shadow-[0_24px_64px_-6px_rgba(255,45,143,0.95)] hover:-translate-y-1.5 px-12 text-base font-semibold animate-cta-pulse"
+            {/* Subheadline */}
+            <p
+              className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg text-pretty hero-enter"
+              style={{ animationDelay: "160ms" }}
             >
-              {hero.ctaPrimary}
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </ShinyButton>
+              {hero.subtitle}
+            </p>
+
+            {/* Bullets */}
+            <ul className="mt-7 space-y-3 hero-enter" style={{ animationDelay: "200ms" }}>
+              {BULLETS.map(({ bold, rest }) => (
+                <li key={bold} className="flex items-start gap-3 text-base text-muted">
+                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[rgba(16,185,129,0.12)] ring-1 ring-[rgba(16,185,129,0.3)]">
+                    <Check className="h-3 w-3 text-[#0f9d6b]" strokeWidth={3} />
+                  </span>
+                  <span>
+                    <span className="font-semibold text-foreground">{bold}</span> {rest}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA */}
+            <div
+              className="mt-9 flex flex-col items-start gap-3 hero-enter"
+              style={{ animationDelay: "240ms" }}
+            >
+              <ShinyButton
+                href="#kontakt"
+                size="lg"
+                className="px-9 text-base font-semibold animate-cta-pulse hover:-translate-y-0.5"
+              >
+                {hero.ctaPrimary}
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </ShinyButton>
+              <p className="text-xs text-muted">
+                Unverbindlich · kein Verkaufsdruck · persönlich, nicht per Chatbot
+              </p>
+            </div>
+
+            {/* Early-trust strip (honest facts) */}
+            <ul
+              className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border pt-6 hero-enter"
+              style={{ animationDelay: "300ms" }}
+            >
+              {TRUST.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-2 text-sm font-medium text-muted-strong">
+                  <Icon className="h-4 w-4 text-[#1e5eff]" strokeWidth={2} />
+                  {label}
+                </li>
+              ))}
+            </ul>
           </div>
 
-
-
-        </div>{/* end left column */}
-
-          {/* Right column — mockup, desktop only */}
-          <div className="hidden lg:flex flex-shrink-0 items-center justify-center w-[520px]">
-            <HeroMockup />
+          {/* Right column — product screenshot anchor, desktop only */}
+          <div
+            className="hidden lg:flex flex-shrink-0 items-center justify-center w-[500px] hero-enter"
+            style={{ animationDelay: "180ms" }}
+          >
+            <HeroVisual />
           </div>
-
-        </div>{/* end flex row */}
+        </div>
       </div>
-
     </section>
   );
 }

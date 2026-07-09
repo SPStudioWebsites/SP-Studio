@@ -101,9 +101,10 @@ export function HeroMockup() {
       <div ref={phoneRef} className="relative" style={{ width: 310, height: 620, opacity: 0 }}>
         <Image
           src="/iphone 17 Pro filled.png"
-          alt="iPhone Mockup"
+          alt="Beispiel-Website für einen lokalen Betrieb auf dem Smartphone"
           fill
-          className="object-contain drop-shadow-[0_40px_80px_rgba(139,92,246,0.4)]"
+          sizes="310px"
+          className="object-contain drop-shadow-[0_40px_70px_rgba(20,24,31,0.22)]"
           unoptimized
           priority
         />
@@ -112,28 +113,28 @@ export function HeroMockup() {
         <div ref={cardAOuterRef} style={{ position: "absolute", right: -100, top: "14%", zIndex: 20, opacity: 0 }}>
           <div ref={cardAInnerRef} style={{
             width: 160,
-            background: "rgba(13,13,20,0.90)",
+            background: "rgba(255,255,255,0.95)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.11)",
+            border: "1px solid rgba(20,24,31,0.08)",
             borderRadius: 18,
             padding: "14px 16px",
-            boxShadow: "0 24px 52px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07)",
+            boxShadow: "0 24px 52px -18px rgba(20,24,31,0.30), inset 0 1px 0 rgba(255,255,255,0.9)",
           }}>
-            <p style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.45)", margin: 0, textTransform: "uppercase", letterSpacing: "0.15em" }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: "#57616f", margin: 0, textTransform: "uppercase", letterSpacing: "0.15em" }}>
               Neue Anfragen
             </p>
-            <p style={{ fontSize: 26, fontWeight: 800, color: "#fff", margin: "3px 0 0", lineHeight: 1 }}>
+            <p style={{ fontSize: 26, fontWeight: 800, color: "#14181f", margin: "3px 0 0", lineHeight: 1 }}>
               +180%
             </p>
-            <p style={{ fontSize: 11, color: "#ff2d8f", marginTop: 5, fontWeight: 600 }}>
+            <p style={{ fontSize: 11, color: "#1e5eff", marginTop: 5, fontWeight: 600 }}>
               nach Website-Launch
             </p>
             <div style={{ display: "flex", alignItems: "flex-end", gap: 3, marginTop: 10, height: 28 }}>
               {BARS.map((h, i) => (
                 <div key={i} style={{
                   flex: 1, height: `${h}%`,
-                  background: i === BARS.length - 1 ? "#ff2d8f" : "rgba(255,45,143,0.32)",
+                  background: i === BARS.length - 1 ? "#1e5eff" : "rgba(30,94,255,0.28)",
                   borderRadius: 2,
                 }} />
               ))}
@@ -145,23 +146,23 @@ export function HeroMockup() {
         <div ref={cardBOuterRef} style={{ position: "absolute", left: -105, top: "62%", zIndex: 20, opacity: 0 }}>
           <div ref={cardBInnerRef} style={{
             width: 168,
-            background: "rgba(13,13,20,0.90)",
+            background: "rgba(255,255,255,0.95)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.11)",
+            border: "1px solid rgba(20,24,31,0.08)",
             borderRadius: 18,
             padding: "14px 16px",
-            boxShadow: "0 24px 52px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07)",
+            boxShadow: "0 24px 52px -18px rgba(20,24,31,0.30), inset 0 1px 0 rgba(255,255,255,0.9)",
           }}>
-            <p style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.45)", margin: 0, textTransform: "uppercase", letterSpacing: "0.15em" }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: "#57616f", margin: 0, textTransform: "uppercase", letterSpacing: "0.15em" }}>
               Fertig in
             </p>
-            <p style={{ fontSize: 32, fontWeight: 800, color: "#fff", margin: "3px 0 0", lineHeight: 1 }}>
+            <p style={{ fontSize: 32, fontWeight: 800, color: "#14181f", margin: "3px 0 0", lineHeight: 1 }}>
               14 Tage
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 7 }}>
-              <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#8b5cf6", flexShrink: 0 }} />
-              <p style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", margin: 0 }}>Ø Lieferzeit</p>
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981", flexShrink: 0 }} />
+              <p style={{ fontSize: 10, color: "#57616f", margin: 0 }}>Ø Lieferzeit</p>
             </div>
           </div>
         </div>

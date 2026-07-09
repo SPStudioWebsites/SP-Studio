@@ -21,13 +21,13 @@ export const ShinyButton = forwardRef<HTMLButtonElement, ShinyButtonProps>(
     };
 
     const base =
-      "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+      "group relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
 
     if (variant === "ghost") {
       const cls = cn(
         base,
         sizes[size],
-        "text-foreground/85 hover:text-foreground hover:bg-white/[0.05] border border-white/[0.08] hover:border-white/[0.18]",
+        "text-foreground/80 hover:text-foreground hover:bg-[rgba(20,24,31,0.04)] border border-border hover:border-border-strong",
         className
       );
       if (href) {
@@ -48,7 +48,7 @@ export const ShinyButton = forwardRef<HTMLButtonElement, ShinyButtonProps>(
       const cls = cn(
         base,
         sizes[size],
-        "text-foreground border border-white/[0.18] hover:border-pink/60 hover:text-pink hover:shadow-[0_0_30px_-10px_rgba(255,45,143,0.5)]",
+        "text-foreground border border-border-strong hover:border-[#1e5eff] hover:text-[#1e5eff] hover:bg-[rgba(30,94,255,0.05)]",
         className
       );
       if (href) {
@@ -68,7 +68,7 @@ export const ShinyButton = forwardRef<HTMLButtonElement, ShinyButtonProps>(
     const cls = cn(
       base,
       sizes[size],
-      "shiny-button-primary text-white shadow-[0_10px_40px_-10px_rgba(255,45,143,0.6)] hover:shadow-[0_15px_50px_-10px_rgba(255,45,143,0.8)]",
+      "shiny-button-primary text-white shadow-[0_12px_36px_-10px_rgba(30,94,255,0.5)] hover:shadow-[0_16px_46px_-10px_rgba(30,94,255,0.7)]",
       className
     );
 
@@ -76,7 +76,7 @@ export const ShinyButton = forwardRef<HTMLButtonElement, ShinyButtonProps>(
       <>
         <span className="shiny-button-bg absolute inset-0 -z-10 rounded-full" />
         <span className="shiny-button-sweep absolute inset-0 -z-10 rounded-full" aria-hidden />
-        <span className="absolute inset-px rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-60 mix-blend-overlay" />
+        <span className="absolute inset-px rounded-full bg-gradient-to-b from-white/25 to-transparent opacity-50 mix-blend-overlay" />
         <span className="relative z-10 flex items-center gap-2">{children}</span>
       </>
     );

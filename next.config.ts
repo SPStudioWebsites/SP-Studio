@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    // Next.js 16 default-restricts the image optimizer to quality [75];
+    // this codebase uses 75/80/85 via next/image `quality` props.
+    qualities: [75, 80, 85],
+  },
   experimental: {
     inlineCss: false,
     optimizePackageImports: ["motion"],

@@ -14,17 +14,17 @@ export function Pill({
 }) {
   const dotColor =
     tone === "pink"
-      ? "bg-pink shadow-[0_0_10px_rgba(255,45,143,0.8)]"
+      ? "bg-[#1e5eff] shadow-[0_0_8px_rgba(30,94,255,0.55)]"
       : tone === "violet"
-        ? "bg-violet shadow-[0_0_10px_rgba(139,92,246,0.8)]"
+        ? "bg-[#4f46e5] shadow-[0_0_8px_rgba(79,70,229,0.5)]"
         : tone === "warn"
-          ? "bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.7)]"
-          : "bg-pink shadow-[0_0_10px_rgba(255,45,143,0.7)]";
+          ? "bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.55)]"
+          : "bg-[#1e5eff] shadow-[0_0_8px_rgba(30,94,255,0.5)]";
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-full glass-pill px-3.5 py-1.5 text-xs font-medium tracking-wide text-foreground/85",
+        "inline-flex items-center gap-2 rounded-full glass-pill px-3.5 py-1.5 text-xs font-medium tracking-wide text-foreground/70",
         className
       )}
     >

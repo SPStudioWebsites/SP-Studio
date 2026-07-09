@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -142,10 +141,19 @@ export function Navbar({ localLinks, logoHref }: NavbarProps = {}) {
           <a
             href={logoHref ?? link("#top")}
             onClick={() => mobileOpen && setMobileOpen(false)}
-            className="flex items-center pl-2 pr-1"
+            className="flex items-center gap-2 pl-2 pr-1"
             aria-label={brand.name}
           >
-            <Image src="/logo.png" alt={brand.name} width={2861} height={430} className="h-6 w-auto" quality={80} sizes="(max-width: 768px) 150px, 200px" priority />
+            <span
+              className="flex h-7 w-7 items-center justify-center rounded-[9px] font-display text-[14px] font-extrabold text-white"
+              style={{ background: "linear-gradient(135deg,#1e5eff,#4f46e5)", boxShadow: "0 4px 12px -4px rgba(30,94,255,0.5)" }}
+              aria-hidden
+            >
+              S
+            </span>
+            <span className="font-display text-[17px] font-extrabold leading-none tracking-tight text-foreground">
+              Schnell<span className="text-[#1e5eff]">-</span>Sichtbar
+            </span>
           </a>
 
           <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex">
@@ -183,11 +191,11 @@ export function Navbar({ localLinks, logoHref }: NavbarProps = {}) {
           <div className="flex items-center gap-2">
             <a
               href={link("#kontakt")}
-              className="group hidden h-10 items-center gap-2 rounded-full pl-5 pr-1.5 text-sm font-medium text-white sm:inline-flex"
-              style={{ background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)", boxShadow: "0 8px 30px -10px rgba(255,45,143,0.7)" }}
+              className="group hidden h-10 items-center gap-2 rounded-full pl-5 pr-1.5 text-sm font-semibold text-white sm:inline-flex"
+              style={{ background: "linear-gradient(110deg, #1e5eff 0%, #2f6bff 50%, #4f46e5 100%)", boxShadow: "0 8px 24px -10px rgba(30,94,255,0.6)" }}
             >
               Erstgespräch
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-x-0.5">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5">
                 <ArrowRight className="h-3.5 w-3.5" />
               </span>
             </a>
@@ -195,7 +203,7 @@ export function Navbar({ localLinks, logoHref }: NavbarProps = {}) {
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-foreground/85 hover:bg-white/[0.06] lg:hidden cursor-pointer"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-[rgba(20,24,31,0.03)] text-foreground/80 hover:bg-[rgba(20,24,31,0.06)] lg:hidden cursor-pointer"
             >
               <span className="grid h-4 w-4 place-items-center">
                 {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -212,7 +220,7 @@ export function Navbar({ localLinks, logoHref }: NavbarProps = {}) {
           aria-hidden={!mobileOpen}
         >
           <div className="flex flex-col" style={{ minHeight: "calc(100dvh - 80px)" }}>
-            <div className="mx-4 h-px bg-white/[0.06]" />
+            <div className="mx-4 h-px bg-[rgba(20,24,31,0.08)]" />
 
             <nav className="flex flex-col px-4 pt-8">
               <ul ref={mobileListRef} className="relative flex flex-col">
@@ -279,8 +287,8 @@ export function Navbar({ localLinks, logoHref }: NavbarProps = {}) {
                   e.stopPropagation();
                   scrollToHash("#kontakt", Date.now() + 3000, 0);
                 }}
-                className="flex h-14 w-full items-center justify-center gap-2 rounded-full text-base font-medium text-white"
-                style={{ background: "linear-gradient(110deg, #ff2d8f 0%, #c026d3 50%, #8b5cf6 100%)", boxShadow: "0 12px 40px -10px rgba(255,45,143,0.6)" }}
+                className="flex h-14 w-full items-center justify-center gap-2 rounded-full text-base font-semibold text-white"
+                style={{ background: "linear-gradient(110deg, #1e5eff 0%, #2f6bff 50%, #4f46e5 100%)", boxShadow: "0 12px 34px -10px rgba(30,94,255,0.55)" }}
               >
                 Kostenloses Erstgespräch
                 <ArrowRight className="h-4 w-4" />

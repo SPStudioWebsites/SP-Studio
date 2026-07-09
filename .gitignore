@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# dependencies (auf jeder Ebene ignorieren – hier steckt die 100 MB+ SWC-Binary drin)
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -13,18 +13,22 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# next.js build output & caches
+.next/
 /out/
+.turbo/
+.swc/
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
 
-# debug
+# debug / logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -40,3 +44,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editor / OS
+.idea/
+*.swp
+*.swo
+
+# large / temporary media (nicht versehentlich einchecken)
+*.zip
+*.tar
+*.tar.gz
+*.mov
+*.mp4
+*.node

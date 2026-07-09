@@ -6,28 +6,20 @@ import Image from "next/image";
 
 export function AboutSection() {
   return (
-    <section
-      id="ueber-uns"
-      aria-labelledby="ueber-uns-h"
-      className="relative overflow-hidden py-16 md:py-24"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-1/3 h-[50%] bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(139,92,246,0.07),transparent)]"
-      />
+    <section id="ueber-uns" aria-labelledby="ueber-uns-h" className="relative py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
           <div className="lg:col-span-6">
             <Reveal>
-              <Pill tone="violet">{about.eyebrow}</Pill>
+              <Pill>{about.eyebrow}</Pill>
             </Reveal>
             <Reveal delay={0.1}>
               <h2
                 id="ueber-uns-h"
-                className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
+                className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl text-balance"
               >
                 Aus Haßfurt.{" "}
-                <em className="font-display font-extrabold not-italic text-gradient">Für dich.</em>
+                <em className="not-italic text-[#1e5eff]">Für dich.</em>
               </h2>
             </Reveal>
             <Reveal delay={0.2}>
@@ -39,11 +31,8 @@ export function AboutSection() {
             </Reveal>
 
             <Reveal delay={0.3}>
-              <figure className="relative mt-10 rounded-3xl glass-strong p-7">
-                <Quote
-                  aria-hidden
-                  className="absolute -top-3 -left-2 h-10 w-10 text-pink/40"
-                />
+              <figure className="relative mt-10 rounded-3xl border border-border bg-white p-7">
+                <Quote aria-hidden className="absolute -top-3 -left-2 h-10 w-10 text-[#1e5eff]/25" />
                 <blockquote className="font-serif text-xl italic leading-relaxed text-foreground md:text-2xl">
                   &bdquo;{about.quote}&ldquo;
                 </blockquote>
@@ -53,8 +42,8 @@ export function AboutSection() {
             <Reveal delay={0.4}>
               <dl className="mt-10 grid grid-cols-2 gap-4">
                 {about.stats.map((s) => (
-                  <div key={s.label} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-                    <dt className="font-display text-2xl font-semibold text-gradient md:text-3xl">
+                  <div key={s.label} className="rounded-2xl border border-border bg-white p-4 text-center">
+                    <dt className="font-display text-2xl font-extrabold text-[#1e5eff] md:text-3xl">
                       {s.value}
                     </dt>
                     <dd className="mt-1 text-xs text-muted">{s.label}</dd>
@@ -65,7 +54,7 @@ export function AboutSection() {
           </div>
 
           <Reveal delay={0.2} className="lg:col-span-6">
-            <div className="relative overflow-hidden rounded-3xl">
+            <div className="relative overflow-hidden rounded-3xl border border-border">
               <Image
                 src="/Über-Mich.jpeg"
                 alt="Simon, Inhaber Schnell-Sichtbar.de"
@@ -76,7 +65,6 @@ export function AboutSection() {
                 quality={80}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }} />
             </div>
           </Reveal>
         </div>

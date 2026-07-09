@@ -1,9 +1,7 @@
 "use client";
 
-import { contact } from "@/lib/content";
+import { contact, CTA_LABEL } from "@/lib/content";
 import { Reveal } from "@/components/ui/reveal";
-import { Pill } from "@/components/ui/pill";
-import { GlassCard } from "@/components/ui/glass-card";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import {
   ArrowRight,
@@ -19,6 +17,11 @@ import { cn } from "@/lib/utils";
 
 const initialState: ContactState = { ok: false };
 
+/**
+ * Sektion 15 — Abschluss-CTA + Footer-Auftakt (Kern, GROSS). Als dunkle,
+ * immersive Sektion gebaut: letzter starker Moment der Seite, spiegelt den
+ * Methode-Block und schließt den Rhythmus hell→dunkel. Kanonischer CTA.
+ */
 export function ContactSection() {
   const [state, formAction, pending] = useActionState(submitContact, initialState);
   const [fields, setFields] = useState({ name: "", company: "", email: "", phone: "", branche: "", message: "" });
@@ -29,43 +32,43 @@ export function ContactSection() {
     <section
       id="kontakt"
       aria-labelledby="kontakt-h"
-      className="relative overflow-hidden py-16 md:py-24"
+      className="section-dark dark-grid relative overflow-hidden py-24 md:py-32"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-32 h-96 bg-[radial-gradient(ellipse_50%_60%_at_50%_50%,rgba(255,45,143,0.12),transparent)]"
-      />
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-3xl text-center">
+      <div className="dark-orb left-[-6%] top-0 h-[420px] w-[420px] bg-[rgba(30,94,255,0.28)]" aria-hidden />
+      <div className="dark-orb bottom-[-12%] right-[-6%] h-[460px] w-[460px] bg-[rgba(79,70,229,0.26)]" aria-hidden />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <Pill tone="pink">{contact.eyebrow}</Pill>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium tracking-wide text-white/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#5b8bff] shadow-[0_0_8px_rgba(91,139,255,0.8)] animate-pulse-soft" />
+              {contact.eyebrow}
+            </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h2
               id="kontakt-h"
-              className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl text-balance"
+              className="mt-6 font-display text-4xl font-bold leading-[1.04] tracking-tight text-white md:text-6xl text-balance"
             >
               Lass uns reden.{" "}
-              <em className="font-display font-extrabold not-italic text-gradient">Kostenlos.</em>{" "}
+              <em className="not-italic bg-gradient-to-r from-[#5b8bff] to-[#a78bfa] bg-clip-text text-transparent">
+                Kostenlos.
+              </em>{" "}
               Unverbindlich.
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg text-pretty">
+            <p className="mx-auto mt-5 max-w-xl text-base text-white/65 md:text-lg text-pretty">
               {contact.subtitle}
             </p>
           </Reveal>
         </div>
 
-        {/* Two-column: photo left, form right */}
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-14 lg:items-start mx-auto max-w-6xl">
-
           {/* Left: photo + personal text + phone CTA */}
           <Reveal delay={0.2}>
             <div className="flex flex-col gap-6">
-
-              {/* Portrait — desktop only */}
-              <div className="relative hidden lg:block w-full overflow-hidden rounded-3xl" style={{ aspectRatio: "3/4" }}>
+              <div className="relative hidden lg:block w-full overflow-hidden rounded-3xl border border-white/12" style={{ aspectRatio: "3/4" }}>
                 <Image
                   src="/Über-Mich.jpeg"
                   alt="Simon Pöske, Inhaber Schnell-Sichtbar.de"
@@ -74,12 +77,10 @@ export function ContactSection() {
                   sizes="380px"
                   quality={85}
                 />
-                <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }} />
               </div>
 
-              {/* Compact avatar row — mobile only */}
               <div className="flex lg:hidden items-center gap-4">
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-white/[0.1] ring-2 ring-pink/25">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-white/15">
                   <Image
                     src="/Über-Mich.jpeg"
                     alt="Simon Pöske"
@@ -89,47 +90,42 @@ export function ContactSection() {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground text-sm leading-snug">Du schreibst direkt mit mir.</p>
-                  <p className="mt-0.5 text-xs text-muted">Kein Callcenter. Ich melde mich innerhalb 24h.</p>
+                  <p className="font-semibold text-white text-sm leading-snug">Du schreibst direkt mit mir.</p>
+                  <p className="mt-0.5 text-xs text-white/55">Kein Callcenter. Ich melde mich innerhalb 24h.</p>
                 </div>
               </div>
 
-              {/* Text — desktop only */}
               <div className="hidden lg:block">
-                <p className="font-semibold text-foreground text-lg leading-snug">
+                <p className="font-semibold text-white text-lg leading-snug">
                   Du schreibst direkt mit mir.
                 </p>
-                <p className="mt-1.5 text-sm text-muted leading-relaxed">
+                <p className="mt-1.5 text-sm text-white/60 leading-relaxed">
                   Kein Callcenter, kein Team. Ich persönlich melde mich innerhalb von 24 Stunden bei dir.
                 </p>
               </div>
 
               <a
                 href={`tel:${brand.phone}`}
-                className="inline-flex h-11 w-fit items-center gap-3 rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-foreground/90 transition-colors hover:border-pink/30 hover:bg-pink/[0.06]"
+                className="inline-flex h-11 w-fit items-center gap-3 rounded-full border border-white/15 bg-white/5 px-5 text-sm font-medium text-white/90 transition-colors hover:border-[rgba(126,166,255,0.5)] hover:bg-white/10"
               >
-                <Phone className="h-4 w-4 text-pink" />
-                <span className="font-semibold text-foreground">Lieber anrufen?</span>
+                <Phone className="h-4 w-4 text-[#7ea6ff]" />
+                <span className="font-semibold text-white">Lieber anrufen?</span>
               </a>
             </div>
           </Reveal>
 
           {/* Right: form */}
           <div>
-          <Reveal delay={0.15}>
-            <GlassCard variant="strong" className="relative overflow-hidden p-5 md:p-8 lg:p-10">
-              {state.ok ? (
-                <SuccessPanel message={state.message} />
-              ) : (
-                  <form
-                    action={formAction}
-                    className="grid gap-5"
-                    noValidate
-                  >
+            <Reveal delay={0.15}>
+              <div className="dark-card relative overflow-hidden rounded-3xl p-5 md:p-8 lg:p-10">
+                {state.ok ? (
+                  <SuccessPanel message={state.message} />
+                ) : (
+                  <form action={formAction} className="grid gap-5" noValidate>
                     {state.message && !state.ok && (
                       <div
                         role="alert"
-                        className="flex items-center gap-2 rounded-2xl border border-red-500/30 bg-red-500/[0.08] px-4 py-3 text-sm text-red-200"
+                        className="flex items-center gap-2 rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-red-300"
                       >
                         <AlertCircle className="h-4 w-4 shrink-0" />
                         {state.message}
@@ -186,16 +182,16 @@ export function ContactSection() {
                       value={fields.message}
                       onChange={set("message")}
                     />
-                    <label className="mt-1 flex items-start gap-3 text-xs text-muted">
+                    <label className="mt-1 flex items-start gap-3 text-xs text-white/60">
                       <input
                         type="checkbox"
                         name="privacy"
-                        className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/10 bg-white/[0.04] accent-pink"
+                        className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/20 accent-[#1e5eff]"
                         required
                       />
                       <span>
                         {contact.privacy}{" "}
-                        <a href="/datenschutz" className="underline underline-offset-2 hover:text-foreground">
+                        <a href="/datenschutz" className="underline underline-offset-2 hover:text-white">
                           Datenschutz
                         </a>
                         .
@@ -204,7 +200,6 @@ export function ContactSection() {
                     {state.errors?.privacy && (
                       <p className="-mt-3 text-xs text-red-300">{state.errors.privacy}</p>
                     )}
-                    {/* Honeypot — hidden from humans, filled by bots */}
                     <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>
                       <input type="text" name="website" tabIndex={-1} autoComplete="off" />
                     </div>
@@ -217,18 +212,17 @@ export function ContactSection() {
                           </>
                         ) : (
                           <>
-                            Anfrage senden
+                            {CTA_LABEL}
                             <ArrowRight className="h-4 w-4" />
                           </>
                         )}
                       </ShinyButton>
                     </div>
                   </form>
-              )}
-            </GlassCard>
-          </Reveal>
+                )}
+              </div>
+            </Reveal>
           </div>
-
         </div>
       </div>
     </section>
@@ -237,8 +231,8 @@ export function ContactSection() {
 
 function SuccessPanel({ message }: { message?: string }) {
   return (
-    <div className="contact-success-enter flex flex-col items-center py-12 text-center">
-      <div className="relative mb-6 h-20 w-20 overflow-hidden rounded-full border border-white/10 ring-2 ring-pink/40 shadow-[0_0_24px_-4px_rgba(255,45,143,0.4)]">
+    <div className="flex flex-col items-center py-12 text-center">
+      <div className="relative mb-6 h-20 w-20 overflow-hidden rounded-full border border-white/15">
         <Image
           src="/simon-danke.jpg"
           alt="Simon — Danke für deine Anfrage!"
@@ -247,16 +241,18 @@ function SuccessPanel({ message }: { message?: string }) {
           sizes="80px"
         />
       </div>
-      <h3 className="font-display text-3xl font-semibold tracking-tight">
+      <h3 className="font-display text-3xl font-bold tracking-tight text-white">
         Danke! Anfrage angekommen.
       </h3>
-      <p className="mt-3 max-w-sm text-sm text-muted text-pretty">
-        {message ??
-          "Ich melde mich innerhalb von 24 Stunden persönlich bei dir."}
+      <p className="mt-3 max-w-sm text-sm text-white/60 text-pretty">
+        {message ?? "Ich melde mich innerhalb von 24 Stunden persönlich bei dir."}
       </p>
     </div>
   );
 }
+
+const inputBase =
+  "w-full rounded-2xl border bg-white/5 text-sm text-white placeholder:text-white/35 transition-colors duration-200 focus:bg-white/10 focus:outline-none";
 
 function Field({
   name, label, type = "text", required, autoComplete, error, value, onChange,
@@ -267,8 +263,8 @@ function Field({
 }) {
   return (
     <label className="group relative block">
-      <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-muted">
-        {label} {required && <span className="text-pink">*</span>}
+      <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-white/55">
+        {label} {required && <span className="text-[#7ea6ff]">*</span>}
       </span>
       <input
         type={type}
@@ -279,10 +275,11 @@ function Field({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${name}-err` : undefined}
         className={cn(
-          "h-12 w-full rounded-2xl border bg-white/[0.025] px-4 text-sm text-foreground placeholder:text-muted/50 transition-colors duration-200 focus:bg-white/[0.04] focus:outline-none",
+          inputBase,
+          "h-12 px-4",
           error
-            ? "border-red-400/50 focus:border-red-400/70"
-            : "border-white/[0.08] hover:border-white/[0.16] focus:border-pink/60"
+            ? "border-red-400/50 focus:border-red-400"
+            : "border-white/10 hover:border-white/20 focus:border-[#7ea6ff]/60"
         )}
       />
       {error && (
@@ -302,8 +299,8 @@ function TextareaField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-muted">
-        {label} {required && <span className="text-pink">*</span>}
+      <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-white/55">
+        {label} {required && <span className="text-[#7ea6ff]">*</span>}
       </span>
       <textarea
         name={name}
@@ -313,10 +310,11 @@ function TextareaField({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${name}-err` : undefined}
         className={cn(
-          "w-full resize-none rounded-2xl border bg-white/[0.025] px-4 py-3 text-sm text-foreground placeholder:text-muted/50 transition-colors duration-200 focus:bg-white/[0.04] focus:outline-none",
+          inputBase,
+          "resize-none px-4 py-3",
           error
-            ? "border-red-400/50 focus:border-red-400/70"
-            : "border-white/[0.08] hover:border-white/[0.16] focus:border-pink/60"
+            ? "border-red-400/50 focus:border-red-400"
+            : "border-white/10 hover:border-white/20 focus:border-[#7ea6ff]/60"
         )}
         placeholder="Erzähl mir kurz von deinem Projekt. Ich höre zu."
       />
@@ -337,18 +335,18 @@ function SelectField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-muted">
+      <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-white/55">
         {label}
       </span>
       <select
         name={name}
         value={value}
         onChange={onChange}
-        className="h-12 w-full rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 text-sm text-foreground transition-colors duration-200 hover:border-white/[0.16] focus:border-pink/60 focus:bg-white/[0.04] focus:outline-none"
+        className={cn(inputBase, "h-12 px-4 border-white/10 hover:border-white/20 focus:border-[#7ea6ff]/60 [&>option]:bg-[#0f1420] [&>option]:text-white")}
       >
         <option value="" disabled>Bitte wählen …</option>
         {options.map((o) => (
-          <option key={o} value={o} className="bg-[#0a0a0a]">{o}</option>
+          <option key={o} value={o}>{o}</option>
         ))}
       </select>
     </label>

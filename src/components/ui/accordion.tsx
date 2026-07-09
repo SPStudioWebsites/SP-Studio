@@ -26,10 +26,10 @@ export function Accordion({
           <li
             key={i}
             className={cn(
-              "group rounded-2xl glass transition-colors duration-300",
+              "group rounded-2xl border bg-white transition-colors duration-300",
               isOpen
-                ? "border-white/[0.18] bg-white/[0.045]"
-                : "hover:border-white/[0.14] hover:bg-white/[0.035]"
+                ? "border-[rgba(30,94,255,0.25)]"
+                : "border-border hover:border-[rgba(20,24,31,0.16)]"
             )}
           >
             <button
@@ -43,8 +43,8 @@ export function Accordion({
               </span>
               <span
                 className={cn(
-                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] transition-all duration-300",
-                  isOpen && "border-pink/50 bg-pink/10 text-pink rotate-180"
+                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-[#faf9f6] transition-all duration-300",
+                  isOpen && "border-[#1e5eff]/40 bg-[rgba(30,94,255,0.08)] text-[#1e5eff] rotate-180"
                 )}
               >
                 <ChevronDown className="h-4 w-4" />

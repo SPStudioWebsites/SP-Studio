@@ -29,4 +29,10 @@ export {
   BadgeEuro,
   Clock,
   Minus,
+  PartyPopper,
+  LifeBuoy,
+  Star,
+  Navigation,
+  ChevronsLeftRight,
+  AlertTriangle,
 } from "lucide-react";

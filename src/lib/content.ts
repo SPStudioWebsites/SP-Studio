@@ -18,17 +18,20 @@ export const navLinks = [
   { label: "Home", href: "#top" },
   { label: "Branchen", href: "#branchen" },
   { label: "Ablauf", href: "#ablauf" },
-  { label: "Warum Webseite", href: "#warum-webseite" },
   { label: "Über mich", href: "#ueber-uns" },
   { label: "Leistungen", href: "#leistungen" },
+  { label: "FAQ", href: "#faq" },
 ] as const;
 
+// Canonical CTA — identical wording in Hero, Mittel-CTA and Final-CTA.
+export const CTA_LABEL = "Kostenloses Erstgespräch sichern";
+
 export const hero = {
-  eyebrow: "Webdesign aus Franken",
-  title: ["Schnell sichtbar.", "*Sofort* überzeugend."],
+  eyebrow: "Festpreis · in 14 Tagen online · Code gehört dir",
+  keywordLine: "Webdesign für lokale Betriebe in Franken",
   subtitle:
-    "Die meisten Betriebe verlieren täglich Kunden, weil ihre Webseite nicht überzeugt. Ich ändere das. In 14 Tagen, zum Festpreis.",
-  ctaPrimary: "Kostenloses Erstgespräch",
+    "Viele Betriebe in Franken verlieren täglich Anfragen – weil ihre Website veraltet ist oder bei Google nicht auftaucht. Ich baue dir in 14 Tagen eine Seite, die gefunden wird und Kunden bringt. Zum Festpreis.",
+  ctaPrimary: CTA_LABEL,
 };
 
 export const services = [
@@ -72,42 +75,77 @@ export const services = [
 
 export const industries = [
   {
+    icon: "Hammer",
+    name: "Handwerk",
+    text: "Referenzen, Angebotsanfrage, Notfallkontakt.",
+    line: "Du hast volle Auftragsbücher verdient, nicht ein Telefon, das nur wegen Kleinkram klingelt.",
+    screenshot: "/Branchen/Hero-Handwerker.png",
+  },
+  {
     icon: "Scissors",
     name: "Frisöre & Salons",
     text: "Online-Buchung, Stylisten-Profile, Vorher-Nachher-Galerie.",
-    span: "lg:col-span-2 lg:row-span-2",
+    line: "Termine, die auch um 22 Uhr online reinkommen – ohne dass du ans Telefon musst.",
+    screenshot: "/Branchen/Hero - Friseur.png",
   },
   {
     icon: "UtensilsCrossed",
     name: "Restaurants & Cafés",
     text: "Speisekarte, Reservierung, Click & Collect.",
-    span: "lg:col-span-2",
+    line: "Auch dienstags gut gebucht, nicht nur freitags und samstags.",
+    screenshot: "/Branchen/Hero-Cafe.png",
   },
   {
-    icon: "Hammer",
-    name: "Handwerk",
-    text: "Referenzen, Angebotsanfrage, Notfallkontakt.",
-    span: "lg:col-span-2",
+    icon: "PartyPopper",
+    name: "Eventlocations & Feiern",
+    text: "Kalender-Auslastung, Anfragen für Hochzeit & Feier, Bildergalerie.",
+    line: "Gäste entscheiden in 5 Minuten, ob sie anfragen. Deine Seite ist der erste Eindruck.",
+    screenshot: "/Branchen/Hero - Eventlocation.png",
   },
   {
     icon: "Stethoscope",
     name: "Praxen & Therapeuten",
     text: "Online-Termine, Team-Vorstellung, Sprechzeiten.",
-    span: "lg:col-span-2",
+    line: "Patienten finden auf Anhieb Sprechzeiten, Team und einen Termin – ohne Warteschleife.",
+    screenshot: "",
   },
   {
     icon: "Dumbbell",
     name: "Fitness- & Yoga-Studios",
     text: "Kursplan, Probestunde, Mitgliedschaft online.",
-    span: "lg:col-span-2",
-  },
-  {
-    icon: "Store",
-    name: "Sonstige KMUs",
-    text: "Vom Hofladen bis zum Steuerbüro. Ich mache dich sichtbar.",
-    span: "lg:col-span-2",
+    line: "Kursplan und Probestunde online buchbar, statt Interessenten an der Rezeption zu verlieren.",
+    screenshot: "",
   },
 ] as const;
+
+// Sektion 4 — Methode (branded, 3 Säulen). Beschreibt das WIE/die Philosophie,
+// nicht den Projekt-Ablauf (der steht separat in `process`).
+export const method = {
+  eyebrow: "Wie ich arbeite",
+  name: "Die Sichtbar-Formel",
+  intro:
+    "Die meisten Anbieter liefern nur eins davon: eine hübsche Seite ohne Auffindbarkeit, oder SEO ohne Struktur, die Anfragen holt. Meine Formel verbindet alle drei – deshalb wirkt sie.",
+  steps: [
+    {
+      n: "01",
+      icon: "Search",
+      title: "Gefunden.",
+      desc: "Lokales SEO und ein sauber eingerichtetes Google-Unternehmensprofil sorgen dafür, dass dich neue Kunden in der Region überhaupt finden, bevor sie bei der Konkurrenz landen.",
+    },
+    {
+      n: "02",
+      icon: "Layout",
+      title: "Überzeugt.",
+      desc: "Klare Struktur, echte Beweise, ein einziger nächster Schritt: Design, das nicht nur gut aussieht, sondern Besucher gezielt zur Anfrage führt.",
+    },
+    {
+      n: "03",
+      icon: "LifeBuoy",
+      title: "Betreut.",
+      desc: "Nach dem Launch bist du nicht allein. Hosting, Pflege und ein direkter Draht zu mir, ohne Ticketsystem und ohne Warteschleife.",
+    },
+  ],
+} as const;
 
 export const process = [
   {
@@ -148,7 +186,7 @@ export const about = {
   quote: "Aus der Region Unterfranken. Für Betriebe, die online endlich sichtbar sein wollen.",
   quoteAuthor: "Simon, Inhaber Schnell-Sichtbar.de",
   stats: [
-    { value: "Ø +180%", label: "mehr Anfragen für Kunden" },
+    { value: "3+ Jahre", label: "Marketing für lokale Betriebe" },
     { value: "14 Tage", label: "bis zur fertigen Seite" },
   ],
   cities: [
@@ -164,11 +202,11 @@ export const about = {
 export const faq = [
   {
     q: "Was kostet eine Website bei Schnell-Sichtbar.de?",
-    a: "Eine professionelle Website beginnt ab 699 € einmalig, inklusive Design, Entwicklung und SEO-Grundlagen. Größere Projekte mit Online-Buchung oder Shop bespreche ich gerne individuell mit dir. Du bekommst immer einen Festpreis, bevor auch nur eine Zeile Code geschrieben wird.",
+    a: "Ab 399 € einmalig, inklusive Design, Entwicklung und SEO-Grundlagen. Größere Projekte mit Online-Buchung oder Shop bespreche ich gerne individuell mit dir. Du bekommst immer einen Festpreis, bevor auch nur eine Zeile Code geschrieben wird.",
   },
   {
     q: "Wie schnell ist meine Website online?",
-    a: "Im Durchschnitt 14 Tage, vom ersten Gespräch bis zum Launch. Bei größeren Projekten plane ich das realistisch mit dir. Und wenn es wirklich schnell gehen muss: Es gibt einen Express-Slot mit 7 Tagen Lieferzeit.",
+    a: "Im Durchschnitt 14 Tage, vom ersten Gespräch bis zum Launch. Wenn es wirklich schnell gehen muss: Es gibt einen Express-Slot mit 7 Tagen Lieferzeit.",
   },
   {
     q: "Brauche ich technisches Wissen?",
@@ -176,45 +214,80 @@ export const faq = [
   },
   {
     q: "Wie läuft die Zusammenarbeit ab?",
-    a: "Einfach und klar. Zuerst führe ich ein kostenloses Erstgespräch mit dir, persönlich oder per Video. Danach bekommst du ein konkretes Angebot. Nach deiner Freigabe starte ich mit Design und Entwicklung. Du gibst einmal Feedback, ich setze es um. Dann geht deine Seite online. Kein Hin und Her, keine langen Warteschleifen.",
+    a: "Zuerst ein kostenloses Erstgespräch, persönlich oder per Video. Danach bekommst du ein konkretes Angebot. Nach deiner Freigabe starte ich mit Design und Entwicklung, du gibst Feedback, ich setze es um. Dann geht deine Seite online. Kein Hin und Her, keine langen Warteschleifen.",
   },
   {
     q: "Was passiert nach dem Launch?",
     a: "Das entscheidest du. Auf Wunsch übernehme ich Hosting, Updates und kleine Änderungen als monatliche Betreuung. Du kannst aber auch alles selbst übernehmen oder zu einem anderen Anbieter wechseln. Deine Website, dein Code, kein Lock-in.",
   },
   {
-    q: "Kann ich später selbst Inhalte ändern?",
-    a: "Ja. Du bekommst auf Wunsch den vollständigen Code deiner Website. Änderungen kannst du selbst vornehmen, einen Entwickler deiner Wahl beauftragen oder jederzeit zu mir kommen. Keine versteckten Abhängigkeiten.",
-  },
-  {
-    q: "Was ist der Unterschied zwischen einer normalen und einer SEO-optimierten Website?",
-    a: "Eine normale Website ist online. Eine SEO-optimierte Website wird gefunden. Der Unterschied liegt in Seitenstruktur, Ladezeit, lokalen Keywords und Google-Sichtbarkeit. Ich baue keine Seiten, die nur existieren. Sondern Seiten, die gefunden werden.",
-  },
-  {
-    q: "Wer braucht eine lokale Website?",
-    a: "Jeder Betrieb, der Kunden aus der Region gewinnen will. Ob Handwerker, Dienstleister, Praxis oder kleines Unternehmen: Wer lokal gefunden werden möchte, braucht eine Website, die genau dafür gebaut ist. Eine allgemeine Seite reicht längst nicht mehr. Google bevorzugt Seiten mit echtem lokalem Bezug, konkreten Standortangaben und klaren Leistungsbeschreibungen.",
-  },
-  {
-    q: "Wie schnell rechnet sich eine neue Webseite?",
-    a: "In den meisten Fällen schon nach wenigen neuen Kunden. Rechne einmal kurz: Wenn eine professionelle Webseite ab 699 € einmalig kostet und ein einziger neuer Stammkunde im Jahr 1.000–3.000 € Umsatz bringt, ist die Investition oft schon im ersten Monat reingespielt. Im Vergleich zu Google Ads, wo jeder Klick neu kostet, oder Print-Werbung, die einmal gedruckt wird und dann wirkungslos verstaubt, arbeitet eine gute Webseite jeden Tag im Jahr für dich – ohne weitere Kosten.",
-  },
-  {
-    q: "Was bringt eine moderne Webseite mehr als eine alte oder selbstgebaute?",
-    a: "Eine moderne Webseite lädt in unter 2 Sekunden, sieht auf dem Handy perfekt aus (über 70 % der Suchanfragen kommen heute mobil), wird von Google als vertrauenswürdig eingestuft und führt Besucher gezielt zu Kontakt, Buchung oder Anruf. Eine alte oder selbstgebaute Seite ist meist langsam, mobil kaputt, ohne SEO-Grundlagen und ohne klare Conversion-Pfade. Der Unterschied zeigt sich konkret: ähnlich viele Besucher, aber drei- bis fünfmal mehr Anfragen.",
+    q: "Wer braucht eine lokale Website wirklich?",
+    a: "Jeder Betrieb, der Kunden aus der Region gewinnen will. Handwerker, Gastronomie, Praxis oder kleines Unternehmen: Wer lokal gefunden werden will, braucht eine Seite mit echtem Ortsbezug, nicht nur eine allgemeine Visitenkarte.",
   },
   {
     q: "Reicht nicht eine Facebook- oder Instagram-Seite statt einer Webseite?",
-    a: "Nein. Social Media ist ein nützlicher Kanal, aber kein Ersatz für eine eigene Webseite. Bei Google rankt Facebook nicht für deine lokalen Keywords. Du gehörst dir nicht selbst – Meta kann jederzeit Algorithmen oder Regeln ändern. Und Kunden, die ernsthaft suchen (Handwerker, Steuerberater, Arzttermin), erwarten eine echte Webseite mit klaren Informationen. Social Media ergänzt deine Webseite, ersetzt sie aber nicht.",
+    a: "Nein. Bei Google rankt Facebook nicht für deine lokalen Keywords, und du gehörst dir dort nicht selbst – Meta kann Regeln jederzeit ändern. Kunden, die ernsthaft suchen, erwarten eine echte Webseite mit klaren Infos. Social Media ergänzt sie, ersetzt sie aber nicht.",
   },
   {
-    q: "Was unterscheidet eine 'Profi-Webseite' von einem Wix- oder Jimdo-Baukasten?",
-    a: "Baukasten-Lösungen sehen am Anfang einfach aus, haben aber strukturelle Probleme: langsame Ladezeiten, eingeschränkte SEO, unsaubere HTML-Struktur, monatliche Mietkosten ohne Eigentum am Code. Eine handgebaute Webseite (wie ich sie liefere) ist schnell, sauber strukturiert, technisch vollständig SEO-optimiert und gehört dir komplett – einmal bezahlt, lebenslang nutzbar. Der Unterschied im Google-Ranking ist nach 3–6 Monaten meist deutlich sichtbar.",
-  },
-  {
-    q: "Wie wichtig ist Mobile-First wirklich für lokale Betriebe?",
-    a: "Entscheidend. Über 70 Prozent aller lokalen Suchanfragen kommen vom Smartphone – jemand sucht eine Pizzeria, einen Notdienst, eine Werkstatt unterwegs. Wenn deine Webseite auf dem Handy zu klein, zu langsam oder unübersichtlich ist, ist der Kunde in 3 Sekunden wieder weg. Mobile-First heißt: Die Seite wird zuerst für das Handy designt und entwickelt, nicht nachträglich angepasst. Genau so baue ich.",
+    q: "Was unterscheidet das von einem Wix- oder Jimdo-Baukasten?",
+    a: "Baukasten-Lösungen sehen anfangs einfach aus, haben aber strukturelle Probleme: langsame Ladezeiten, eingeschränkte SEO, monatliche Mietkosten ohne Eigentum am Code. Eine handgebaute Seite ist schnell, sauber strukturiert und gehört dir komplett, einmal bezahlt, dauerhaft nutzbar.",
   },
 ] as const;
+
+// Sektion 6 — Trust-Block. Schnell-Sichtbar.de ist jung: statt Kundenzahlen zu
+// erfinden, trägt hier ehrliche Risikoumkehr (Garantien) + Gründer-Track-Record.
+// Sobald echte Fallstudien vorliegen, ersetzen sie diesen Block.
+export const guarantees = [
+  {
+    icon: "BadgeEuro",
+    title: "Festpreis, bevor es losgeht",
+    desc: "Du bekommst einen verbindlichen Preis, bevor die erste Zeile Code entsteht. Keine Nachträge, keine Überraschung auf der Rechnung.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Der Code gehört dir",
+    desc: "Kein Abo, kein Lock-in, kein proprietärer Baukasten. Deine Seite gehört komplett dir – für immer.",
+  },
+  {
+    icon: "Phone",
+    title: "Direkt mit dem Inhaber",
+    desc: "Du sprichst nie mit einem Callcenter oder Praktikanten. Bei Fragen schreibst du mir, und ich antworte persönlich.",
+  },
+  {
+    icon: "CheckCircle2",
+    title: "Feedback, bis es passt",
+    desc: "Klare Korrekturrunden sind eingeplant. Deine Seite geht erst online, wenn du wirklich zufrieden bist.",
+  },
+] as const;
+
+// Typische Ausgangslagen → was die neue Seite konkret leistet (Ziel, keine
+// erfundene Ergebnis-Zahl). Wird ersetzt, sobald echte Fallzahlen vorliegen.
+export const scenarios = [
+  {
+    branche: "Handwerksbetrieb",
+    problem: "Keine Website. Anfragen kamen nur über Mundpropaganda und Zufallsfunde bei Google.",
+    result: "Eine Seite mit Referenzen und schnellem Angebots-Kontakt, die auch dann Anfragen sammelt, wenn dich niemand empfohlen hat.",
+  },
+  {
+    branche: "Friseursalon",
+    problem: "Alte Website ohne Online-Buchung. Jeder Termin lief über Anrufe mitten im Betrieb.",
+    result: "Online-Buchung rund um die Uhr – Termine kommen rein, ohne dass jemand ans Telefon muss.",
+  },
+  {
+    branche: "Café / Restaurant",
+    problem: "Website auf dem Handy kaum lesbar, Speisekarte nur als PDF verlinkt.",
+    result: "Mobil-optimierte Seite mit klarer Speisekarte und Tisch-Anfrage direkt vom Handy.",
+  },
+] as const;
+
+// Sektion 12 — Standort. Echte Adresse & Einzugsgebiet für lokale Glaubwürdigkeit.
+export const location = {
+  eyebrow: "Standort",
+  title: "Vor Ort in der Region.",
+  subtitle:
+    "Kein Callcenter, keine Agentur in einer fremden Großstadt. Ich arbeite von hier aus, für Betriebe hier aus der Gegend.",
+  mapsHref: "https://maps.app.goo.gl/usAdLbggi5VHqWrR7",
+} as const;
 
 export const contact = {
   eyebrow: "Kontakt",

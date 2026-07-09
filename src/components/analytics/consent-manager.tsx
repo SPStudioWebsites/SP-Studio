@@ -42,11 +42,11 @@ export function ConsentManager() {
 
       {consent === null && (
         <div className="fixed bottom-[72px] left-0 right-0 z-50 p-4 sm:bottom-0 md:p-6">
-          <div className="mx-auto max-w-2xl rounded-2xl border border-white/10 bg-[#111] backdrop-blur-md p-5 shadow-2xl">
+          <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-white p-5 shadow-[0_30px_70px_-30px_rgba(20,24,31,0.3)]">
             <p className="text-sm text-muted leading-relaxed">
               Wir verwenden Cookies: technisch notwendige und (mit Ihrer Einwilligung) Google
               Analytics zur Reichweitenmessung. Mehr dazu in unserer{" "}
-              <Link href="/datenschutz" className="text-pink underline underline-offset-2">
+              <Link href="/datenschutz" className="text-[#1e5eff] underline underline-offset-2">
                 Datenschutzerklärung
               </Link>
               .
@@ -54,13 +54,14 @@ export function ConsentManager() {
             <div className="mt-4 flex flex-wrap gap-3">
               <button
                 onClick={accept}
-                className="rounded-full bg-pink px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                className="rounded-full px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                style={{ background: "linear-gradient(135deg,#1e5eff,#4f46e5)" }}
               >
                 Alle akzeptieren
               </button>
               <button
                 onClick={decline}
-                className="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
+                className="rounded-full border border-border px-5 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
               >
                 Nur notwendige
               </button>
